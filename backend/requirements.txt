@@ -1,5 +1,7 @@
 Flask
 Flask-Cors
-flask_SQLAlchemy
+Flask-SQLAlchemy
 psycopg2-binary
 python-dotenv
+pytest
+pytest-cov
