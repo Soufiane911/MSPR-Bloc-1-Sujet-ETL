@@ -45,9 +45,10 @@ jobs:
 
       - name: Build and push backend
         uses: docker/build-push-action@v4
+        working-directory: ./backend
         with:
-          context: ./backend
-          file: ./Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta-backend.outputs.tags }}
           labels: ${{ steps.meta-backend.outputs.labels }}
@@ -67,9 +68,10 @@ jobs:
 
       - name: Build and push frontend
         uses: docker/build-push-action@v4
+        working-directory: ./frontend
         with:
-          context: ./frontend
-          file: ./Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta-frontend.outputs.tags }}
           labels: ${{ steps.meta-frontend.outputs.labels }}
