@@ -44,8 +44,8 @@ jobs:
             type=sha
 
       - name: Build and push backend
-        uses: docker/build-push-action@v4
         working-directory: ./backend
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile
@@ -67,8 +67,8 @@ jobs:
         run: ls -la frontend
 
       - name: Build and push frontend
-        uses: docker/build-push-action@v4
         working-directory: ./frontend
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile
