@@ -62,8 +62,8 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha
-        - name: List frontend dir (debug)
-          run: ls -la frontend
+      - name: List frontend dir (debug)
+        run: ls -la frontend
 
       - name: Build and push frontend
         uses: docker/build-push-action@v4
