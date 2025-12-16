@@ -1,17 +1,9 @@
-"""Seed data for development and testing."""
-
 from datetime import date, time
 from .db import db
-from .models import (
-    Agence, TypeVehicule, Ligne, ModeleTrain, Calendrier,
-    Forme, Arret, Trajet, HorairePassage, StatistiquesTrajet
-)
+from .models import Agence, TypeVehicule, Ligne, ModeleTrain, Calendrier, Forme, Arret, Trajet, HorairePassage, StatistiquesTrajet
 
 
-def seed_dev_data():
-    """Populate database with minimal dev data: 2 agencies, 3 lines, 4 trips (day/night mix)."""
-    
-    # Clear existing data
+def seedDevData():
     db.session.query(Trajet).delete()
     db.session.query(Arret).delete()
     db.session.query(Calendrier).delete()
@@ -21,182 +13,73 @@ def seed_dev_data():
     db.session.query(Agence).delete()
     db.session.commit()
 
-    # Create agencies
-    sncf = Agence(nom_agence="SNCF", url="https://www.sncf.com", fuseau_horaire="Europe/Paris")
-    db_ag = Agence(nom_agence="Deutsche Bahn", url="https://www.deutschebahn.com", fuseau_horaire="Europe/Berlin")
-    db.session.add_all([sncf, db_ag])
+    sncf = Agence(nomAgence="SNCF", url="https://www.sncf.com", fuseauHoraire="Europe/Paris")
+    dbAgence = Agence(nomAgence="Deutsche Bahn", url="https://www.deutschebahn.com", fuseauHoraire="Europe/Berlin")
+    db.session.add_all([sncf, dbAgence])
     db.session.flush()
 
-    # Create vehicle types
-    tgv_type = TypeVehicule(nom_type_vehicule="TGV", co2_par_km_defaut=14.2, co2_par_pkm_defaut=5.6)
-    ice_type = TypeVehicule(nom_type_vehicule="ICE", co2_par_km_defaut=15.0, co2_par_pkm_defaut=5.8)
-    db.session.add_all([tgv_type, ice_type])
+    tgvType = TypeVehicule(nomTypeVehicule="TGV", co2ParKmDefaut=14.2, co2ParPkmDefaut=5.6)
+    iceType = TypeVehicule(nomTypeVehicule="ICE", co2ParKmDefaut=15.0, co2ParPkmDefaut=5.8)
+    db.session.add_all([tgvType, iceType])
     db.session.flush()
 
-    # Create train models
-    tgv_model = ModeleTrain(
-        id_type_vehicule=tgv_type.id_type_vehicule,
-        nom_modele="TGV InOui",
+    tgvModel = ModeleTrain(
+        idTypeVehicule=tgvType.idTypeVehicule,
+        nomModele="TGV InOui",
         fabricant="Alstom",
-        type_energie="electrique",
-        nombre_places=915,
-        co2_par_km=14.2,
-        co2_par_pkm=5.6
+        typeEnergie="electrique",
+        nombrePlaces=915,
+        co2ParKm=14.2,
+        co2ParPkm=5.6,
     )
-    ice_model = ModeleTrain(
-        id_type_vehicule=ice_type.id_type_vehicule,
-        nom_modele="ICE 4",
+    iceModel = ModeleTrain(
+        idTypeVehicule=iceType.idTypeVehicule,
+        nomModele="ICE 4",
         fabricant="Siemens",
-        type_energie="electrique",
-        nombre_places=830,
-        co2_par_km=15.0,
-        co2_par_pkm=5.8
+        typeEnergie="electrique",
+        nombrePlaces=830,
+        co2ParKm=15.0,
+        co2ParPkm=5.8,
     )
-    db.session.add_all([tgv_model, ice_model])
+    db.session.add_all([tgvModel, iceModel])
     db.session.flush()
 
-    # Create lines
-    paris_marseille = Ligne(
-        id_agence=sncf.id_agence,
-        nom_court="PM",
-        nom_long="Paris - Marseille",
-        type_ligne="rail",
-        id_type_vehicule=tgv_type.id_type_vehicule
-    )
-    paris_nuit = Ligne(
-        id_agence=sncf.id_agence,
-        nom_court="PN",
-        nom_long="Paris - Nice (Nuit)",
-        type_ligne="rail",
-        id_type_vehicule=tgv_type.id_type_vehicule
-    )
-    berlin_munich = Ligne(
-        id_agence=db_ag.id_agence,
-        nom_court="BM",
-        nom_long="Berlin - Munich",
-        type_ligne="rail",
-        id_type_vehicule=ice_type.id_type_vehicule
-    )
-    db.session.add_all([paris_marseille, paris_nuit, berlin_munich])
+    parisMarseille = Ligne(idAgence=sncf.idAgence, nomCourt="PM", nomLong="Paris - Marseille", typeLigne="rail", idTypeVehicule=tgvType.idTypeVehicule)
+    parisNuit = Ligne(idAgence=sncf.idAgence, nomCourt="PN", nomLong="Paris - Nice (Nuit)", typeLigne="rail", idTypeVehicule=tgvType.idTypeVehicule)
+    berlinMunich = Ligne(idAgence=dbAgence.idAgence, nomCourt="BM", nomLong="Berlin - Munich", typeLigne="rail", idTypeVehicule=iceType.idTypeVehicule)
+    db.session.add_all([parisMarseille, parisNuit, berlinMunich])
     db.session.flush()
 
-    # Create calendars (services)
-    service_daily = Calendrier(
-        lundi=True, mardi=True, mercredi=True, jeudi=True,
-        vendredi=True, samedi=True, dimanche=True,
-        date_debut=date(2024, 1, 1),
-        date_fin=date(2025, 12, 31)
-    )
-    service_night = Calendrier(
-        lundi=True, mardi=True, mercredi=True, jeudi=True,
-        vendredi=True, samedi=False, dimanche=False,
-        date_debut=date(2024, 1, 1),
-        date_fin=date(2025, 12, 31)
-    )
-    db.session.add_all([service_daily, service_night])
+    serviceDaily = Calendrier(lundi=True, mardi=True, mercredi=True, jeudi=True, vendredi=True, samedi=True, dimanche=True, dateDebut=date(2024, 1, 1), dateFin=date(2025, 12, 31))
+    serviceNight = Calendrier(lundi=True, mardi=True, mercredi=True, jeudi=True, vendredi=True, samedi=False, dimanche=False, dateDebut=date(2024, 1, 1), dateFin=date(2025, 12, 31))
+    db.session.add_all([serviceDaily, serviceNight])
     db.session.flush()
 
-    # Create stops
-    paris_gld = Arret(nom_arret="Paris Gare de Lyon", latitude=48.8438, longitude=2.3736, id_zone=1)
-    marseille_st = Arret(nom_arret="Marseille Saint-Charles", latitude=43.3026, longitude=5.3685, id_zone=1)
-    nice_ville = Arret(nom_arret="Nice Ville", latitude=43.2965, longitude=7.2584, id_zone=1)
-    berlin_hbf = Arret(nom_arret="Berlin Hauptbahnhof", latitude=52.5256, longitude=13.3686, id_zone=1)
-    munich_hbf = Arret(nom_arret="München Hauptbahnhof", latitude=48.1408, longitude=11.5582, id_zone=1)
-    db.session.add_all([paris_gld, marseille_st, nice_ville, berlin_hbf, munich_hbf])
+    parisGareDeLyon = Arret(nomArret="Paris Gare de Lyon", latitude=48.8438, longitude=2.3736, idZone=1)
+    marseilleSaintCharles = Arret(nomArret="Marseille Saint-Charles", latitude=43.3026, longitude=5.3685, idZone=1)
+    niceVille = Arret(nomArret="Nice Ville", latitude=43.2965, longitude=7.2584, idZone=1)
+    berlinHbf = Arret(nomArret="Berlin Hauptbahnhof", latitude=52.5256, longitude=13.3686, idZone=1)
+    munichHbf = Arret(nomArret="München Hauptbahnhof", latitude=48.1408, longitude=11.5582, idZone=1)
+    db.session.add_all([parisGareDeLyon, marseilleSaintCharles, niceVille, berlinHbf, munichHbf])
     db.session.flush()
 
-    # Create trips
-    trajet_pm_day = Trajet(
-        id_ligne=paris_marseille.id_ligne,
-        id_service=service_daily.id_service,
-        destination="Marseille",
-        id_modele_train=tgv_model.id_modele_train,
-        train_de_nuit=False
-    )
-    trajet_pn_night = Trajet(
-        id_ligne=paris_nuit.id_ligne,
-        id_service=service_night.id_service,
-        destination="Nice",
-        id_modele_train=tgv_model.id_modele_train,
-        train_de_nuit=True
-    )
-    trajet_bm_day = Trajet(
-        id_ligne=berlin_munich.id_ligne,
-        id_service=service_daily.id_service,
-        destination="Munich",
-        id_modele_train=ice_model.id_modele_train,
-        train_de_nuit=False
-    )
-    db.session.add_all([trajet_pm_day, trajet_pn_night, trajet_bm_day])
+    trajetParisMarseilleDay = Trajet(idLigne=parisMarseille.idLigne, idService=serviceDaily.idService, destination="Marseille", idModeleTrain=tgvModel.idModeleTrain, trainDeNuit=False)
+    trajetParisNiceNight = Trajet(idLigne=parisNuit.idLigne, idService=serviceNight.idService, destination="Nice", idModeleTrain=tgvModel.idModeleTrain, trainDeNuit=True)
+    trajetBerlinMunichDay = Trajet(idLigne=berlinMunich.idLigne, idService=serviceDaily.idService, destination="Munich", idModeleTrain=iceModel.idModeleTrain, trainDeNuit=False)
+    db.session.add_all([trajetParisMarseilleDay, trajetParisNiceNight, trajetBerlinMunichDay])
     db.session.flush()
 
-    # Create stop times (horaires_passage)
-    # Paris-Marseille day trip
-    h1 = HorairePassage(
-        id_trajet=trajet_pm_day.id_trajet,
-        id_arret=paris_gld.id_arret,
-        heure_depart=time(7, 0),
-        sequence_arret=1
-    )
-    h2 = HorairePassage(
-        id_trajet=trajet_pm_day.id_trajet,
-        id_arret=marseille_st.id_arret,
-        heure_arrivee=time(10, 30),
-        sequence_arret=2
-    )
-    # Paris-Nice night trip
-    h3 = HorairePassage(
-        id_trajet=trajet_pn_night.id_trajet,
-        id_arret=paris_gld.id_arret,
-        heure_depart=time(21, 0),
-        sequence_arret=1
-    )
-    h4 = HorairePassage(
-        id_trajet=trajet_pn_night.id_trajet,
-        id_arret=nice_ville.id_arret,
-        heure_arrivee=time(9, 30),
-        sequence_arret=2
-    )
-    # Berlin-Munich day trip
-    h5 = HorairePassage(
-        id_trajet=trajet_bm_day.id_trajet,
-        id_arret=berlin_hbf.id_arret,
-        heure_depart=time(8, 0),
-        sequence_arret=1
-    )
-    h6 = HorairePassage(
-        id_trajet=trajet_bm_day.id_trajet,
-        id_arret=munich_hbf.id_arret,
-        heure_arrivee=time(13, 30),
-        sequence_arret=2
-    )
-    db.session.add_all([h1, h2, h3, h4, h5, h6])
+    horaireOne = HorairePassage(idTrajet=trajetParisMarseilleDay.idTrajet, idArret=parisGareDeLyon.idArret, heureDepart=time(7, 0), sequenceArret=1)
+    horaireTwo = HorairePassage(idTrajet=trajetParisMarseilleDay.idTrajet, idArret=marseilleSaintCharles.idArret, heureArrivee=time(10, 30), sequenceArret=2)
+    horaireThree = HorairePassage(idTrajet=trajetParisNiceNight.idTrajet, idArret=parisGareDeLyon.idArret, heureDepart=time(21, 0), sequenceArret=1)
+    horaireFour = HorairePassage(idTrajet=trajetParisNiceNight.idTrajet, idArret=niceVille.idArret, heureArrivee=time(9, 30), sequenceArret=2)
+    horaireFive = HorairePassage(idTrajet=trajetBerlinMunichDay.idTrajet, idArret=berlinHbf.idArret, heureDepart=time(8, 0), sequenceArret=1)
+    horaireSix = HorairePassage(idTrajet=trajetBerlinMunichDay.idTrajet, idArret=munichHbf.idArret, heureArrivee=time(13, 30), sequenceArret=2)
+    db.session.add_all([horaireOne, horaireTwo, horaireThree, horaireFour, horaireFive, horaireSix])
     db.session.commit()
 
-    # Create stats
-    stat1 = StatistiquesTrajet(
-        id_trajet=trajet_pm_day.id_trajet,
-        distance_km=775,
-        duree_minutes=210,
-        vitesse_moyenne_kmh=221,
-        co2_total_g=11000,
-        co2_par_passager_g=12
-    )
-    stat2 = StatistiquesTrajet(
-        id_trajet=trajet_pn_night.id_trajet,
-        distance_km=934,
-        duree_minutes=600,
-        vitesse_moyenne_kmh=93,
-        co2_total_g=13254,
-        co2_par_passager_g=14.5
-    )
-    stat3 = StatistiquesTrajet(
-        id_trajet=trajet_bm_day.id_trajet,
-        distance_km=587,
-        duree_minutes=270,
-        vitesse_moyenne_kmh=130,
-        co2_total_g=8805,
-        co2_par_passager_g=10.6
-    )
-    db.session.add_all([stat1, stat2, stat3])
+    statOne = StatistiquesTrajet(idTrajet=trajetParisMarseilleDay.idTrajet, distanceKm=775, dureeMinutes=210, vitesseMoyenneKmh=221, co2TotalG=11000, co2ParPassagerG=12)
+    statTwo = StatistiquesTrajet(idTrajet=trajetParisNiceNight.idTrajet, distanceKm=934, dureeMinutes=600, vitesseMoyenneKmh=93, co2TotalG=13254, co2ParPassagerG=14.5)
+    statThree = StatistiquesTrajet(idTrajet=trajetBerlinMunichDay.idTrajet, distanceKm=587, dureeMinutes=270, vitesseMoyenneKmh=130, co2TotalG=8805, co2ParPassagerG=10.6)
+    db.session.add_all([statOne, statTwo, statThree])
     db.session.commit()

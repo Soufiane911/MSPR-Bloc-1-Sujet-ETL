@@ -1,17 +1,23 @@
 import os
 from flask import Flask
 from flask_cors import CORS
-from .db import db, init_db
-from . import models  # noqa: F401 ensures models are registered before create_all
+from .db import db, initDb
+from . import models
+from prometheus_flask_exporter import PrometheusMetrics
 
-def create_app():
+metrics = PrometheusMetrics.for_app_factory()
+
+
+def createApp():
     app = Flask(__name__)
     CORS(app)
 
     app.config["APP_ENV"] = os.getenv("FLASK_ENV", "production")
     app.config["ALLOW_INITDB"] = os.getenv("ALLOW_INITDB", "false").lower() == "true" or app.config["APP_ENV"] in {"development", "testing"}
 
-    init_db(app)
+    initDb(app)
+
+    metrics.init_app(app)
 
     from .routes import api
     app.register_blueprint(api)

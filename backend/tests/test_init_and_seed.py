@@ -3,15 +3,14 @@ import os
 from app.db import db
 
 
-def test_initdb_forbidden_when_not_allowed(monkeypatch):
-    # Force production-like config
+def testInitdbForbiddenWhenNotAllowed(monkeypatch):
     monkeypatch.setenv("FLASK_ENV", "production")
     monkeypatch.delenv("ALLOW_INITDB", raising=False)
     monkeypatch.setenv("DATABASE_URL", "sqlite:///forbidden.db")
 
-    from app import create_app
+    from app import createApp
 
-    app = create_app()
+    app = createApp()
     client = app.test_client()
 
     resp = client.post("/initdb")
@@ -19,15 +18,12 @@ def test_initdb_forbidden_when_not_allowed(monkeypatch):
     assert resp.get_json().get("error") == "forbidden"
 
 
-def test_seed_import_and_trajets_list(client, app):
-    # Enable initdb/seed (already true via fixture)
-    # Seed minimal data
+def testSeedImportAndTrajetsList(client, app):
     resp = client.post("/import/seed")
     assert resp.status_code == 200
     payload = resp.get_json()
-    assert payload.get("status") == "seed data imported"
+    assert payload.get("status") == "seedDataImported"
 
-    # Query trajets
     resp2 = client.get("/trajets?limit=5&offset=0")
     assert resp2.status_code == 200
     data = resp2.get_json()
@@ -35,7 +31,6 @@ def test_seed_import_and_trajets_list(client, app):
     assert isinstance(data["trajets"], list)
     assert len(data["trajets"]) >= 1
 
-    # Pagination sanity
     resp3 = client.get("/trajets?limit=1&offset=0")
     assert resp3.status_code == 200
     d3 = resp3.get_json()

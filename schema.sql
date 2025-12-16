@@ -1,4 +1,3 @@
--- Agences de transport
 CREATE TABLE agences (
     id_agence SERIAL PRIMARY KEY,
     nom_agence TEXT NOT NULL,
@@ -7,7 +6,6 @@ CREATE TABLE agences (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Types de véhicules (TER, IC, TGV, etc.)
 CREATE TABLE types_vehicules (
     id_type_vehicule SERIAL PRIMARY KEY,
     nom_type_vehicule TEXT NOT NULL,
@@ -15,7 +13,6 @@ CREATE TABLE types_vehicules (
     co2_par_pkm_defaut NUMERIC
 );
 
--- Modèles de trains spécifiques
 CREATE TABLE modeles_trains (
     id_modele_train SERIAL PRIMARY KEY,
     id_type_vehicule INTEGER NOT NULL REFERENCES types_vehicules(id_type_vehicule),
@@ -27,7 +24,6 @@ CREATE TABLE modeles_trains (
     co2_par_pkm NUMERIC
 );
 
--- Lignes de train (trajet régulier entre deux points)
 CREATE TABLE lignes (
     id_ligne SERIAL PRIMARY KEY,
     id_agence INTEGER NOT NULL REFERENCES agences(id_agence),
@@ -37,7 +33,6 @@ CREATE TABLE lignes (
     id_type_vehicule INTEGER REFERENCES types_vehicules(id_type_vehicule)
 );
 
--- Calendrier de service (jours de circulation)
 CREATE TABLE calendriers (
     id_service SERIAL PRIMARY KEY,
     lundi BOOLEAN,
@@ -51,7 +46,6 @@ CREATE TABLE calendriers (
     date_fin DATE NOT NULL
 );
 
--- Exceptions de calendrier (service spécialisé pour certaines dates)
 CREATE TABLE dates_calendrier (
     id_service INTEGER NOT NULL REFERENCES calendriers(id_service),
     date DATE NOT NULL,
@@ -59,13 +53,11 @@ CREATE TABLE dates_calendrier (
     PRIMARY KEY (id_service, date)
 );
 
--- Formes géométriques des trajets
 CREATE TABLE formes (
     id_forme SERIAL PRIMARY KEY,
     description_forme TEXT
 );
 
--- Points de la géométrie d'une forme
 CREATE TABLE points_forme (
     id_point_forme SERIAL PRIMARY KEY,
     id_forme INTEGER NOT NULL REFERENCES formes(id_forme),
@@ -75,7 +67,6 @@ CREATE TABLE points_forme (
     geom TEXT
 );
 
--- Arrêts (gares, haltes)
 CREATE TABLE arrets (
     id_arret SERIAL PRIMARY KEY,
     nom_arret TEXT NOT NULL,
@@ -85,7 +76,6 @@ CREATE TABLE arrets (
     geom TEXT
 );
 
--- Trajets individuels (instances d'une ligne)
 CREATE TABLE trajets (
     id_trajet SERIAL PRIMARY KEY,
     id_ligne INTEGER NOT NULL REFERENCES lignes(id_ligne),
@@ -96,7 +86,6 @@ CREATE TABLE trajets (
     train_de_nuit BOOLEAN NOT NULL DEFAULT FALSE
 );
 
--- Horaires de passage aux arrêts
 CREATE TABLE horaires_passage (
     id_trajet INTEGER NOT NULL REFERENCES trajets(id_trajet),
     id_arret INTEGER NOT NULL REFERENCES arrets(id_arret),
@@ -106,7 +95,6 @@ CREATE TABLE horaires_passage (
     PRIMARY KEY (id_trajet, id_arret, sequence_arret)
 );
 
--- Statistiques agrégées par trajet
 CREATE TABLE statistiques_trajets (
     id_statistiques SERIAL PRIMARY KEY,
     id_trajet INTEGER NOT NULL UNIQUE REFERENCES trajets(id_trajet),
@@ -117,7 +105,6 @@ CREATE TABLE statistiques_trajets (
     co2_par_passager_g NUMERIC
 );
 
--- Indexes pour améliorer les performances
 CREATE INDEX idx_lignes_agence ON lignes(id_agence);
 CREATE INDEX idx_lignes_type_vehicule ON lignes(id_type_vehicule);
 CREATE INDEX idx_modeles_trains_type_vehicule ON modeles_trains(id_type_vehicule);

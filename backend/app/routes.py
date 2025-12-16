@@ -1,12 +1,18 @@
+import time
 from flask import Blueprint, jsonify, current_app, request
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func, text
+from prometheus_client import Counter, Summary
 from .db import db
-from .seeds import seed_dev_data
+from .seeds import seedDevData
 from .gtfs_importer import GTFSImporter
 from .models import Trajet, Arret, HorairePassage, Agence, Ligne, StatistiquesTrajet
 
 api = Blueprint("api", __name__)
+
+gtfsImportCounter = Counter("gtfs_import_total", "GTFS import attempts", ["result"])
+gtfsImportDuration = Summary("gtfs_import_seconds", "GTFS import duration seconds", ["result"])
+
 
 @api.get("/test")
 def test():
@@ -14,347 +20,289 @@ def test():
 
 
 @api.post("/initdb")
-def init_db_route():
+def initDbRoute():
     if not current_app.config.get("ALLOW_INITDB", False):
         return jsonify({"error": "forbidden"}), 403
 
     try:
         db.create_all()
-        return jsonify({"status": "database initialized"})
+        return jsonify({"status": "databaseInitialized"})
     except SQLAlchemyError as exc:
         current_app.logger.exception("DB init failed")
-        return jsonify({"error": "db_init_failed", "details": str(exc)}), 500
+        return jsonify({"error": "dbInitFailed", "details": str(exc)}), 500
 
 
 @api.post("/import/seed")
-def import_seed():
-    """Load minimal dev/test data (SNCF, DB, day/night trips)."""
+def importSeed():
     if not current_app.config.get("ALLOW_INITDB", False):
         return jsonify({"error": "forbidden"}), 403
 
     try:
-        seed_dev_data()
-        return jsonify({"status": "seed data imported", "agencies": 2, "trips": 3})
+        seedDevData()
+        return jsonify({"status": "seedDataImported", "agencies": 2, "trips": 3})
     except Exception as exc:
         current_app.logger.exception("Seed import failed")
-        return jsonify({"error": "seed_import_failed", "details": str(exc)}), 500
+        return jsonify({"error": "seedImportFailed", "details": str(exc)}), 500
 
 
 @api.post("/import/gtfs")
-def import_gtfs():
-    """Import GTFS feed from URL or uploaded file.
-    
-    Query params:
-    - url: HTTP URL to GTFS ZIP (e.g., ?url=https://example.com/feed.zip)
-    
-    Or upload a file (multipart/form-data):
-    - file: GTFS ZIP file
-    
-    Examples:
-    - curl -X POST "http://localhost:5001/import/gtfs?url=https://..."
-    - curl -F "file=@test_gtfs.zip" http://localhost:5001/import/gtfs
-    """
+def importGtfs():
     if not current_app.config.get("ALLOW_INITDB", False):
         return jsonify({"error": "forbidden"}), 403
 
-    gtfs_url = request.args.get("url")
-    gtfs_file = request.files.get("file")
+    startTime = time.perf_counter()
+    resultLabel = "failure"
+    gtfsUrl = request.args.get("url")
+    gtfsFile = request.files.get("file")
 
-    if not gtfs_url and not gtfs_file:
-        return jsonify({
-            "error": "missing_input",
-            "details": "Provide either ?url=<url> query param or upload file"
-        }), 400
+    try:
+        if not gtfsUrl and not gtfsFile:
+            return jsonify({"error": "missingInput", "details": "Provide either ?url=<url> query param or upload file"}), 400
 
-    summary = None
+        summary = None
 
-    if gtfs_file:
-        # Read stream into memory so we can inspect then import
-        import io, zipfile
-        file_bytes = gtfs_file.read()
-        importer = GTFSImporter(None)
-        try:
-            importer.zip_file = zipfile.ZipFile(io.BytesIO(file_bytes))
-        except zipfile.BadZipFile as e:
-            return jsonify({"error": "invalid_zip", "details": str(e)}), 400
-        summary = importer.inspect_feed()
-        success = importer.parse_and_import()
-    else:
-        # Handle URL with preflight inspection
-        importer = GTFSImporter(gtfs_url)
-        if not importer.download_and_parse():
-            return jsonify({"error": "download_failed", "details": importer.errors}), 400
-        summary = importer.inspect_feed()
-        success = importer.parse_and_import()
+        if gtfsFile:
+            import io, zipfile
 
-    if success:
-        note = None
-        if summary and not summary.get("has_core_schedules"):
-            note = "Feed contains no trips/stop_times. Routes and stops are imported; trips will be empty. Use /import/gtfs/preflight to verify feeds before import."
-        return jsonify({
-            "status": "gtfs_imported",
-            "preflight": summary,
-            "stats": importer.stats,
-            "note": note,
-            "errors": importer.errors
-        }), 200
-    else:
-        return jsonify({
-            "error": "gtfs_import_failed",
-            "details": importer.errors,
-            "preflight": summary
-        }), 500
+            fileBytes = gtfsFile.read()
+            importer = GTFSImporter(None)
+            try:
+                importer.zipFile = zipfile.ZipFile(io.BytesIO(fileBytes))
+            except zipfile.BadZipFile as exc:
+                return jsonify({"error": "invalidZip", "details": str(exc)}), 400
+            summary = importer.inspectFeed()
+            success = importer.parseAndImport()
+        else:
+            importer = GTFSImporter(gtfsUrl)
+            if not importer.downloadAndParse():
+                return jsonify({"error": "downloadFailed", "details": importer.errors}), 400
+            summary = importer.inspectFeed()
+            success = importer.parseAndImport()
+
+        if success:
+            resultLabel = "success"
+            note = None
+            if summary and not summary.get("hasCoreSchedules"):
+                note = "Feed contains no trips/stop_times. Routes and stops are imported; trips will be empty. Use /import/gtfs/preflight to verify feeds before import."
+            return jsonify({"status": "gtfsImported", "preflight": summary, "stats": importer.stats, "note": note, "errors": importer.errors}), 200
+        return jsonify({"error": "gtfsImportFailed", "details": importer.errors, "preflight": summary}), 500
+
+    finally:
+        elapsed = time.perf_counter() - startTime
+        gtfsImportDuration.labels(resultLabel).observe(elapsed)
+        gtfsImportCounter.labels(resultLabel).inc()
 
 
 @api.get("/import/gtfs/preflight")
-def import_gtfs_preflight():
-    """Inspect a GTFS feed by URL and report file availability + row counts.
-
-    Query params:
-    - url: HTTP URL to GTFS ZIP
-
-    Returns: summary dict indicating presence and counts for agency, routes, stops, calendar, trips, stop_times.
-    """
+def importGtfsPreflight():
     if not current_app.config.get("ALLOW_INITDB", False):
         return jsonify({"error": "forbidden"}), 403
 
-    gtfs_url = request.args.get("url")
-    if not gtfs_url:
-        return jsonify({"error": "missing_url", "details": "?url=https://..."}), 400
+    gtfsUrl = request.args.get("url")
+    if not gtfsUrl:
+        return jsonify({"error": "missingUrl", "details": "?url=https://..."}), 400
 
-    importer = GTFSImporter(gtfs_url)
-    if not importer.download_and_parse():
-        return jsonify({"error": "download_failed", "details": importer.errors}), 400
+    importer = GTFSImporter(gtfsUrl)
+    if not importer.downloadAndParse():
+        return jsonify({"error": "downloadFailed", "details": importer.errors}), 400
 
-    summary = importer.inspect_feed()
-    return jsonify({
-        "status": "gtfs_preflight",
-        "summary": summary
-    }), 200
+    summary = importer.inspectFeed()
+    return jsonify({"status": "gtfsPreflight", "summary": summary}), 200
 
 
 @api.get("/trajets")
-def list_trajets():
-    """List trips with optional filters.
-    
-    Query params:
-    - agency_id: filter by agency (id_agence)
-    - is_night: filter by day/night (true/false)
-    - limit: max results (default 50)
-    - offset: pagination offset (default 0)
-    
-    Example: GET /trajets?is_night=false&limit=20
-    """
+def listTrajets():
     try:
-        # Build query
         query = db.session.query(Trajet).join(Ligne).join(Agence)
 
-        # Filters
-        agency_id = request.args.get("agency_id", type=int)
-        if agency_id:
-            query = query.filter(Ligne.id_agence == agency_id)
+        agencyId = request.args.get("agency_id", type=int)
+        if agencyId:
+            query = query.filter(Ligne.idAgence == agencyId)
 
-        is_night = request.args.get("is_night")
-        if is_night is not None:
-            is_night_bool = is_night.lower() == "true"
-            query = query.filter(Trajet.train_de_nuit == is_night_bool)
+        isNight = request.args.get("is_night")
+        if isNight is not None:
+            isNightBool = isNight.lower() == "true"
+            query = query.filter(Trajet.trainDeNuit == isNightBool)
 
-        # Pagination
-        limit = request.args.get("limit", default=50, type=int)
-        offset = request.args.get("offset", default=0, type=int)
-        limit = min(limit, 200)  # cap at 200
+        limitValue = request.args.get("limit", default=50, type=int)
+        offsetValue = request.args.get("offset", default=0, type=int)
+        limitValue = min(limitValue, 200)
 
         total = query.count()
-        trajets = query.offset(offset).limit(limit).all()
+        trajets = query.offset(offsetValue).limit(limitValue).all()
 
         result = {
             "total": total,
-            "limit": limit,
-            "offset": offset,
+            "limit": limitValue,
+            "offset": offsetValue,
             "trajets": [
                 {
-                    "id": t.id_trajet,
+                    "id": trajet.idTrajet,
                     "ligne": {
-                        "id": t.ligne.id_ligne,
-                        "nom_long": t.ligne.nom_long,
-                        "nom_court": t.ligne.nom_court,
-                        "type": t.ligne.type_ligne,
+                        "id": trajet.ligne.idLigne,
+                        "nomLong": trajet.ligne.nomLong,
+                        "nomCourt": trajet.ligne.nomCourt,
+                        "type": trajet.ligne.typeLigne,
                     },
                     "agence": {
-                        "id": t.ligne.agence.id_agence,
-                        "nom": t.ligne.agence.nom_agence,
+                        "id": trajet.ligne.agence.idAgence,
+                        "nom": trajet.ligne.agence.nomAgence,
                     },
-                    "destination": t.destination,
-                    "train_de_nuit": t.train_de_nuit,
+                    "destination": trajet.destination,
+                    "trainDeNuit": trajet.trainDeNuit,
                     "horaires": [
                         {
-                            "sequence": h.sequence_arret,
-                            "arret": h.arret.nom_arret,
-                            "arrival": h.heure_arrivee.strftime("%H:%M") if h.heure_arrivee else None,
-                            "departure": h.heure_depart.strftime("%H:%M") if h.heure_depart else None,
+                            "sequence": horaire.sequenceArret,
+                            "arret": horaire.arret.nomArret,
+                            "arrival": horaire.heureArrivee.strftime("%H:%M") if horaire.heureArrivee else None,
+                            "departure": horaire.heureDepart.strftime("%H:%M") if horaire.heureDepart else None,
                         }
-                        for h in sorted(t.horaires, key=lambda x: x.sequence_arret)
+                        for horaire in sorted(trajet.horaires, key=lambda horaire_item: horaire_item.sequenceArret)
                     ],
                     "stats": {
-                        "distance_km": float(t.stats.distance_km) if t.stats and t.stats.distance_km else None,
-                        "duree_minutes": t.stats.duree_minutes if t.stats else None,
-                        "co2_total_g": float(t.stats.co2_total_g) if t.stats and t.stats.co2_total_g else None,
-                        "co2_par_passager_g": float(t.stats.co2_par_passager_g) if t.stats and t.stats.co2_par_passager_g else None,
-                    } if t.stats else None,
+                        "distanceKm": float(trajet.stats.distanceKm) if trajet.stats and trajet.stats.distanceKm else None,
+                        "dureeMinutes": trajet.stats.dureeMinutes if trajet.stats else None,
+                        "co2TotalG": float(trajet.stats.co2TotalG) if trajet.stats and trajet.stats.co2TotalG else None,
+                        "co2ParPassagerG": float(trajet.stats.co2ParPassagerG) if trajet.stats and trajet.stats.co2ParPassagerG else None,
+                    }
+                    if trajet.stats
+                    else None,
                 }
-                for t in trajets
-            ]
+                for trajet in trajets
+            ],
         }
 
         return jsonify(result), 200
 
     except Exception as exc:
         current_app.logger.exception("Error listing trajets")
-        return jsonify({"error": "list_trajets_failed", "details": str(exc)}), 500
+        return jsonify({"error": "listTrajetsFailed", "details": str(exc)}), 500
 
 
-@api.get("/trajets/<int:trajet_id>")
-def get_trajet(trajet_id):
-    """Get trip details by ID."""
+@api.get("/trajets/<int:trajetId>")
+def getTrajet(trajetId):
     try:
-        trajet = db.session.query(Trajet).filter(Trajet.id_trajet == trajet_id).first()
+        trajet = db.session.query(Trajet).filter(Trajet.idTrajet == trajetId).first()
         if not trajet:
-            return jsonify({"error": "not_found"}), 404
+            return jsonify({"error": "notFound"}), 404
 
         result = {
-            "id": trajet.id_trajet,
+            "id": trajet.idTrajet,
             "ligne": {
-                "id": trajet.ligne.id_ligne,
-                "nom_long": trajet.ligne.nom_long,
-                "nom_court": trajet.ligne.nom_court,
-                "type": trajet.ligne.type_ligne,
+                "id": trajet.ligne.idLigne,
+                "nomLong": trajet.ligne.nomLong,
+                "nomCourt": trajet.ligne.nomCourt,
+                "type": trajet.ligne.typeLigne,
             },
             "agence": {
-                "id": trajet.ligne.agence.id_agence,
-                "nom": trajet.ligne.agence.nom_agence,
+                "id": trajet.ligne.agence.idAgence,
+                "nom": trajet.ligne.agence.nomAgence,
                 "url": trajet.ligne.agence.url,
-                "fuseau_horaire": trajet.ligne.agence.fuseau_horaire,
+                "fuseauHoraire": trajet.ligne.agence.fuseauHoraire,
             },
             "destination": trajet.destination,
-            "train_de_nuit": trajet.train_de_nuit,
+            "trainDeNuit": trajet.trainDeNuit,
             "horaires": [
                 {
-                    "sequence": h.sequence_arret,
+                    "sequence": horaire.sequenceArret,
                     "arret": {
-                        "id": h.arret.id_arret,
-                        "nom": h.arret.nom_arret,
-                        "latitude": float(h.arret.latitude),
-                        "longitude": float(h.arret.longitude),
+                        "id": horaire.arret.idArret,
+                        "nom": horaire.arret.nomArret,
+                        "latitude": float(horaire.arret.latitude),
+                        "longitude": float(horaire.arret.longitude),
                     },
-                    "arrival": h.heure_arrivee.strftime("%H:%M") if h.heure_arrivee else None,
-                    "departure": h.heure_depart.strftime("%H:%M") if h.heure_depart else None,
+                    "arrival": horaire.heureArrivee.strftime("%H:%M") if horaire.heureArrivee else None,
+                    "departure": horaire.heureDepart.strftime("%H:%M") if horaire.heureDepart else None,
                 }
-                for h in sorted(trajet.horaires, key=lambda x: x.sequence_arret)
+                for horaire in sorted(trajet.horaires, key=lambda horaire_item: horaire_item.sequenceArret)
             ],
             "stats": {
-                "distance_km": float(trajet.stats.distance_km) if trajet.stats and trajet.stats.distance_km else None,
-                "duree_minutes": trajet.stats.duree_minutes if trajet.stats else None,
-                "vitesse_moyenne_kmh": float(trajet.stats.vitesse_moyenne_kmh) if trajet.stats and trajet.stats.vitesse_moyenne_kmh else None,
-                "co2_total_g": float(trajet.stats.co2_total_g) if trajet.stats and trajet.stats.co2_total_g else None,
-                "co2_par_passager_g": float(trajet.stats.co2_par_passager_g) if trajet.stats and trajet.stats.co2_par_passager_g else None,
-            } if trajet.stats else None,
+                "distanceKm": float(trajet.stats.distanceKm) if trajet.stats and trajet.stats.distanceKm else None,
+                "dureeMinutes": trajet.stats.dureeMinutes if trajet.stats else None,
+                "vitesseMoyenneKmh": float(trajet.stats.vitesseMoyenneKmh) if trajet.stats and trajet.stats.vitesseMoyenneKmh else None,
+                "co2TotalG": float(trajet.stats.co2TotalG) if trajet.stats and trajet.stats.co2TotalG else None,
+                "co2ParPassagerG": float(trajet.stats.co2ParPassagerG) if trajet.stats and trajet.stats.co2ParPassagerG else None,
+            }
+            if trajet.stats
+            else None,
         }
 
         return jsonify(result), 200
 
     except Exception as exc:
-        current_app.logger.exception(f"Error fetching trajet {trajet_id}")
-        return jsonify({"error": "get_trajet_failed", "details": str(exc)}), 500
+        current_app.logger.exception(f"Error fetching trajet {trajetId}")
+        return jsonify({"error": "getTrajetFailed", "details": str(exc)}), 500
 
 
 @api.get("/stats/volumes")
-def stats_volumes():
-    """Get aggregated trip statistics by agency and day/night.
-    
-    Query params:
-    - agency_id: filter by agency (optional)
-    
-    Returns: volumes grouped by (agency, is_night)
-    """
+def statsVolumes():
     try:
         from sqlalchemy import cast, Float
-        # Query starting from Trajet with proper joins
+
         query = db.session.query(
-            Agence.id_agence,
-            Agence.nom_agence,
-            Trajet.train_de_nuit,
-            func.count(Trajet.id_trajet).label("trip_count"),
-            func.coalesce(func.sum(cast(StatistiquesTrajet.distance_km, Float)), 0).label("total_distance_km"),
-            func.coalesce(func.avg(cast(StatistiquesTrajet.distance_km, Float)), 0).label("avg_distance_km"),
-            func.coalesce(func.sum(cast(StatistiquesTrajet.co2_total_g, Float)), 0).label("total_co2_g"),
-            func.coalesce(func.avg(cast(StatistiquesTrajet.co2_par_passager_g, Float)), 0).label("avg_co2_per_pax_g"),
+            Agence.idAgence,
+            Agence.nomAgence,
+            Trajet.trainDeNuit,
+            func.count(Trajet.idTrajet).label("tripCount"),
+            func.coalesce(func.sum(cast(StatistiquesTrajet.distanceKm, Float)), 0).label("totalDistanceKm"),
+            func.coalesce(func.avg(cast(StatistiquesTrajet.distanceKm, Float)), 0).label("avgDistanceKm"),
+            func.coalesce(func.sum(cast(StatistiquesTrajet.co2TotalG, Float)), 0).label("totalCo2G"),
+            func.coalesce(func.avg(cast(StatistiquesTrajet.co2ParPassagerG, Float)), 0).label("avgCo2PerPaxG"),
         ).select_from(Trajet).join(
-            Ligne, Trajet.id_ligne == Ligne.id_ligne
+            Ligne, Trajet.idLigne == Ligne.idLigne
         ).join(
-            Agence, Ligne.id_agence == Agence.id_agence
+            Agence, Ligne.idAgence == Agence.idAgence
         ).outerjoin(
-            StatistiquesTrajet, StatistiquesTrajet.id_trajet == Trajet.id_trajet
+            StatistiquesTrajet, StatistiquesTrajet.idTrajet == Trajet.idTrajet
         ).group_by(
-            Agence.id_agence, Agence.nom_agence, Trajet.train_de_nuit
+            Agence.idAgence, Agence.nomAgence, Trajet.trainDeNuit
         )
 
-        # Optional filter by agency
-        agency_id = request.args.get("agency_id", type=int)
-        if agency_id:
-            query = query.filter(Agence.id_agence == agency_id)
+        agencyId = request.args.get("agency_id", type=int)
+        if agencyId:
+            query = query.filter(Agence.idAgence == agencyId)
 
         results = query.all()
 
         stats = {
-            "summary": {
-                "total_agencies": len(set(r[0] for r in results)),
-                "total_trips": sum(r[3] for r in results),
-            },
-            "by_agency": []
+            "summary": {"totalAgencies": len(set(result[0] for result in results)), "totalTrips": sum(result[3] for result in results)},
+            "byAgency": [],
         }
 
-        # Group by agency
-        by_agency = {}
+        byAgency = {}
         for row in results:
-            agency_id, agency_name, is_night, trip_count, total_dist, avg_dist, total_co2, avg_co2 = row
-            key = f"{agency_id}:{agency_name}"
-            if key not in by_agency:
-                by_agency[key] = {
-                    "agency_id": agency_id,
-                    "agency_name": agency_name,
-                    "day_trips": None,
-                    "night_trips": None,
-                }
-            if is_night:
-                by_agency[key]["night_trips"] = {
-                    "count": int(trip_count),
-                    "total_distance_km": float(total_dist) if total_dist else 0,
-                    "avg_distance_km": float(avg_dist) if avg_dist else 0,
-                    "total_co2_g": float(total_co2) if total_co2 else 0,
-                    "avg_co2_per_passenger_g": float(avg_co2) if avg_co2 else 0,
+            currentAgencyId, agencyName, isNight, tripCount, totalDist, avgDist, totalCo2, avgCo2 = row
+            key = f"{currentAgencyId}:{agencyName}"
+            if key not in byAgency:
+                byAgency[key] = {"agencyId": currentAgencyId, "agencyName": agencyName, "dayTrips": None, "nightTrips": None}
+            if isNight:
+                byAgency[key]["nightTrips"] = {
+                    "count": int(tripCount),
+                    "totalDistanceKm": float(totalDist) if totalDist else 0,
+                    "avgDistanceKm": float(avgDist) if avgDist else 0,
+                    "totalCo2G": float(totalCo2) if totalCo2 else 0,
+                    "avgCo2PerPassengerG": float(avgCo2) if avgCo2 else 0,
                 }
             else:
-                by_agency[key]["day_trips"] = {
-                    "count": int(trip_count),
-                    "total_distance_km": float(total_dist) if total_dist else 0,
-                    "avg_distance_km": float(avg_dist) if avg_dist else 0,
-                    "total_co2_g": float(total_co2) if total_co2 else 0,
-                    "avg_co2_per_passenger_g": float(avg_co2) if avg_co2 else 0,
+                byAgency[key]["dayTrips"] = {
+                    "count": int(tripCount),
+                    "totalDistanceKm": float(totalDist) if totalDist else 0,
+                    "avgDistanceKm": float(avgDist) if avgDist else 0,
+                    "totalCo2G": float(totalCo2) if totalCo2 else 0,
+                    "avgCo2PerPassengerG": float(avgCo2) if avgCo2 else 0,
                 }
 
-        stats["by_agency"] = list(by_agency.values())
+        stats["byAgency"] = list(byAgency.values())
         return jsonify(stats), 200
 
     except Exception as exc:
         current_app.logger.exception("Error computing stats/volumes")
-        return jsonify({"error": "stats_failed", "details": str(exc)}), 500
+        return jsonify({"error": "statsFailed", "details": str(exc)}), 500
 
 
 @api.get("/health")
 def health():
-    """Health check endpoint."""
     try:
-        # Test DB connection
         db.session.execute(text("SELECT 1"))
         return jsonify({"status": "healthy", "database": "ok"}), 200
     except Exception as exc:

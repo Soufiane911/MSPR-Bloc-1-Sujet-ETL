@@ -3,7 +3,7 @@ import shutil
 import tempfile
 import pytest
 
-from app import create_app
+from app import createApp
 from app.db import db
 
 
@@ -16,7 +16,7 @@ def app():
     os.environ["FLASK_ENV"] = "testing"
     os.environ["ALLOW_INITDB"] = "true"
 
-    app = create_app()
+    app = createApp()
 
     with app.app_context():
         db.create_all()
