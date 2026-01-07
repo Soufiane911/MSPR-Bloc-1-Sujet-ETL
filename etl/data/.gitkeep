@@ -1,0 +1,3 @@
+# Dossier data - contenant les données du projet
+# Les sous-dossiers (raw/, clean/, processed/) sont ignorés par .gitignore
+# mais le dossier parent est conservé pour la structure du projet
