@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 function StatsVolumes({ apiUrl }) {
   const [stats, setStats] = useState(null);
+  const [co2ByType, setCo2ByType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -24,6 +25,15 @@ function StatsVolumes({ apiUrl }) {
 
   useEffect(() => {
     fetchStats();
+    (async () => {
+      try {
+        const response = await fetch(`${apiUrl}/stats/co2-by-type`);
+        const data = await response.json();
+        setCo2ByType(data);
+      } catch (err) {
+        // non-blocking error
+      }
+    })();
   }, [fetchStats]);
 
   if (loading) return <div className="loading">Chargement des statistiques...</div>;
@@ -109,6 +119,26 @@ function StatsVolumes({ apiUrl }) {
           </div>
         </div>
       ))}
+
+      {co2ByType && co2ByType.byType && (
+        <div style={{ marginTop: 20 }}>
+          <div className="trajet-title" style={{ marginBottom: 8 }}>CO₂ par type de ligne</div>
+          <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
+            {co2ByType.byType.map((item) => (
+              <div key={item.type} style={{ textAlign: "center" }}>
+                <div style={{
+                  width: 60,
+                  height: Math.min(200, Math.max(10, item.totalCo2G / 1000)),
+                  background: "#667eea",
+                  borderRadius: 4
+                }}></div>
+                <div style={{ marginTop: 6, fontSize: "0.85em" }}>{item.type}</div>
+                <div style={{ fontSize: "0.8em", color: "#666" }}>{Math.round(item.totalCo2G)} g CO₂</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <button
         onClick={fetchStats}

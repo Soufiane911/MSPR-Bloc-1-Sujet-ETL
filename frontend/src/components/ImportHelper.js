@@ -1,11 +1,18 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
-export default function ImportHelper({ apiUrl }) {
+export default function ImportHelper({ apiUrl, onLoadingChange }) {
   const [url, setUrl] = useState("");
   const [preflight, setPreflight] = useState(null);
   const [loading, setLoading] = useState(false);
   const [note, setNote] = useState(null);
   const [error, setError] = useState(null);
+  const [progress, setProgress] = useState([]);
+
+  useEffect(() => {
+    if (onLoadingChange) {
+      onLoadingChange(loading);
+    }
+  }, [loading, onLoadingChange]);
 
   const runPreflight = useCallback(async () => {
     setError(null);
@@ -31,18 +38,44 @@ export default function ImportHelper({ apiUrl }) {
   const importNow = useCallback(async () => {
     setError(null);
     setNote(null);
-    setLoading(true);
-    try {
-      const res = await fetch(`${apiUrl}/import/gtfs?url=${encodeURIComponent(url)}`, { method: "POST" });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.details || data.error || "Import failed");
-      setPreflight(data.preflight || null);
-      setNote(data.note || null);
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
+    setProgress([]);
+    if (!url) {
+      setError("Please enter a GTFS ZIP URL");
+      return;
     }
+    setLoading(true);
+    
+    const eventSource = new EventSource(`${apiUrl}/import/gtfs/stream?url=${encodeURIComponent(url)}`);
+    
+    eventSource.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      
+      if (msg.status === "downloading") {
+        setProgress(prev => [...prev, "🔽 Downloading GTFS..."]);
+      } else if (msg.status === "downloaded") {
+        setProgress(prev => [...prev, `✓ Downloaded (${msg.data.files} files)`]);
+      } else if (msg.status === "processing") {
+        setProgress(prev => [...prev, `⚙️ Processing ${msg.data.file} (${msg.data.rows} rows)...`]);
+      } else if (msg.status === "completed") {
+        setProgress(prev => [...prev, `✓ ${msg.data.file}: ${msg.data.imported} imported`]);
+      } else if (msg.status === "computing_stats") {
+        setProgress(prev => [...prev, "📊 Computing statistics..."]);
+      } else if (msg.status === "complete") {
+        setProgress(prev => [...prev, `✅ Import complete! ${JSON.stringify(msg.data.stats)}`]);
+        setLoading(false);
+        eventSource.close();
+      } else if (msg.status === "error") {
+        setError(msg.data.message || "Import failed");
+        setLoading(false);
+        eventSource.close();
+      }
+    };
+    
+    eventSource.onerror = () => {
+      setError("Connection lost");
+      setLoading(false);
+      eventSource.close();
+    };
   }, [apiUrl, url]);
 
   return (
@@ -53,6 +86,13 @@ export default function ImportHelper({ apiUrl }) {
             <div className="trajet-title">Importer un flux GTFS</div>
             <div className="trajet-agency">Vérifie d'abord le contenu avant d'importer</div>
           </div>
+          <button 
+            className="export-csv-button"
+            onClick={() => window.open(`${apiUrl}/export/csv/flat`, '_blank')}
+            title="Exporter pour PowerBI (CSV dénormalisé)"
+          >
+            📊 Export PowerBI
+          </button>
         </div>
 
         <div className="filters" style={{ marginTop: 16 }}>
@@ -76,9 +116,28 @@ export default function ImportHelper({ apiUrl }) {
           </div>
         </div>
 
-        {loading && <div className="loading">Traitement en cours…</div>}
+        {loading && (
+          <div className="loading-import">
+            <div className="loading-spinner"></div>
+            <div>Traitement en cours…</div>
+          </div>
+        )}
         {error && <div className="error">{error}</div>}
         {note && <div className="error">{note}</div>}
+
+        {progress.length > 0 && (
+          <div className="progress-container">
+            <div className="trajet-title" style={{ marginBottom: 8 }}>Import Progress</div>
+            <div className="progress-log">
+              {progress.map((msg, idx) => (
+                <div key={idx} className="progress-message">
+                  <span className="progress-icon">📝</span>
+                  {msg}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {preflight && (
           <div style={{ marginTop: 12 }}>

@@ -20,10 +20,11 @@ from .models import (
 class GTFSImporter:
     """Parse and import GTFS feed into database."""
 
-    def __init__(self, gtfsUrl: str):
+    def __init__(self, gtfsUrl: str, progressCallback=None):
         self.gtfsUrl = gtfsUrl
         self.zipFile = None
         self.errors = []
+        self.progressCallback = progressCallback
         self.stats = {
             "agencies": 0,
             "routes": 0,
@@ -32,6 +33,25 @@ class GTFSImporter:
             "trips": 0,
             "stopTimes": 0,
         }
+
+    def _emitProgress(self, message: str, data: Dict = None):
+        if self.progressCallback:
+            self.progressCallback(message, data or {})
+
+    def _cleanText(self, text: str, maxLength: int = None) -> Optional[str]:
+        """Clean text field: strip whitespace, convert empty to None, truncate."""
+        if not text:
+            return None
+        cleaned = text.strip()
+        if not cleaned:
+            return None
+        if maxLength and len(cleaned) > maxLength:
+            cleaned = cleaned[:maxLength]
+        return cleaned
+
+    def _validateCoordinate(self, lat: float, lon: float) -> bool:
+        """Validate latitude and longitude are within valid ranges."""
+        return -90 <= lat <= 90 and -180 <= lon <= 180
 
     def importFromFile(self, fileStream) -> bool:
         try:
@@ -50,6 +70,7 @@ class GTFSImporter:
 
     def downloadAndParse(self) -> bool:
         try:
+            self._emitProgress("downloading", {"url": self.gtfsUrl})
             current_app.logger.info(f"Downloading GTFS from {self.gtfsUrl}")
 
             req = Request(
@@ -60,6 +81,7 @@ class GTFSImporter:
             )
             response = urlopen(req, timeout=30)
             self.zipFile = zipfile.ZipFile(io.BytesIO(response.read()))
+            self._emitProgress("downloaded", {"files": len(self.zipFile.namelist())})
             current_app.logger.info(f"GTFS ZIP downloaded, {len(self.zipFile.namelist())} files")
             return self.parseAndImport()
         except URLError as exc:
@@ -129,18 +151,24 @@ class GTFSImporter:
         return summary
 
     def importAgencies(self, rows: List[Dict]) -> Dict[str, int]:
+        self._emitProgress("processing", {"file": "agency.txt", "rows": len(rows)})
         mapping = {}
         for row in rows:
             try:
-                agencyId = row.get("agency_id", "default")
-                name = row.get("agency_name", "Unknown")
-                url = row.get("agency_url", "")
-                timezone = row.get("agency_timezone", "UTC")
+                agencyId = row.get("agency_id", "default").strip()
+                name = self._cleanText(row.get("agency_name"), 255) or "Unknown"
+                url = self._cleanText(row.get("agency_url"), 255)
+                timezone = self._cleanText(row.get("agency_timezone"), 50) or "UTC"
+
+                existing = db.session.query(Agence).filter(Agence.nomAgence.ilike(name)).first()
+                if existing:
+                    mapping[agencyId] = existing.idAgence
+                    continue
 
                 agency = Agence(
-                    nomAgence=name[:255],
-                    url=url[:255] if url else None,
-                    fuseauHoraire=timezone[:50],
+                    nomAgence=name,
+                    url=url,
+                    fuseauHoraire=timezone,
                 )
                 db.session.add(agency)
                 db.session.flush()
@@ -148,22 +176,29 @@ class GTFSImporter:
                 self.stats["agencies"] += 1
             except Exception as exc:
                 self.errors.append(f"Agency import error: {str(exc)}")
+        self._emitProgress("completed", {"file": "agency.txt", "imported": self.stats["agencies"]})
         return mapping
 
     def importStops(self, rows: List[Dict]) -> Dict[str, int]:
+        self._emitProgress("processing", {"file": "stops.txt", "rows": len(rows)})
         mapping = {}
         for row in rows:
             try:
-                stopId = row.get("stop_id", "")
-                name = row.get("stop_name", "Unknown")
-                lat = float(row.get("stop_lat", 0))
-                lon = float(row.get("stop_lon", 0))
-                zone = row.get("zone_id", None)
-
-                if lat == 0 or lon == 0:
-                    current_app.logger.warning(f"Stop {stopId} has invalid coords")
+                stopId = row.get("stop_id", "").strip()
+                name = self._cleanText(row.get("stop_name"), 255) or "Unknown"
+                
+                try:
+                    lat = float(row.get("stop_lat", 0))
+                    lon = float(row.get("stop_lon", 0))
+                except (ValueError, TypeError):
+                    current_app.logger.warning(f"Stop {stopId} has invalid coordinate format")
                     continue
 
+                if lat == 0 or lon == 0 or not self._validateCoordinate(lat, lon):
+                    current_app.logger.warning(f"Stop {stopId} has invalid coords: ({lat}, {lon})")
+                    continue
+
+                zone = self._cleanText(row.get("zone_id"))
                 zoneInt = None
                 if zone:
                     try:
@@ -171,8 +206,17 @@ class GTFSImporter:
                     except (ValueError, TypeError):
                         zoneInt = None
 
+                existing = db.session.query(Arret).filter(
+                    Arret.nomArret.ilike(name),
+                    Arret.latitude.between(lat - 0.0005, lat + 0.0005),
+                    Arret.longitude.between(lon - 0.0005, lon + 0.0005)
+                ).first()
+                if existing:
+                    mapping[stopId] = existing.idArret
+                    continue
+
                 arret = Arret(
-                    nomArret=name[:255],
+                    nomArret=name,
                     latitude=lat,
                     longitude=lon,
                     idZone=zoneInt,
@@ -183,17 +227,23 @@ class GTFSImporter:
                 self.stats["stops"] += 1
             except Exception as exc:
                 self.errors.append(f"Stop import error: {str(exc)}")
+        self._emitProgress("completed", {"file": "stops.txt", "imported": self.stats["stops"]})
         return mapping
 
     def importRoutes(self, rows: List[Dict], agencyMap: Dict) -> Dict[str, int]:
+        self._emitProgress("processing", {"file": "routes.txt", "rows": len(rows)})
         mapping = {}
         for row in rows:
             try:
-                routeId = row.get("route_id", "")
-                agencyId = row.get("agency_id", "default")
-                nameShort = row.get("route_short_name", "")
-                nameLong = row.get("route_long_name", "")
-                routeType = row.get("route_type", "3")
+                routeId = row.get("route_id", "").strip()
+                agencyId = row.get("agency_id", "default").strip()
+                nameShort = self._cleanText(row.get("route_short_name"), 50)
+                nameLong = self._cleanText(row.get("route_long_name"), 255)
+                routeType = row.get("route_type", "3").strip()
+
+                if not nameShort and not nameLong:
+                    current_app.logger.warning(f"Route {routeId}: missing name")
+                    continue
 
                 typeMap = {
                     "0": "rail",
@@ -211,8 +261,8 @@ class GTFSImporter:
 
                 ligne = Ligne(
                     idAgence=idAgence,
-                    nomCourt=nameShort[:50],
-                    nomLong=nameLong[:255],
+                    nomCourt=nameShort or nameLong[:50],
+                    nomLong=nameLong or nameShort,
                     typeLigne=typeLigne,
                 )
                 db.session.add(ligne)
@@ -221,25 +271,38 @@ class GTFSImporter:
                 self.stats["routes"] += 1
             except Exception as exc:
                 self.errors.append(f"Route import error: {str(exc)}")
+        self._emitProgress("completed", {"file": "routes.txt", "imported": self.stats["routes"]})
         return mapping
 
     def importCalendars(self, rows: List[Dict]) -> Dict[str, int]:
         mapping = {}
         for row in rows:
             try:
-                serviceId = row.get("service_id", "")
-                monday = row.get("monday", "0") == "1"
-                tuesday = row.get("tuesday", "0") == "1"
-                wednesday = row.get("wednesday", "0") == "1"
-                thursday = row.get("thursday", "0") == "1"
-                friday = row.get("friday", "0") == "1"
-                saturday = row.get("saturday", "0") == "1"
-                sunday = row.get("sunday", "0") == "1"
-                start = row.get("start_date", "20240101")
-                end = row.get("end_date", "20251231")
+                serviceId = row.get("service_id", "").strip()
+                monday = row.get("monday", "0").strip() == "1"
+                tuesday = row.get("tuesday", "0").strip() == "1"
+                wednesday = row.get("wednesday", "0").strip() == "1"
+                thursday = row.get("thursday", "0").strip() == "1"
+                friday = row.get("friday", "0").strip() == "1"
+                saturday = row.get("saturday", "0").strip() == "1"
+                sunday = row.get("sunday", "0").strip() == "1"
+                start = row.get("start_date", "20240101").strip()
+                end = row.get("end_date", "20251231").strip()
 
-                startDate = date(int(start[:4]), int(start[4:6]), int(start[6:8]))
-                endDate = date(int(end[:4]), int(end[4:6]), int(end[6:8]))
+                try:
+                    startDate = date(int(start[:4]), int(start[4:6]), int(start[6:8]))
+                    endDate = date(int(end[:4]), int(end[4:6]), int(end[6:8]))
+                    
+                    if startDate > endDate:
+                        current_app.logger.warning(f"Calendar {serviceId}: start date after end date")
+                        continue
+                    
+                    if startDate.year < 1900 or endDate.year > 2100:
+                        current_app.logger.warning(f"Calendar {serviceId}: date out of reasonable range")
+                        continue
+                except (ValueError, IndexError) as e:
+                    current_app.logger.warning(f"Calendar {serviceId}: invalid date format - {e}")
+                    continue
 
                 cal = Calendrier(
                     lundi=monday,
@@ -283,14 +346,15 @@ class GTFSImporter:
                 self.errors.append(f"Calendar date error: {str(exc)}")
 
     def importTrips(self, rows: List[Dict], routeMap: Dict, calMap: Dict) -> Dict[str, int]:
+        self._emitProgress("processing", {"file": "trips.txt", "rows": len(rows)})
         mapping = {}
         for row in rows:
             try:
-                tripId = row.get("trip_id", "")
-                routeId = row.get("route_id", "")
-                serviceId = row.get("service_id", "")
-                tripHeadsign = row.get("trip_headsign", "Unknown")
-                wheelchair = row.get("wheelchair_accessible", "0") == "1"
+                tripId = row.get("trip_id", "").strip()
+                routeId = row.get("route_id", "").strip()
+                serviceId = row.get("service_id", "").strip()
+                tripHeadsign = self._cleanText(row.get("trip_headsign"), 255) or "Unknown"
+                wheelchair = row.get("wheelchair_accessible", "0").strip() == "1"
 
                 isNight = False
 
@@ -302,7 +366,7 @@ class GTFSImporter:
                 trajet = Trajet(
                     idLigne=idLigne,
                     idService=idService,
-                    destination=tripHeadsign[:255],
+                    destination=tripHeadsign,
                     trainDeNuit=isNight,
                 )
                 db.session.add(trajet)
@@ -311,20 +375,31 @@ class GTFSImporter:
                 self.stats["trips"] += 1
             except Exception as exc:
                 self.errors.append(f"Trip import error: {str(exc)}")
+        self._emitProgress("completed", {"file": "trips.txt", "imported": self.stats["trips"]})
         return mapping
 
     def importStopTimes(self, rows: List[Dict], tripMap: Dict, stopMap: Dict):
+        self._emitProgress("processing", {"file": "stop_times.txt", "rows": len(rows)})
         for row in rows:
             try:
-                tripId = row.get("trip_id", "")
-                stopId = row.get("stop_id", "")
-                arrivalTime = row.get("arrival_time", "")
-                departureTime = row.get("departure_time", "")
-                sequence = row.get("stop_sequence", "0")
+                tripId = row.get("trip_id", "").strip()
+                stopId = row.get("stop_id", "").strip()
+                arrivalTime = self._cleanText(row.get("arrival_time"))
+                departureTime = self._cleanText(row.get("departure_time"))
+                sequence = row.get("stop_sequence", "0").strip()
 
                 idTrajet = tripMap.get(tripId)
                 idArret = stopMap.get(stopId)
                 if not idTrajet or not idArret:
+                    continue
+
+                try:
+                    sequenceInt = int(sequence) if sequence else 0
+                    if sequenceInt < 0:
+                        current_app.logger.warning(f"Stop time: negative sequence {sequenceInt}")
+                        continue
+                except (ValueError, TypeError):
+                    current_app.logger.warning(f"Stop time: invalid sequence {sequence}")
                     continue
 
                 arrivalNormalized = None
@@ -334,17 +409,21 @@ class GTFSImporter:
                 if departureTime and len(departureTime) >= 5:
                     departureNormalized = self._normalizeTime(departureTime)
 
+                if not arrivalNormalized and not departureNormalized:
+                    continue
+
                 horaire = HorairePassage(
                     idTrajet=idTrajet,
                     idArret=idArret,
                     heureArrivee=arrivalNormalized,
                     heureDepart=departureNormalized,
-                    sequenceArret=int(sequence) if sequence else 0,
+                    sequenceArret=sequenceInt,
                 )
                 db.session.add(horaire)
                 self.stats["stopTimes"] += 1
             except Exception as exc:
                 self.errors.append(f"Stop time error: {str(exc)}")
+        self._emitProgress("completed", {"file": "stop_times.txt", "imported": self.stats["stopTimes"]})
 
     def computeTripStatistics(self):
         from math import radians, sin, cos, sqrt, atan2
@@ -457,10 +536,12 @@ class GTFSImporter:
 
             db.session.commit()
 
+            self._emitProgress("computing_stats", {"message": "Computing trip statistics..."})
             current_app.logger.info("Computing trip statistics (distance, CO2)...")
             self.computeTripStatistics()
             db.session.commit()
 
+            self._emitProgress("complete", {"stats": self.stats})
             current_app.logger.info(f"GTFS import successful: {self.stats}")
             return True
 
