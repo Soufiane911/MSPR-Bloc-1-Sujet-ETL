@@ -9,9 +9,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -25,63 +26,141 @@ jobs:
       run: |
         python -m pip install --upgrade pip setuptools wheel
 
-    - name: Install test dependencies
+    - name: Install dependencies
       run: |
         if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
-
-    - name: Install API and ETL dependencies
-      run: |
         if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
         if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
 
-    - name: Run tests with coverage
+  test-api-endpoints:
+    name: "Test: API Endpoints (17 tests)"
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
       run: |
-        pytest tests/ -v --cov=. --cov-report=xml --cov-report=term --tb=short 2>&1 | tee test-output.txt
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Run API endpoint tests
+      run: pytest tests/test_api_endpoints.py -v --tb=short
 
-    - name: Parse and Display Test Results
-      if: always()
+  test-data-validation:
+    name: "Test: Data Validation (25 tests)"
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
       run: |
-        python << 'EOF'
-        import re
-        
-        # Read test output
-        with open('test-output.txt', 'r') as f:
-            content = f.read()
-        
-        # Extract test results
-        test_lines = [line for line in content.split('\n') if '::' in line and ('PASSED' in line or 'FAILED' in line)]
-        
-        # Write to summary
-        with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'a') as summary:
-            summary.write('# 📋 Test Results\n\n')
-            summary.write('| Test File | Test Name | Status |\n')
-            summary.write('|-----------|-----------|--------|\n')
-            
-            for line in test_lines:
-                match = re.search(r'(test_\w+\.py)::(\w+)::(\w+)\s+(PASSED|FAILED)', line)
-                if match:
-                    file, cls, method, status = match.groups()
-                    icon = '✅' if status == 'PASSED' else '❌'
-                    summary.write(f'| {file} | {cls}::{method} | {icon} {status} |\n')
-            
-            # Add summary stats
-            passed = len([l for l in test_lines if 'PASSED' in l])
-            failed = len([l for l in test_lines if 'FAILED' in l])
-            summary.write(f'\n## Summary\n')
-            summary.write(f'- ✅ **Passed:** {passed}\n')
-            summary.write(f'- ❌ **Failed:** {failed}\n')
-            summary.write(f'- 📊 **Total:** {passed + failed}\n')
-            
-            # Add coverage
-            if 'Name' in content and 'Stmts' in content:
-                summary.write(f'\n## 📊 Coverage\n')
-                coverage_section = content[content.find('Name'):content.find('Name')+500]
-                summary.write(f'```\n{coverage_section}\n```\n')
-        
-        import os
-        EOF
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Run data validation tests
+      run: pytest tests/test_data_validation.py -v --tb=short
 
-    - name: Upload coverage to Codecov
+  test-etl-pipeline:
+    name: "Test: ETL Pipeline (19 tests)"
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Run ETL pipeline tests
+      run: pytest tests/test_etl_pipeline.py -v --tb=short
+
+  test-data-merger:
+    name: "Test: Data Merger (18 tests)"
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Run data merger tests
+      run: pytest tests/test_data_merger.py -v --tb=short
+
+  test-examples:
+    name: "Test: Examples & Security (9 tests)"
+    runs-on: ubuntu-latest
+    needs: setup
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Run example and security tests
+      run: pytest tests/test_example.py -v --tb=short
+
+  coverage:
+    name: "Coverage Report"
+    runs-on: ubuntu-latest
+    needs: [test-api-endpoints, test-data-validation, test-etl-pipeline, test-data-merger, test-examples]
+    if: always()
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        if [ -f api/requirements.txt ]; then pip install -r api/requirements.txt; fi
+        if [ -f etl/requirements.txt ]; then pip install -r etl/requirements.txt; fi
+    
+    - name: Generate coverage report
+      run: |
+        pytest tests/ --cov=. --cov-report=xml --cov-report=term
+
+    - name: Upload to Codecov
       uses: codecov/codecov-action@v3
       with:
         files: ./coverage.xml
