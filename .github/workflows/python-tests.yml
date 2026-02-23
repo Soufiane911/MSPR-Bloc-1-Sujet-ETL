@@ -36,19 +36,50 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        pytest tests/ -v --cov=. --cov-report=xml --cov-report=term >> test-output.txt 2>&1
-        cat test-output.txt
+        pytest tests/ -v --cov=. --cov-report=xml --cov-report=term --tb=short 2>&1 | tee test-output.txt
 
-    - name: Create Test Summary
+    - name: Parse and Display Test Results
       if: always()
       run: |
-        echo "# ✅ Test Results" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "## Test Execution" >> $GITHUB_STEP_SUMMARY
-        tail -30 test-output.txt >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "## 📊 Coverage" >> $GITHUB_STEP_SUMMARY
-        python -m coverage report >> $GITHUB_STEP_SUMMARY 2>&1 || echo "Coverage report unavailable"
+        python << 'EOF'
+        import re
+        
+        # Read test output
+        with open('test-output.txt', 'r') as f:
+            content = f.read()
+        
+        # Extract test results
+        test_lines = [line for line in content.split('\n') if '::' in line and ('PASSED' in line or 'FAILED' in line)]
+        
+        # Write to summary
+        with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'a') as summary:
+            summary.write('# 📋 Test Results\n\n')
+            summary.write('| Test File | Test Name | Status |\n')
+            summary.write('|-----------|-----------|--------|\n')
+            
+            for line in test_lines:
+                match = re.search(r'(test_\w+\.py)::(\w+)::(\w+)\s+(PASSED|FAILED)', line)
+                if match:
+                    file, cls, method, status = match.groups()
+                    icon = '✅' if status == 'PASSED' else '❌'
+                    summary.write(f'| {file} | {cls}::{method} | {icon} {status} |\n')
+            
+            # Add summary stats
+            passed = len([l for l in test_lines if 'PASSED' in l])
+            failed = len([l for l in test_lines if 'FAILED' in l])
+            summary.write(f'\n## Summary\n')
+            summary.write(f'- ✅ **Passed:** {passed}\n')
+            summary.write(f'- ❌ **Failed:** {failed}\n')
+            summary.write(f'- 📊 **Total:** {passed + failed}\n')
+            
+            # Add coverage
+            if 'Name' in content and 'Stmts' in content:
+                summary.write(f'\n## 📊 Coverage\n')
+                coverage_section = content[content.find('Name'):content.find('Name')+500]
+                summary.write(f'```\n{coverage_section}\n```\n')
+        
+        import os
+        EOF
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
