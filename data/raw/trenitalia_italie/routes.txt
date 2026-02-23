@@ -1,0 +1,3 @@
+agency_id,route_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+0083,70083,BUS,Autobus,3,DA1D2A,FFFFFF
+0083,10083,REG,Regionale,2,DA1D2A,FFFFFF

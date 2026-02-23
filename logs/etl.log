@@ -1,0 +1,417 @@
+2026-02-23 10:55:12 - obrail_etl - INFO - 
+🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂
+2026-02-23 10:55:12 - obrail_etl - INFO -   ETL OBRAIL EUROPE - DÉMARRAGE
+2026-02-23 10:55:12 - obrail_etl - INFO - 🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂🚂
+
+2026-02-23 10:55:12 - obrail_etl - INFO - 
+======================================================================
+2026-02-23 10:55:12 - obrail_etl - INFO - PHASE 1: EXTRACTION DES DONNÉES
+2026-02-23 10:55:12 - obrail_etl - INFO - ======================================================================
+
+2026-02-23 10:55:12 - obrail_etl - INFO - 📥 Extraction Back-on-Track...
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - ============================================================
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - Démarrage de l'extraction Back-on-Track
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - ============================================================
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - Téléchargement: agencies.json
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - ✓ agencies: 30 enregistrements extraits
+2026-02-23 10:55:12 - extractor.Back-on-Track - INFO - Téléchargement: stops.json
+2026-02-23 10:55:13 - extractor.Back-on-Track - INFO - ✓ stops: 28769 enregistrements extraits
+2026-02-23 10:55:13 - extractor.Back-on-Track - INFO - Téléchargement: routes.json
+2026-02-23 10:55:13 - extractor.Back-on-Track - INFO - ✓ routes: 207 enregistrements extraits
+2026-02-23 10:55:13 - extractor.Back-on-Track - INFO - Téléchargement: trips.json
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - ✓ trips: 408 enregistrements extraits
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - Téléchargement: trip_stop.json
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - ✓ trip_stop: 3420 enregistrements extraits
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - Téléchargement: calendar.json
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - ✓ calendar: 108 enregistrements extraits
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - Téléchargement: calendar_dates.json
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - ✓ calendar_dates: 59 enregistrements extraits
+2026-02-23 10:55:14 - extractor.Back-on-Track - INFO - Téléchargement: translations.json
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - ✓ translations: 2 enregistrements extraits
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - Téléchargement: classes.json
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - ✓ classes: 12 enregistrements extraits
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - ------------------------------------------------------------
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - Extraction terminée: 9 endpoints
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - Validation des données Back-on-Track...
+2026-02-23 10:55:15 - extractor.Back-on-Track - WARNING - ⚠ 13 agency_id des routes ne sont pas dans agencies: ['', 'TCDD/BDŽ/CFR', 'CFR/MÁV', 'ŽS/ŽPCG', 'MÁV/ÖBB']
+2026-02-23 10:55:15 - extractor.Back-on-Track - WARNING - ⚠ 18 stop_id des trip_stop ne sont pas dans stops
+2026-02-23 10:55:15 - extractor.Back-on-Track - INFO - ✓ Validation Back-on-Track réussie
+2026-02-23 10:55:15 - obrail_etl - INFO - ✅ Back-on-Track: Extraction réussie
+
+2026-02-23 10:55:15 - obrail_etl - INFO - 📥 Extraction Mobility Catalog...
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - Téléchargement du catalogue Mobility Database
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - ✓ Catalogue téléchargé: 3080 flux
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO -   - Colonnes: 27
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - ✓ Validation catalogue réussie
+2026-02-23 10:55:15 - extractor.Mobility-Catalog - INFO - Flux européens trouvés: 657
+2026-02-23 10:55:15 - obrail_etl - INFO - ✅ Mobility Catalog: 657 flux européens
+
+2026-02-23 10:55:15 - obrail_etl - INFO - 📥 Extraction SNCF Transilien...
+2026-02-23 10:55:15 - extractor.SNCF Transilien - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.SNCF Transilien - INFO - Téléchargement GTFS: SNCF Transilien
+2026-02-23 10:55:15 - extractor.SNCF Transilien - INFO - URL: https://eu.ftp.opendatasoft.com/sncf/gtfs/transilien-gtfs.zip
+2026-02-23 10:55:15 - extractor.SNCF Transilien - INFO - ============================================================
+2026-02-23 10:55:15 - extractor.SNCF Transilien - INFO - Téléchargement en cours...
+2026-02-23 10:55:16 - extractor.SNCF Transilien - INFO - ✓ Téléchargé: 10.32 MB
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - ✓ Extraction réussie: 11 fichiers
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - transfers.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - agency.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - calendar_dates.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - calendar.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - stops.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - trips.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - routes.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - stop_extensions.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - stop_times.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   - pathways.txt
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO -   ... et 1 autres fichiers
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - Lecture des fichiers GTFS...
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - ✓ agency.txt: 3 lignes
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - ✓ stops.txt: 6845 lignes
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - ✓ routes.txt: 38 lignes
+2026-02-23 10:55:17 - extractor.SNCF Transilien - INFO - ✓ trips.txt: 46938 lignes
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ✓ stop_times.txt: 632273 lignes
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ✓ calendar.txt: 499 lignes
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ✓ calendar_dates.txt: 1182 lignes
+2026-02-23 10:55:18 - extractor.SNCF Transilien - WARNING - ⚠ Fichier manquant: shapes.txt
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ✓ transfers.txt: 22692 lignes
+2026-02-23 10:55:18 - extractor.SNCF Transilien - WARNING - ⚠ Fichier manquant: feed_info.txt
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ------------------------------------------------------------
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - Extraction terminée: 8 fichiers GTFS
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - Validation GTFS: SNCF Transilien
+2026-02-23 10:55:18 - extractor.SNCF Transilien - INFO - ✓ Validation GTFS réussie
+2026-02-23 10:55:18 - obrail_etl - INFO - ✅ SNCF Transilien: Extraction réussie
+
+2026-02-23 10:55:18 - obrail_etl - INFO - 📥 Extraction SNCF Intercités...
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - Téléchargement GTFS: SNCF Intercités
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - URL: https://eu.ftp.opendatasoft.com/sncf/gtfs/export-intercites-gtfs-last.zip
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - Téléchargement en cours...
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ Téléchargé: 0.12 MB
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ Extraction réussie: 8 fichiers
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - trips.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - routes.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - calendar_dates.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - transfers.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - stop_times.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - agency.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - feed_info.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO -   - stops.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - Lecture des fichiers GTFS...
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ agency.txt: 2 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ stops.txt: 351 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ routes.txt: 30 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ trips.txt: 1648 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ stop_times.txt: 14782 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - WARNING - ⚠ Fichier manquant: calendar.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ calendar_dates.txt: 6213 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - WARNING - ⚠ Fichier manquant: shapes.txt
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ transfers.txt: 0 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ feed_info.txt: 1 lignes
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ------------------------------------------------------------
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - Extraction terminée: 8 fichiers GTFS
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - Validation GTFS: SNCF Intercités
+2026-02-23 10:55:18 - extractor.SNCF Intercités - INFO - ✓ Validation GTFS réussie
+2026-02-23 10:55:18 - obrail_etl - INFO - ✅ SNCF Intercités: Extraction réussie
+
+2026-02-23 10:55:18 - obrail_etl - INFO - 📥 Extraction GTFS Allemagne...
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - Téléchargement GTFS: GTFS Allemagne
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - URL: https://download.gtfs.de/germany/rv_free/latest.zip
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - ============================================================
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - Téléchargement en cours...
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - ✓ Téléchargé: 8.14 MB
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - ✓ Extraction réussie: 9 fichiers
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - agency.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - feed_info.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - stops.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - routes.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - calendar.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - calendar_dates.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - trips.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - stop_times.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO -   - attributions.txt
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - Lecture des fichiers GTFS...
+2026-02-23 10:55:18 - extractor.GTFS Allemagne - INFO - ✓ agency.txt: 121 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ stops.txt: 16159 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ routes.txt: 916 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ trips.txt: 83097 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ stop_times.txt: 1228020 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ calendar.txt: 2924 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ calendar_dates.txt: 7983 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - WARNING - ⚠ Fichier manquant: shapes.txt
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - WARNING - ⚠ Fichier manquant: transfers.txt
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ feed_info.txt: 1 lignes
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ------------------------------------------------------------
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - Extraction terminée: 8 fichiers GTFS
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ============================================================
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - Validation GTFS: GTFS Allemagne
+2026-02-23 10:55:19 - extractor.GTFS Allemagne - INFO - ✓ Validation GTFS réussie
+2026-02-23 10:55:19 - obrail_etl - INFO - ✅ GTFS Allemagne: Extraction réussie
+
+2026-02-23 10:55:19 - obrail_etl - INFO - 📥 Extraction ÖBB Autriche...
+2026-02-23 10:55:19 - extractor.ÖBB Autriche - INFO - ============================================================
+2026-02-23 10:55:19 - extractor.ÖBB Autriche - INFO - Téléchargement GTFS: ÖBB Autriche
+2026-02-23 10:55:19 - extractor.ÖBB Autriche - INFO - URL: https://data.oebb.at/de/datensaetze~soll-fahrplan-gtfs~/download.csv
+2026-02-23 10:55:19 - extractor.ÖBB Autriche - INFO - ============================================================
+2026-02-23 10:55:19 - extractor.ÖBB Autriche - INFO - Téléchargement en cours...
+2026-02-23 10:55:20 - extractor.ÖBB Autriche - ERROR - ✗ Erreur téléchargement GTFS: 404 Client Error:  for url: https://data.oebb.at/de/datensaetze~soll-fahrplan-gtfs~/download.csv
+2026-02-23 10:55:20 - obrail_etl - ERROR - ❌ ÖBB Autriche: 404 Client Error:  for url: https://data.oebb.at/de/datensaetze~soll-fahrplan-gtfs~/download.csv
+
+2026-02-23 10:55:20 - obrail_etl - INFO - 📥 Extraction Renfe Espagne...
+2026-02-23 10:55:20 - extractor.Renfe Espagne - INFO - ============================================================
+2026-02-23 10:55:20 - extractor.Renfe Espagne - INFO - Téléchargement GTFS: Renfe Espagne
+2026-02-23 10:55:20 - extractor.Renfe Espagne - INFO - URL: https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip
+2026-02-23 10:55:20 - extractor.Renfe Espagne - INFO - ============================================================
+2026-02-23 10:55:20 - extractor.Renfe Espagne - INFO - Téléchargement en cours...
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ Téléchargé: 0.76 MB
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ Extraction réussie: 7 fichiers
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - agency.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - calendar_dates.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - calendar.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - routes.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - stops.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - stop_times.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO -   - trips.txt
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - Lecture des fichiers GTFS...
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ agency.txt: 1 lignes
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ stops.txt: 758 lignes
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ routes.txt: 622 lignes
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ trips.txt: 6048 lignes
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ stop_times.txt: 48435 lignes
+2026-02-23 10:55:21 - extractor.Renfe Espagne - INFO - ✓ calendar.txt: 6048 lignes
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - ✓ calendar_dates.txt: 53816 lignes
+2026-02-23 10:55:22 - extractor.Renfe Espagne - WARNING - ⚠ Fichier manquant: shapes.txt
+2026-02-23 10:55:22 - extractor.Renfe Espagne - WARNING - ⚠ Fichier manquant: transfers.txt
+2026-02-23 10:55:22 - extractor.Renfe Espagne - WARNING - ⚠ Fichier manquant: feed_info.txt
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - ------------------------------------------------------------
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - Extraction terminée: 7 fichiers GTFS
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - ============================================================
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - Validation GTFS: Renfe Espagne
+2026-02-23 10:55:22 - extractor.Renfe Espagne - INFO - ✓ Validation GTFS réussie
+2026-02-23 10:55:22 - obrail_etl - INFO - ✅ Renfe Espagne: Extraction réussie
+
+2026-02-23 10:55:22 - obrail_etl - INFO - 📥 Extraction Trenitalia Italie...
+2026-02-23 10:55:22 - extractor.Trenitalia Italie - INFO - ============================================================
+2026-02-23 10:55:22 - extractor.Trenitalia Italie - INFO - Téléchargement GTFS: Trenitalia Italie
+2026-02-23 10:55:22 - extractor.Trenitalia Italie - INFO - URL: http://www.sardegnamobilita.it/opendata/dati_trenitalia.zip
+2026-02-23 10:55:22 - extractor.Trenitalia Italie - INFO - ============================================================
+2026-02-23 10:55:22 - extractor.Trenitalia Italie - INFO - Téléchargement en cours...
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ Téléchargé: 0.22 MB
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ Extraction réussie: 10 fichiers
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - agency.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - calendar_dates.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - calendar.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - routes.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - shapes.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - stops.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - stop_times.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - transfers.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - trips.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO -   - feed_info.txt
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - Lecture des fichiers GTFS...
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ agency.txt: 1 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ stops.txt: 41 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ routes.txt: 2 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ trips.txt: 541 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ stop_times.txt: 3376 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ calendar.txt: 0 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ calendar_dates.txt: 47988 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ shapes.txt: 5682 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ transfers.txt: 41 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ feed_info.txt: 1 lignes
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ------------------------------------------------------------
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - Extraction terminée: 10 fichiers GTFS
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ============================================================
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - Validation GTFS: Trenitalia Italie
+2026-02-23 10:55:23 - extractor.Trenitalia Italie - INFO - ✓ Validation GTFS réussie
+2026-02-23 10:55:23 - obrail_etl - INFO - ✅ Trenitalia Italie: Extraction réussie
+
+2026-02-23 10:55:23 - obrail_etl - INFO - 📊 Total sources extraites: 7
+2026-02-23 10:55:23 - obrail_etl - INFO - 
+======================================================================
+2026-02-23 10:55:23 - obrail_etl - INFO - PHASE 2: TRANSFORMATION DES DONNÉES
+2026-02-23 10:55:23 - obrail_etl - INFO - ======================================================================
+
+2026-02-23 10:55:23 - obrail_etl - INFO - 🔧 Transformation de back_on_track...
+2026-02-23 10:55:23 - transformer.cleaner - INFO - Nettoyage des données de lignes...
+2026-02-23 10:55:23 - transformer.cleaner - INFO - ✓ Lignes nettoyées: 30 lignes
+2026-02-23 10:55:23 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:23 - transformer.cleaner - WARNING - ⚠ 7 coordonnées invalides
+2026-02-23 10:55:23 - transformer.cleaner - INFO - ✓ Gares nettoyées: 28769 lignes
+2026-02-23 10:55:23 - obrail_etl - INFO - 🔧 Transformation de mobility_catalog...
+2026-02-23 10:55:23 - obrail_etl - INFO - 🔧 Transformation de sncf_transilien...
+2026-02-23 10:55:23 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:23 - transformer.cleaner - INFO - ✓ Gares nettoyées: 6845 lignes
+2026-02-23 10:55:23 - transformer.normalizer - INFO - Normalisation de arrival_time...
+2026-02-23 10:55:23 - transformer.normalizer - INFO - Normalisation de departure_time...
+2026-02-23 10:55:23 - transformer.classifier - INFO - Classification depuis timedelta (departure_time)...
+2026-02-23 10:55:25 - transformer.classifier - INFO - ✓ Classification terminée: 534196 jour, 98077 nuit
+2026-02-23 10:55:25 - obrail_etl - INFO - 🔧 Transformation de sncf_intercites...
+2026-02-23 10:55:25 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:25 - transformer.cleaner - INFO - ✓ Gares nettoyées: 351 lignes
+2026-02-23 10:55:25 - transformer.normalizer - INFO - Normalisation de arrival_time...
+2026-02-23 10:55:25 - transformer.normalizer - INFO - Normalisation de departure_time...
+2026-02-23 10:55:25 - transformer.classifier - INFO - Classification depuis timedelta (departure_time)...
+2026-02-23 10:55:25 - transformer.classifier - INFO - ✓ Classification terminée: 12202 jour, 2580 nuit
+2026-02-23 10:55:25 - obrail_etl - INFO - 🔧 Transformation de gtfs_de...
+2026-02-23 10:55:25 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:25 - transformer.cleaner - INFO - ✓ Gares nettoyées: 16159 lignes
+2026-02-23 10:55:25 - transformer.normalizer - INFO - Normalisation de arrival_time...
+2026-02-23 10:55:26 - transformer.normalizer - INFO - Normalisation de departure_time...
+2026-02-23 10:55:26 - transformer.classifier - INFO - Classification depuis timedelta (departure_time)...
+2026-02-23 10:55:29 - transformer.classifier - INFO - ✓ Classification terminée: 956387 jour, 271633 nuit
+2026-02-23 10:55:29 - obrail_etl - INFO - 🔧 Transformation de renfe...
+2026-02-23 10:55:29 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:29 - transformer.cleaner - INFO - ✓ Gares nettoyées: 758 lignes
+2026-02-23 10:55:29 - transformer.normalizer - INFO - Normalisation de arrival_time...
+2026-02-23 10:55:29 - transformer.normalizer - INFO - Normalisation de departure_time...
+2026-02-23 10:55:29 - transformer.classifier - INFO - Classification depuis timedelta (departure_time)...
+2026-02-23 10:55:30 - transformer.classifier - INFO - ✓ Classification terminée: 44462 jour, 3973 nuit
+2026-02-23 10:55:30 - obrail_etl - INFO - 🔧 Transformation de trenitalia...
+2026-02-23 10:55:30 - transformer.cleaner - INFO - Nettoyage des données de gares...
+2026-02-23 10:55:30 - transformer.cleaner - INFO - ✓ Gares nettoyées: 41 lignes
+2026-02-23 10:55:30 - transformer.normalizer - INFO - Normalisation de arrival_time...
+2026-02-23 10:55:30 - transformer.normalizer - INFO - Normalisation de departure_time...
+2026-02-23 10:55:30 - transformer.classifier - INFO - Classification depuis timedelta (departure_time)...
+2026-02-23 10:55:30 - transformer.classifier - INFO - ✓ Classification terminée: 3149 jour, 227 nuit
+2026-02-23 10:55:30 - obrail_etl - INFO - 
+🔗 Fusion des données...
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: back_on_track
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: sncf_transilien
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: sncf_intercites
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: gtfs_de
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: renfe
+2026-02-23 10:55:30 - transformer.merger - INFO - Source ajoutée: trenitalia
+2026-02-23 10:55:30 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 10:55:30 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 158 opérateurs uniques
+2026-02-23 10:55:30 - transformer.merger - INFO - Fusion des gares...
+2026-02-23 10:55:30 - transformer.merger - INFO - ✓ Gares fusionnées: 38596 gares uniques
+2026-02-23 10:55:30 - transformer.merger - INFO - Fusion des trains...
+2026-02-23 10:55:30 - transformer.merger - INFO - Types de trains avant mapping: {'night': 207}
+2026-02-23 10:55:30 - transformer.merger - INFO - Types de trains après mapping: {'night': 187}
+2026-02-23 10:55:30 - transformer.merger - INFO - ✓ Trains fusionnés: 138459 trains uniques
+2026-02-23 10:55:30 - transformer.merger - INFO - Fusion des horaires...
+2026-02-23 10:55:36 - transformer.merger - INFO - ✓ Horaires fusionnés: 0 dessertes
+2026-02-23 10:55:36 - obrail_etl - INFO - ✅ Transformation terminée
+
+2026-02-23 10:55:36 - obrail_etl - INFO - 
+======================================================================
+2026-02-23 10:55:36 - obrail_etl - INFO - PHASE 3: CHARGEMENT DANS POSTGRESQL
+2026-02-23 10:55:36 - obrail_etl - INFO - ======================================================================
+
+2026-02-23 10:55:36 - loader.database - INFO - ============================================================
+2026-02-23 10:55:36 - loader.database - INFO - Chargement des opérateurs...
+2026-02-23 10:55:36 - loader.database - INFO - ============================================================
+2026-02-23 10:55:36 - loader.database - INFO - ✓ Opérateurs chargés: 158
+2026-02-23 10:55:36 - loader.database - INFO - Chargement des gares...
+2026-02-23 10:55:37 - loader.database - INFO - ✓ Gares chargées: 38596
+2026-02-23 10:55:37 - loader.database - INFO - Chargement des trains...
+2026-02-23 10:55:42 - loader.database - INFO - ✓ Trains chargés: 138459
+2026-02-23 10:55:42 - obrail_etl - INFO - 
+📊 Statistiques finales:
+2026-02-23 10:55:42 - obrail_etl - INFO -   - Opérateurs: 161
+2026-02-23 10:55:42 - obrail_etl - INFO -   - Gares: 38599
+2026-02-23 10:55:42 - obrail_etl - INFO -   - Trains: 138459
+2026-02-23 10:55:42 - obrail_etl - INFO -   - Dessertes: 0
+2026-02-23 10:55:42 - obrail_etl - INFO - 
+✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+2026-02-23 10:55:42 - obrail_etl - INFO -   ETL TERMINÉ AVEC SUCCÈS
+2026-02-23 10:55:42 - obrail_etl - INFO - ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+
+2026-02-23 12:25:35 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:32:30 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Deutsche Bahn
+2026-02-23 12:32:30 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:32:30 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:32:30 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Trenitalia
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Source0
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Source1
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Source2
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Source3
+2026-02-23 12:32:30 - transformer.merger - INFO - Source ajoutée: Source4
+2026-02-23 12:32:30 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:32:30 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:35:16 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Deutsche Bahn
+2026-02-23 12:35:16 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:35:16 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:35:16 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Trenitalia
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Source0
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Source1
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Source2
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Source3
+2026-02-23 12:35:16 - transformer.merger - INFO - Source ajoutée: Source4
+2026-02-23 12:35:16 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:35:16 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:37:31 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Deutsche Bahn
+2026-02-23 12:37:31 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:37:31 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:37:31 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Trenitalia
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Source0
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Source1
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Source2
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Source3
+2026-02-23 12:37:31 - transformer.merger - INFO - Source ajoutée: Source4
+2026-02-23 12:37:31 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:37:31 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:41:15 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Deutsche Bahn
+2026-02-23 12:41:15 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:41:15 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:41:15 - transformer.merger - INFO - ✓ Opérateurs fusionnés: 2 opérateurs uniques
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Fusion des opérateurs...
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: SNCF
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Trenitalia
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Source0
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Source1
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Source2
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Source3
+2026-02-23 12:41:15 - transformer.merger - INFO - Source ajoutée: Source4
+2026-02-23 12:41:16 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes
+2026-02-23 12:41:16 - transformer.cleaner - INFO - ✓ Doublons supprimés: 1 lignes

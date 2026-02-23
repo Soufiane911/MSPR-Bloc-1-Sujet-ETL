@@ -1,0 +1,4 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_email,agency_fare_url
+IDFM:1046,Transilien,https://www.iledefrance-mobilites.fr,Europe/Paris,,,,
+IDFM:93,TER,https://www.iledefrance-mobilites.fr,Europe/Paris,,,,
+IDFM:71,RER,https://www.iledefrance-mobilites.fr,Europe/Paris,,,,

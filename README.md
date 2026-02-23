@@ -108,6 +108,104 @@ docker-compose --profile etl run --rm etl
 docker-compose --profile etl run --rm etl python main.py --source back_on_track
 ```
 
+## 🧪 Tests
+
+### Setup des Tests
+
+Des tests unitaires, d'intégration et de sécurité ont été implémentés pour assurer la qualité du code.
+
+#### Installation des dépendances de test
+
+```bash
+pip install -r requirements-test.txt
+```
+
+### Exécution des tests
+
+**Tous les tests:**
+```bash
+pytest tests/ -v
+```
+
+**Tests spécifiques:**
+```bash
+# Tests de validation des données
+pytest tests/test_data_validation.py -v
+
+# Tests des endpoints API
+pytest tests/test_api_endpoints.py -v
+
+# Tests du pipeline ETL
+pytest tests/test_etl_pipeline.py -v
+
+# Tests du fusionneur de données
+pytest tests/test_data_merger.py -v
+
+# Tests d'exemple
+pytest tests/test_example.py -v
+```
+
+**Avec rapport de couverture:**
+```bash
+pytest tests/ --cov=. --cov-report=html
+```
+
+### Suites de tests disponibles
+
+#### 1. **Tests de validation des données** (`test_data_validation.py`)
+- Validation des numéros de train
+- Validation des coordonnées géographiques
+- Validation des formats d'heure
+- Validation des codes pays
+- Validation des structures de DataFrames
+
+#### 2. **Tests des endpoints API** (`test_api_endpoints.py`)
+- Endpoints trains (GET, filtres, pagination)
+- Endpoints stations (GET, filtres)
+- Endpoints horaires
+- Endpoints opérateurs
+- Gestion des erreurs API
+- Documentation API (Swagger, ReDoc)
+
+#### 3. **Tests du pipeline ETL** (`test_etl_pipeline.py`)
+- Extraction de données (GTFS, Back-on-Track, Mobility Catalog)
+- Transformation et nettoyage
+- Normalisation
+- Classification jour/nuit
+- Fusion de données
+- Chargement en base de données
+- Tests d'intégration complets
+
+#### 4. **Tests du fusionneur de données** (`test_data_merger.py`)
+- Fusion d'opérateurs multisources
+- Fusion de stations
+- Fusion de trains
+- Résolution de conflits
+- Intégrité des données
+- Performance sur grandes données
+
+#### 5. **Tests d'exemple** (`test_example.py`)
+- Nettoyage de données
+- Gestion des valeurs manquantes
+- Tests de sécurité (injection SQL, XSS)
+
+### GitHub Actions Workflow
+
+Le fichier `.github/workflows/python-tests.yml` configure une intégration continue automatique:
+
+- Les tests s'exécutent à chaque push et pull request
+- Rapport de couverture généré automatiquement
+- Upload vers Codecov pour le suivi
+- Notification des résultats
+
+### Bonnes pratiques de test
+
+1. **Écrivez des tests isolés** - Utilisez des mocks pour les dépendances externes
+2. **Nommez clairement** - Les noms de tests doivent décrire ce qu'ils testent
+3. **Testez les cas limites** - Empty, null, invalid inputs
+4. **Maintenez la couverture** - Visez 80%+ de couverture de code
+5. **Exécutez régulièrement** - Avant chaque commit local et en CI/CD
+
 ### API REST
 
 #### Endpoints principaux
@@ -193,3 +291,56 @@ Projet réalisé dans le cadre de la certification professionnelle
 <p align="center">
   🚂 <strong>ObRail Europe</strong> - Pour une mobilité durable
 </p>
+
+## Unit Testing Setup
+
+### Unit Tests
+
+To ensure the quality of the code, unit tests are implemented using pytest. Follow the instructions below to set up and run the tests.
+
+### Prerequisites
+- Python 3.x
+- pytest installed
+
+### Installation
+To install pytest, run the following command:
+
+```bash
+pip install pytest
+```
+
+### Creating Tests
+1. Create a new directory named `tests` in the root of your project.
+2. Inside the `tests` directory, create test files prefixed with `test_` (e.g., `test_example.py`).
+3. Write your test functions inside these files.
+
+Example test function:
+
+```python
+import pytest
+
+from app.main import some_function
+
+
+def test_some_function():
+    assert some_function() == expected_value
+```
+
+### Running Tests
+To run the tests, execute:
+
+```bash
+pytest
+```
+
+### GitHub Actions Workflow
+
+A GitHub Actions workflow has been created to automate testing. The workflow file is located at `.github/workflows/python-tests.yml`. This file will run tests on every push and pull request to the main branch.
+
+Make sure to check the workflow file for any specific configurations you might need to adjust based on your project requirements.
+
+### Security Tests
+
+Security tests have also been included to check for vulnerabilities such as SQL injection and XSS. These tests ensure that the application handles malicious input appropriately.
+
+Make sure to run these tests regularly to maintain code quality and security.
