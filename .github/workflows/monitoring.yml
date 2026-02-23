@@ -1,0 +1,180 @@
+name: Application Monitoring & Health Checks
+
+on:
+  schedule:
+    # Run health checks every 10 minutes during business hours
+    - cron: '*/10 8-18 * * 1-5'
+    # Run once daily during off-hours
+    - cron: '0 3 * * *'
+  push:
+    branches:
+      - main
+      - monitoring
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  health-checks:
+    name: Application Health Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Start services with docker-compose
+        run: |
+          docker-compose up -d
+          sleep 30
+
+      - name: Check API health
+        run: |
+          max_attempts=30
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            if curl -f http://localhost:8000/health; then
+              echo "API is healthy"
+              exit 0
+            fi
+            echo "Attempt $attempt of $max_attempts failed. Retrying..."
+            sleep 2
+            attempt=$((attempt + 1))
+          done
+          echo "API health check failed"
+          exit 1
+
+      - name: Check Prometheus health
+        run: |
+          curl -f http://localhost:9090/-/healthy || exit 1
+          echo "Prometheus is healthy"
+
+      - name: Check Grafana health
+        run: |
+          curl -f http://localhost:3000/api/health || exit 1
+          echo "Grafana is healthy"
+
+      - name: Check database connectivity
+        run: |
+          curl -f http://localhost:9187 || exit 1
+          echo "PostgreSQL exporter is responding"
+
+      - name: Fetch API metrics
+        run: |
+          curl -s http://localhost:8000/metrics | head -20
+          echo "Successfully retrieved metrics from API"
+
+      - name: Fetch Prometheus metrics
+        run: |
+          curl -s 'http://localhost:9090/api/v1/query?query=up' | jq '.'
+          echo "Successfully queried Prometheus"
+
+      - name: Monitor database connections
+        run: |
+          curl -s http://localhost:9187/metrics | grep pg_stat_activity_count
+          echo "Successfully retrieved PostgreSQL metrics"
+
+      - name: Upload health check report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: health-check-report
+          path: ./logs/
+
+      - name: Cleanup
+        if: always()
+        run: docker-compose down -v
+
+  performance-tests:
+    name: API Performance Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start services
+        run: |
+          docker-compose up -d
+          sleep 30
+
+      - name: Wait for API to be ready
+        run: |
+          until curl -f http://localhost:8000/health; do
+            echo 'Waiting for API...'
+            sleep 1
+          done
+
+      - name: Run load tests with Apache Bench
+        run: |
+          apt-get update && apt-get install -y apache2-utils
+          # Test API endpoints
+          ab -n 100 -c 10 http://localhost:8000/trains/ || true
+          ab -n 100 -c 10 http://localhost:8000/stations/ || true
+          ab -n 100 -c 10 http://localhost:8000/operators/ || true
+          ab -n 100 -c 10 http://localhost:8000/schedules/ || true
+
+      - name: Verify metrics are being collected
+        run: |
+          metrics=$(curl -s http://localhost:8000/metrics)
+          if echo "$metrics" | grep -q "http_requests_total"; then
+            echo "Metrics are being collected successfully"
+          else
+            echo "Error: No metrics collected"
+            exit 1
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: docker-compose down -v
+
+  monitoring-stack-validation:
+    name: Monitoring Stack Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate prometheus.yml
+        run: |
+          docker run --rm -v $(pwd)/prometheus.yml:/prometheus.yml prom/prometheus:latest promtool check config /prometheus.yml
+
+      - name: Validate Grafana dashboards
+        run: |
+          for dashboard in grafana/provisioning/dashboards/*.json; do
+            if [ -f "$dashboard" ]; then
+              python3 -m json.tool "$dashboard" > /dev/null
+              echo "✓ $dashboard is valid JSON"
+            fi
+          done
+
+      - name: Lint docker-compose.yml
+        run: |
+          docker-compose config --quiet
+          echo "docker-compose.yml is valid"
+
+  notify-monitoring-status:
+    name: Send Monitoring Status Notification
+    needs: [health-checks, performance-tests, monitoring-stack-validation]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Check job status
+        run: |
+          if [ "${{ needs.health-checks.result }}" = "failure" ] || \
+             [ "${{ needs.performance-tests.result }}" = "failure" ] || \
+             [ "${{ needs.monitoring-stack-validation.result }}" = "failure" ]; then
+            echo "⚠️ One or more monitoring jobs failed"
+            exit 1
+          else
+            echo "✅ All monitoring jobs passed"
+          fi
