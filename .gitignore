@@ -133,7 +133,6 @@ dmypy.json
 # Project specific
 data/raw/
 data/processed/
-logs/
 *.joblib
 *.pkl
 *.pickle
@@ -148,7 +147,6 @@ logs/
 .env.*.local
 
 # OS
-.DS_Store
 Thumbs.db
 
 # Coverage reports
@@ -158,9 +156,11 @@ coverage.xml
 
 # pytest
 .pytest_cache/
+
 # Monitoring & Metrics
 prometheus_data/
 grafana_data/
+loki_data/
 grafana/provisioning/**/tmp/
 grafana/provisioning/**/cache/
 
@@ -168,9 +168,11 @@ grafana/provisioning/**/cache/
 test_results/
 test_output/
 
-# Monitoring logs
+# Logs - only ignore monitoring/runtime logs
 logs/prometheus/
 logs/grafana/
+logs/loki/
+logs/*.log
 
 # API profiling data
 *.prof

@@ -167,10 +167,44 @@ services:
       timeout: 10s
       retries: 3
 
+  # Loki for log aggregation
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: obrail-loki
+    command: -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - ./loki-config.yml:/etc/loki/loki-config.yml
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - obrail-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3100/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Promtail for shipping logs to Loki
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: obrail-promtail
+    command: -config.file=/etc/promtail/promtail-config.yml
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log:/var/log:ro
+    depends_on:
+      - loki
+    networks:
+      - obrail-network
+
 volumes:
   postgres_data:
   prometheus_data:
   grafana_data:
+  loki_data:
 
 networks:
   obrail-network:
