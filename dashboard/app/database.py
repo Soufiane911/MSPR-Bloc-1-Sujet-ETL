@@ -15,7 +15,19 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     DATABASE_URL = "postgresql://obrail:changeme@database:5432/obrail_db"
 
-engine = create_engine(DATABASE_URL, pool_size=5, max_overflow=10, pool_pre_ping=True)
+# Arguments de connexion
+engine_kwargs = {
+    "pool_pre_ping": True,
+}
+
+# Arguments spécifiques à PostgreSQL
+if DATABASE_URL.startswith("postgresql"):
+    engine_kwargs.update({
+        "pool_size": 5,
+        "max_overflow": 10,
+    })
+
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 
 
 def get_connection():

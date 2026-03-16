@@ -23,15 +23,21 @@ def get_engine():
     """Crée l'engine SQLAlchemy à la demande (lazy loading)."""
     global _engine
     if _engine is None:
+        # Arguments de connexion
+        engine_kwargs = {
+            "pool_pre_ping": True,
+            "echo": False
+        }
+
+        # Arguments spécifiques à PostgreSQL
+        if DATABASE_URL.startswith("postgresql"):
+            engine_kwargs.update({
+                "pool_size": 10,
+                "max_overflow": 20,
+            })
+
         from sqlalchemy import create_engine
-        _engine = create_engine(
-            DATABASE_URL,
-            pool_size=10,
-            max_overflow=20,
-            pool_pre_ping=True,
-            # Désactiver les logs SQL pour réduire le bruit
-            echo=False
-        )
+        _engine = create_engine(DATABASE_URL, **engine_kwargs)
     return _engine
 
 

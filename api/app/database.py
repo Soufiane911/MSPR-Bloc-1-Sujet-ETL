@@ -13,8 +13,20 @@ if not DATABASE_URL:
         "Copiez .env.example vers .env et renseignez vos valeurs."
     )
 
+# Arguments de connexion par défaut
+engine_kwargs = {
+    "pool_pre_ping": True,
+}
+
+# Arguments spécifiques à PostgreSQL (non supportés par SQLite/SingletonThreadPool)
+if DATABASE_URL.startswith("postgresql"):
+    engine_kwargs.update({
+        "pool_size": 10,
+        "max_overflow": 20,
+    })
+
 # Création du moteur SQLAlchemy
-engine = create_engine(DATABASE_URL, pool_size=10, max_overflow=20, pool_pre_ping=True)
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
