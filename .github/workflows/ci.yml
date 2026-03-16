@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+# Passe toutes les actions sur Node.js 24 (Node 20 sera supprimé le 02/06/2026)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   # ─── Job 1 : Tests Python ────────────────────────────────────────────────
   test:
@@ -46,6 +50,10 @@ jobs:
           python -m pytest tests/ -v --tb=short
 
       - name: Tests API
+        env:
+          # database.py lève EnvironmentError si DATABASE_URL est absent.
+          # SQLite en mémoire permet l'import sans PostgreSQL en CI.
+          DATABASE_URL: sqlite:///:memory:
         run: |
           cd api
           python -m pytest tests/ -v --tb=short
