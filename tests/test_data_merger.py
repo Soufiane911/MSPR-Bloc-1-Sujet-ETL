@@ -1,6 +1,3 @@
-"""
-Data Merger Tests for ObRail Europe ETL Project
-"""
 
 import pytest
 import pandas as pd
@@ -9,10 +6,8 @@ from unittest.mock import patch, MagicMock
 
 
 class TestDataMergerBasics:
-    """Tests for basic data merger functionality."""
     
     def test_merger_initialization(self):
-        """Test DataMerger initialization."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
@@ -21,7 +16,6 @@ class TestDataMergerBasics:
         assert len(merger.sources_data) == 0
     
     def test_add_source(self):
-        """Test adding a source to the merger."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
@@ -37,10 +31,8 @@ class TestDataMergerBasics:
 
 
 class TestMergeOperators:
-    """Tests for merging operator data from multiple sources."""
     
     def test_merge_single_source_operators(self):
-        """Test merging operators from a single source."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
@@ -59,12 +51,10 @@ class TestMergeOperators:
         assert len(result) == 2
     
     def test_merge_multiple_source_operators(self):
-        """Test merging operators from multiple sources."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
         
-        # Add SNCF source
         sncf_data = {
             'agency': pd.DataFrame({
                 'agency_id': ['1'],
@@ -74,7 +64,6 @@ class TestMergeOperators:
         }
         merger.add_source('SNCF', sncf_data)
         
-        # Add Deutsche Bahn source
         db_data = {
             'agency': pd.DataFrame({
                 'agency_id': ['1'],
@@ -89,7 +78,6 @@ class TestMergeOperators:
         assert len(result) >= 2
     
     def test_operator_id_prefixing(self):
-        """Test that operator IDs are properly prefixed with source name."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
@@ -103,21 +91,17 @@ class TestMergeOperators:
         merger.add_source('SNCF', source_data)
         result = merger.merge_operators()
         
-        # IDs should be prefixed
         if 'agency_id' in result.columns:
             assert any('SNCF_' in str(id_val) for id_val in result['agency_id'])
 
 
 class TestMergeStations:
-    """Tests for merging station data from multiple sources."""
     
     def test_merge_stations_from_sources(self):
-        """Test merging stations from multiple sources."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
         
-        # Add SNCF stations
         sncf_data = {
             'stops': pd.DataFrame({
                 'stop_id': ['1', '2'],
@@ -132,8 +116,6 @@ class TestMergeStations:
         assert result is not None
     
     def test_station_coordinate_preservation(self):
-        """Test that station coordinates are preserved during merge."""
-        # Create sample data
         stations = pd.DataFrame({
             'stop_id': ['1', '2', '3'],
             'stop_name': ['Paris', 'Lyon', 'Marseille'],
@@ -141,21 +123,17 @@ class TestMergeStations:
             'stop_lon': [2.3740, 4.8233, 5.3698]
         })
         
-        # Verify coordinates are valid
         assert all(-90 <= lat <= 90 for lat in stations['stop_lat'])
         assert all(-180 <= lon <= 180 for lon in stations['stop_lon'])
 
 
 class TestMergeTrains:
-    """Tests for merging train data from multiple sources."""
     
     def test_merge_day_and_night_trains(self):
-        """Test merging day and night train data."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
         
-        # Day trains from SNCF
         sncf_data = {
             'trips': pd.DataFrame({
                 'trip_id': ['1', '2'],
@@ -165,7 +143,6 @@ class TestMergeTrains:
         }
         merger.add_source('SNCF', sncf_data)
         
-        # Night trains from Trenitalia
         trenitalia_data = {
             'trips': pd.DataFrame({
                 'trip_id': ['1', '2'],
@@ -175,23 +152,19 @@ class TestMergeTrains:
         }
         merger.add_source('Trenitalia', trenitalia_data)
         
-        # Both sources should be added
         assert len(merger.sources_data) == 2
     
     def test_merge_trains_with_different_schemas(self):
-        """Test merging train data with different schemas."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
         
-        # SNCF format with 3 columns
         sncf_trains = pd.DataFrame({
             'trip_id': ['1', '2'],
             'route_short_name': ['TGV001', 'TGV002'],
             'agency_id': ['SNCF', 'SNCF']
         })
         
-        # Deutsche Bahn format with 4 columns
         db_trains = pd.DataFrame({
             'trip_id': ['1', '2'],
             'trip_headsign': ['Berlin', 'Hamburg'],
@@ -199,18 +172,14 @@ class TestMergeTrains:
             'route_type': [3, 3]
         })
         
-        # Verify schemas have different column counts
         assert sncf_trains.shape[1] == 3
         assert db_trains.shape[1] == 4
         assert sncf_trains.shape[1] != db_trains.shape[1]
 
 
 class TestConflictResolution:
-    """Tests for conflict resolution during data merging."""
     
     def test_duplicate_station_ids(self):
-        """Test handling of duplicate station IDs from different sources."""
-        # Simulate duplicate IDs
         stations_sncf = pd.DataFrame({
             'stop_id': ['1', '2'],
             'stop_name': ['Paris Gare de Lyon', 'Lyon Perrache'],
@@ -223,8 +192,6 @@ class TestConflictResolution:
             'source': ['DB', 'DB']
         })
         
-        # After merge with ID prefixing, conflicts should be resolved
-        # Simulating merged result
         merged = pd.concat([
             stations_sncf.assign(stop_id=lambda x: 'SNCF_' + x['stop_id']),
             stations_db.assign(stop_id=lambda x: 'DB_' + x['stop_id'])
@@ -234,18 +201,15 @@ class TestConflictResolution:
         assert len(merged['stop_id'].unique()) == 4
     
     def test_conflicting_operator_names(self):
-        """Test handling of conflicting operator names."""
         operators = pd.DataFrame({
             'operator_id': ['SNCF_1', 'DB_1'],
             'operator_name': ['SNCF', 'Deutsche Bahn'],
             'country': ['FR', 'DE']
         })
         
-        # Ensure no name conflicts after prefixing
         assert len(operators) == len(operators['operator_id'].unique())
     
     def test_conflicting_route_data(self):
-        """Test handling of conflicting route data."""
         routes_source1 = pd.DataFrame({
             'route_id': ['TGV001', 'TGV002'],
             'route_name': ['Paris - Lyon', 'Paris - Marseille'],
@@ -258,8 +222,6 @@ class TestConflictResolution:
             'distance_km': [465, 315]
         })
         
-        # Routes with same ID should be deduplicated
-        # Simulating merge with deduplication
         merged = pd.concat([routes_source1, routes_source2]).drop_duplicates(
             subset=['route_id'], keep='first'
         )
@@ -268,10 +230,8 @@ class TestConflictResolution:
 
 
 class TestDataIntegrity:
-    """Tests for maintaining data integrity during merges."""
     
     def test_no_data_loss_during_merge(self):
-        """Test that no data is lost during merge operation."""
         df1 = pd.DataFrame({
             'id': [1, 2, 3],
             'value': ['a', 'b', 'c']
@@ -288,7 +248,6 @@ class TestDataIntegrity:
         assert set(merged['id']) == {1, 2, 3, 4, 5, 6}
     
     def test_column_consistency(self):
-        """Test that columns remain consistent after merge."""
         df1 = pd.DataFrame({
             'train_id': [1, 2],
             'operator': ['SNCF', 'SNCF']
@@ -304,7 +263,6 @@ class TestDataIntegrity:
         assert list(merged.columns) == list(df1.columns)
     
     def test_data_type_preservation(self):
-        """Test that data types are preserved during merge."""
         df1 = pd.DataFrame({
             'id': [1, 2],
             'name': ['A', 'B'],
@@ -325,11 +283,8 @@ class TestDataIntegrity:
 
 
 class TestMergePerformance:
-    """Tests for merge operation performance and scalability."""
     
     def test_merge_large_datasets(self):
-        """Test merging large datasets."""
-        # Create large DataFrames
         large_df1 = pd.DataFrame({
             'id': range(10000),
             'value': np.random.rand(10000)
@@ -345,12 +300,10 @@ class TestMergePerformance:
         assert len(merged) == 20000
     
     def test_merge_with_many_sources(self):
-        """Test merging data from many sources."""
         from etl.transformers.data_merger import DataMerger
         
         merger = DataMerger()
         
-        # Add 5 sources
         for i in range(5):
             source_data = {
                 'data': pd.DataFrame({

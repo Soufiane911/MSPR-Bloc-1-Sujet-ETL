@@ -1,39 +1,18 @@
 #!/bin/bash
 
-##############################################################################
-# Test Monitoring Script
-# 
-# This script generates test traffic to the API and allows you to monitor
-# the metrics being collected in Prometheus and Grafana.
-#
-# Usage:
-#   bash tests/test_monitoring.sh
-#   bash tests/test_monitoring.sh --duration 120
-#   bash tests/test_monitoring.sh --concurrent 5
-#
-# Prerequisites:
-#   - API running on localhost:8000
-#   - Prometheus running on localhost:9090
-#   - Grafana running on localhost:3000
-#   - apache2-utils (ab command) or curl
-##############################################################################
-
 set -e
 
-# Configuration
 API_BASE_URL="${API_BASE_URL:-http://localhost:8000}"
 DURATION="${DURATION:-60}"
 CONCURRENT="${CONCURRENT:-3}"
 REQUESTS_PER_ENDPOINT="${REQUESTS_PER_ENDPOINT:-50}"
 
-# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Parse command line arguments
 while [[ $# -gt 0 ]]; do
   case $1 in
     --duration)
@@ -56,44 +35,39 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}====================================================${NC}"
 echo -e "${BLUE}ObRail Europe - Monitoring Test Suite${NC}"
-echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}====================================================${NC}"
 echo ""
 
-# Check if API is reachable
 echo -e "${YELLOW}[1/6] Checking API connectivity...${NC}"
 if ! curl -f -s "${API_BASE_URL}/health" > /dev/null 2>&1; then
-  echo -e "${RED}✗ API is not reachable at ${API_BASE_URL}${NC}"
+  echo -e "${RED}API is not reachable at ${API_BASE_URL}${NC}"
   echo -e "${YELLOW}Please ensure docker-compose is running: docker-compose up -d${NC}"
   exit 1
 fi
-echo -e "${GREEN}✓ API is reachable${NC}"
+echo -e "${GREEN}API is reachable${NC}"
 echo ""
 
-# Check if Prometheus is reachable
 echo -e "${YELLOW}[2/6] Checking Prometheus connectivity...${NC}"
 if ! curl -f -s "http://localhost:9090/-/healthy" > /dev/null 2>&1; then
-  echo -e "${RED}✗ Prometheus is not reachable${NC}"
+  echo -e "${RED}Prometheus is not reachable${NC}"
   exit 1
 fi
-echo -e "${GREEN}✓ Prometheus is healthy${NC}"
+echo -e "${GREEN}Prometheus is healthy${NC}"
 echo ""
 
-# Check if Grafana is reachable
 echo -e "${YELLOW}[3/6] Checking Grafana connectivity...${NC}"
 if ! curl -f -s "http://localhost:3000/api/health" > /dev/null 2>&1; then
-  echo -e "${RED}✗ Grafana is not reachable${NC}"
+  echo -e "${RED}Grafana is not reachable${NC}"
   exit 1
 fi
-echo -e "${GREEN}✓ Grafana is healthy${NC}"
+echo -e "${GREEN}Grafana is healthy${NC}"
 echo ""
 
-# Start generating test traffic
 echo -e "${YELLOW}[4/6] Generating test traffic for ${DURATION}s with ${CONCURRENT} concurrent requests...${NC}"
 echo ""
 
-# Array of endpoints to test
 ENDPOINTS=(
   "/trains/"
   "/stations/"
@@ -104,7 +78,6 @@ ENDPOINTS=(
   "/stations/?limit=5"
 )
 
-# Function to make requests
 make_requests() {
   local endpoint=$1
   local requests=$2
@@ -115,17 +88,14 @@ make_requests() {
   wait
 }
 
-# Generate traffic
 start_time=$(date +%s)
 total_requests=0
 
 while [ $(($(date +%s) - start_time)) -lt "$DURATION" ]; do
-  # Randomly select an endpoint
   endpoint=${ENDPOINTS[$RANDOM % ${#ENDPOINTS[@]}]}
   
   echo -ne "\r${BLUE}Running tests... $(($(($(date +%s) - start_time))))s elapsed, ~${total_requests} requests sent${NC}"
   
-  # Make concurrent requests
   for ((c=1; c<=CONCURRENT; c++)); do
     make_requests "$endpoint" 1 &
   done
@@ -136,40 +106,35 @@ done
 
 wait
 echo ""
-echo -e "${GREEN}✓ Test traffic generation complete${NC}"
+echo -e "${GREEN}Test traffic generation complete${NC}"
 echo -e "${GREEN}  Total requests sent: ${total_requests}${NC}"
 echo ""
 
-# Test error scenarios
 echo -e "${YELLOW}[5/6] Testing error scenarios...${NC}"
 
-# Test 404 errors
 echo -e "${BLUE}  Testing 404 errors (non-existent endpoint)...${NC}"
 for i in {1..10}; do
   curl -s "${API_BASE_URL}/non-existent-endpoint-$i" > /dev/null 2>&1 &
 done
 wait
-echo -e "${GREEN}  ✓ 404 error requests sent${NC}"
+echo -e "${GREEN}  404 error requests sent${NC}"
 
-# Test with invalid parameters
 echo -e "${BLUE}  Testing invalid query parameters...${NC}"
 for i in {1..5}; do
   curl -s "${API_BASE_URL}/trains/?invalid_param=test&limit=abc" > /dev/null 2>&1 &
 done
 wait
-echo -e "${GREEN}  ✓ Invalid parameter requests sent${NC}"
+echo -e "${GREEN}  Invalid parameter requests sent${NC}"
 
 echo ""
 
-# Retrieve metrics
 echo -e "${YELLOW}[6/6] Retrieving metrics snapshot...${NC}"
 echo ""
 
 echo -e "${BLUE}API Metrics:${NC}"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "==================================================="
 api_metrics=$(curl -s "${API_BASE_URL}/metrics" 2>/dev/null)
 
-# Display key metrics
 echo "Total HTTP Requests:"
 echo "$api_metrics" | grep -E "http_requests_total" | grep -v "^#" | head -5 || echo "  (not yet available)"
 
@@ -183,38 +148,19 @@ echo "$api_metrics" | grep -E "^http_requests_active" | grep -v "^#" || echo "  
 
 echo ""
 
-# Display Prometheus query results
 echo -e "${BLUE}Prometheus Query Results:${NC}"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "==================================================="
 
-# Query total requests
 prom_total=$(curl -s 'http://localhost:9090/api/v1/query?query=http_requests_total' 2>/dev/null | jq '.data.result | length' 2>/dev/null || echo "0")
 echo "Unique metric series: $prom_total"
 
-# Query request rate
 prom_rate=$(curl -s 'http://localhost:9090/api/v1/query?query=rate(http_requests_total%5B5m%5D)' 2>/dev/null | jq '.data.result[0].value[1]' 2>/dev/null || echo "N/A")
 echo "Request rate (last 5m): $prom_rate req/s"
 
 echo ""
-
-# Summary and next steps
-echo -e "${GREEN}✓ Monitoring test suite complete!${NC}"
+echo -e "${GREEN}Monitoring test suite complete${NC}"
 echo ""
-echo -e "${BLUE}📊 View your metrics:${NC}"
-echo "  • API Metrics Endpoint: ${API_BASE_URL}/metrics"
-echo "  • Prometheus Dashboard: http://localhost:9090"
-echo "  • Grafana Dashboard: http://localhost:3000/d/obrail-monitoring"
-echo ""
-echo -e "${BLUE}💡 Suggested next steps:${NC}"
-echo "  1. Open Grafana at http://localhost:3000/d/obrail-monitoring"
-echo "  2. Use the dashboard to visualize the test traffic"
-echo "  3. Check request rates, latencies, and error metrics"
-echo "  4. Explore Prometheus: http://localhost:9090/graph"
-echo "  5. Try custom queries in Prometheus query editor"
-echo ""
-echo -e "${BLUE}Example Prometheus queries to try:${NC}"
-echo "  • rate(http_requests_total[5m]) - Request rate"
-echo "  • histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) - P95 latency"
-echo "  • sum(rate(http_requests_total{status_code=~\"5..\"}[5m])) - Error rate"
-echo "  • http_requests_active - Active requests"
-echo ""
+echo -e "${BLUE}View your metrics:${NC}"
+echo "  - API Metrics Endpoint: ${API_BASE_URL}/metrics"
+echo "  - Prometheus Dashboard: http://localhost:9090"
+echo "  - Grafana Dashboard: http://localhost:3000/d/obrail-monitoring"

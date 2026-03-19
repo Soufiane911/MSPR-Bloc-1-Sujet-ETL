@@ -1,6 +1,3 @@
-"""
-API Endpoint Tests for ObRail Europe FastAPI Application
-"""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -11,11 +8,9 @@ client = TestClient(app)
 
 
 class TestTrainsEndpoints:
-    """Tests for train-related API endpoints."""
     
     @patch('app.services.train_service.TrainService.get_trains')
     def test_get_trains_success(self, mock_get_trains):
-        """Test successful retrieval of trains."""
         mock_get_trains.return_value = [
             {
                 'train_id': 1,
@@ -42,7 +37,6 @@ class TestTrainsEndpoints:
     
     @patch('app.services.train_service.TrainService.get_trains')
     def test_get_trains_with_filters(self, mock_get_trains):
-        """Test train retrieval with query filters."""
         mock_get_trains.return_value = [
             {
                 'train_id': 1,
@@ -62,7 +56,6 @@ class TestTrainsEndpoints:
     
     @patch('app.services.train_service.TrainService.get_trains')
     def test_get_trains_pagination(self, mock_get_trains):
-        """Test train pagination with limit and offset."""
         mock_get_trains.return_value = []
         
         response = client.get("/trains/?limit=50&offset=100")
@@ -71,14 +64,11 @@ class TestTrainsEndpoints:
     
     @patch('app.services.train_service.TrainService.get_trains')
     def test_get_trains_invalid_limit(self, mock_get_trains):
-        """Test that invalid limit parameter is rejected."""
-        # Limit should be between 1 and 1000
         response = client.get("/trains/?limit=2000")
-        assert response.status_code == 422  # Validation error
+        assert response.status_code == 422
     
     @patch('app.services.train_service.TrainService.get_train_by_id')
     def test_get_train_by_id_success(self, mock_get_train):
-        """Test successful retrieval of a specific train."""
         from datetime import datetime
         mock_get_train.return_value = {
             'train_id': 1,
@@ -99,7 +89,6 @@ class TestTrainsEndpoints:
     
     @patch('app.services.train_service.TrainService.get_train_by_id')
     def test_get_train_by_id_not_found(self, mock_get_train):
-        """Test retrieval of non-existent train."""
         mock_get_train.return_value = None
         
         response = client.get("/trains/99999")
@@ -107,11 +96,9 @@ class TestTrainsEndpoints:
 
 
 class TestStationsEndpoints:
-    """Tests for station-related API endpoints."""
     
     @patch('app.services.station_service.StationService.get_stations')
     def test_get_stations_success(self, mock_get_stations):
-        """Test successful retrieval of stations."""
         mock_get_stations.return_value = [
             {
                 'station_id': 1,
@@ -139,7 +126,6 @@ class TestStationsEndpoints:
     
     @patch('app.services.station_service.StationService.get_stations')
     def test_get_stations_by_country(self, mock_get_stations):
-        """Test station retrieval filtered by country."""
         mock_get_stations.return_value = []
         
         response = client.get("/stations/?country=DE")
@@ -148,7 +134,6 @@ class TestStationsEndpoints:
     
     @patch('app.services.station_service.StationService.get_stations')
     def test_get_stations_by_city(self, mock_get_stations):
-        """Test station retrieval filtered by city."""
         mock_get_stations.return_value = []
         
         response = client.get("/stations/?city=Berlin")
@@ -156,11 +141,9 @@ class TestStationsEndpoints:
 
 
 class TestSchedulesEndpoints:
-    """Tests for schedule-related API endpoints."""
     
     @patch('app.services.schedule_service.ScheduleService.get_schedules')
     def test_get_schedules_success(self, mock_get_schedules):
-        """Test successful retrieval of schedules."""
         from datetime import datetime
         mock_get_schedules.return_value = [
             {
@@ -186,11 +169,9 @@ class TestSchedulesEndpoints:
 
 
 class TestOperatorsEndpoints:
-    """Tests for operator-related API endpoints."""
     
     @patch('app.services.operator_service.OperatorService.get_operators')
     def test_get_operators_success(self, mock_get_operators):
-        """Test successful retrieval of operators."""
         mock_get_operators.return_value = [
             {
                 'operator_id': 1,
@@ -212,42 +193,31 @@ class TestOperatorsEndpoints:
 
 
 class TestErrorHandling:
-    """Tests for error handling in API endpoints."""
     
     def test_invalid_endpoint(self):
-        """Test response for non-existent endpoint."""
         response = client.get("/nonexistent/")
         assert response.status_code == 404
     
     def test_server_error_handling(self):
-        """Test handling of server errors gracefully."""
-        # Test that invalid requests are handled properly
-        # Using a malformed query that should trigger validation error
         response = client.get("/trains/?limit=invalid_value")
-        # Should return validation error (422)
         assert response.status_code in [422, 400]
     
     def test_invalid_query_parameter_type(self):
-        """Test handling of invalid query parameter types."""
         response = client.get("/trains/?limit=invalid")
-        assert response.status_code == 422  # Validation error
+        assert response.status_code == 422
 
 
 class TestAPIDocumentation:
-    """Tests for API documentation endpoints."""
     
     def test_swagger_docs_available(self):
-        """Test that Swagger documentation is available."""
         response = client.get("/docs")
         assert response.status_code == 200
     
     def test_redoc_docs_available(self):
-        """Test that ReDoc documentation is available."""
         response = client.get("/redoc")
         assert response.status_code == 200
     
     def test_openapi_schema_available(self):
-        """Test that OpenAPI schema is available."""
         response = client.get("/openapi.json")
         assert response.status_code == 200
         assert 'openapi' in response.json()

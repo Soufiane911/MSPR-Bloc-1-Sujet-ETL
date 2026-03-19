@@ -1,6 +1,3 @@
-"""
-ETL Pipeline Tests for ObRail Europe Project
-"""
 
 import pytest
 import pandas as pd
@@ -10,11 +7,9 @@ from pathlib import Path
 
 
 class TestDataExtraction:
-    """Tests for data extraction phase of ETL."""
     
     @patch('etl.extractors.gtfs_extractor.GTFSExtractor')
     def test_gtfs_extractor_initialization(self, mock_gtfs):
-        """Test GTFS extractor initialization."""
         mock_extractor = MagicMock()
         mock_gtfs.return_value = mock_extractor
         
@@ -22,7 +17,6 @@ class TestDataExtraction:
     
     @patch('etl.extractors.gtfs_extractor.GTFSExtractor')
     def test_gtfs_extract_stops(self, mock_gtfs):
-        """Test extraction of stops from GTFS data."""
         mock_extractor = MagicMock()
         mock_extractor.extract_stops.return_value = pd.DataFrame({
             'stop_id': ['1', '2', '3'],
@@ -38,7 +32,6 @@ class TestDataExtraction:
     
     @patch('etl.extractors.gtfs_extractor.GTFSExtractor')
     def test_gtfs_extract_routes(self, mock_gtfs):
-        """Test extraction of routes from GTFS data."""
         mock_extractor = MagicMock()
         mock_extractor.extract_routes.return_value = pd.DataFrame({
             'route_id': ['1', '2'],
@@ -53,7 +46,6 @@ class TestDataExtraction:
     
     @patch('etl.extractors.back_on_track.BackOnTrackExtractor')
     def test_back_on_track_extractor(self, mock_bot):
-        """Test Back-on-Track extractor."""
         mock_extractor = MagicMock()
         mock_extractor.extract.return_value = pd.DataFrame({
             'train_id': [1, 2, 3],
@@ -68,7 +60,6 @@ class TestDataExtraction:
     
     @patch('etl.extractors.mobility_catalog.MobilityCatalogExtractor')
     def test_mobility_catalog_extractor(self, mock_mob):
-        """Test Mobility Catalog extractor."""
         mock_extractor = MagicMock()
         mock_extractor.extract.return_value = pd.DataFrame({
             'station_id': [1, 2],
@@ -81,10 +72,8 @@ class TestDataExtraction:
 
 
 class TestDataTransformation:
-    """Tests for data transformation phase of ETL."""
     
     def test_data_cleaner_remove_duplicates(self):
-        """Test removal of duplicate records."""
         from etl.transformers.data_cleaner import DataCleaner
         
         cleaner = DataCleaner()
@@ -97,7 +86,6 @@ class TestDataTransformation:
         assert len(df_clean) == 3
     
     def test_data_cleaner_handle_missing_values(self):
-        """Test handling of missing values."""
         from etl.transformers.data_cleaner import DataCleaner
         
         cleaner = DataCleaner()
@@ -106,12 +94,10 @@ class TestDataTransformation:
             'train_number': ['TGV001', None, 'TGV003', 'TGV004']
         })
         
-        # Should handle missing values
         assert df.isnull().sum().sum() == 2
     
     @patch('etl.transformers.data_normalizer.DataNormalizer')
     def test_data_normalizer(self, mock_normalizer):
-        """Test data normalization."""
         mock_norm = MagicMock()
         mock_norm.normalize.return_value = pd.DataFrame({
             'train_id': [1, 2, 3],
@@ -125,7 +111,6 @@ class TestDataTransformation:
     
     @patch('etl.transformers.day_night_classifier.DayNightClassifier')
     def test_day_night_classifier(self, mock_classifier):
-        """Test day/night train classification."""
         mock_clf = MagicMock()
         mock_clf.classify.return_value = pd.DataFrame({
             'train_id': [1, 2, 3, 4],
@@ -140,11 +125,9 @@ class TestDataTransformation:
 
 
 class TestDataMerging:
-    """Tests for data merger functionality."""
     
     @patch('etl.transformers.data_merger.DataMerger')
     def test_merge_operators(self, mock_merger):
-        """Test merging operators from multiple sources."""
         mock_merge = MagicMock()
         mock_merge.merge_operators.return_value = pd.DataFrame({
             'agency_id': ['SNCF_1', 'DB_1', 'Trenitalia_1'],
@@ -158,7 +141,6 @@ class TestDataMerging:
     
     @patch('etl.transformers.data_merger.DataMerger')
     def test_merge_stations(self, mock_merger):
-        """Test merging stations from multiple sources."""
         mock_merge = MagicMock()
         mock_merge.merge_stations.return_value = pd.DataFrame({
             'station_id': [1, 2, 3],
@@ -171,9 +153,7 @@ class TestDataMerging:
     
     @patch('etl.transformers.data_merger.DataMerger')
     def test_merge_handles_conflicts(self, mock_merger):
-        """Test handling of conflicting data during merge."""
         mock_merge = MagicMock()
-        # Simulate conflict resolution
         mock_merge.merge_operators.return_value = pd.DataFrame({
             'agency_id': ['conflict_resolved_1'],
             'agency_name': ['Merged Agency'],
@@ -185,17 +165,14 @@ class TestDataMerging:
 
 
 class TestDataLoading:
-    """Tests for data loading phase of ETL."""
     
     @patch('etl.loaders.database_loader.DatabaseLoader')
     def test_database_loader_initialization(self, mock_loader):
-        """Test database loader initialization."""
         mock_db_loader = MagicMock()
         assert mock_db_loader is not None
     
     @patch('etl.loaders.database_loader.DatabaseLoader')
     def test_load_trains_to_database(self, mock_loader):
-        """Test loading train data to database."""
         mock_db_loader = MagicMock()
         mock_db_loader.load_trains.return_value = 100
         
@@ -210,7 +187,6 @@ class TestDataLoading:
     
     @patch('etl.loaders.database_loader.DatabaseLoader')
     def test_load_stations_to_database(self, mock_loader):
-        """Test loading station data to database."""
         mock_db_loader = MagicMock()
         mock_db_loader.load_stations.return_value = 50
         
@@ -225,14 +201,11 @@ class TestDataLoading:
 
 
 class TestETLPipelineIntegration:
-    """Integration tests for complete ETL pipeline."""
     
     @patch('etl.extractors.gtfs_extractor.GTFSExtractor')
     @patch('etl.transformers.data_cleaner.DataCleaner')
     @patch('etl.loaders.database_loader.DatabaseLoader')
     def test_complete_etl_pipeline(self, mock_loader, mock_cleaner, mock_gtfs):
-        """Test complete ETL pipeline execution."""
-        # Setup mocks
         mock_extractor = MagicMock()
         mock_extractor.extract_stops.return_value = pd.DataFrame({
             'stop_id': ['1', '2'],
@@ -251,26 +224,20 @@ class TestETLPipelineIntegration:
         mock_db.load_stations.return_value = 2
         mock_loader.return_value = mock_db
         
-        # Simulate pipeline
         assert mock_extractor is not None
         assert mock_clean is not None
         assert mock_db is not None
     
     def test_etl_pipeline_data_flow(self):
-        """Test data flowing through ETL stages."""
-        # Simulate data at each stage
         raw_data = pd.DataFrame({
             'id': [1, 1, 2],
             'name': ['Train A', 'Train A', 'Train B']
         })
         
-        # After extraction - no changes
         extracted = raw_data.copy()
         assert len(extracted) == 3
         
-        # After transformation - duplicates removed
         transformed = extracted.drop_duplicates(subset=['id'])
         assert len(transformed) == 2
         
-        # Verify data quality improved
         assert len(transformed) < len(extracted)

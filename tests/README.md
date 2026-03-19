@@ -44,41 +44,41 @@ bash tests/test_monitoring.sh --requests 100
 
 ### What It Does
 
-1. ✅ Checks API, Prometheus, and Grafana connectivity
-2. 📊 Generates test traffic for 60 seconds (default)
-3. 🧪 Tests error scenarios (404s, invalid parameters)
-4. 📈 Retrieves and displays metrics snapshots
-5. 🔍 Queries Prometheus for request rates
+1. Checks API, Prometheus, and Grafana connectivity
+2. Generates test traffic for 60 seconds (default)
+3. Tests error scenarios (404s, invalid parameters)
+4. Retrieves and displays metrics snapshots
+5. Queries Prometheus for request rates
 
 ### Example Output
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+===================================================
 ObRail Europe - Monitoring Test Suite
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+===================================================
 
 [1/6] Checking API connectivity...
-✓ API is reachable
+API is reachable
 
 [2/6] Checking Prometheus connectivity...
-✓ Prometheus is healthy
+Prometheus is healthy
 
 [3/6] Checking Grafana connectivity...
-✓ Grafana is healthy
+Grafana is healthy
 
 [4/6] Generating test traffic for 60s with 3 concurrent requests...
 Running tests... 60s elapsed, ~180 requests sent
-✓ Test traffic generation complete
+Test traffic generation complete
   Total requests sent: 180
 
 [5/6] Testing error scenarios...
   Testing 404 errors (non-existent endpoint)...
-  ✓ 404 error requests sent
+   404 error requests sent
 
-📊 View your metrics:
-  • API Metrics Endpoint: http://localhost:8000/metrics
-  • Prometheus Dashboard: http://localhost:9090
-  • Grafana Dashboard: http://localhost:3000/d/obrail-monitoring
+View your metrics:
+   - API Metrics Endpoint: http://localhost:8000/metrics
+   - Prometheus Dashboard: http://localhost:9090
+   - Grafana Dashboard: http://localhost:3000/d/obrail-monitoring
 ```
 
 ### View Results in Grafana
@@ -180,10 +180,8 @@ Overall health check of the entire monitoring stack:
 Run the test script and watch Grafana simultaneously:
 
 ```bash
-# Terminal 1: Run tests
 bash tests/test_monitoring.sh --duration 120
 
-# Terminal 2: Open Grafana in browser
 open http://localhost:3000/d/obrail-monitoring
 ```
 
@@ -207,25 +205,18 @@ Real-time query in Prometheus:
 Use these queries in Prometheus (http://localhost:9090/query) to inspect your test results:
 
 ```promql
-# Request rate over 5 minutes
 rate(http_requests_total[5m])
 
-# 95th percentile latency
 histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
 
-# Error rate
 rate(http_requests_total{status_code=~"5.."}[5m])
 
-# Active connections to database
 pg_stat_activity_count
 
-# CPU usage per container
 rate(container_cpu_usage_seconds_total[5m])
 
-# Memory usage percentage
 (container_memory_working_set_bytes / container_memory_limit_bytes) * 100
 
-# Request distribution by status code
 sum(rate(http_requests_total[5m])) by (status_code)
 ```
 
@@ -236,10 +227,8 @@ sum(rate(http_requests_total[5m])) by (status_code)
 While testing, watch the raw metrics:
 
 ```bash
-# Terminal 1: Run test
 bash tests/test_monitoring.sh
 
-# Terminal 2: Watch metrics update live
 watch -n 1 'curl -s http://localhost:8000/metrics | grep http_requests_total | tail -5'
 ```
 
@@ -250,7 +239,6 @@ watch -n 1 'curl -s http://localhost:8000/metrics | grep http_requests_total | t
 1. **Check services are running**
    ```bash
    docker-compose ps
-   # All containers should show "Up"
    ```
 
 2. **Check service connectivity**
@@ -305,13 +293,13 @@ The GitHub Actions workflow (`.github/workflows/monitoring.yml`) automatically:
 After a successful test run, you should see:
 
 ```
-✓ 150-200 total requests sent
-✓ 5-10 error requests for testing
-✓ Metrics visible in Prometheus
-✓ Dashboard panels showing activity
-✓ Request rate: ~2-3 requests/second during test
-✓ P95 latency: <100ms (healthy)
-✓ Error rate: ~5% (from intentional errors)
+150-200 total requests sent
+5-10 error requests for testing
+Metrics visible in Prometheus
+Dashboard panels showing activity
+Request rate: ~2-3 requests/second during test
+P95 latency: <100ms (healthy)
+Error rate: ~5% (from intentional errors)
 ```
 
 ## Performance Baseline

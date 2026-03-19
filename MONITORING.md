@@ -214,7 +214,7 @@ Edit `prometheus.yml`:
 ```yaml
 scrape_configs:
   - job_name: 'obrail-api'
-    scrape_interval: 5s  # More frequent (uses more resources)
+    scrape_interval: 5s
     static_configs:
       - targets: ['api:8000']
 ```

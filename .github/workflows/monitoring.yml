@@ -2,9 +2,7 @@ name: Application Monitoring & Health Checks
 
 on:
   schedule:
-    # Run health checks every 10 minutes during business hours
     - cron: '*/10 8-18 * * 1-5'
-    # Run once daily during off-hours
     - cron: '0 3 * * *'
   push:
     branches:
@@ -114,7 +112,6 @@ jobs:
       - name: Run load tests with Apache Bench
         run: |
           apt-get update && apt-get install -y apache2-utils
-          # Test API endpoints
           ab -n 100 -c 10 http://localhost:8000/trains/ || true
           ab -n 100 -c 10 http://localhost:8000/stations/ || true
           ab -n 100 -c 10 http://localhost:8000/operators/ || true
@@ -152,7 +149,7 @@ jobs:
           for dashboard in grafana/provisioning/dashboards/*.json; do
             if [ -f "$dashboard" ]; then
               python3 -m json.tool "$dashboard" > /dev/null
-              echo "✓ $dashboard is valid JSON"
+              echo "$dashboard is valid JSON"
             fi
           done
 
@@ -173,8 +170,8 @@ jobs:
           if [ "${{ needs.health-checks.result }}" = "failure" ] || \
              [ "${{ needs.performance-tests.result }}" = "failure" ] || \
              [ "${{ needs.monitoring-stack-validation.result }}" = "failure" ]; then
-            echo "⚠️ One or more monitoring jobs failed"
+            echo "One or more monitoring jobs failed"
             exit 1
           else
-            echo "✅ All monitoring jobs passed"
+            echo "All monitoring jobs passed"
           fi
