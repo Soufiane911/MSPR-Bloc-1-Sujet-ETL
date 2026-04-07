@@ -10,7 +10,10 @@ Usage:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 from app.routers import trains, schedules, stations, operators, stats
+from app.middleware import PrometheusMiddleware
 
 # Création de l'application FastAPI
 app = FastAPI(
@@ -45,6 +48,9 @@ app = FastAPI(
         "url": "https://opensource.org/licenses/MIT",
     },
 )
+
+# Collect request/response metrics for Prometheus.
+app.add_middleware(PrometheusMiddleware)
 
 # Configuration CORS
 app.add_middleware(
@@ -111,3 +117,13 @@ def health_check():
         "api": "running",
         "database": db_status,
     }
+
+
+@app.get("/metrics")
+def metrics():
+    """Expose metrics in Prometheus text format."""
+    return Response(
+        content=generate_latest(),
+        media_type=CONTENT_TYPE_LATEST,
+        headers={"Content-Type": CONTENT_TYPE_LATEST},
+    )
