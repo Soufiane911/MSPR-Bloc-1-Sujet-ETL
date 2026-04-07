@@ -39,23 +39,16 @@ services:
     networks:
       - obrail-network
 
-  # Dashboard Streamlit
+  # Dashboard React
   dashboard:
     build:
-      context: ./dashboard
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: obrail-dashboard
-    environment:
-      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
     ports:
-      - "8501:8501"
+      - "8501:80"
     depends_on:
-      database:
-        condition: service_healthy
-    volumes:
-      - ./dashboard:/app
-      - ./etl:/etl
-    command: streamlit run app/app.py --server.port 8501 --server.address 0.0.0.0
+      - api
     networks:
       - obrail-network
 

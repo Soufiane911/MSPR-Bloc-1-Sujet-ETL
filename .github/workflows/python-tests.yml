@@ -95,6 +95,7 @@ jobs:
         curl -f http://localhost:9090/-/healthy
         curl -f http://localhost:3000/api/health
         curl -f http://localhost:9187
+        curl -f http://localhost:8501
         curl -s http://localhost:8000/metrics | head -20
         curl -s 'http://localhost:9090/api/v1/query?query=up' | jq '.'
         curl -s http://localhost:9187/metrics | grep pg_stat_activity_count

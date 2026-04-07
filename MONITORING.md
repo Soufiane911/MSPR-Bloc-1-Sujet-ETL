@@ -26,9 +26,9 @@ docker-compose up -d
 ```
 
 This will start:
-- PostgreSQL database on `localhost:5432`
+- PostgreSQL database on `localhost:5433`
 - FastAPI API on `localhost:8000`
-- Streamlit Dashboard on `localhost:8501`
+- React Dashboard (Nginx) on `localhost:8501`
 - Prometheus on `localhost:9090`
 - Grafana on `localhost:3000`
 - PostgreSQL Exporter on `localhost:9187`
@@ -37,6 +37,7 @@ This will start:
 ### 2. Access the Services
 
 - **API Documentation**: http://localhost:8000/docs
+- **Frontend Dashboard**: http://localhost:8501
 - **Prometheus**: http://localhost:9090
 - **Grafana**: http://localhost:3000 (admin/admin)
 - **API Metrics**: http://localhost:8000/metrics
