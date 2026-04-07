@@ -1,0 +1,10 @@
+{
+  "source": "sncb",
+  "url": "https://gtfs.irail.be/nmbs/gtfs/latest.zip",
+  "last_download": "2026-04-07T10:36:29.241792+00:00",
+  "last_modified_remote": "Tue, 07 Apr 2026 06:30:16 GMT",
+  "etag": "\"69d4a478-d9104f\"",
+  "content_length": "14225487",
+  "local_path": "/data/raw/sncb",
+  "status": "success"
+}

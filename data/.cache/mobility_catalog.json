@@ -1,0 +1,10 @@
+{
+  "source": "mobility_catalog",
+  "url": "https://storage.googleapis.com/storage/v1/b/mdb-csv/o/sources.csv?alt=media",
+  "last_download": "2026-04-07T10:36:23.860396+00:00",
+  "last_modified_remote": "Fri, 27 Mar 2026 14:07:57 GMT",
+  "etag": "CO2/vLmgwJMDEAE=",
+  "content_length": "239395",
+  "local_path": "/data/raw/mobility_catalog",
+  "status": "success"
+}

@@ -33,6 +33,7 @@ class DatabaseLoader:
         """Initialise le loader de base de données."""
         self.logger = setup_logging("loader.database")
         self.engine = get_engine()
+        self._ensure_conflict_indexes()
         self.stats = {
             "operators_loaded": 0,
             "stations_loaded": 0,
@@ -40,6 +41,50 @@ class DatabaseLoader:
             "schedules_loaded": 0,
         }
         self._performance_stats = {}
+
+    def _ensure_conflict_indexes(self) -> None:
+        """
+        Garantit la présence d'index uniques compatibles avec ON CONFLICT.
+
+        Cela corrige les bases déjà initialisées avec un ancien schéma (volume Docker
+        persistant) où certaines contraintes uniques peuvent être absentes.
+        """
+        migration_statements = [
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS train_type_rule VARCHAR(10)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS train_type_heuristic VARCHAR(10)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS train_type_ml VARCHAR(10)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS classification_method VARCHAR(50)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS classification_reason VARCHAR(100)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS classification_confidence DECIMAL(4, 2)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS ml_night_probability DECIMAL(4, 2)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS night_percentage DECIMAL(5, 2)",
+            "ALTER TABLE trains ADD COLUMN IF NOT EXISTS needs_manual_review BOOLEAN DEFAULT FALSE",
+        ]
+
+        statements = [
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_operators_conflict
+            ON operators (name, country, source_name)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_stations_conflict
+            ON stations (name, country, source_name)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_trains_conflict
+            ON trains (train_number, operator_id, source_name)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_schedules_conflict
+            ON schedules (train_id, origin_id, destination_id, departure_time)
+            """,
+        ]
+
+        with self.engine.begin() as conn:
+            for stmt in migration_statements:
+                conn.execute(text(stmt))
+            for stmt in statements:
+                conn.execute(text(stmt))
 
     def _bulk_insert(
         self,
@@ -287,6 +332,28 @@ class DatabaseLoader:
         }
         df_load = df.rename(columns=column_mapping)
 
+        if "country" not in df_load.columns:
+            df_load["country"] = "EU"
+        df_load["country"] = (
+            df_load["country"].fillna("EU").astype(str).str.strip().replace("", "EU")
+        )
+        if "name" in df_load.columns:
+            df_load = df_load[df_load["name"].notna()]
+            df_load["name"] = df_load["name"].astype(str).str.strip()
+            df_load = df_load[df_load["name"] != ""]
+
+        # Certaines sources ne renseignent pas le pays; on applique une valeur
+        # neutre pour respecter la contrainte NOT NULL en base.
+        if "country" not in df_load.columns:
+            df_load["country"] = "EU"
+        df_load["country"] = (
+            df_load["country"].fillna("EU").astype(str).str.strip().replace("", "EU")
+        )
+        if "name" in df_load.columns:
+            df_load = df_load[df_load["name"].notna()]
+            df_load["name"] = df_load["name"].astype(str).str.strip()
+            df_load = df_load[df_load["name"] != ""]
+
         count = self._bulk_insert(
             df=df_load,
             table_name="operators",
@@ -325,6 +392,16 @@ class DatabaseLoader:
             "source_name": "source_name",
         }
         df_load = df.rename(columns=column_mapping)
+
+        if "country" not in df_load.columns:
+            df_load["country"] = "EU"
+        df_load["country"] = (
+            df_load["country"].fillna("EU").astype(str).str.strip().replace("", "EU")
+        )
+        if "name" in df_load.columns:
+            df_load = df_load[df_load["name"].notna()]
+            df_load["name"] = df_load["name"].astype(str).str.strip()
+            df_load = df_load[df_load["name"] != ""]
 
         # CORRECTION: Deduplicate before insert to avoid ON CONFLICT error
         # Keep first occurrence of each unique (name, country, source_name) combination
@@ -484,6 +561,32 @@ class DatabaseLoader:
             df_load["distance_km"] = pd.to_numeric(
                 df_load["distance_km"], errors="coerce"
             )
+
+        # Filtre défensif pour respecter les contraintes SQL de la table schedules.
+        required_cols = [
+            "train_id",
+            "origin_id",
+            "destination_id",
+            "departure_time",
+            "arrival_time",
+            "duration_min",
+        ]
+        existing_required = [c for c in required_cols if c in df_load.columns]
+        if existing_required:
+            before_filter = len(df_load)
+            df_load = df_load.dropna(subset=existing_required)
+            if all(c in df_load.columns for c in ["origin_id", "destination_id"]):
+                df_load = df_load[df_load["origin_id"] != df_load["destination_id"]]
+            if all(c in df_load.columns for c in ["departure_time", "arrival_time"]):
+                df_load = df_load[df_load["arrival_time"] > df_load["departure_time"]]
+            if "duration_min" in df_load.columns:
+                df_load = df_load[df_load["duration_min"] > 0]
+
+            dropped = before_filter - len(df_load)
+            if dropped > 0:
+                self.logger.warning(
+                    f"[WARN] Schedules: {dropped} lignes invalides ignorées avant chargement"
+                )
 
         count = self._bulk_insert(
             df=df_load,

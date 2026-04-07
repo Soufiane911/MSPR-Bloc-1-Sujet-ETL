@@ -5,6 +5,7 @@ Data Validation Tests for ObRail Europe ETL Project
 import pytest
 import pandas as pd
 import numpy as np
+from pandas.api.types import is_object_dtype, is_string_dtype
 from datetime import datetime, time
 
 
@@ -232,7 +233,7 @@ class TestDataFrameValidation:
         
         assert df['train_id'].dtype in [np.int64, np.int32]
         assert df['latitude'].dtype in [np.float64, np.float32]
-        assert df['country'].dtype == object
+        assert is_object_dtype(df['country']) or is_string_dtype(df['country'])
 
 
 class TestRangeValidation:

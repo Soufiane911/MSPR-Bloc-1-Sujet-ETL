@@ -1,0 +1,10 @@
+{
+  "source": "back_on_track",
+  "url": "https://raw.githubusercontent.com/Back-on-Track-eu/night-train-data/main/data/latest/agencies.json",
+  "last_download": "2026-04-07T10:36:23.426104+00:00",
+  "last_modified_remote": null,
+  "etag": "W/\"d4f64deda045cdb86e1055716b13b58e75d8377cde4c514ba2be13ef0f10bcc7\"",
+  "content_length": "222",
+  "local_path": "/data/raw/back_on_track",
+  "status": "success"
+}

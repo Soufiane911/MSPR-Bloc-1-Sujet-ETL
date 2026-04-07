@@ -1,0 +1,10 @@
+{
+  "source": "renfe",
+  "url": "https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip",
+  "last_download": "2026-04-07T10:36:26.668608+00:00",
+  "last_modified_remote": "Mon, 06 Apr 2026 23:21:27 GMT",
+  "etag": "\"69d43ff7-cc382\"",
+  "content_length": "836482",
+  "local_path": "/data/raw/renfe",
+  "status": "success"
+}

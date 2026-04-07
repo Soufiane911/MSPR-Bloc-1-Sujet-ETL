@@ -1,0 +1,2 @@
+feed_id,feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version,conv_rev,plan_rev,feed_contact_url
+0,NMBS/SNCB,http://www.belgiantrain.be/,fr,20260204,20261212,2026-04-07,1.180,,http://www.belgiantrain.be/

@@ -5,7 +5,7 @@ services:
     container_name: obrail-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-obrail}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-obrail_secure_password}
       POSTGRES_DB: ${POSTGRES_DB:-obrail_db}
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -27,7 +27,7 @@ services:
       dockerfile: Dockerfile
     container_name: obrail-api
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
     ports:
       - "8000:8000"
     depends_on:
@@ -46,7 +46,7 @@ services:
       dockerfile: Dockerfile
     container_name: obrail-dashboard
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
     ports:
       - "8501:8501"
     depends_on:
@@ -66,7 +66,7 @@ services:
       dockerfile: Dockerfile
     container_name: obrail-dashboard-dash
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
     ports:
       - "8050:8050"
     depends_on:
@@ -85,7 +85,7 @@ services:
       dockerfile: Dockerfile
     container_name: obrail-etl
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
     mem_limit: 12g
     memswap_limit: 12g
     depends_on:
@@ -131,7 +131,7 @@ services:
     image: prometheuscommunity/postgres-exporter:latest
     container_name: obrail-postgres-exporter
     environment:
-      DATA_SOURCE_NAME: "postgresql://obrail:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB:-obrail_db}?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://obrail:${POSTGRES_PASSWORD:-obrail_secure_password}@database:5432/${POSTGRES_DB:-obrail_db}?sslmode=disable"
     ports:
       - "9187:9187"
     depends_on:

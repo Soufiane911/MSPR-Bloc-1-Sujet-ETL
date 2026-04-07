@@ -1,0 +1,10 @@
+{
+  "source": "sncf_intercites",
+  "url": "https://eu.ftp.opendatasoft.com/sncf/gtfs/export-intercites-gtfs-last.zip",
+  "last_download": "2026-04-07T10:36:24.044838+00:00",
+  "last_modified_remote": "Wed, 22 Jan 2025 00:29:22 GMT",
+  "etag": "\"67903be2-1ebd9\"",
+  "content_length": "125913",
+  "local_path": "/data/raw/sncf_intercites",
+  "status": "success"
+}

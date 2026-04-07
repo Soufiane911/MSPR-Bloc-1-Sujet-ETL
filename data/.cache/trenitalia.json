@@ -1,0 +1,10 @@
+{
+  "source": "trenitalia",
+  "url": "http://www.sardegnamobilita.it/opendata/dati_trenitalia.zip",
+  "last_download": "2026-04-07T10:36:27.698683+00:00",
+  "last_modified_remote": null,
+  "etag": null,
+  "content_length": "230086",
+  "local_path": "/data/raw/trenitalia",
+  "status": "success"
+}
