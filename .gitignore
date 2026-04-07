@@ -28,3 +28,4 @@ logs/
 .DS_Store
 *.swp
 *.swo
+frontend/node_modules/
