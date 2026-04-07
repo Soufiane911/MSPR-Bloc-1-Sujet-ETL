@@ -1,8 +1,3 @@
--- ============================================================
--- INITIALISATION DE LA BASE DE DONNÉES OBRAIL
--- ============================================================
--- Ce script est exécuté automatiquement au démarrage du conteneur
--- PostgreSQL (via docker-entrypoint-initdb.d).
--- ============================================================
-
-\i /docker-entrypoint-initdb.d/01-schema.sql
+-- Ce fichier est conservé pour compatibilité.
+-- Le schéma est initialisé directement par 01-schema.sql
+-- via docker-entrypoint-initdb.d.

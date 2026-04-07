@@ -92,10 +92,22 @@ def health_check():
     Vérification de la santé de l'API.
     
     Returns:
-        dict: Statut de l'API
+        dict: Statut de l'API et de la base de données
     """
+    from app.database import engine
+    from sqlalchemy import text
+
+    db_status = "connected"
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+    except Exception:
+        db_status = "disconnected"
+
+    status = "healthy" if db_status == "connected" else "degraded"
+
     return {
-        "status": "healthy",
+        "status": status,
         "api": "running",
-        "database": "connected"
+        "database": db_status,
     }

@@ -17,17 +17,17 @@ from datetime import datetime, timezone
 
 import pandas as pd
 import requests
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
 sys.path.insert(0, str(Path(__file__).parent))
 from config.logging_config import setup_logging
 
+load_dotenv()
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
-    raise EnvironmentError(
-        "La variable d'environnement DATABASE_URL est requise. "
-        "Copiez .env.example vers .env et renseignez vos valeurs."
-    )
+    DATABASE_URL = "postgresql://obrail:obrail_dbpw@database:5432/obrail_db"
 BASE_URL = "https://raw.githubusercontent.com/Back-on-Track-eu/night-train-data/main/data/latest"
 REF_DATE = datetime(2025, 1, 15, tzinfo=timezone.utc)
 
@@ -165,7 +165,7 @@ def main() -> int:
     schedules_to_load = schedules[cols].reset_index(drop=True)
 
     with engine.connect() as conn:
-        conn.execute(text("TRUNCATE TABLE schedules RESTART IDENTITY"))
+        conn.execute(text("DELETE FROM schedules WHERE source_name = 'back_on_track'"))
         conn.commit()
 
     schedules_to_load.to_sql("schedules", engine, if_exists="append", index=False)

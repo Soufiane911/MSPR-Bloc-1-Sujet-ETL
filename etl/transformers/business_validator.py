@@ -336,6 +336,13 @@ class BusinessValidator:
             reasons["durée invalide"] = int(bad_dur.sum())
             mask &= ~bad_dur
 
+        # departure_time et arrival_time ne doivent pas être null
+        for time_col in ("departure_time", "arrival_time"):
+            if time_col in df.columns:
+                null_time = df[time_col].isna()
+                reasons[f"{time_col} manquant"] = int(null_time.sum())
+                mask &= ~null_time
+
         valid_df, rejected_df = self._split_valid_rejected(df, mask)
 
         self._log_rejections(entity, rejected_df, reasons)

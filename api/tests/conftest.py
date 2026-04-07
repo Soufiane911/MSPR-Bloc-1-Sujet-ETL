@@ -1,5 +1,9 @@
+import os
 from pathlib import Path
 import sys
+
+
+os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
 
 API_ROOT = Path(__file__).resolve().parents[1]

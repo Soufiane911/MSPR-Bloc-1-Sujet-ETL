@@ -13,7 +13,7 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
-    DATABASE_URL = "postgresql://obrail:changeme@database:5432/obrail_db"
+    DATABASE_URL = "postgresql://obrail:obrail_dbpw@database:5432/obrail_db"
 
 # Arguments de connexion
 engine_kwargs = {

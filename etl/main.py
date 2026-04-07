@@ -95,6 +95,9 @@ def show_status_fast(logger):
     expired = 0
     never = 0
 
+    print(f"{'Source':<25} {'Dernier DL':<20} {'Statut':<15}")
+    print("-" * 70)
+
     for source_name, config in SOURCES.items():
         if not config.get("enabled", True):
             continue
@@ -132,8 +135,6 @@ def show_status_fast(logger):
             never += 1
 
     print()
-    print(f"{'Source':<25} {'Dernier DL':<20} {'Statut':<15}")
-    print("-" * 70)
     print(
         f"\nRésumé: {up_to_date} ✅ à jour, {expired} ⏰ expirées, {never} ⚠️ jamais/sans cache"
     )
@@ -432,19 +433,27 @@ def process_gtfs_source(
         result["trips"] = data["trips"].copy()
 
         # Filtrer les trips par route_id si on a filtré les routes
-        if "routes" in result and not result["routes"].empty:
-            rail_route_ids = set(result["routes"]["route_id"].unique())
-            initial_trips_count = len(result["trips"])
-            result["trips"] = result["trips"][
-                result["trips"]["route_id"].isin(rail_route_ids)
-            ].copy()
-            removed_trips = initial_trips_count - len(result["trips"])
-            if removed_trips > 0:
+        if "routes" in result:
+            if result["routes"].empty:
                 logger = setup_logging("transformer.filter")
-                logger.info(
-                    f"[FILTER] {source_name}: {removed_trips}/{initial_trips_count} "
-                    f"trips supprimés (non-ferroviaires)"
+                logger.warning(
+                    f"[FILTER] {source_name}: aucune route ferroviaire, "
+                    f"suppression de tous les trips"
                 )
+                result["trips"] = result["trips"].iloc[0:0].copy()
+            else:
+                rail_route_ids = set(result["routes"]["route_id"].unique())
+                initial_trips_count = len(result["trips"])
+                result["trips"] = result["trips"][
+                    result["trips"]["route_id"].isin(rail_route_ids)
+                ].copy()
+                removed_trips = initial_trips_count - len(result["trips"])
+                if removed_trips > 0:
+                    logger = setup_logging("transformer.filter")
+                    logger.info(
+                        f"[FILTER] {source_name}: {removed_trips}/{initial_trips_count} "
+                        f"trips supprimés (non-ferroviaires)"
+                    )
 
     # Étape 3: Filtrer les stop_times pour ne garder que ceux des trips filtrés
     if "stop_times" in data:
@@ -544,7 +553,7 @@ def main():
     parser.add_argument(
         "--status", action="store_true", help="Afficher le statut des sources"
     )
-    parser.add_argument("--full", action="store_true", help="Exécution complète")
+
     parser.add_argument(
         "--skip-download", action="store_true", help="Skip la phase de téléchargement"
     )
