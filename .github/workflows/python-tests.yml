@@ -112,7 +112,7 @@ jobs:
 
     - name: Monitoring Stack Validation
       run: |
-        docker run --rm -v $(pwd)/prometheus.yml:/prometheus.yml prom/prometheus:latest promtool check config /prometheus.yml
+        docker run --rm --entrypoint promtool -v $(pwd)/prometheus.yml:/prometheus.yml prom/prometheus:latest check config /prometheus.yml
         for dashboard in grafana/provisioning/dashboards/*.json; do
           if [ -f "$dashboard" ]; then
             python3 -m json.tool "$dashboard" > /dev/null
