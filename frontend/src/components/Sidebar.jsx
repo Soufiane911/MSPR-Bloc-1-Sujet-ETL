@@ -45,8 +45,7 @@ export default function Sidebar({ countries, filters, setFilters, maxDistance })
       </div>
 
       <p className="hint">
-        Donnees ferroviaires europeennes. Fallback API direct pour conserver les memes
-        fonctionnalites que Streamlit.
+        Donnees ferroviaires europeennes.
       </p>
     </aside>
   );

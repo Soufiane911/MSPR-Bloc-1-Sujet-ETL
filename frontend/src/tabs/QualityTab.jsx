@@ -25,9 +25,6 @@ export default function QualityTab({ quality, schedules }) {
 
       <article className="card">
         <h3>Export donnees</h3>
-        <p className="muted">
-          Export des dessertes filtrees pour conserver la meme capacite qu'avec Streamlit.
-        </p>
         <div className="actions">
           <button type="button" onClick={() => exportCsv(schedules)}>
             Export CSV
