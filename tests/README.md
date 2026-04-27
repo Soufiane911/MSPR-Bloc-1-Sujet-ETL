@@ -7,6 +7,49 @@ This directory contains tests for verifying that the monitoring and metrics coll
 - **`test_monitoring.sh`** - Bash script to generate test traffic and visualize metrics
 - **`test_monitoring.py`** - Pytest-based tests for monitoring components
 
+## Frontend E2E (Playwright)
+
+The React frontend includes an E2E test suite powered by Playwright.
+
+### Location
+
+- `frontend/e2e/smoke.spec.js`
+- `frontend/e2e/navigation.spec.js`
+- `frontend/e2e/filters.spec.js`
+
+### Prerequisites
+
+Start the stack first (frontend must be reachable on port 8501):
+
+```bash
+docker compose up -d
+curl -I http://localhost:8501
+```
+
+### Run locally
+
+```bash
+cd frontend
+npm install
+npx playwright install chromium
+npm run e2e
+```
+
+Optional debug modes:
+
+```bash
+npm run e2e:headed
+npm run e2e:ui
+```
+
+### CI integration
+
+Playwright E2E tests are executed in GitHub Actions after service health checks:
+
+- workflow: `.github/workflows/python-tests.yml`
+- browser: Chromium
+- report artifact: `playwright-report`
+
 ## Prerequisites
 
 Before running tests, ensure all services are running:
@@ -326,10 +369,3 @@ Healthy metrics during test:
 - **Database Connections**: 1-5 active
 
 If your metrics differ significantly, review [MONITORING.md](../MONITORING.md) for troubleshooting.
-
-## Further Reading
-
-- [Prometheus Documentation](https://prometheus.io/docs/)
-- [Grafana Dashboards](https://grafana.com/docs/grafana/latest/dashboards/)
-- [FastAPI Monitoring](https://fastapi.tiangolo.com/)
-- [PostgreSQL Exporter Metrics](https://github.com/prometheuscommunity/postgres_exporter)
