@@ -1,0 +1,220 @@
+# ObRail Europe — Staging Environment
+# =============================================================================
+# This compose file is optimized for staging deployments.
+# It uses pre-built images from GHCR (or local builds with --build).
+#
+# Usage:
+#   docker compose -f docker-compose.staging.yml up -d
+#   ./scripts/deploy-staging.sh
+# =============================================================================
+
+services:
+  # Base de données PostgreSQL
+  database:
+    image: postgres:15-alpine
+    container_name: obrail-staging-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-obrail}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-obrail_staging_password}
+      POSTGRES_DB: ${POSTGRES_DB:-obrail_staging_db}
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+      - ./sql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-obrail} -d $${POSTGRES_DB:-obrail_staging_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - obrail-staging-network
+    # Staging: restart on failure, but not always (to avoid boot loops on bad config)
+    restart: unless-stopped
+
+  # API FastAPI — uses GHCR image or local build
+  api:
+    image: ${REGISTRY:-ghcr.io}/${REPO_OWNER:-soufiane911}/${REPO_NAME:-mspr-bloc-1-sujet-etl}/api:${IMAGE_TAG:-latest}
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: obrail-staging-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_staging_password@database:5432/obrail_staging_db}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ENVIRONMENT: staging
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # Dashboard React — uses GHCR image or local build
+  dashboard:
+    image: ${REGISTRY:-ghcr.io}/${REPO_OWNER:-soufiane911}/${REPO_NAME:-mspr-bloc-1-sujet-etl}/frontend:${IMAGE_TAG:-latest}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: obrail-staging-dashboard
+    ports:
+      - "8501:80"
+    depends_on:
+      - api
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # Dashboard Dash (optionnel en staging)
+  dashboard_dash:
+    image: ${REGISTRY:-ghcr.io}/${REPO_OWNER:-soufiane911}/${REPO_NAME:-mspr-bloc-1-sujet-etl}/dashboard:${IMAGE_TAG:-latest}
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: obrail-staging-dashboard-dash
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_staging_password@database:5432/obrail_staging_db}
+    ports:
+      - "8050:8050"
+    depends_on:
+      database:
+        condition: service_healthy
+    command: python app/dash_app.py
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # ETL (service ponctuel, déclenché manuellement)
+  etl:
+    image: ${REGISTRY:-ghcr.io}/${REPO_OWNER:-soufiane911}/${REPO_NAME:-mspr-bloc-1-sujet-etl}/etl:${IMAGE_TAG:-latest}
+    build:
+      context: ./etl
+      dockerfile: Dockerfile
+    container_name: obrail-staging-etl
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_staging_password@database:5432/obrail_staging_db}
+    mem_limit: 12g
+    memswap_limit: 12g
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ./data:/data
+      - ./logs:/app/logs
+    working_dir: /app
+    profiles:
+      - etl
+    networks:
+      - obrail-staging-network
+
+  # Prometheus Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: obrail-staging-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_staging_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgres_exporter
+      - cadvisor
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # PostgreSQL Exporter
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: obrail-staging-postgres-exporter
+    environment:
+      DATA_SOURCE_NAME: "postgresql://obrail:${POSTGRES_PASSWORD:-obrail_staging_password}@database:5432/${POSTGRES_DB:-obrail_staging_db}?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # cAdvisor
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: obrail-staging-cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: obrail-staging-grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_INSTALL_PLUGINS: grafana-worldmap-panel,grafana-piechart-panel
+    volumes:
+      - grafana_staging_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # Loki for log aggregation
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: obrail-staging-loki
+    command: -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - ./loki-config.yml:/etc/loki/loki-config.yml
+      - loki_staging_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+  # Promtail
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: obrail-staging-promtail
+    command: -config.file=/etc/promtail/promtail-config.yml
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log:/var/log:ro
+    depends_on:
+      - loki
+    networks:
+      - obrail-staging-network
+    restart: unless-stopped
+
+volumes:
+  postgres_staging_data:
+  prometheus_staging_data:
+  grafana_staging_data:
+  loki_staging_data:
+
+networks:
+  obrail-staging-network:
+    driver: bridge

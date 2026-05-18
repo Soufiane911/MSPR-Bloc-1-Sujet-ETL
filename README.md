@@ -195,13 +195,53 @@ sleep 30
 docker-compose --profile etl run --rm etl python main.py --force
 ```
 
+### Deploiement staging
+
+Pour deployer l'application en environnement de staging (pre-production), un fichier dedie et un script d'automatisation sont fournis :
+
+- `docker-compose.staging.yml` : orchestration des services avec images GHCR ou builds locaux
+- `scripts/deploy-staging.sh` : script de deploiement avec health checks automatiques
+
+**Prerequis staging :**
+- Docker et Docker Compose v2
+- Un fichier `.env.staging` (cree automatiquement depuis `.env.example` si absent)
+- (Optionnel) `GHCR_TOKEN` pour tirer les images pre-construites depuis GitHub Container Registry
+
+**Lancement rapide :**
+
+```bash
+# Avec images GHCR (recommande si le workflow CD est vert)
+./scripts/deploy-staging.sh --pull
+
+# Avec build local des images
+./scripts/deploy-staging.sh --build
+
+# Sans argument : demarre avec les images disponibles localement
+./scripts/deploy-staging.sh
+```
+
+**Ce que fait le script :**
+1. Verifie que Docker est installe et demarre
+2. Cree `.env.staging` a partir de `.env.example` si necessaire
+3. Connecte a GHCR (si `GHCR_TOKEN` est defini)
+4. Arrete proprement l'ancienne stack staging
+5. Lance la nouvelle stack avec `docker-compose.staging.yml`
+6. Execute des health checks sur l'API, Grafana et Prometheus
+7. Affiche un recapitulatif des URLs accessibles
+
+**Arret du staging :**
+
+```bash
+docker compose -f docker-compose.staging.yml down
+```
+
 ### Services exposes
 
 | Service | Adresse | Description |
 |---|---|---|
 | API REST | `http://localhost:8000` | Service FastAPI |
 | Documentation OpenAPI | `http://localhost:8000/docs` | Interface Swagger |
-| Dashboard | `http://localhost:8501` | Interface Streamlit |
+| Dashboard | `http://localhost:8501` | Frontend React (Nginx) |
 | PostgreSQL | `localhost:5433` | Base relationnelle |
 
 ## Commandes utiles
