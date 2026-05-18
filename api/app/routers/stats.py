@@ -64,10 +64,21 @@ def get_top_routes(
 ):
     """
     Récupère les routes les plus fréquentées.
-    
+
     - **limit**: Nombre de routes à retourner
-    
+
     Returns:
         list: Top routes
     """
     return stats_service.get_top_routes(limit=limit)
+
+
+@router.get("/volumes")
+def get_volumes_stats():
+    """
+    Récupère les volumes de données par table et par source.
+
+    Returns:
+        dict: Volumes (nombre de lignes par table, taille estimée)
+    """
+    return stats_service.get_volumes()

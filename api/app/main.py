@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
-from app.routers import trains, schedules, stations, operators, stats
+from app.routers import trains, schedules, stations, operators, stats, trajets
 from app.middleware import PrometheusMiddleware
 
 # Création de l'application FastAPI
@@ -78,6 +78,7 @@ app.include_router(schedules.router, prefix="/schedules", tags=["Schedules"])
 app.include_router(stations.router, prefix="/stations", tags=["Stations"])
 app.include_router(operators.router, prefix="/operators", tags=["Operators"])
 app.include_router(stats.router, prefix="/stats", tags=["Statistics"])
+app.include_router(trajets.router, prefix="/trajets", tags=["Trajets"])
 
 
 @app.get("/")
@@ -98,7 +99,8 @@ def read_root():
             "schedules": "/schedules",
             "stations": "/stations",
             "operators": "/operators",
-            "statistics": "/stats"
+            "statistics": "/stats",
+            "trajets": "/trajets"
         }
     }
 

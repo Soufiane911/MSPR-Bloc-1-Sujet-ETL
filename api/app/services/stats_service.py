@@ -153,3 +153,35 @@ class StatsService:
             routes = [dict(row._mapping) for row in result]
         
         return routes
+
+    def get_volumes(self) -> Dict[str, Any]:
+        """
+        Recupere les volumes de donnees par table.
+
+        Returns:
+            Volumes (nombre de lignes et taille estimée par table)
+        """
+        queries = {
+            'operators': "SELECT COUNT(*) FROM operators",
+            'stations': "SELECT COUNT(*) FROM stations",
+            'trains': "SELECT COUNT(*) FROM trains",
+            'schedules': "SELECT COUNT(*) FROM schedules",
+        }
+
+        volumes = {}
+        total_rows = 0
+        with engine.connect() as conn:
+            for key, query in queries.items():
+                result = conn.execute(text(query))
+                count = result.scalar()
+                volumes[key] = count
+                total_rows += count
+
+        # Estimation grossiere : ~200 octets par ligne en moyenne
+        estimated_size_mb = round(total_rows * 200 / (1024 * 1024), 2)
+
+        return {
+            'tables': volumes,
+            'total_rows': total_rows,
+            'estimated_size_mb': estimated_size_mb,
+        }

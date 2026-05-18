@@ -10,7 +10,9 @@ The monitoring stack consists of:
 2. **Grafana**: Visualization and dashboarding
 3. **PostgreSQL Exporter**: Database metrics collection
 4. **cAdvisor**: Container metrics collection
-5. **FastAPI Instrumentation**: Application-level metrics
+5. **Loki**: Log aggregation and storage (7-day retention)
+6. **Promtail**: Log shipping to Loki
+7. **FastAPI Instrumentation**: Application-level metrics
 
 This setup monitors:
 - **Application Performance**: Request rates, latencies, errors
@@ -252,6 +254,46 @@ docker-compose up -d --no-start cadvisor
 - [Grafana Dashboard Guide](https://grafana.com/docs/grafana/latest/dashboards/)
 - [FastAPI Monitoring Best Practices](https://fastapi.tiangolo.com/)
 - [PostgreSQL Exporter Metrics](https://github.com/prometheuscommunity/postgres_exporter)
+
+## Maintenance and Rollback
+
+### Patch Deployment
+
+1. Identify the issue via Grafana or logs (`docker compose logs -f api`)
+2. Fix the code on the `6-3-main` branch
+3. Push the fix — the CD workflow automatically rebuilds images
+4. Redeploy: `./scripts/deploy-staging.sh --pull`
+
+### Rollback in Case of Regression
+
+A dedicated script is provided to safely revert to a previous version:
+
+```bash
+# Rollback staging to the previous version (local images)
+./scripts/rollback.sh --staging
+
+# Rollback staging to a specific SHA
+./scripts/rollback.sh --staging --to-sha abc1234
+```
+
+**What the script does:**
+1. Backs up the compose config and database (`backups/YYYYMMDD_HHMMSS/`)
+2. Stops current containers
+3. Prepares target images
+4. Restarts with the previous image (or the specified SHA)
+5. Runs health checks to confirm the API is responding
+
+**Database restoration (if needed):**
+
+```bash
+docker compose -f docker-compose.staging.yml exec -T database psql -U obrail -d postgres < backups/YYYYMMDD_HHMMSS/db_dump.sql
+```
+
+### Key Points
+
+- **Database**: rolling back the image does not automatically restore data. Use `pg_dumpall` before each major deployment.
+- **Logs**: Docker logs are lost on `down`. Loki retains container logs for 7 days.
+- **GHCR Images**: each push to `6-3-main` generates a SHA-tagged image. Keep the last 10 tags to enable fast rollback.
 
 ## Support
 
