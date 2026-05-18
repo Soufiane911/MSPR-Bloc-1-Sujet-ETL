@@ -12,14 +12,22 @@ import QualityTab from "./tabs/QualityTab";
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
   const [filters, setFilters] = useState({ country: "Tous", trainType: "Tous", distanceMin: 0, distanceMax: 2000 });
-  const [state, setState] = useState({ loading: true, error: "", data: null });
+  const [state, setState] = useState({ loading: true, error: "", warnings: [], data: null });
 
   useEffect(() => {
     let mounted = true;
-    setState((s) => ({ ...s, loading: true, error: "" }));
+    setState((s) => ({ ...s, loading: true, error: "", warnings: [] }));
     loadDashboardData(filters.country, filters.trainType)
-      .then((data) => mounted && setState({ loading: false, error: "", data }))
-      .catch((err) => mounted && setState({ loading: false, error: err.message, data: null }));
+      .then(({ data, errors }) => {
+        if (!mounted) return;
+        if (errors.length > 0) {
+          // Certains endpoints ont echoue mais d'autres sont disponibles
+          setState({ loading: false, error: "", warnings: errors, data });
+        } else {
+          setState({ loading: false, error: "", warnings: [], data });
+        }
+      })
+      .catch((err) => mounted && setState({ loading: false, error: err.message, warnings: [], data: null }));
     return () => {
       mounted = false;
     };
@@ -63,24 +71,35 @@ export default function App() {
         <section className="content">
           <header>
             <h1>ObRail Europe</h1>
-            <p>Dashboard React remplaçant Streamlit avec fonctionnalités équivalentes.</p>
+            <p>Dashboard React remplacant Streamlit avec fonctionnalites equivalentes.</p>
           </header>
 
-        {state.loading && <div className="card">Chargement des donnees...</div>}
-        {state.error && <div className="card error">Erreur: {state.error}</div>}
+          {state.loading && <div className="card">Chargement des donnees...</div>}
+          {state.error && <div className="card error">Erreur: {state.error}</div>}
 
-        {!state.loading && !state.error && d && (
-          <>
-            <KpiBar kpis={kpis} />
-            <Tabs active={activeTab} setActive={setActiveTab} />
+          {state.warnings.length > 0 && (
+            <div className="card" style={{ borderColor: "#f39b2f", background: "#fff8dc" }}>
+              <strong style={{ color: "#b37400" }}>Avertissement : certains endpoints sont indisponibles</strong>
+              <ul style={{ margin: "0.5rem 0 0 1rem", fontSize: "0.85rem", color: "#607086" }}>
+                {state.warnings.map((w, i) => (
+                  <li key={i}>{w}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-            {activeTab === "overview" && <OverviewTab trains={d.trains} byCountry={d.byCountry} />}
-            {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight} />}
-            {activeTab === "network" && <NetworkTab routes={d.routes} />}
-            {activeTab === "map" && <MapTab stations={d.stations} />}
-            {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
-          </>
-        )}
+          {!state.loading && !state.error && d && (
+            <>
+              <KpiBar kpis={kpis} />
+              <Tabs active={activeTab} setActive={setActiveTab} />
+
+              {activeTab === "overview" && <OverviewTab trains={d.trains || []} byCountry={d.byCountry || []} />}
+              {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight || []} />}
+              {activeTab === "network" && <NetworkTab routes={d.routes || []} />}
+              {activeTab === "map" && <MapTab stations={d.stations || []} />}
+              {activeTab === "quality" && <QualityTab quality={d.quality || []} schedules={schedules} />}
+            </>
+          )}
         </section>
       </main>
     </>

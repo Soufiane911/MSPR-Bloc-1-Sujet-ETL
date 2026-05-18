@@ -11,18 +11,34 @@ export async function loadDashboardData(country, trainType) {
   const typeApi = trainType === "Jour" ? "day" : trainType === "Nuit" ? "night" : "";
   const typeQuery = typeApi ? `&train_type=${typeApi}` : "";
 
-  const [summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules] =
-    await Promise.all([
-      getJson("/stats/summary"),
-      getJson("/stats/by-country"),
-      getJson(`/stats/day-night?country=${country && country !== "Tous" ? country : ""}`),
-      getJson("/stats/top-routes?limit=20"),
-      getJson("/stats/data-quality"),
-      getJson(`/trains/?limit=1000${countryQuery}${typeQuery}`),
-      getJson(`/stations/?limit=1000${countryQuery}`),
-      getJson(`/operators/?limit=1000${countryQuery}`),
-      getJson(`/schedules/?limit=1000${countryQuery}${typeQuery}`),
-    ]);
+  const endpoints = [
+    { key: "summary",  path: "/stats/summary" },
+    { key: "byCountry", path: "/stats/by-country" },
+    { key: "dayNight", path: `/stats/day-night?country=${country && country !== "Tous" ? country : ""}` },
+    { key: "routes",   path: "/stats/top-routes?limit=20" },
+    { key: "quality",  path: "/stats/data-quality" },
+    { key: "trains",   path: `/trains/?limit=1000${countryQuery}${typeQuery}` },
+    { key: "stations", path: `/stations/?limit=1000${countryQuery}` },
+    { key: "operators",path: `/operators/?limit=1000${countryQuery}` },
+    { key: "schedules",path: `/schedules/?limit=1000${countryQuery}${typeQuery}` },
+  ];
 
-  return { summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules };
+  const results = await Promise.allSettled(
+    endpoints.map((ep) => getJson(ep.path))
+  );
+
+  const data = {};
+  const errors = [];
+
+  results.forEach((result, i) => {
+    const key = endpoints[i].key;
+    if (result.status === "fulfilled") {
+      data[key] = result.value;
+    } else {
+      data[key] = null;
+      errors.push(`${endpoints[i].path} — ${result.reason.message}`);
+    }
+  });
+
+  return { data, errors };
 }
