@@ -41,7 +41,7 @@ This will start:
 - **API Documentation**: http://localhost:8000/docs
 - **Frontend Dashboard**: http://localhost:8501
 - **Prometheus**: http://localhost:9090
-- **Grafana**: http://localhost:3000 (admin/admin)
+- **Grafana**: http://localhost:3000 (cf. `GRAFANA_ADMIN_PASSWORD` dans `.env`, defaut: admin)
 - **API Metrics**: http://localhost:8000/metrics
 
 ### 3. Configure Grafana Data Source

@@ -27,7 +27,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
-    DATABASE_URL = "postgresql://obrail:obrail_dbpw@database:5432/obrail_db"
+    DATABASE_URL = "postgresql://obrail:obrail_secure_password@database:5432/obrail_db"
 BASE_URL = "https://raw.githubusercontent.com/Back-on-Track-eu/night-train-data/main/data/latest"
 REF_DATE = datetime(2025, 1, 15, tzinfo=timezone.utc)
 
