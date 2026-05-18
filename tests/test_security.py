@@ -10,6 +10,7 @@ Verifie :
 
 import pytest
 from fastapi.testclient import TestClient
+from unittest.mock import patch
 from app.main import app
 
 client = TestClient(app)
@@ -97,13 +98,16 @@ class TestInputValidation:
         response = client.get("/trains/?limit=1 UNION SELECT * FROM operators--")
         assert response.status_code == 422
 
-    def test_xss_in_query_param_blocked(self):
-        """Une tentative XSS dans un parametre doit etre traitee comme texte brut."""
+    @patch('app.services.train_service.TrainService.get_trains')
+    def test_xss_in_query_param_blocked(self, mock_get_trains):
+        """Une tentative XSS dans un parametre doit etre traitee comme texte brut (JSON)."""
+        mock_get_trains.return_value = []
         response = client.get("/trains/?train_type=<script>alert(1)</script>")
         # L'API retourne toujours du JSON, jamais du HTML execute
         assert "application/json" in response.headers.get("content-type", "")
-        # Pas de script execute dans la reponse (on accepte 200, 422 ou 500 si BDD indisponible)
-        assert "<script>" not in response.text or response.status_code in [422, 500]
+        # Pas de script execute dans la reponse
+        assert response.status_code == 200
+        assert "<script>" not in response.text
 
 
 class TestErrorHandling:
