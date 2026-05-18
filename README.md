@@ -178,7 +178,7 @@ launch-etl.bat
 
 **Fonctionnement des scripts :**
 1. Vérifient si Docker Desktop est installé (message d'erreur sinon)
-2. Démarent Docker Desktop s'il ne l'est pas déjà
+2. Démarrent Docker Desktop s'il ne l'est pas déjà
 3. Attendent que Docker soit prêt
 4. Lancent PostgreSQL
 5. Attendent 30 secondes (initialisation de la base)
@@ -270,9 +270,103 @@ cd etl
 python analysis/ml_classifier.py
 ```
 
+## Environnement de developpement
+
+### Prerequis
+
+- **Python 3.11** (version recommandee et utilisee en CI/CD)
+- **Docker** et **Docker Compose v2**
+- **Node.js 20** (pour le frontend)
+
+### Installation locale (venv Python 3.11)
+
+Pour eviter les conflits de dependances, il est recommande d'utiliser un environnement virtuel Python 3.11 :
+
+```bash
+# Creer le venv
+python3.11 -m venv .venv
+
+# Activer (macOS / Linux)
+source .venv/bin/activate
+
+# Activer (Windows)
+# .venv\Scripts\activate
+
+# Installer les dependances
+pip install -r api/requirements.txt -r etl/requirements.txt -r requirements-test.txt
+
+# Verifier l'installation
+pip check
+```
+
+> **Note** : L'environnement local doit utiliser Python 3.11 et les versions pincees des dependances. L'utilisation de Python 3.13 ou de versions flottantes peut provoquer des incompatibilites (ex. FastAPI / Starlette).
+
+### Lancer les tests
+
+```bash
+# Tous les tests (depuis la racine du repo)
+pytest -q
+
+# Avec couverture de code
+pytest --cov=. --cov-report=xml --cov-report=term
+
+# Tests de securite uniquement
+pytest tests/test_security.py -v
+
+# Tests d'integration (requiert PostgreSQL)
+# Demarrer la BDD : docker compose up -d database
+pytest tests/test_integration.py -v
+
+# Tests frontend E2E (Playwright)
+cd frontend
+npm ci
+npx playwright install --with-deps chromium
+npm run e2e
+```
+
+### Execution hors Docker (mode local)
+
+```bash
+# 1. Demarrer PostgreSQL (port 5433)
+docker compose up -d database
+
+# 2. Attendre l'initialisation de la base (30s)
+sleep 30
+
+# 3. Charger les donnees ETL
+cd etl
+python main.py --force
+
+# 4. Lancer l'API
+cd ../api
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+# 5. Lancer le dashboard (dans un autre terminal)
+cd ../frontend
+npm install
+npm run dev
+```
+
+---
+
 ## Validation et tests
 
-Le depot contient des tests unitaires cibles sur l'API et l'ETL.
+Le depot contient une suite de tests complete couvrant plusieurs niveaux :
+
+| Type | Fichier | Description |
+|------|---------|-------------|
+| Unitaires API | `tests/test_api_endpoints.py` | Endpoints REST (mockes) |
+| API main | `api/tests/test_main.py` | Tests API avec SQLite |
+| Securite | `tests/test_security.py` | CORS, injection, validation |
+| Validation donnees | `tests/test_data_validation.py` | Qualite des donnees |
+| Merger | `tests/test_data_merger.py` | Fusion des donnees |
+| ETL pipeline | `tests/test_etl_pipeline.py` | Pipeline complet |
+| ETL loader | `etl/tests/test_database_loader.py` | Chargement BDD |
+| ETL extracteurs | `etl/tests/test_extractors_local_files.py` | Extraction sources |
+| ETL fraicheur | `etl/tests/test_freshness.py` | Detection changements |
+| ETL classifier | `etl/tests/test_day_night_classifier.py` | Classification jour/nuit |
+| Integration | `tests/test_integration.py` | API + PostgreSQL reelle |
+| E2E Frontend | `frontend/e2e/` | Playwright (smoke, accessibilite) |
 
 ```bash
 pytest -q
