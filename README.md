@@ -30,14 +30,14 @@ Le systeme est compose de quatre couches principales :
 1. une couche de sources de donnees externes ;
 2. un pipeline ETL developpe en Python ;
 3. une base PostgreSQL structurante ;
-4. une couche d'exposition composee d'une API FastAPI et d'un dashboard Streamlit.
+4. une couche d'exposition composee d'une API FastAPI et d'un dashboard React (avec un dashboard Dash optionnel).
 
 ```text
 Sources de donnees
     -> ETL Python (extraction, nettoyage, normalisation, classification, chargement)
     -> PostgreSQL
     -> API REST FastAPI
-    -> Dashboard Streamlit
+    -> Dashboard React (Nginx) + Dash (optionnel)
 ```
 
 ## Perimetre des sources
@@ -133,7 +133,7 @@ L'API REST expose les donnees agregees et detaillees via FastAPI. Elle permet no
 
 ### Dashboard
 
-Le dashboard Streamlit fournit une interface de consultation des indicateurs de qualite, des comparaisons jour/nuit et des vues synthetiques par pays, operateur ou type de service.
+Le dashboard React fournit une interface de consultation des indicateurs de qualite, des comparaisons jour/nuit et des vues synthetiques par pays, operateur ou type de service. Un dashboard Dash alternatif est egalement disponible sur le port 8050.
 
 ## Methodologie de classification jour/nuit
 
@@ -286,6 +286,31 @@ Il est egalement possible d'executer les sous-ensembles de tests depuis les repe
 - la qualification jour/nuit depend de la qualite et de la granularite des donnees sources ;
 - certaines sources nationales necessitent un filtrage metier pour exclure les dessertes trop locales au regard de la problematique ;
 - l'URL actuellement utilisee pour la Suisse doit etre verifiee regulierement afin de confirmer qu'elle reste directement exploitable dans le pipeline.
+
+## Donnees et conformite RGPD
+
+Le projet ObRail Europe traite exclusivement des **donnees publiques et ouvertes** du domaine ferroviaire. Aucune donnee a caractere personnel (DCP) n'est collectee, stockee ou traitee.
+
+### Sources et licences
+
+Les jeux de donnees proviennent de sources open data europeennes (Back-on-Track, Deutsche Bahn, SNCF, Renfe, Trenitalia, SNCB, Mobility Database Catalogs). Les licences respectives (GPL-3.0, ODbL, CC-BY-4.0) imposent l'attribution et, pour l'ODbL, le partage a l'identique.
+
+### Logs et retention
+
+- **Contenu des logs** : evenements techniques uniquement (timestamp, endpoint, statut HTTP, duree). Aucune donnee personnelle ni token d'authentification n'est loggue.
+- **Duree de conservation** :
+  - Logs conteneurises (Loki) : 7 jours
+  - Logs ETL (fichier local) : 7 jours
+  - Logs systeme : 7 jours
+- Les logs ETL sont stockes dans `logs/` (ignore par `.gitignore`). Les logs conteneurises sont agreges via Loki en environnement Docker.
+
+### Mesures de securite complementaires
+
+- Les fichiers `.env` et `.env.staging` sont exclus du versionnement
+- Les secrets CI/CD utilisent les mecanismes natifs GitHub Actions (`secrets.GITHUB_TOKEN`)
+- La base PostgreSQL n'est exposee que sur localhost (port 5433)
+
+Pour le detail complet, voir `docs/RGPD.md`.
 
 ## Licences des donnees
 

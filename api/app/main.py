@@ -29,7 +29,7 @@ app = FastAPI(
     
     ## Sources de données
     - Back-on-Track Night Train Database (trains de nuit)
-    - SNCF, Deutsche Bahn, ÖBB, Renfe, Trenitalia (trains de jour)
+    - SNCF, Deutsche Bahn, Renfe, Trenitalia (trains de jour)
     - Mobility Database Catalogs
     
     ## Licence
