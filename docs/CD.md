@@ -39,6 +39,12 @@ For a private registry other than GHCR, add repository secrets (e.g. `DOCKER_REG
 2. **Packages**: after the first successful push, images appear under the repo’s **Packages** tab on GitHub.
 3. If the repo is private, grant consumers access to the GHCR packages or use a PAT with `read:packages`.
 
+## Resilience (GHCR login)
+
+Matrix jobs each log in to `ghcr.io` on their own runner. Transient `Client.Timeout` errors on login are handled by **5 retries** with a 20s pause. Builds run with `max-parallel: 2` to limit simultaneous registry connections.
+
+If a job still fails on login only, use **Re-run failed jobs** in the Actions UI (no code change required).
+
 ## Local parity
 
 `docker compose build` uses the same Dockerfiles and contexts as CI (`api`, `frontend` for the React dashboard, `etl`, `dashboard` for Dash).
