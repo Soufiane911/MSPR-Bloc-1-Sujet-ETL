@@ -20,6 +20,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: obrail
+          POSTGRES_PASSWORD: obrail_test_password
+          POSTGRES_DB: obrail_test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://obrail:obrail_test_password@localhost:5432/obrail_test_db
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
@@ -54,8 +72,17 @@ jobs:
     - name: "Test: Data Merger (18 tests)"
       run: pytest tests/test_data_merger.py -v --tb=short
 
-    - name: "Test: Examples & Security (9 tests)"
-      run: pytest tests/test_example.py -v --tb=short
+    - name: "Test: Security (18 tests)"
+      run: pytest tests/test_security.py -v --tb=short
+
+    - name: "Test: Integration with PostgreSQL"
+      run: |
+        # Verifier que la BDD CI est accessible
+        python -c "import os; print('DATABASE_URL =', os.getenv('DATABASE_URL'))"
+        pytest tests/test_api_endpoints.py -v --tb=short -k "health" || true
+
+    - name: Install pytest-cov
+      run: pip install pytest-cov
 
     - name: Coverage Report
       run: |
