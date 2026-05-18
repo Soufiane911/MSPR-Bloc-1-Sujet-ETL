@@ -79,7 +79,7 @@ jobs:
       run: |
         # Verifier que la BDD CI est accessible
         python -c "import os; print('DATABASE_URL =', os.getenv('DATABASE_URL'))"
-        pytest tests/test_api_endpoints.py -v --tb=short -k "health" || true
+        pytest tests/test_integration.py -v --tb=short
 
     - name: Install pytest-cov
       run: pip install pytest-cov
