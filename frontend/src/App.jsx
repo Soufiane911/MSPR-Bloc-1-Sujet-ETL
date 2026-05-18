@@ -54,13 +54,17 @@ export default function App() {
   }, [d]);
 
   return (
-    <main className="app-shell">
+    <>
+      <a href="#contenu-principal" className="skip-link">
+        Aller au contenu
+      </a>
       <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
-      <section className="content">
-        <header>
-          <h1>ObRail Europe</h1>
-          <p>Dashboard React remplaçant Streamlit avec fonctionnalités équivalentes.</p>
-        </header>
+      <main className="app-shell" id="contenu-principal" role="main" tabIndex={-1}>
+        <section className="content">
+          <header>
+            <h1>ObRail Europe</h1>
+            <p>Dashboard React remplaçant Streamlit avec fonctionnalités équivalentes.</p>
+          </header>
 
         {state.loading && <div className="card">Chargement des donnees...</div>}
         {state.error && <div className="card error">Erreur: {state.error}</div>}
@@ -77,7 +81,8 @@ export default function App() {
             {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
           </>
         )}
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }
