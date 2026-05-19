@@ -102,7 +102,30 @@ jobs:
     - name: Start services with docker compose
       run: |
         docker compose up -d
-        sleep 30
+        sleep 60
+
+    - name: Initialize database
+      run: |
+        echo "Waiting for PostgreSQL to be ready..."
+        max=30
+        attempt=1
+        while [ $attempt -le $max ]; do
+          if docker compose exec -T database pg_isready -U obrail -d obrail_db; then
+            echo "PostgreSQL is ready"
+            break
+          fi
+          echo "Attempt $attempt/$max: PostgreSQL not ready yet, waiting..."
+          sleep 2
+          attempt=$((attempt + 1))
+        done
+
+        if [ $attempt -gt $max ]; then
+          echo "ERROR: PostgreSQL did not become ready in time"
+          exit 1
+        fi
+
+        echo "Waiting for tables to be initialized..."
+        sleep 10
 
     - name: Application Health Checks
       run: |
