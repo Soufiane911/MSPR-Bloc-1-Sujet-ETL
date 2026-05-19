@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function formatDuration(minutes) {
   if (!minutes) return "-";
   const hours = Math.floor(minutes / 60);
@@ -16,7 +18,11 @@ function formatTrainType(type) {
 }
 
 export default function TrajetsTab({ trajets }) {
+  const [showMapSummary, setShowMapSummary] = useState(false);
   const rows = (trajets || []).slice(0, 100);
+  const mappedTrips = rows.filter(
+    (trajet) => trajet.origin_latitude && trajet.origin_longitude && trajet.destination_latitude && trajet.destination_longitude
+  );
 
   return (
     <section className="card">
@@ -27,23 +33,34 @@ export default function TrajetsTab({ trajets }) {
         </div>
       </div>
 
-      {!rows.length ? (
-        <div className="empty-state">Aucun trajet ne correspond aux filtres selectionnes. Elargissez la distance, revenez sur "Tous" ou actualisez les donnees.</div>
-      ) : (
-        <div className="table-wrap">
-          <table className="table" aria-label="Tableau des trajets ferroviaires">
-            <thead>
-              <tr>
-                <th>Origine</th>
-                <th>Destination</th>
-                <th>Operateur</th>
-                <th>Type</th>
-                <th>Duree</th>
-                <th>Distance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((trajet) => (
+      <div style={{ marginBottom: "1rem" }}>
+        <button type="button" onClick={() => setShowMapSummary((value) => !value)}>
+          Carte des trajets
+        </button>
+        {showMapSummary && (
+          <p className="muted" role="status">
+            {mappedTrips.length
+              ? `${mappedTrips.length} trajets cartographies`
+              : "Aucun trajet cartographiable"}
+          </p>
+        )}
+      </div>
+
+      <div className="table-wrap">
+        <table className="table" aria-label="Tableau des trajets ferroviaires">
+          <thead>
+            <tr>
+              <th>Origine</th>
+              <th>Destination</th>
+              <th>Operateur</th>
+              <th>Type</th>
+              <th>Duree</th>
+              <th>Distance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.length ? (
+              rows.map((trajet) => (
                 <tr key={trajet.trajet_id}>
                   <td>
                     <strong>{trajet.origin}</strong>
@@ -62,11 +79,17 @@ export default function TrajetsTab({ trajets }) {
                   <td>{formatDuration(trajet.duration_min)}</td>
                   <td>{formatDistance(trajet.distance_km)}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6}>
+                  Aucun trajet ne correspond aux filtres selectionnes. Elargissez la distance, revenez sur "Tous" ou actualisez les donnees.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

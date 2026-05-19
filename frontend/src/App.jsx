@@ -8,6 +8,7 @@ import DayNightTab from "./tabs/DayNightTab";
 import NetworkTab from "./tabs/NetworkTab";
 import MapTab from "./tabs/MapTab";
 import QualityTab from "./tabs/QualityTab";
+import TrajetsTab from "./tabs/TrajetsTab";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -94,6 +95,7 @@ export default function App() {
               <Tabs active={activeTab} setActive={setActiveTab} />
 
               {activeTab === "overview" && <OverviewTab trains={d.trains || []} byCountry={d.byCountry || []} />}
+              {activeTab === "trajets" && <TrajetsTab trajets={d.trajets || []} />}
               {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight || []} />}
               {activeTab === "network" && <NetworkTab routes={d.routes || []} />}
               {activeTab === "map" && <MapTab stations={d.stations || []} />}

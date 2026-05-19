@@ -21,6 +21,7 @@ export async function loadDashboardData(country, trainType) {
     { key: "stations", path: `/stations/?limit=1000${countryQuery}` },
     { key: "operators",path: `/operators/?limit=1000${countryQuery}` },
     { key: "schedules",path: `/schedules/?limit=1000${countryQuery}${typeQuery}` },
+    { key: "trajets",  path: `/trajets/?limit=1000${countryQuery}${typeQuery}` },
   ];
 
   const results = await Promise.allSettled(

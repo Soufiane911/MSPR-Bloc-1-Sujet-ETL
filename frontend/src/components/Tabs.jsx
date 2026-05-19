@@ -1,5 +1,6 @@
 const TABS = [
   ["overview", "Vue d'ensemble"],
+  ["trajets", "Trajets"],
   ["daynight", "Comparaison Jour/Nuit"],
   ["network", "Reseau & Distance"],
   ["map", "Carte"],
