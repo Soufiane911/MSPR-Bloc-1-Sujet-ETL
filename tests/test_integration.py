@@ -7,6 +7,8 @@ En local sans BDD, les tests sont ignores (skipped).
 """
 
 import os
+from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -36,6 +38,43 @@ if not _postgres_available:
         "Demarrez la BDD avec : docker compose up -d database",
         allow_module_level=True,
     )
+
+
+def _ensure_test_schema():
+    """Initialise le schema metier si le service PostgreSQL CI est vide."""
+    from sqlalchemy import create_engine, text
+
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+    with engine.connect() as conn:
+        table_exists = conn.execute(
+            text(
+                """
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM information_schema.tables
+                    WHERE table_schema = 'public'
+                    AND table_name = 'operators'
+                )
+                """
+            )
+        ).scalar()
+
+    if table_exists:
+        return
+
+    schema_path = Path(__file__).resolve().parents[1] / "sql" / "init" / "01-schema.sql"
+    schema_sql = schema_path.read_text(encoding="utf-8")
+
+    raw_connection = engine.raw_connection()
+    try:
+        with raw_connection.cursor() as cursor:
+            cursor.execute(schema_sql)
+        raw_connection.commit()
+    finally:
+        raw_connection.close()
+
+
+_ensure_test_schema()
 
 from api.app.main import app
 
