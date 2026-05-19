@@ -1,0 +1,93 @@
+groups:
+  - name: obrail-api-alerts
+    rules:
+      # Alert 1: API down - health endpoint non disponible
+      - alert: APIHighErrorRate
+        expr: rate(http_requests_total{job="obrail-api",status=~"5.."}[5m]) / rate(http_requests_total{job="obrail-api"}[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: "Taux d'erreur API eleve (> 5%)"
+          description: "Le taux d'erreur HTTP 5xx sur l'API est de {{ $value | humanizePercentage }} au cours des 5 dernieres minutes."
+          runbook_url: "https://github.com/Soufiane911/MSPR-Bloc-1-Sujet-ETL/blob/6-3-main/docs/ALERTING.md"
+
+      # Alert 2: API completely down
+      - alert: APIDown
+        expr: up{job="obrail-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: "API ObRail hors ligne"
+          description: "L'API FastAPI n'a pas ete scrapee par Prometheus depuis plus d'une minute. Le service est probablement arrete ou inaccessible."
+          runbook_url: "https://github.com/Soufiane911/MSPR-Bloc-1-Sujet-ETL/blob/6-3-main/docs/ALERTING.md"
+
+      # Alert 3: High response time (p95 > 2s)
+      - alert: APIHighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="obrail-api"}[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "Latence API elevee (p95 > 2s)"
+          description: "Le 95e percentile du temps de reponse de l'API est de {{ $value }}s au cours des 5 dernieres minutes."
+
+      # Alert 4: PostgreSQL exporter down
+      - alert: PostgreSQLExporterDown
+        expr: up{job="postgresql"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "PostgreSQL Exporter hors ligne"
+          description: "Le postgres_exporter n'est pas accessible. Les metriques de base de donnees ne sont plus collectees."
+
+      # Alert 5: Database connection errors
+      - alert: PostgreSQLConnectionsHigh
+        expr: pg_stat_activity_count > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Nombre eleve de connexions PostgreSQL"
+          description: "PostgreSQL a {{ $value }} connexions actives (seuil : 80)."
+
+      # Alert 6: cAdvisor down (Docker metrics)
+      - alert: CadvisorDown
+        expr: up{job="docker"} == 0
+        for: 3m
+        labels:
+          severity: info
+          service: infrastructure
+        annotations:
+          summary: "cAdvisor hors ligne"
+          description: "cAdvisor ne fournit plus de metriques Docker."
+
+  - name: obrail-infrastructure-alerts
+    rules:
+      # Alert 7: Disk space (simulated via container metrics)
+      - alert: ContainerHighMemoryUsage
+        expr: (container_memory_usage_bytes{name=~"obrail-.*"} / container_spec_memory_limit_bytes{name=~"obrail-.*"}) > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Utilisation memoire conteneur elevee"
+          description: "Le conteneur {{ $labels.name }} utilise {{ $value | humanizePercentage }} de sa memoire allouee."
+
+      # Alert 8: Prometheus target missing
+      - alert: PrometheusTargetMissing
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Target Prometheus indisponible"
+          description: "Le target {{ $labels.job }} est down depuis plus de 5 minutes."

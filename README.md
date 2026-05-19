@@ -303,6 +303,8 @@ pip check
 
 ### Lancer les tests
 
+#### Tests unitaires et securite (rapide, sans base de donnees)
+
 ```bash
 # Tous les tests (depuis la racine du repo)
 pytest -q
@@ -312,12 +314,36 @@ pytest --cov=. --cov-report=xml --cov-report=term
 
 # Tests de securite uniquement
 pytest tests/test_security.py -v
+```
 
-# Tests d'integration (requiert PostgreSQL)
-# Demarrer la BDD : docker compose up -d database
+#### Tests d'integration (requiert PostgreSQL)
+
+Les tests d'integration verifient l'API REST contre une vraie base PostgreSQL.
+Ils sont ignores si la base n'est pas accessible.
+
+```bash
+# 1. Demarrer PostgreSQL (obligatoire)
+docker compose up -d database
+
+# 2. Attendre l'initialisation (healthcheck automatique)
+docker compose exec database pg_isready -U obrail -d obrail_db
+
+# 3. Executer les tests d'integration
 pytest tests/test_integration.py -v
 
-# Tests frontend E2E (Playwright)
+# Alternative : tout en une commande
+docker compose up -d database && \
+  echo "Attente initialisation..." && \
+  sleep 10 && \
+  pytest tests/test_integration.py -v
+```
+
+> **Note** : Sans PostgreSQL, les tests d'integration sont automatiquement ignores (`pytest.skip`).
+> La CI/CD demarre un service PostgreSQL dedie pour ces tests.
+
+#### Tests frontend E2E (Playwright)
+
+```bash
 cd frontend
 npm ci
 npx playwright install --with-deps chromium
@@ -405,6 +431,16 @@ Les jeux de donnees proviennent de sources open data europeennes (Back-on-Track,
 - La base PostgreSQL n'est exposee que sur localhost (port 5433)
 
 Pour le detail complet, voir `docs/RGPD.md`.
+
+## Documentation technique
+
+| Document | Description |
+|----------|-------------|
+| `docs/RGPD.md` | Conformite RGPD et gestion des donnees |
+| `docs/RGAA-AUDIT.md` | Audit d'accessibilite RGAA/WCAG du dashboard |
+| `docs/SECURITY-HTTPS-RATELIMIT.md` | Recommandations HTTPS et rate limiting pour la production |
+| `docs/ALERTING.md` | Guide des alertes Prometheus (runbook) |
+| `PLAN-DE-TESTS.md` | Strategie et couverture des tests |
 
 ## Licences des donnees
 

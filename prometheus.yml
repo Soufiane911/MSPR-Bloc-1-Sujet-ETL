@@ -4,6 +4,10 @@ global:
   external_labels:
     monitor: 'obrail-monitoring'
 
+# Fichier des regles d'alerte
+rule_files:
+  - '/etc/prometheus/alert_rules.yml'
+
 alerting:
   alertmanagers:
     - static_configs:
