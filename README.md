@@ -30,14 +30,14 @@ Le systeme est compose de quatre couches principales :
 1. une couche de sources de donnees externes ;
 2. un pipeline ETL developpe en Python ;
 3. une base PostgreSQL structurante ;
-4. une couche d'exposition composee d'une API FastAPI et d'un dashboard Streamlit.
+4. une couche d'exposition composee d'une API FastAPI et d'un dashboard React (Vite + React).
 
 ```text
 Sources de donnees
     -> ETL Python (extraction, nettoyage, normalisation, classification, chargement)
     -> PostgreSQL
     -> API REST FastAPI
-    -> Dashboard Streamlit
+    -> Dashboard React (frontend/)
 ```
 
 ## Perimetre des sources
@@ -133,7 +133,7 @@ L'API REST expose les donnees agregees et detaillees via FastAPI. Elle permet no
 
 ### Dashboard
 
-Le dashboard Streamlit fournit une interface de consultation des indicateurs de qualite, des comparaisons jour/nuit et des vues synthetiques par pays, operateur ou type de service.
+Le dashboard React (Vite + React) fournit une interface de consultation des indicateurs de qualite, des comparaisons jour/nuit et des vues synthetiques par pays, operateur ou type de service.
 
 ## Methodologie de classification jour/nuit
 
@@ -201,7 +201,7 @@ docker-compose --profile etl run --rm etl python main.py --force
 |---|---|---|
 | API REST | `http://localhost:8000` | Service FastAPI |
 | Documentation OpenAPI | `http://localhost:8000/docs` | Interface Swagger |
-| Dashboard | `http://localhost:8501` | Interface Streamlit |
+| Dashboard | `http://localhost:8501` | React frontend (Vite) |
 | PostgreSQL | `localhost:5433` | Base relationnelle |
 
 ## Commandes utiles

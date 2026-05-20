@@ -53,8 +53,14 @@ def lazy_import_extractors():
     from extractors.back_on_track import BackOnTrackExtractor
     from extractors.gtfs_extractor import GTFSExtractor
     from extractors.mobility_catalog import MobilityCatalogExtractor
+    from extractors.openflights_extractor import OpenFlightsExtractor
 
-    return BackOnTrackExtractor, GTFSExtractor, MobilityCatalogExtractor
+    return (
+        BackOnTrackExtractor,
+        GTFSExtractor,
+        MobilityCatalogExtractor,
+        OpenFlightsExtractor,
+    )
 
 
 def lazy_import_transformers():
@@ -172,6 +178,8 @@ def run_download(
     # Filtrer les sources si nécessaire
     sources_to_process = {}
     for name, config in SOURCES.items():
+        if name == "openflights":
+            continue
         if not config.get("enabled", True):
             logger.info(f"[DISABLED] {name}: Desactive")
             continue
@@ -231,9 +239,12 @@ def run_extraction(logger, source_filter: Optional[str] = None) -> dict:
         dict: Données extraites par source
     """
     # Import lazy des extracteurs seulement quand extraction demandée
-    BackOnTrackExtractor, GTFSExtractor, MobilityCatalogExtractor = (
-        lazy_import_extractors()
-    )
+    (
+        BackOnTrackExtractor,
+        GTFSExtractor,
+        MobilityCatalogExtractor,
+        OpenFlightsExtractor,
+    ) = lazy_import_extractors()
 
     logger.info("\n" + "=" * 70)
     logger.info("PHASE 1: EXTRACTION DES DONNÉES")
@@ -271,6 +282,47 @@ def run_extraction(logger, source_filter: Optional[str] = None) -> dict:
                 logger.error("[ERROR] Mobility Catalog: Validation echouee\n")
         except Exception as e:
             logger.error(f"[ERROR] Mobility Catalog: {str(e)}\n")
+
+    # 2b. OpenFlights (airlines, airports, routes)
+    if source_filter is None or source_filter == "openflights":
+        logger.info("[START] Extraction OpenFlights...")
+        try:
+            _, _, _, OpenFlightsExtractor = lazy_import_extractors()
+            extractor = OpenFlightsExtractor()
+            data = extractor.extract()
+
+            if extractor.validate():
+                extracted_data["openflights"] = {
+                    "airlines": data.get("airlines"),
+                    "airports": data.get("airports"),
+                    "routes": data.get("routes"),
+                }
+                logger.info(
+                    f"[OK] OpenFlights: airlines={len(data.get('airlines', []))}, airports={len(data.get('airports', []))}, routes={len(data.get('routes', []))}\n"
+                )
+            else:
+                logger.warning("[WARN] OpenFlights: Validation partielle\n")
+        except Exception as e:
+            logger.error(f"[ERROR] OpenFlights: {str(e)}\n")
+
+    # 2c. OpenSky (realtime states -> flight instances)
+    if source_filter is None or source_filter == "opensky":
+        logger.info("[START] Extraction OpenSky realtime states...")
+        try:
+            from extractors.opensky_extractor import OpenSkyExtractor
+
+            osky = OpenSkyExtractor()
+            data = osky.extract()
+
+            if osky.validate():
+                extracted_data["opensky"] = {"instances": data.get("instances")}
+                logger.info(
+                    f"[OK] OpenSky: instances={len(data.get('instances', []))}\n"
+                )
+            else:
+                logger.warning("[WARN] OpenSky: Validation partielle\n")
+        except Exception as e:
+            logger.error(f"[ERROR] OpenSky: {str(e)}\n")
 
     # 3. Sources GTFS nationales
     gtfs_sources = [
@@ -330,6 +382,26 @@ def run_transformation(logger, extracted_data: dict) -> dict:
                 data["data"], cleaner, normalizer, classifier
             )
             transformed_data[source_name] = transformed
+        elif source_name == "openflights":
+            # Process OpenFlights data
+            from transformers.flight_transformer import FlightTransformer
+
+            ft = FlightTransformer()
+            airlines_df = ft.normalize_airlines(data.get("airlines", []))
+            airports_df = ft.normalize_airports(data.get("airports", []))
+            flights_df = ft.build_flights_from_routes(
+                data.get("routes", []), airports_df, airlines_df
+            )
+
+            transformed_data[source_name] = {
+                "airlines": airlines_df,
+                "airports": airports_df,
+                "flights": flights_df,
+            }
+        elif source_name == "opensky":
+            # OpenSky already returns flight-instance like rows in extractor
+            instances_df = data.get("instances")
+            transformed_data[source_name] = {"instances": instances_df}
         elif source_name != "mobility_catalog":
             transformed = process_gtfs_source(
                 source_name,
@@ -361,6 +433,13 @@ def run_transformation(logger, extracted_data: dict) -> dict:
         "trains": trains,
         "schedules": schedules,
     })
+
+    # Keep aviation data available for the loader stage without mixing schemas.
+    if "openflights" in transformed_data:
+        merged["openflights"] = transformed_data["openflights"]
+    if "opensky" in transformed_data:
+        # Keep OpenSky instances available for loader stage
+        merged["opensky_instances"] = transformed_data["opensky"].get("instances")
 
     logger.info("[OK] Transformation et validation terminées\n")
     return merged
@@ -525,6 +604,30 @@ def run_loading(logger, transformed_data: dict) -> tuple:
     if "schedules" in transformed_data and not transformed_data["schedules"].empty:
         loader.load_schedules(transformed_data["schedules"])
         loader.calculate_distances()
+
+    # If OpenFlights data present, load aviation tables
+    if "openflights" in transformed_data:
+        of = transformed_data["openflights"]
+        if of.get("airlines") is not None and not of.get("airlines").empty:
+            loader.load_airlines(of.get("airlines"))
+        if of.get("airports") is not None and not of.get("airports").empty:
+            loader.load_airports(of.get("airports"))
+        if of.get("flights") is not None and not of.get("flights").empty:
+            loader.load_flights(of.get("flights"))
+            # Generate synthetic flight instances for flights (Europe-only)
+            try:
+                loader.generate_and_load_flight_instances(days=7, instances_per_day=1)
+            except Exception:
+                logger.warning("[WARN] generation of flight instances failed")
+
+    # If OpenSky realtime instances are present, load them
+    if "opensky_instances" in transformed_data and transformed_data.get("opensky_instances") is not None:
+            try:
+                loader.load_flight_instances(transformed_data.get("opensky_instances"))
+            except Exception as e:
+                import traceback
+
+                logger.error("[ERROR] loading OpenSky instances failed:\n" + traceback.format_exc())
 
     counts = loader.verify_counts()
 

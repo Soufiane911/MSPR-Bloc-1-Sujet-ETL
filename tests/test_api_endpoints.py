@@ -251,3 +251,52 @@ class TestAPIDocumentation:
         response = client.get("/openapi.json")
         assert response.status_code == 200
         assert 'openapi' in response.json()
+
+
+class TestAviationStatsEndpoints:
+    """Tests for aviation statistics endpoints."""
+
+    @patch('app.services.aviation_stats_service.AviationStatsService.get_summary')
+    def test_get_aviation_summary(self, mock_get_summary):
+        mock_get_summary.return_value = {
+            'airlines': 2,
+            'airports': 2,
+            'flights': 2,
+            'countries': 1,
+            'routes': 2,
+        }
+
+        response = client.get('/aviationStats/summary')
+        assert response.status_code == 200
+        assert response.json()['flights'] == 2
+
+    @patch('app.services.aviation_stats_service.AviationStatsService.get_top_routes')
+    def test_get_aviation_top_routes(self, mock_get_top_routes):
+        mock_get_top_routes.return_value = [
+            {
+                'origin_name': 'Airport A',
+                'destination_name': 'Airport B',
+                'frequency': 4,
+                'nb_airlines': 2,
+            }
+        ]
+
+        response = client.get('/aviationStats/topRoutes?limit=5')
+        assert response.status_code == 200
+        assert response.json()[0]['frequency'] == 4
+
+    @patch('app.services.aviation_stats_service.AviationStatsService.get_airport_activity')
+    def test_get_aviation_top_airports(self, mock_get_airport_activity):
+        mock_get_airport_activity.return_value = [
+            {
+                'airport_id': 1,
+                'name': 'Airport A',
+                'departures': 3,
+                'arrivals': 5,
+                'movements': 8,
+            }
+        ]
+
+        response = client.get('/aviationStats/topAirports?limit=5')
+        assert response.status_code == 200
+        assert response.json()[0]['movements'] == 8

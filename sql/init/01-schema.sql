@@ -413,6 +413,94 @@ VALUES (
         '8103000',
         'oebb.at'
     ) ON CONFLICT DO NOTHING;
+    -- ============================================================
+    -- TABLES: AVIATION (Airlines, Airports, Flights)
+    -- ============================================================
+    DROP TABLE IF EXISTS flight_instances CASCADE;
+    DROP TABLE IF EXISTS flights CASCADE;
+    DROP TABLE IF EXISTS airports CASCADE;
+    DROP TABLE IF EXISTS airlines CASCADE;
+
+    CREATE TABLE airlines (
+        airline_id SERIAL PRIMARY KEY,
+        name VARCHAR(200) NOT NULL,
+        alias VARCHAR(100),
+        iata VARCHAR(10),
+        icao VARCHAR(10),
+        country VARCHAR(50),
+        source_name VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT uq_airline_unique UNIQUE (name, iata, icao)
+    );
+    COMMENT ON TABLE airlines IS 'Compagnies aériennes';
+
+    CREATE TABLE airports (
+        airport_id SERIAL PRIMARY KEY,
+        name VARCHAR(200) NOT NULL,
+        city VARCHAR(100),
+        country VARCHAR(50),
+        iata VARCHAR(10),
+        icao VARCHAR(10),
+        latitude DOUBLE PRECISION,
+        longitude DOUBLE PRECISION,
+        timezone VARCHAR(100),
+        source_name VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT uq_airport_unique UNIQUE (name, iata, icao)
+    );
+    COMMENT ON TABLE airports IS 'Aéroports et aérodromes';
+
+    CREATE TABLE flights (
+        flight_id SERIAL PRIMARY KEY,
+        airline_id INTEGER REFERENCES airlines(airline_id) ON DELETE SET NULL,
+        flight_number VARCHAR(50),
+        origin_airport_id INTEGER REFERENCES airports(airport_id) ON DELETE SET NULL,
+        destination_airport_id INTEGER REFERENCES airports(airport_id) ON DELETE SET NULL,
+        distance_km DOUBLE PRECISION,
+        aircraft_type VARCHAR(50),
+        source_name VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT uq_flight_unique UNIQUE (airline_id, flight_number, origin_airport_id, destination_airport_id)
+    );
+    COMMENT ON TABLE flights IS 'Vols canoniques (routes planifiées)';
+
+    CREATE TABLE flight_instances (
+        instance_id SERIAL PRIMARY KEY,
+        flight_id INTEGER REFERENCES flights(flight_id) ON DELETE CASCADE,
+        flight_date DATE,
+        scheduled_departure TIMESTAMP WITH TIME ZONE,
+        scheduled_arrival TIMESTAMP WITH TIME ZONE,
+        actual_departure TIMESTAMP WITH TIME ZONE,
+        actual_arrival TIMESTAMP WITH TIME ZONE,
+        status VARCHAR(50),
+        source_name VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    COMMENT ON TABLE flight_instances IS 'Occurrences planifiées ou réelles d''un vol';
+
+    -- Indexes
+    CREATE INDEX idx_airports_iata ON airports(iata);
+    CREATE INDEX idx_airports_icao ON airports(icao);
+    CREATE INDEX idx_airlines_iata ON airlines(iata);
+    CREATE INDEX idx_airlines_icao ON airlines(icao);
+    CREATE INDEX idx_flights_airline ON flights(airline_id);
+    CREATE INDEX idx_flights_route ON flights(origin_airport_id, destination_airport_id);
+
+    -- Simple view: airline summary
+    CREATE OR REPLACE VIEW v_airline_summary AS
+    SELECT a.airline_id, a.name AS airline_name, a.country,
+        COUNT(DISTINCT f.flight_id) AS nb_routes,
+        COUNT(fi.instance_id) AS nb_instances
+    FROM airlines a
+    LEFT JOIN flights f ON f.airline_id = a.airline_id
+    LEFT JOIN flight_instances fi ON fi.flight_id = f.flight_id
+    GROUP BY a.airline_id, a.name, a.country;
+
+    COMMENT ON VIEW v_airline_summary IS 'Résumé par compagnie aérienne';
 -- ============================================================
 -- CONFIRMATION
 -- ============================================================

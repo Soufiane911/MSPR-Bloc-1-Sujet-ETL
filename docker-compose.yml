@@ -52,25 +52,6 @@ services:
     networks:
       - obrail-network
 
-  # Dashboard Dash une page
-  dashboard_dash:
-    build:
-      context: ./dashboard
-      dockerfile: Dockerfile
-    container_name: obrail-dashboard-dash
-    environment:
-      DATABASE_URL: ${DATABASE_URL:-postgresql://obrail:obrail_secure_password@database:5432/obrail_db}
-    ports:
-      - "8050:8050"
-    depends_on:
-      database:
-        condition: service_healthy
-    volumes:
-      - ./dashboard:/app
-    command: python app/dash_app.py
-    networks:
-      - obrail-network
-
   # ETL (service ponctuel)
   etl:
     build:

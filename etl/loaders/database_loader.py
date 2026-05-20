@@ -2,6 +2,7 @@
 Module de chargement des données pour l'ETL ObRail Europe - VERSION OPTIMISÉE.
 
 Gère le chargement des données transformées dans PostgreSQL avec insertions en bulk.
+
 Performance : ~10,000-50,000 lignes/sec avec COPY vs ~10 lignes/sec avec row-by-row.
 """
 
@@ -39,6 +40,10 @@ class DatabaseLoader:
             "stations_loaded": 0,
             "trains_loaded": 0,
             "schedules_loaded": 0,
+            "airlines_loaded": 0,
+            "airports_loaded": 0,
+            "flights_loaded": 0,
+            "flight_instances_loaded": 0,
         }
         self._performance_stats = {}
 
@@ -77,6 +82,83 @@ class DatabaseLoader:
             """
             CREATE UNIQUE INDEX IF NOT EXISTS idx_schedules_conflict
             ON schedules (train_id, origin_id, destination_id, departure_time)
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS airlines (
+                airline_id SERIAL PRIMARY KEY,
+                name VARCHAR(200) NOT NULL,
+                alias VARCHAR(100),
+                iata VARCHAR(10),
+                icao VARCHAR(10),
+                country VARCHAR(50),
+                source_name VARCHAR(100),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT uq_airline_unique UNIQUE (name, iata, icao)
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS airports (
+                airport_id SERIAL PRIMARY KEY,
+                name VARCHAR(200) NOT NULL,
+                city VARCHAR(100),
+                country VARCHAR(50),
+                iata VARCHAR(10),
+                icao VARCHAR(10),
+                latitude DOUBLE PRECISION,
+                longitude DOUBLE PRECISION,
+                timezone VARCHAR(100),
+                source_name VARCHAR(100),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT uq_airport_unique UNIQUE (name, iata, icao)
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS flights (
+                flight_id SERIAL PRIMARY KEY,
+                airline_id INTEGER REFERENCES airlines(airline_id) ON DELETE SET NULL,
+                flight_number VARCHAR(50),
+                origin_airport_id INTEGER REFERENCES airports(airport_id) ON DELETE SET NULL,
+                destination_airport_id INTEGER REFERENCES airports(airport_id) ON DELETE SET NULL,
+                distance_km DOUBLE PRECISION,
+                aircraft_type VARCHAR(50),
+                source_name VARCHAR(100),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT uq_flight_unique UNIQUE (airline_id, flight_number, origin_airport_id, destination_airport_id)
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS flight_instances (
+                instance_id SERIAL PRIMARY KEY,
+                flight_id INTEGER REFERENCES flights(flight_id) ON DELETE CASCADE,
+                flight_date DATE,
+                scheduled_departure TIMESTAMP WITH TIME ZONE,
+                scheduled_arrival TIMESTAMP WITH TIME ZONE,
+                actual_departure TIMESTAMP WITH TIME ZONE,
+                actual_arrival TIMESTAMP WITH TIME ZONE,
+                status VARCHAR(50),
+                source_name VARCHAR(100),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_airlines_conflict
+            ON airlines (name, iata, icao)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_airports_conflict
+            ON airports (name, iata, icao)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_flights_conflict
+            ON flights (airline_id, flight_number, origin_airport_id, destination_airport_id)
+            """,
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_flight_instances_conflict
+            ON flight_instances (flight_id, flight_date, scheduled_departure)
             """,
         ]
 
@@ -522,6 +604,284 @@ class DatabaseLoader:
         )
 
         self.stats["trains_loaded"] += count
+        return count
+
+    def load_airlines(self, df: pd.DataFrame) -> int:
+        """Charge les compagnies aériennes."""
+        self.logger.info("=" * 60)
+        self.logger.info("Chargement des airlines (BULK UPSERT)...")
+        self.logger.info("=" * 60)
+
+        if df.empty:
+            self.logger.warning("[WARN] Aucun airline à charger")
+            return 0
+
+        df_load = df.copy()
+        # Map common columns
+        column_mapping = {"name": "name", "iata": "iata", "icao": "icao", "country": "country", "alias": "alias"}
+        df_load = df_load.rename(columns=column_mapping)
+
+        for col in ["name", "iata", "icao", "country", "alias", "source_name"]:
+            if col not in df_load.columns:
+                df_load[col] = None
+
+        count = self._bulk_insert(
+            df=df_load,
+            table_name="airlines",
+            columns=["name", "alias", "iata", "icao", "country", "source_name"],
+            conflict_columns=["name", "iata", "icao"],
+            update_columns=["alias", "country"],
+        )
+
+        self.stats["airlines_loaded"] += count
+        return count
+
+    def load_airports(self, df: pd.DataFrame) -> int:
+        """Charge les aéroports."""
+        self.logger.info("=" * 60)
+        self.logger.info("Chargement des airports (BULK UPSERT)...")
+        self.logger.info("=" * 60)
+
+        if df.empty:
+            self.logger.warning("[WARN] Aucun airport à charger")
+            return 0
+
+        df_load = df.copy()
+        column_mapping = {"name": "name", "city": "city", "country": "country", "iata": "iata", "icao": "icao", "latitude": "latitude", "longitude": "longitude", "timezone": "timezone"}
+        df_load = df_load.rename(columns=column_mapping)
+
+        for col in ["name", "city", "country", "iata", "icao", "latitude", "longitude", "timezone", "source_name"]:
+            if col not in df_load.columns:
+                df_load[col] = None
+
+        # Ensure numeric
+        if "latitude" in df_load.columns:
+            df_load["latitude"] = pd.to_numeric(df_load["latitude"], errors="coerce")
+        if "longitude" in df_load.columns:
+            df_load["longitude"] = pd.to_numeric(df_load["longitude"], errors="coerce")
+
+        count = self._insert_with_tosql(
+            df_load[[c for c in ["name", "city", "country", "iata", "icao", "latitude", "longitude", "timezone", "source_name"] if c in df_load.columns]],
+            table_name="airports",
+            conflict_columns=["name", "iata", "icao"],
+            update_columns=["city", "latitude", "longitude"],
+        )
+
+        self.stats["airports_loaded"] += count
+        return count
+
+    def load_flights(self, df: pd.DataFrame) -> int:
+        """Charge les vols canoniques (routes)."""
+        self.logger.info("=" * 60)
+        self.logger.info("Chargement des flights (BULK UPSERT)...")
+        self.logger.info("=" * 60)
+
+        if df.empty:
+            self.logger.warning("[WARN] Aucun flight à charger")
+            return 0
+
+        df_load = df.copy()
+        # Expect columns: airline (iata or name), flight_number, source_airport / origin_iata, dest_airport / dest_iata, distance_km, equipment
+        for col in ["airline", "flight_number", "source_airport", "origin_iata", "dest_airport", "dest_iata", "distance_km", "equipment", "source_name"]:
+            if col not in df_load.columns:
+                df_load[col] = None
+
+        # Build lookup maps from DB
+        with self.engine.connect() as conn:
+            airlines_rows = conn.execute(text("SELECT airline_id, iata, icao, name FROM airlines")).fetchall()
+            airports_rows = conn.execute(text("SELECT airport_id, iata, icao FROM airports")).fetchall()
+
+        airline_map = {}
+        airline_name_map = {}
+        for row in airlines_rows:
+            aid = row[0]
+            iata = row[1]
+            icao = row[2]
+            name = row[3]
+            if iata:
+                airline_map[iata.upper()] = aid
+            if icao:
+                airline_map[icao.upper()] = aid
+            if name:
+                airline_name_map[name.lower()] = aid
+
+        airport_map = {}
+        for row in airports_rows:
+            pid = row[0]
+            iata = row[1]
+            icao = row[2]
+            if iata:
+                airport_map[iata.upper()] = pid
+            if icao:
+                airport_map[icao.upper()] = pid
+
+        # Resolve ids
+        resolved = []
+        dropped = 0
+        for _, row in df_load.iterrows():
+            airline_key = (str(row.get("airline", "")).upper() or None)
+            airline_id = None
+            if airline_key and airline_key in airline_map:
+                airline_id = airline_map[airline_key]
+            else:
+                # try name match
+                name_key = str(row.get("airline", "")).lower()
+                airline_id = airline_name_map.get(name_key)
+
+            origin_code = None
+            if row.get("origin_iata"):
+                origin_code = str(row.get("origin_iata")).upper()
+            elif row.get("source_airport"):
+                origin_code = str(row.get("source_airport")).upper()
+
+            dest_code = None
+            if row.get("dest_iata"):
+                dest_code = str(row.get("dest_iata")).upper()
+            elif row.get("dest_airport"):
+                dest_code = str(row.get("dest_airport")).upper()
+
+            origin_id = airport_map.get(origin_code)
+            dest_id = airport_map.get(dest_code)
+
+            if not airline_id or not origin_id or not dest_id:
+                dropped += 1
+                continue
+
+            resolved.append(
+                {
+                    "airline_id": airline_id,
+                    "flight_number": row.get("flight_number"),
+                    "origin_airport_id": origin_id,
+                    "destination_airport_id": dest_id,
+                    "distance_km": row.get("distance_km"),
+                    "aircraft_type": row.get("equipment"),
+                    "source_name": row.get("source_name"),
+                }
+            )
+
+        if dropped > 0:
+            self.logger.warning(f"[WARN] Flights: dropped {dropped} rows due to unresolved airline/airport ids")
+
+        if not resolved:
+            return 0
+
+        df_final = pd.DataFrame(resolved)
+
+        count = self._bulk_insert(
+            df=df_final,
+            table_name="flights",
+            columns=["airline_id", "flight_number", "origin_airport_id", "destination_airport_id", "distance_km", "aircraft_type", "source_name"],
+            conflict_columns=["airline_id", "flight_number", "origin_airport_id", "destination_airport_id"],
+            update_columns=["distance_km", "aircraft_type"],
+        )
+
+        self.stats["flights_loaded"] += count
+        return count
+
+    def generate_and_load_flight_instances(self, days: int = 7, instances_per_day: int = 1) -> int:
+        """
+        Generate synthetic flight instances for loaded flights and insert into `flight_instances`.
+
+        Args:
+            days: number of past days to generate (including today)
+            instances_per_day: average instances per flight per day
+
+        Returns:
+            int: number of instances inserted
+        """
+        import random
+        from datetime import datetime, timedelta, timezone
+
+        self.logger.info("=" * 60)
+        self.logger.info("Génération des flight_instances (synthétiques)...")
+        self.logger.info("=" * 60)
+
+        with self.engine.connect() as conn:
+            rows = conn.execute(text("SELECT flight_id FROM flights")).fetchall()
+
+        flight_ids = [r[0] for r in rows]
+        if not flight_ids:
+            self.logger.warning("[WARN] Aucune flight en base pour générer des instances")
+            return 0
+
+        instances = []
+        now = datetime.now(tz=timezone.utc)
+        for fid in flight_ids:
+            for day in range(days):
+                # schedule one or more instances per day
+                for i in range(instances_per_day):
+                    # pick a departure time between 04:00 and 22:00 UTC with some randomness
+                    dep_hour = random.randint(4, 22)
+                    dep_min = random.choice([0, 15, 30, 45])
+                    flight_date = (now.date() - timedelta(days=day))
+                    scheduled_departure = datetime.combine(flight_date, datetime.min.time()).replace(tzinfo=timezone.utc) + timedelta(hours=dep_hour, minutes=dep_min)
+                    # approximate duration: pick 1-3 hours randomly
+                    duration_min = random.randint(45, 180)
+                    scheduled_arrival = scheduled_departure + timedelta(minutes=duration_min)
+
+                    instances.append(
+                        {
+                            "flight_id": fid,
+                            "flight_date": flight_date,
+                            "scheduled_departure": scheduled_departure,
+                            "scheduled_arrival": scheduled_arrival,
+                            "status": "scheduled",
+                            "source_name": "openflights_synthetic",
+                        }
+                    )
+
+        df_instances = pd.DataFrame(instances)
+        if df_instances.empty:
+            self.logger.warning("[WARN] Aucun flight_instance généré")
+            return 0
+
+        # Ensure datetime types
+        df_instances["scheduled_departure"] = pd.to_datetime(df_instances["scheduled_departure"], utc=True)
+        df_instances["scheduled_arrival"] = pd.to_datetime(df_instances["scheduled_arrival"], utc=True)
+
+        count = self._bulk_insert(
+            df=df_instances,
+            table_name="flight_instances",
+            columns=["flight_id", "flight_date", "scheduled_departure", "scheduled_arrival", "status", "source_name"],
+            conflict_columns=["flight_id", "flight_date", "scheduled_departure"],
+            update_columns=["scheduled_arrival", "status"],
+        )
+
+        self.stats["flight_instances_loaded"] += count
+        return count
+
+    def load_flight_instances(self, df: pd.DataFrame) -> int:
+        """Load pre-built flight_instances DataFrame into `flight_instances` table."""
+        self.logger.info("=" * 60)
+        self.logger.info("Chargement des flight_instances (OpenSky / external)...")
+        self.logger.info("=" * 60)
+
+        if df is None or df.empty:
+            self.logger.warning("[WARN] Aucun flight_instance à charger")
+            return 0
+
+        df_load = df.copy()
+        # Ensure required columns exist
+        for col in ["flight_id", "flight_date", "scheduled_departure", "scheduled_arrival", "actual_departure", "actual_arrival", "status", "source_name"]:
+            if col not in df_load.columns:
+                df_load[col] = None
+
+        # Convert datetimes
+        if "scheduled_departure" in df_load.columns:
+            df_load["scheduled_departure"] = pd.to_datetime(df_load["scheduled_departure"], errors="coerce")
+        if "scheduled_arrival" in df_load.columns:
+            df_load["scheduled_arrival"] = pd.to_datetime(df_load["scheduled_arrival"], errors="coerce")
+
+        selected_cols = [c for c in ["flight_id", "flight_date", "scheduled_departure", "scheduled_arrival", "actual_departure", "actual_arrival", "status", "source_name"] if c in df_load.columns]
+        count = self._bulk_insert(
+            df=df_load[selected_cols],
+            table_name="flight_instances",
+            columns=selected_cols,
+            conflict_columns=["flight_id", "flight_date", "scheduled_departure"],
+            update_columns=["scheduled_arrival", "actual_departure", "actual_arrival", "status"],
+        )
+
+        self.stats["flight_instances_loaded"] += count
         return count
 
     def load_schedules(self, df: pd.DataFrame) -> int:

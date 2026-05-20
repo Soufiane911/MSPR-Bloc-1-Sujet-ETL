@@ -100,6 +100,16 @@ SOURCES = {
         "max_age_hours": 336,
         "enabled": True,
     },
+    "openflights": {
+        "name": "OpenFlights (airlines/airports/routes)",
+        "type": "csv",
+        "url": "https://raw.githubusercontent.com/jpatokal/openflights/master/data",
+        "country": "WW",
+        "licence": "Open",
+        "priority": 5,
+        "max_age_hours": 1680,
+        "enabled": False,
+    },
 }
 
 # Liste des pays européens pour filtrage

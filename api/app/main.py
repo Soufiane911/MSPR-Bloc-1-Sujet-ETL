@@ -12,7 +12,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
-from app.routers import trains, schedules, stations, operators, stats
+from app.routers import (
+    trains,
+    schedules,
+    stations,
+    operators,
+    stats,
+    aviation_stats,
+    airlines,
+    airports,
+    flights,
+)
 from app.middleware import PrometheusMiddleware
 
 # Création de l'application FastAPI
@@ -31,6 +41,7 @@ app = FastAPI(
     - Back-on-Track Night Train Database (trains de nuit)
     - SNCF, Deutsche Bahn, ÖBB, Renfe, Trenitalia (trains de jour)
     - Mobility Database Catalogs
+    - OpenFlights (aviation)
     
     ## Licence
     Les données sont fournies sous les licences respectives des sources
@@ -67,6 +78,10 @@ app.include_router(schedules.router, prefix="/schedules", tags=["Schedules"])
 app.include_router(stations.router, prefix="/stations", tags=["Stations"])
 app.include_router(operators.router, prefix="/operators", tags=["Operators"])
 app.include_router(stats.router, prefix="/stats", tags=["Statistics"])
+app.include_router(aviation_stats.router, prefix="/aviationStats", tags=["Aviation Statistics"])
+app.include_router(airlines.router, prefix="/airlines", tags=["Airlines"])
+app.include_router(airports.router, prefix="/airports", tags=["Airports"])
+app.include_router(flights.router, prefix="/flights", tags=["Flights"])
 
 
 @app.get("/")
@@ -87,7 +102,8 @@ def read_root():
             "schedules": "/schedules",
             "stations": "/stations",
             "operators": "/operators",
-            "statistics": "/stats"
+            "statistics": "/stats",
+            "aviation_statistics": "/aviationStats"
         }
     }
 

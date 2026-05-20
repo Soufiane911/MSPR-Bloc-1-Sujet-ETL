@@ -21,7 +21,7 @@ def get_summary_stats():
     return stats_service.get_summary()
 
 
-@router.get("/by-country")
+@router.get("/byCountry")
 def get_stats_by_country():
     """
     Récupère les statistiques par pays.
@@ -32,7 +32,7 @@ def get_stats_by_country():
     return stats_service.get_by_country()
 
 
-@router.get("/day-night")
+@router.get("/dayNight")
 def get_day_night_comparison(
     country: Optional[str] = Query(None, description="Code pays (FR, DE, etc.)")
 ):
@@ -47,7 +47,7 @@ def get_day_night_comparison(
     return stats_service.get_day_night_comparison(country=country)
 
 
-@router.get("/data-quality")
+@router.get("/dataQuality")
 def get_data_quality():
     """
     Récupère les statistiques de qualité des données.
@@ -58,7 +58,7 @@ def get_data_quality():
     return stats_service.get_data_quality()
 
 
-@router.get("/top-routes")
+@router.get("/topRoutes")
 def get_top_routes(
     limit: int = Query(10, ge=1, le=50, description="Nombre de routes à retourner")
 ):

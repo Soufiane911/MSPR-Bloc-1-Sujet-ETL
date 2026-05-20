@@ -4,6 +4,7 @@ const TABS = [
   ["network", "Reseau & Distance"],
   ["map", "Carte"],
   ["quality", "Qualite & Export"],
+  // aviation moved to its own page
 ];
 
 export default function Tabs({ active, setActive }) {

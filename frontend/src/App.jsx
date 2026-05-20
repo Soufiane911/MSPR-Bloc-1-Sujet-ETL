@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { loadDashboardData } from "./api";
+import { loadDashboardData, loadAviationData } from "./api";
 import Sidebar from "./components/Sidebar";
 import Tabs from "./components/Tabs";
 import KpiBar from "./components/KpiBar";
@@ -8,6 +8,8 @@ import DayNightTab from "./tabs/DayNightTab";
 import NetworkTab from "./tabs/NetworkTab";
 import MapTab from "./tabs/MapTab";
 import QualityTab from "./tabs/QualityTab";
+import AviationTab from "./tabs/AviationTab";
+import AviationPage from "./pages/AviationPage";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -17,8 +19,11 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
     setState((s) => ({ ...s, loading: true, error: "" }));
-    loadDashboardData(filters.country, filters.trainType)
-      .then((data) => mounted && setState({ loading: false, error: "", data }))
+    Promise.all([loadDashboardData(filters.country, filters.trainType), loadAviationData(20)])
+      .then(([dashboardData, aviationData]) => {
+        const combined = { ...dashboardData, aviation: aviationData };
+        mounted && setState({ loading: false, error: "", data: combined });
+      })
       .catch((err) => mounted && setState({ loading: false, error: err.message, data: null }));
     return () => {
       mounted = false;
@@ -53,13 +58,18 @@ export default function App() {
     return Math.ceil(max || 2000);
   }, [d]);
 
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/aviation")) {
+    return <AviationPage />;
+  }
+
   return (
     <main className="app-shell">
       <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
       <section className="content">
         <header>
           <h1>ObRail Europe</h1>
-          <p>Dashboard React remplaçant Streamlit avec fonctionnalités équivalentes.</p>
+          <p>Analyse de données ferroviaires et aériennes</p>
+          <p style={{ marginTop: 8 }}><a href="/aviation">Voir les statistiques Aviation →</a></p>
         </header>
 
         {state.loading && <div className="card">Chargement des donnees...</div>}
@@ -75,6 +85,7 @@ export default function App() {
             {activeTab === "network" && <NetworkTab routes={d.routes} />}
             {activeTab === "map" && <MapTab stations={d.stations} />}
             {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
+            {activeTab === "aviation" && <AviationTab aviation={d.aviation} />}
           </>
         )}
       </section>
