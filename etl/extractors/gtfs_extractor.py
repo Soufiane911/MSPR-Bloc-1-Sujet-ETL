@@ -114,12 +114,28 @@ class GTFSExtractor(BaseExtractor):
         super().__init__(source_name=source_name)
         self.country_code = country_code
         self.include_optional_files = include_optional_files
-        self.extract_path = (
+        self.raw_path = (
             Path(__file__).parent.parent.parent
             / "data"
             / "raw"
             / source_name.lower().replace(" ", "_")
         )
+        self.extract_path = self._resolve_gtfs_root(self.raw_path)
+
+    @staticmethod
+    def _resolve_gtfs_root(raw_path: Path) -> Path:
+        """Retourne le dossier contenant agency.txt (racine ou sous-dossier ZIP)."""
+        if not raw_path.exists():
+            return raw_path
+
+        if (raw_path / "agency.txt").exists():
+            return raw_path
+
+        for child in sorted(raw_path.iterdir()):
+            if child.is_dir() and (child / "agency.txt").exists():
+                return child
+
+        return raw_path
 
     @staticmethod
     def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:

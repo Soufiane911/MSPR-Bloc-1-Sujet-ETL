@@ -50,11 +50,13 @@ Le perimetre retenu pour la version finale de l'ETL repose sur des sources direc
 |---|---|---|---|
 | Back-on-Track Night Train Database | Reference metier pour les trains de nuit | Europe | JSON |
 | Deutsche Bahn - Fernverkehr (`fv_free`) | Grandes lignes allemandes | Allemagne | GTFS |
+| SNCF TGV | Offre grande vitesse diurne | France | GTFS |
 | SNCF Intercites | Services inter-regionaux et Intercites de Nuit | France | GTFS |
 | Renfe AVE / longue distance | Grandes lignes espagnoles | Espagne | GTFS |
-| Trenitalia | Services longue distance italiens | Italie | GTFS |
-| CFF/SBB | Axes transfrontaliers et corridors centraux | Suisse | GTFS |
-| SNCB | Hub belge et connexions nord-europeennes | Belgique | GTFS |
+| Trenitalia (dati Toscana) | Reseau national Trenitalia (flux GTFS national) | Italie | GTFS |
+| CFF/SBB | Axes transfrontaliers et corridors centraux (filtre IC/EC/IR en ETL) | Suisse | GTFS |
+| OBB | Hub autrichien et Nightjet | Autriche | GTFS |
+| SNCB | Hub belge et connexions nord-europeennes (filtre EC en ETL) | Belgique | GTFS |
 
 ### Source de support
 
@@ -66,7 +68,9 @@ Le perimetre retenu pour la version finale de l'ETL repose sur des sources direc
 
 - `SNCF Transilien`, car le flux est majoritairement urbain et periurbain ;
 - `GTFS Allemagne rv_free`, car il introduit un bruit regional important par rapport a `fv_free` ;
-- `OEBB`, tant qu'une URL GTFS stable et verifiee n'est pas disponible.
+- `Trenitalia Sardegna` (`sardegnamobilita.it`), remplace par le flux national `dati.toscana.it` ;
+- operateurs regionaux du GTFS CFF/SBB (BLS, transports urbains, etc.), filtres en transformation ;
+- trajets de moins de **100 km** (distance origine-destination), filtres en transformation pour le perimetre grande ligne.
 
 ## Structure du depot
 

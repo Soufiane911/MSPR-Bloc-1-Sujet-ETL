@@ -42,6 +42,24 @@ class DatabaseLoader:
         }
         self._performance_stats = {}
 
+    def truncate_all(self) -> None:
+        """
+        Vide toutes les tables dans l'ordre pour éviter les violations de clés étrangères.
+        À appeler au début d'un ETL complet pour garantir la cohérence des IDs.
+        """
+        self.logger.info("=" * 60)
+        self.logger.info("Vidage des tables (TRUNCATE CASCADE)...")
+        self.logger.info("=" * 60)
+
+        with self.engine.begin() as conn:
+            # Ordre : tables enfants d'abord, puis parents
+            tables = ["schedules", "trains", "stations", "operators"]
+            for table in tables:
+                conn.execute(text(f"TRUNCATE TABLE {table} RESTART IDENTITY CASCADE"))
+                self.logger.info(f"[OK] Table {table} vidée")
+
+        self.logger.info("[OK] Toutes les tables ont été vidées")
+
     def _ensure_conflict_indexes(self) -> None:
         """
         Garantit la présence d'index uniques compatibles avec ON CONFLICT.

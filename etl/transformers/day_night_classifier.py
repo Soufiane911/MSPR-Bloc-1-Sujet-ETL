@@ -185,6 +185,7 @@ class DayNightClassifier:
             )
             .copy()
         )
+        grouped["trip_id"] = grouped["trip_id"].astype(str)
 
         metrics = grouped.apply(
             lambda row: pd.Series(

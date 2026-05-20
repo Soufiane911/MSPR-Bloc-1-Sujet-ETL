@@ -23,10 +23,12 @@ class DataMerger:
     # Mapping source -> country basé sur les sources connues
     SOURCE_COUNTRY_MAP = {
         "sncf_intercites": "FR",
+        "sncf_tgv": "FR",
         "db_fernverkehr": "DE",
         "renfe": "ES",
         "trenitalia": "IT",
         "cff_sbb": "CH",
+        "obb": "AT",
         "sncb": "BE",
     }
 
@@ -102,8 +104,11 @@ class DataMerger:
         if all_operators:
             merged = pd.concat(all_operators, ignore_index=True)
 
-            # Suppression des doublons par nom
-            merged = merged.drop_duplicates(subset=["agency_name"], keep="first")
+            # Suppression des doublons par nom + pays + source
+            # (même clé que le conflit ON CONFLICT dans database_loader)
+            merged = merged.drop_duplicates(
+                subset=["agency_name", "country", "source_name"], keep="first"
+            )
 
             # Réindexation
             merged["operator_id"] = range(1, len(merged) + 1)

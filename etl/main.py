@@ -275,10 +275,12 @@ def run_extraction(logger, source_filter: Optional[str] = None) -> dict:
     # 3. Sources GTFS nationales
     gtfs_sources = [
         ("sncf_intercites", "FR"),
+        ("sncf_tgv", "FR"),
         ("db_fernverkehr", "DE"),
         ("renfe", "ES"),
         ("trenitalia", "IT"),
         ("cff_sbb", "CH"),
+        ("obb", "AT"),
         ("sncb", "BE"),
     ]
 
@@ -409,7 +411,9 @@ def process_back_on_track(data: dict, cleaner, normalizer, classifier) -> dict:
         # trip_stop est l'équivalent de stop_times pour Back-on-Track
         result["stop_times"] = data["trip_stop"].copy()
 
-    return result
+    from transformers.distance_filter import apply_min_distance_to_result
+
+    return apply_min_distance_to_result("back_on_track", result)
 
 
 def process_gtfs_source(
@@ -427,6 +431,27 @@ def process_gtfs_source(
     if "routes" in data:
         routes_standardized = normalizer.standardize_route_types(data["routes"])
         result["routes"] = normalizer.filter_rail_routes_only(routes_standardized)
+
+        if source_name == "cff_sbb":
+            from transformers.source_filters import filter_cff_sbb_long_distance
+
+            result["routes"] = filter_cff_sbb_long_distance(result["routes"])
+
+        # Filtre spécifique SNCB : ne garder que les trains internationaux EC (EuroCity)
+        # Les données SNCB contiennent 51k+ trips dont la majorité sont des trains
+        # régionaux (S, L, P) non pertinents pour un projet de trains de nuit
+        if source_name == "sncb" and "route_short_name" in result["routes"].columns:
+            initial_count = len(result["routes"])
+            result["routes"] = result["routes"][
+                result["routes"]["route_short_name"] == "EC"
+            ].copy()
+            removed_count = initial_count - len(result["routes"])
+            if removed_count > 0:
+                logger = setup_logging("transformer.filter")
+                logger.info(
+                    f"[FILTER] {source_name}: {removed_count}/{initial_count} "
+                    f"routes supprimées (non-EC)"
+                )
 
     # Étape 2: Filtrer les trips pour ne garder que ceux des routes ferroviaires
     if "trips" in data:
@@ -477,6 +502,10 @@ def process_gtfs_source(
         result["stops"] = cleaner.clean_stations(data["stops"])
         result["stops"] = normalizer.normalize_coordinates(result["stops"])
 
+    from transformers.distance_filter import apply_min_distance_to_result
+
+    result = apply_min_distance_to_result(source_name, result)
+
     # Classification jour/nuit (après filtrage)
     if "trips" in result and not result["trips"].empty:
         if "stop_times" in result and not result["stop_times"].empty:
@@ -515,6 +544,9 @@ def run_loading(logger, transformed_data: dict) -> tuple:
     logger.info("=" * 70 + "\n")
 
     loader = DatabaseLoader()
+
+    # Vidage des tables pour garantir la cohérence des IDs
+    loader.truncate_all()
 
     if "operators" in transformed_data and not transformed_data["operators"].empty:
         loader.load_operators(transformed_data["operators"])
