@@ -98,6 +98,12 @@ class DataMerger:
                     df["source_agency_id"] = df["agency_id"].astype(str)
                     df["agency_id"] = f"{source_name}_" + df["agency_id"].astype(str)
 
+                if "country" not in df.columns:
+                    if "agency_country" in df.columns:
+                        df["country"] = df["agency_country"]
+                    else:
+                        df["country"] = self.SOURCE_COUNTRY_MAP.get(source_name, None)
+
                 df["source_name"] = source_name
                 all_operators.append(df)
 
