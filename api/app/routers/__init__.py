@@ -1,4 +1,4 @@
-from . import trains, schedules, stations, operators, stats, aviation_stats, airlines, airports, flights
+from . import trains, schedules, stations, operators, stats, aviation_stats, airlines, airports, flights, watch
 
 __all__ = [
 	"trains",
@@ -10,4 +10,5 @@ __all__ = [
 	"airlines",
 	"airports",
 	"flights",
+	"watch",
 ]

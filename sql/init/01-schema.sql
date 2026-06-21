@@ -501,6 +501,30 @@ VALUES (
     GROUP BY a.airline_id, a.name, a.country;
 
     COMMENT ON VIEW v_airline_summary IS 'Résumé par compagnie aérienne';
+
+-- ============================================================
+-- TABLE: WATCH_ITEMS (Veille technologique)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS watch_items (
+    item_id     SERIAL PRIMARY KEY,
+    source      VARCHAR(50)  NOT NULL,
+    title       TEXT         NOT NULL,
+    url         TEXT         NOT NULL,
+    summary     TEXT,
+    author      VARCHAR(255),
+    published_at TIMESTAMP,
+    fetched_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    tags        TEXT[],
+    url_hash    VARCHAR(64)  NOT NULL,
+    CONSTRAINT uq_watch_url_hash UNIQUE (url_hash)
+);
+COMMENT ON TABLE watch_items IS 'Items de veille technologique agrégés depuis plusieurs sources';
+COMMENT ON COLUMN watch_items.source IS 'Identifiant de la source: newsapi, hackernews, reddit, rss, google_alerts, feedly';
+COMMENT ON COLUMN watch_items.url_hash IS 'SHA-256 de l''URL pour déduplication';
+CREATE INDEX idx_watch_source       ON watch_items(source);
+CREATE INDEX idx_watch_published_at ON watch_items(published_at DESC);
+CREATE INDEX idx_watch_fetched_at   ON watch_items(fetched_at DESC);
+
 -- ============================================================
 -- CONFIRMATION
 -- ============================================================

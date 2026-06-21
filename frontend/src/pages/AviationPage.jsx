@@ -22,6 +22,8 @@ export default function AviationPage() {
           <p>Statistiques aériennes séparées du dashboard ferroviaire.</p>
           <p>
             <a href="/">← Retour au dashboard trains</a>
+            {" | "}
+            <a href="/watch">Veille technologique</a>
           </p>
         </header>
 

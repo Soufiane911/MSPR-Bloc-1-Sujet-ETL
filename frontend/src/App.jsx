@@ -10,6 +10,7 @@ import MapTab from "./tabs/MapTab";
 import QualityTab from "./tabs/QualityTab";
 import AviationTab from "./tabs/AviationTab";
 import AviationPage from "./pages/AviationPage";
+import WatchPage from "./pages/WatchPage";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -62,6 +63,10 @@ export default function App() {
     return <AviationPage />;
   }
 
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/watch")) {
+    return <WatchPage />;
+  }
+
   return (
     <main className="app-shell">
       <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
@@ -69,7 +74,11 @@ export default function App() {
         <header>
           <h1>ObRail Europe</h1>
           <p>Analyse de données ferroviaires et aériennes</p>
-          <p style={{ marginTop: 8 }}><a href="/aviation">Voir les statistiques Aviation →</a></p>
+          <p style={{ marginTop: 8 }}>
+            <a href="/aviation">Voir les statistiques Aviation →</a>
+            {" | "}
+            <a href="/watch">Ouvrir la veille technologique →</a>
+          </p>
         </header>
 
         {state.loading && <div className="card">Chargement des donnees...</div>}

@@ -6,6 +6,16 @@ async function getJson(path) {
   return res.json();
 }
 
+async function postJson(path, payload) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: payload ? JSON.stringify(payload) : undefined,
+  });
+  if (!res.ok) throw new Error(`API ${res.status}: ${path}`);
+  return res.json();
+}
+
 export async function loadDashboardData(country, trainType) {
   const countryQuery = country && country !== "Tous" ? `&country=${country}` : "";
   const typeApi = trainType === "Jour" ? "day" : trainType === "Nuit" ? "night" : "";
@@ -38,4 +48,25 @@ export async function loadAviationData(limit = 50) {
   ]);
 
   return { summary, byCountry, topRoutes, topAirports, airlineSummary, dataQuality };
+}
+
+export async function loadWatchOverview() {
+  return getJson("/watch/");
+}
+
+export async function loadWatchItems({ source, tag, limit = 50, offset = 0 } = {}) {
+  const params = new URLSearchParams();
+  if (source && source !== "all") params.set("source", source);
+  if (tag) params.set("tag", tag);
+  params.set("limit", String(limit));
+  params.set("offset", String(offset));
+  return getJson(`/watch/items?${params.toString()}`);
+}
+
+export async function loadWatchSources() {
+  return getJson("/watch/sources");
+}
+
+export async function refreshWatch() {
+  return postJson("/watch/refresh");
 }

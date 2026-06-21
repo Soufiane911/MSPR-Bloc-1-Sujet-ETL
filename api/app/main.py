@@ -22,6 +22,7 @@ from app.routers import (
     airlines,
     airports,
     flights,
+    watch,
 )
 from app.middleware import PrometheusMiddleware
 
@@ -82,6 +83,7 @@ app.include_router(aviation_stats.router, prefix="/aviationStats", tags=["Aviati
 app.include_router(airlines.router, prefix="/airlines", tags=["Airlines"])
 app.include_router(airports.router, prefix="/airports", tags=["Airports"])
 app.include_router(flights.router, prefix="/flights", tags=["Flights"])
+app.include_router(watch.router, prefix="/watch", tags=["Technological Watch"])
 
 
 @app.get("/")
@@ -103,7 +105,8 @@ def read_root():
             "stations": "/stations",
             "operators": "/operators",
             "statistics": "/stats",
-            "aviation_statistics": "/aviationStats"
+            "aviation_statistics": "/aviationStats",
+            "watch": "/watch"
         }
     }
 
