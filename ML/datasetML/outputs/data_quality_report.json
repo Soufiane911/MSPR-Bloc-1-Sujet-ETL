@@ -1,0 +1,29 @@
+{
+  "row_count": 58689,
+  "missing_counts": {
+    "route_id": 0,
+    "schedule_id": 0,
+    "source_name": 0,
+    "origin": 0,
+    "destination": 0,
+    "origin_country": 0,
+    "destination_country": 0,
+    "distance_km": 0,
+    "duration_min": 0,
+    "duration_minutes": 0,
+    "duration_hours": 0,
+    "avg_speed_kmh": 0,
+    "is_international": 0,
+    "train_type": 0,
+    "weekly_frequency": 0,
+    "estimated_co2_saving_kg": 0,
+    "substitution_potential": 0
+  },
+  "class_distribution": {
+    "faible_potentiel": 48220,
+    "potentiel_moyen": 9623,
+    "fort_potentiel": 846
+  },
+  "required_columns_present": true,
+  "is_valid": true
+}

@@ -1,0 +1,1016 @@
+route_avion,origin_iata,destination_iata,origine_avion,destination_avion,origin_country,destination_country,distance_avion,airline_count,route_train_candidate,origin_train,destination_train,distance_train,duration_train,train_type,weekly_frequency,estimated_co2_saving_kg,substitution_potential,match_score,match_method
+GRZ-DUS,GRZ,DUS,Feldkirchen bei Graz,Düsseldorf,AT,DE,790.6,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,76.496,country_distance
+GRZ-FRA,GRZ,FRA,Feldkirchen bei Graz,Frankfurt am Main,AT,DE,608.6,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,68.037,country_distance
+KLU-HAM,KLU,HAM,Klagenfurt am Wörthersee,Hamburg,AT,DE,836.2,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,90.376,country_city_distance
+KLU-CGN,KLU,CGN,Klagenfurt am Wörthersee,Köln (Cologne),AT,DE,705.6,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,72.556,country_distance
+LNZ-DUS,LNZ,DUS,Linz,Düsseldorf,AT,DE,631.6,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,70.264,country_distance
+SZG-DUS,SZG,DUS,Salzburg,Düsseldorf,AT,DE,594.4,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,68.266,country_distance
+SZG-HAM,SZG,HAM,Salzburg,Hamburg,AT,DE,682.8,2,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,85.571,country_city_distance
+VIE-BLQ,VIE,BLQ,Vienna,Bologna,AT,IT,567.6,1,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,91.472,country_distance
+VIE-BRE,VIE,BRE,Vienna,Bremen,AT,DE,775.8,1,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,80.403,country_distance
+VIE-CTA,VIE,CTA,Vienna,Catania,AT,IT,1189.8,3,back_on_track_ÖBB NJ 40233,Wien Hbf,Roma Tiburtina,1112.0,887.0,night,7,166.8,faible_potentiel,91.08,country_distance
+VIE-DNK,VIE,DNK,Vienna,Dnipro,AT,UA,1369.4,2,back_on_track_UZ/ÖBB 40149,Wien Westbf,Kyiv Pasazhyrskyi,1477.0,1394.0,night,7,221.55,faible_potentiel,89.243,country_distance
+VIE-DUS,VIE,DUS,Vienna,Düsseldorf,AT,DE,787.8,3,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,80.199,country_distance
+VIE-MXP,VIE,MXP,Vienna,Ferno (VA),AT,IT,656.4,5,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,92.504,country_distance
+VIE-FLR,VIE,FLR,Vienna,Firenze (FI),AT,IT,632.9,5,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,94.341,country_distance
+VIE-FRA,VIE,FRA,Vienna,Frankfurt am Main,AT,DE,620.9,5,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,72.77,country_distance
+VIE-HAM,VIE,HAM,Vienna,Hamburg,AT,DE,767.5,4,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,90.515,country_city_distance
+VIE-HAJ,VIE,HAJ,Vienna,Hannover,AT,DE,687.4,3,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,75.386,country_distance
+VIE-IAS,VIE,IAS,Vienna,Iaşi,AT,RO,833.6,2,back_on_track_CFR/MÁV/ÖBB D 347,Wien Hbf,București Nord,1157.0,1164.0,night,7,173.55,faible_potentiel,80.396,country_distance
+VIE-CGN,VIE,CGN,Vienna,Köln (Cologne),AT,DE,746.0,3,back_on_track_ÖBB NJ 40420,Innsbruck Hbf,Hamburg Altona,1112.0,740.0,night,7,166.8,faible_potentiel,77.805,country_distance
+VIE-SUF,VIE,SUF,Vienna,Lamezia Terme (CZ),AT,IT,1023.8,1,back_on_track_ÖBB NJ 40233,Wien Hbf,Roma Tiburtina,1112.0,887.0,night,7,166.8,faible_potentiel,91.83,country_distance
+VIE-NAP,VIE,NAP,Vienna,Napoli,AT,IT,823.3,1,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,90.025,country_distance
+VIE-OLB,VIE,OLB,Vienna,Olbia (SS),AT,IT,976.7,4,back_on_track_ÖBB NJ 40233,Wien Hbf,Roma Tiburtina,1112.0,887.0,night,7,166.8,faible_potentiel,91.281,country_distance
+VIE-OTP,VIE,OTP,Vienna,Otopeni,AT,RO,830.1,2,back_on_track_CFR/MÁV/ÖBB D 347,Wien Hbf,București Nord,1157.0,1164.0,night,7,173.55,faible_potentiel,80.012,country_distance
+VIE-PMO,VIE,PMO,Vienna,Palermo,AT,IT,1139.8,1,back_on_track_ÖBB NJ 40233,Wien Hbf,Roma Tiburtina,1112.0,887.0,night,7,166.8,faible_potentiel,90.676,country_distance
+VIE-FCO,VIE,FCO,Vienna,Rome,AT,IT,778.8,5,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,87.603,country_distance
+VIE-LIN,VIE,LIN,Vienna,Segrate (MI),AT,IT,629.1,1,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,94.489,country_distance
+VIE-SBZ,VIE,SBZ,Vienna,Sibiu,AT,RO,626.1,2,back_on_track_CFR/MÁV/ÖBB D 347,Wien Hbf,București Nord,1157.0,1164.0,night,7,173.55,faible_potentiel,70.388,country_distance
+VIE-ARN,VIE,ARN,Vienna,Stockholm,AT,SE,1286.0,4,back_on_track_ST 304,Innsbruck Hbf,Malmö C,1847.0,1230.0,night,1,277.05,faible_potentiel,73.581,country_distance
+VIE-VCE,VIE,VCE,Vienna,Venezia (VE),AT,IT,432.3,1,back_on_track_ÖBB NJ 40466,Wien Hbf,Venezia Santa Lucia,619.0,655.0,night,7,92.85,potentiel_moyen,95.632,country_city_distance
+CRL-AHO,CRL,AHO,Charleroi,Alghero,BE,IT,1132.6,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,83.671,country_distance
+CRL-BRI,CRL,BRI,Charleroi,Bari,BE,IT,1404.9,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,80.327,country_distance
+CRL-BLQ,CRL,BLQ,Charleroi,Bologna,BE,IT,834.4,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,76.068,country_distance
+CRL-CAG,CRL,CAG,Charleroi,Cagliari,BE,IT,1297.4,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,83.498,country_distance
+CRL-TRN,CRL,TRN,Charleroi,Caselle Torinese (TO),BE,IT,631.5,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,67.29,country_distance
+CRL-AOI,CRL,AOI,Charleroi,Falconara Marittima (AN),BE,IT,1015.7,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,86.505,country_distance
+CRL-GOA,CRL,GOA,Charleroi,Genova (GE),BE,IT,748.8,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,73.422,country_distance
+CRL-BGY,CRL,BGY,Charleroi,Orio al Serio (BG),BE,IT,660.1,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,70.384,country_distance
+CRL-PEG,CRL,PEG,Charleroi,Perugia (PG),BE,IT,1021.9,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,85.257,country_distance
+CRL-PSR,CRL,PSR,Charleroi,Pescara,BE,IT,1160.9,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,85.144,country_distance
+CRL-PSA,CRL,PSA,Charleroi,Pisa (PI),BE,IT,876.8,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,79.065,country_distance
+CRL-CIA,CRL,CIA,Charleroi,Rome,BE,IT,1147.8,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,82.432,country_distance
+CRL-TRS,CRL,TRS,Charleroi,Ronchi dei Legionari/Trieste,BE,IT,842.9,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,78.534,country_distance
+CRL-TSF,CRL,TSF,Charleroi,Treviso (TV),BE,IT,784.7,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,75.002,country_distance
+BRU-BLQ,BRU,BLQ,Zaventem,Bologna,BE,IT,871.1,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,74.156,country_distance
+BRU-TRN,BRU,TRN,Zaventem,Caselle Torinese (TO),BE,IT,676.0,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,66.865,country_distance
+BRU-MXP,BRU,MXP,Zaventem,Ferno (VA),BE,IT,664.7,4,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,64.444,country_distance
+BRU-FLR,BRU,FLR,Zaventem,Firenze (FI),BE,IT,936.2,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,76.365,country_distance
+BRU-NAP,BRU,NAP,Zaventem,Napoli,BE,IT,1345.1,2,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,79.789,country_distance
+BRU-PRG,BRU,PRG,Zaventem,Prague,BE,CZ,696.6,4,back_on_track_ES 453,Bruxelles Midi / Brussel Zuid,Praha hl.n.,852.0,923.0,night,3,127.8,faible_potentiel,78.905,country_distance
+BRU-FCO,BRU,FCO,Zaventem,Rome,BE,IT,1172.6,6,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,78.612,country_distance
+BRU-LIN,BRU,LIN,Zaventem,Segrate (MI),BE,IT,702.8,4,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,67.582,country_distance
+BRU-TSF,BRU,TSF,Zaventem,Treviso (TV),BE,IT,815.7,1,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,73.033,country_distance
+BRU-VCE,BRU,VCE,Zaventem,Venezia (VE),BE,IT,835.8,3,back_on_track_ES 456,Bruxelles Midi / Brussel Zuid,Milano Porta Garibaldi,1107.0,1054.0,night,3,166.05,faible_potentiel,73.849,country_distance
+SOF-IST,SOF,IST,Sofia,Istanbul,BG,TR,466.7,1,back_on_track_TCDD/BDŽ 493/12504,Sofia,İstanbul Halkalı,591.0,906.0,night,7,88.65,faible_potentiel,105.342,country_city_distance
+BRN-AMS,BRN,AMS,Bern,Amsterdam,CH,NL,631.4,1,back_on_track_ÖBB NJ 402,Zürich HB,Amsterdam Centraal,845.0,730.0,night,7,126.75,faible_potentiel,90.85,country_city_distance
+BRN-HAM,BRN,HAM,Bern,Hamburg,CH,DE,767.5,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,94.376,country_city_distance
+GVA-AMS,GVA,AMS,Geneva,Amsterdam,CH,NL,682.0,2,back_on_track_ÖBB NJ 402,Zürich HB,Amsterdam Centraal,845.0,730.0,night,7,126.75,faible_potentiel,91.025,country_city_distance
+GVA-BUD,GVA,BUD,Geneva,Budapest,CH,HU,1008.1,1,back_on_track_MÁV/ÖBB EN 40467,Zürich HB,Budapest Keleti,1083.0,759.0,night,7,162.45,faible_potentiel,95.143,country_city_distance
+GVA-DBV,GVA,DBV,Geneva,Dubrovnik,CH,HR,1047.3,1,back_on_track_HŽPP/ÖBB EN 40465,Zürich HB,Zagreb Gl. K.,903.0,899.0,night,7,135.45,faible_potentiel,81.555,country_distance
+GVA-DUS,GVA,DUS,Geneva,Düsseldorf,CH,DE,563.7,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,68.912,country_distance
+GVA-HAM,GVA,HAM,Geneva,Hamburg,CH,DE,867.3,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,95.858,country_city_distance
+GVA-PRG,GVA,PRG,Geneva,Prague,CH,CZ,740.9,1,back_on_track_ČD EN 40459,Zürich HB,Praha hl.n.,915.0,804.0,night,7,137.25,faible_potentiel,81.75,country_distance
+GVA-SPU,GVA,SPU,Geneva,Split,CH,HR,856.2,1,back_on_track_HŽPP/ÖBB EN 40465,Zürich HB,Zagreb Gl. K.,903.0,899.0,night,7,135.45,faible_potentiel,82.508,country_distance
+ZRH-AMS,ZRH,AMS,Zurich,Amsterdam,CH,NL,603.5,2,back_on_track_ÖBB NJ 402,Zürich HB,Amsterdam Centraal,845.0,730.0,night,7,126.75,faible_potentiel,101.996,country_city_distance
+ZRH-BRE,ZRH,BRE,Zurich,Bremen,CH,DE,621.7,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,88.845,country_city_distance
+ZRH-BUD,ZRH,BUD,Zurich,Budapest,CH,HU,805.1,1,back_on_track_MÁV/ÖBB EN 40467,Zürich HB,Budapest Keleti,1083.0,759.0,night,7,162.45,faible_potentiel,103.371,country_city_distance
+ZRH-DRS,ZRH,DRS,Zurich,Dresden,CH,DE,556.8,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,82.464,country_city_distance
+ZRH-DBV,ZRH,DBV,Zurich,Dubrovnik,CH,HR,936.9,2,back_on_track_HŽPP/ÖBB EN 40465,Zürich HB,Zagreb Gl. K.,903.0,899.0,night,7,135.45,faible_potentiel,99.095,country_city_distance
+ZRH-FMO,ZRH,FMO,Zurich,Greven,CH,DE,523.6,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,79.728,country_city_distance
+ZRH-HAM,ZRH,HAM,Zurich,Hamburg,CH,DE,693.8,3,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,103.57,country_city_distance
+ZRH-HAJ,ZRH,HAJ,Zurich,Hannover,CH,DE,562.2,2,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,84.134,country_city_distance
+ZRH-PRG,ZRH,PRG,Zurich,Prague,CH,CZ,511.2,3,back_on_track_ČD EN 40459,Zürich HB,Praha hl.n.,915.0,804.0,night,7,137.25,faible_potentiel,82.877,country_city_distance
+ZRH-LEJ,ZRH,LEJ,Zurich,Schkeuditz,CH,DE,514.7,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,79.644,country_city_distance
+ZRH-SPU,ZRH,SPU,Zurich,Split,CH,HR,744.2,2,back_on_track_HŽPP/ÖBB EN 40465,Zürich HB,Zagreb Gl. K.,903.0,899.0,night,7,135.45,faible_potentiel,93.54,country_city_distance
+ZRH-GWT,ZRH,GWT,Zurich,Sylt,CH,DE,829.1,1,back_on_track_ÖBB NJ 470,Zürich HB,Hamburg Altona,1011.0,670.0,night,7,151.65,potentiel_moyen,97.848,country_city_distance
+ZRH-ZAG,ZRH,ZAG,Zurich,Velika Gorica,CH,HR,605.1,2,back_on_track_HŽPP/ÖBB EN 40465,Zürich HB,Zagreb Gl. K.,903.0,899.0,night,7,135.45,faible_potentiel,88.442,country_city_distance
+PRG-BUD,PRG,BUD,Prague,Budapest,CZ,HU,471.6,2,back_on_track_ČD EN 40457,Praha hl.n.,Budapest Nyugati,608.0,626.0,night,7,91.2,potentiel_moyen,98.394,country_city_distance
+PRG-GVA,PRG,GVA,Prague,Geneva,CZ,CH,740.9,1,back_on_track_ČD EC 458,Praha hl.n.,Zürich HB,915.0,940.0,night,7,137.25,faible_potentiel,81.75,country_distance
+PRG-KSC,PRG,KSC,Prague,Košice,CZ,SK,529.8,2,back_on_track_ZSSK EN 443,Praha hl.n.,Humenné,745.0,733.0,night,7,111.75,faible_potentiel,79.778,country_distance
+PRG-WAW,PRG,WAW,Prague,Warsaw,CZ,PL,521.0,3,back_on_track_RJ 1039,Praha hl.n.,Przemyśl Gł.,740.0,637.0,night,7,111.0,potentiel_moyen,83.866,country_distance
+PRG-BRU,PRG,BRU,Prague,Zaventem,CZ,BE,696.6,4,back_on_track_ES 452,Praha hl.n.,Bruxelles Midi / Brussel Zuid,852.0,923.0,night,3,127.8,faible_potentiel,78.905,country_distance
+PRG-ZRH,PRG,ZRH,Prague,Zurich,CZ,CH,511.2,3,back_on_track_ČD EC 458,Praha hl.n.,Zürich HB,915.0,940.0,night,7,137.25,faible_potentiel,82.877,country_city_distance
+BRE-BZR,BRE,BZR,Bremen,Béziers,DE,FR,1153.0,1,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,85.338,country_distance
+BRE-NYO,BRE,NYO,Bremen,Nyköping,DE,SE,813.6,1,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,71.566,country_distance
+BRE-BGY,BRE,BGY,Bremen,Orio al Serio (BG),DE,IT,823.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,87.386,country_distance
+BRE-CDG,BRE,CDG,Bremen,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,625.4,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,78.854,country_city_distance
+BRE-TLS,BRE,TLS,Bremen,Toulouse/Blagnac,DE,FR,1180.8,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,85.867,country_distance
+BRE-TSF,BRE,TSF,Bremen,Treviso (TV),DE,IT,858.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,85.694,country_distance
+BRE-VIE,BRE,VIE,Bremen,Vienna,DE,AT,775.8,1,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,80.403,country_distance
+BRE-ZRH,BRE,ZRH,Bremen,Zurich,DE,CH,621.7,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,85.845,country_city_distance
+DTM-AHO,DTM,AHO,Dortmund,Alghero,DE,IT,1211.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,89.006,country_distance
+DTM-KRK,DTM,KRK,Dortmund,Balice,DE,PL,869.3,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,81.481,country_distance
+DTM-BUD,DTM,BUD,Dortmund,Budapest,DE,HU,955.1,1,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,99.572,country_city_distance
+DTM-GDN,DTM,GDN,Dortmund,Gdańsk,DE,PL,792.6,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,78.311,country_distance
+DTM-KTW,DTM,KTW,Dortmund,Katowice,DE,PL,810.0,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,80.044,country_distance
+DTM-MUC,DTM,MUC,Dortmund,Munich,DE,DE,461.4,2,db_fernverkehr_1387049,Dortmund Hbf,München Hbf,476.8,329.0,day,7,71.52,potentiel_moyen,107.989,country_city_distance
+DTM-SPU,DTM,SPU,Dortmund,Split,DE,HR,1099.5,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,80.081,country_distance
+DRS-BSL,DRS,BSL,Dresden,Bâle / Mulhouse,DE,FR,598.8,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,64.608,country_distance
+DRS-DUS,DRS,DUS,Dresden,Düsseldorf,DE,DE,487.8,2,db_fernverkehr_292336,Dresden Hbf,Essen Hbf,469.6,365.0,day,7,70.44,potentiel_moyen,105.383,country_city_distance
+DRS-ZRH,DRS,ZRH,Dresden,Zurich,DE,CH,556.8,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,79.464,country_city_distance
+DUS-BRI,DUS,BRI,Düsseldorf,Bari,DE,IT,1363.0,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.94,country_distance
+DUS-BIA,DUS,BIA,Düsseldorf,Bastia,DE,FR,993.0,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,83.053,country_distance
+DUS-BUD,DUS,BUD,Düsseldorf,Budapest,DE,HU,999.8,1,back_on_track_MÁV EN 40457,Berlin Hbf,Budapest Nyugati,995.0,788.0,night,7,149.25,faible_potentiel,101.38,country_city_distance
+DUS-CAG,DUS,CAG,Düsseldorf,Cagliari,DE,IT,1350.3,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.003,country_distance
+DUS-CLY,DUS,CLY,Düsseldorf,Calvi,DE,FR,985.9,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,81.708,country_distance
+DUS-TRN,DUS,TRN,Düsseldorf,Caselle Torinese (TO),DE,IT,680.2,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,83.027,country_distance
+DUS-LYS,DUS,LYS,Düsseldorf,"Colombier-Saugnieu, Rhône",DE,FR,630.8,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,67.398,country_distance
+DUS-DRS,DUS,DRS,Düsseldorf,Dresden,DE,DE,487.8,2,db_fernverkehr_75375,Köln Hbf,Dresden Hbf,474.0,439.0,day,6,71.1,potentiel_moyen,101.626,country_city_distance
+DUS-DBV,DUS,DBV,Düsseldorf,Dubrovnik,DE,HR,1302.4,3,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,79.404,country_distance
+DUS-AOI,DUS,AOI,Düsseldorf,Falconara Marittima (AN),DE,IT,985.9,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,89.402,country_distance
+DUS-GRZ,DUS,GRZ,Düsseldorf,Feldkirchen bei Graz,DE,AT,790.6,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,76.496,country_distance
+DUS-MXP,DUS,MXP,Düsseldorf,Ferno (VA),DE,IT,645.6,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,80.42,country_distance
+DUS-FLR,DUS,FLR,Düsseldorf,Firenze (FI),DE,IT,895.6,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,88.158,country_distance
+DUS-GVA,DUS,GVA,Düsseldorf,Geneva,DE,CH,563.7,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,65.912,country_distance
+DUS-GOT,DUS,GOT,Düsseldorf,Göteborg,DE,SE,792.5,1,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,69.264,country_distance
+DUS-HAM,DUS,HAM,Düsseldorf,Hamburg,DE,DE,339.6,2,db_fernverkehr_632091,Köln Hbf,Hamburg-Altona(S),353.9,258.0,day,7,53.08,potentiel_moyen,102.281,country_city_distance
+DUS-KTW,DUS,KTW,Düsseldorf,Katowice,DE,PL,867.6,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,81.927,country_distance
+DUS-LNZ,DUS,LNZ,Düsseldorf,Linz,DE,AT,631.6,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,70.264,country_distance
+DUS-MPL,DUS,MPL,Düsseldorf,Montpellier/Méditerranée,DE,FR,883.1,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,77.936,country_distance
+DUS-MUC,DUS,MUC,Düsseldorf,Munich,DE,DE,485.8,2,db_fernverkehr_126798,Essen Hbf,München Hbf,491.7,319.0,day,7,73.76,potentiel_moyen,99.836,country_city_distance
+DUS-NTE,DUS,NTE,Düsseldorf,Nantes,DE,FR,761.9,2,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,74.008,country_distance
+DUS-NAP,DUS,NAP,Düsseldorf,Napoli,DE,IT,1292.6,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.739,country_distance
+DUS-NCE,DUS,NCE,Düsseldorf,"Nice, Alpes-Maritimes",DE,FR,849.2,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,78.475,country_distance
+DUS-NUE,DUS,NUE,Düsseldorf,Nuremberg,DE,DE,364.7,2,db_fernverkehr_1179318,Düsseldorf Hbf,Gera Hbf,371.2,395.0,day,6,55.68,potentiel_moyen,102.084,country_city_distance
+DUS-OLB,DUS,OLB,Düsseldorf,Olbia (SS),DE,IT,1174.5,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,88.059,country_distance
+DUS-POZ,DUS,POZ,Düsseldorf,Poznań,DE,PL,701.5,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,74.444,country_distance
+DUS-FCO,DUS,FCO,Düsseldorf,Rome,DE,IT,1134.2,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,92.856,country_distance
+DUS-SZG,DUS,SZG,Düsseldorf,Salzburg,DE,AT,594.4,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,68.266,country_distance
+DUS-SPU,DUS,SPU,Düsseldorf,Split,DE,HR,1119.3,3,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,80.813,country_distance
+DUS-ARN,DUS,ARN,Düsseldorf,Stockholm,DE,SE,1162.5,3,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,95.554,country_city_distance
+DUS-VCE,DUS,VCE,Düsseldorf,Venezia (VE),DE,IT,763.5,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,98.015,country_city_distance
+DUS-VIE,DUS,VIE,Düsseldorf,Vienna,DE,AT,787.8,3,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,80.199,country_distance
+DUS-WAW,DUS,WAW,Düsseldorf,Warsaw,DE,PL,981.3,3,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,89.768,country_distance
+DUS-WRO,DUS,WRO,Düsseldorf,Wrocław,DE,PL,704.6,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,75.673,country_distance
+DUS-ZAD,DUS,ZAD,Düsseldorf,Zadar,DE,HR,1024.6,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,86.229,country_distance
+FRA-KRK,FRA,KRK,Frankfurt am Main,Balice,DE,PL,800.8,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,75.013,country_distance
+FRA-BIA,FRA,BIA,Frankfurt am Main,Bastia,DE,FR,834.1,1,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,76.639,country_distance
+FRA-BLQ,FRA,BLQ,Frankfurt am Main,Bologna,DE,IT,644.3,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,80.249,country_distance
+FRA-BUD,FRA,BUD,Frankfurt am Main,Budapest,DE,HU,835.6,2,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,97.099,country_city_distance
+FRA-VRN,FRA,VRN,Frankfurt am Main,Caselle (VR),DE,IT,543.6,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,74.124,country_distance
+FRA-TRN,FRA,TRN,Frankfurt am Main,Caselle Torinese (TO),DE,IT,540.9,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,75.05,country_distance
+FRA-CTA,FRA,CTA,Frankfurt am Main,Catania,DE,IT,1489.8,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,82.712,country_distance
+FRA-DBV,FRA,DBV,Frankfurt am Main,Dubrovnik,DE,HR,1114.0,3,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,82.11,country_distance
+FRA-GRZ,FRA,GRZ,Frankfurt am Main,Feldkirchen bei Graz,DE,AT,608.6,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,68.037,country_distance
+FRA-MXP,FRA,MXP,Frankfurt am Main,Ferno (VA),DE,IT,489.0,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,69.942,country_distance
+FRA-FLR,FRA,FLR,Frankfurt am Main,Firenze (FI),DE,IT,719.9,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,84.874,country_distance
+FRA-GDN,FRA,GDN,Frankfurt am Main,Gdańsk,DE,PL,829.4,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,76.239,country_distance
+FRA-GOT,FRA,GOT,Frankfurt am Main,Göteborg,DE,SE,883.2,3,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,72.759,country_distance
+FRA-RZE,FRA,RZE,Frankfurt am Main,Jasionka,DE,PL,959.8,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,83.019,country_distance
+FRA-KTW,FRA,KTW,Frankfurt am Main,Katowice,DE,PL,749.2,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,73.526,country_distance
+FRA-MRS,FRA,MRS,Frankfurt am Main,"Marignane, Bouches-du-Rhône",DE,FR,775.5,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,77.728,country_distance
+FRA-MPL,FRA,MPL,Frankfurt am Main,Montpellier/Méditerranée,DE,FR,797.6,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,73.371,country_distance
+FRA-MUC,FRA,MUC,Frankfurt am Main,Munich,DE,DE,299.3,2,db_fernverkehr_481513,Frankfurt(Main)Hbf,München Hbf,303.6,239.0,day,7,45.54,potentiel_moyen,103.464,country_city_distance
+FRA-NAP,FRA,NAP,Frankfurt am Main,Napoli,DE,IT,1109.6,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.008,country_distance
+FRA-NCE,FRA,NCE,Frankfurt am Main,"Nice, Alpes-Maritimes",DE,FR,715.4,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,71.142,country_distance
+FRA-OLB,FRA,OLB,Frankfurt am Main,Olbia (SS),DE,IT,1017.7,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,84.776,country_distance
+FRA-PMO,FRA,PMO,Frankfurt am Main,Palermo,DE,IT,1365.9,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,84.374,country_distance
+FRA-POZ,FRA,POZ,Frankfurt am Main,Poznań,DE,PL,633.7,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,66.887,country_distance
+FRA-PUY,FRA,PUY,Frankfurt am Main,Pula,DE,HR,698.5,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,84.117,country_distance
+FRA-FCO,FRA,FCO,Frankfurt am Main,Rome,DE,IT,957.6,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,87.063,country_distance
+FRA-LIN,FRA,LIN,Frankfurt am Main,Segrate (MI),DE,IT,512.3,4,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,72.884,country_distance
+FRA-SPU,FRA,SPU,Frankfurt am Main,Split,DE,HR,930.5,3,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,84.557,country_distance
+FRA-ARN,FRA,ARN,Frankfurt am Main,Stockholm,DE,SE,1224.0,3,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,95.942,country_city_distance
+FRA-TLS,FRA,TLS,Frankfurt am Main,Toulouse/Blagnac,DE,FR,896.7,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,78.637,country_distance
+FRA-ZAG,FRA,ZAG,Frankfurt am Main,Velika Gorica,DE,HR,734.6,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,87.286,country_distance
+FRA-VCE,FRA,VCE,Frankfurt am Main,Venezia (VE),DE,IT,577.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,89.085,country_city_distance
+FRA-VIE,FRA,VIE,Frankfurt am Main,Vienna,DE,AT,620.9,5,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,72.77,country_distance
+FRA-WAW,FRA,WAW,Frankfurt am Main,Warsaw,DE,PL,897.3,3,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,83.837,country_distance
+FRA-WRO,FRA,WRO,Frankfurt am Main,Wrocław,DE,PL,599.6,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,65.381,country_distance
+FRA-ZAD,FRA,ZAD,Frankfurt am Main,Zadar,DE,HR,835.7,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,90.766,country_distance
+HHN-AHO,HHN,AHO,Frankfurt am Main (Lautzenhausen),Alghero,DE,IT,1038.8,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.528,country_distance
+HHN-BRI,HHN,BRI,Frankfurt am Main (Lautzenhausen),Bari,DE,IT,1225.3,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.977,country_distance
+HHN-BUD,HHN,BUD,Frankfurt am Main (Lautzenhausen),Budapest,DE,HU,923.1,1,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,99.838,country_city_distance
+HHN-CAG,HHN,CAG,Frankfurt am Main (Lautzenhausen),Cagliari,DE,IT,1197.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.367,country_distance
+HHN-KTW,HHN,KTW,Frankfurt am Main (Lautzenhausen),Katowice,DE,PL,842.2,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,77.723,country_distance
+HHN-SUF,HHN,SUF,Frankfurt am Main (Lautzenhausen),Lamezia Terme (CZ),DE,IT,1417.5,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.731,country_city_distance
+HHN-MPL,HHN,MPL,Frankfurt am Main (Lautzenhausen),Montpellier/Méditerranée,DE,FR,751.4,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,71.212,country_distance
+HHN-BGY,HHN,BGY,Frankfurt am Main (Lautzenhausen),Orio al Serio (BG),DE,IT,509.4,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,73.874,country_distance
+HHN-PSR,HHN,PSR,Frankfurt am Main (Lautzenhausen),Pescara,DE,IT,990.1,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,87.128,country_distance
+HHN-PSA,HHN,PSA,Frankfurt am Main (Lautzenhausen),Pisa (PI),DE,IT,735.8,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,85.965,country_distance
+HHN-PUY,HHN,PUY,Frankfurt am Main (Lautzenhausen),Pula,DE,HR,752.3,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,86.182,country_distance
+HHN-CIA,HHN,CIA,Frankfurt am Main (Lautzenhausen),Rome,DE,IT,995.0,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,88.134,country_distance
+HHN-TPS,HHN,TPS,Frankfurt am Main (Lautzenhausen),Trapani (TP),DE,IT,1401.3,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,83.869,country_distance
+HHN-TSF,HHN,TSF,Frankfurt am Main (Lautzenhausen),Treviso (TV),DE,IT,603.2,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,77.996,country_distance
+HHN-ZAD,HHN,ZAD,Frankfurt am Main (Lautzenhausen),Zadar,DE,HR,893.0,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,89.217,country_distance
+FDH-EBA,FDH,EBA,Friedrichshafen,Campo nell'Elba (LI),DE,IT,549.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,72.803,country_distance
+FDH-OLB,FDH,OLB,Friedrichshafen,Olbia (SS),DE,IT,753.1,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,82.288,country_distance
+FDH-ZAD,FDH,ZAD,Friedrichshafen,Zadar,DE,HR,601.7,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,80.166,country_distance
+FMO-ZRH,FMO,ZRH,Greven,Zurich,DE,CH,523.6,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,76.728,country_city_distance
+HAM-BIA,HAM,BIA,Hamburg,Bastia,DE,FR,1232.3,1,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,83.946,country_distance
+HAM-BRN,HAM,BRN,Hamburg,Bern,DE,CH,767.5,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,91.376,country_city_distance
+HAM-BUD,HAM,BUD,Hamburg,Budapest,DE,HU,949.8,1,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,99.574,country_city_distance
+HAM-BSL,HAM,BSL,Hamburg,Bâle / Mulhouse,DE,FR,692.6,3,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,70.941,country_distance
+HAM-VRN,HAM,VRN,Hamburg,Caselle (VR),DE,IT,918.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,85.51,country_distance
+HAM-DBV,HAM,DBV,Hamburg,Dubrovnik,DE,HR,1373.5,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,77.689,country_distance
+HAM-DUS,HAM,DUS,Hamburg,Düsseldorf,DE,DE,339.6,2,db_fernverkehr_308806,Hamburg-Altona(S),Düsseldorf Hbf,335.7,239.0,day,2,50.36,potentiel_moyen,109.713,country_city_distance
+HAM-MXP,HAM,MXP,Hamburg,Ferno (VA),DE,IT,894.1,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,86.323,country_distance
+HAM-FRA,HAM,FRA,Hamburg,Frankfurt am Main,DE,DE,412.6,2,db_fernverkehr_275813,Hamburg-Altona(S),Frankfurt(Main)Hbf,393.0,234.0,day,7,58.95,potentiel_moyen,108.812,country_city_distance
+HAM-GVA,HAM,GVA,Hamburg,Geneva,DE,CH,867.3,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,92.858,country_city_distance
+HAM-KLU,HAM,KLU,Hamburg,Klagenfurt am Wörthersee,DE,AT,836.2,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,90.376,country_city_distance
+HAM-MUC,HAM,MUC,Hamburg,Munich,DE,DE,600.0,2,db_fernverkehr_1169227,Hamburg-Altona(S),München Hbf,612.5,363.0,day,7,91.88,fort_potentiel,111.303,country_city_distance
+HAM-NAP,HAM,NAP,Hamburg,Napoli,DE,IT,1453.2,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,82.453,country_distance
+HAM-NCE,HAM,NCE,Hamburg,"Nice, Alpes-Maritimes",DE,FR,1127.2,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,85.317,country_distance
+HAM-NUE,HAM,NUE,Hamburg,Nuremberg,DE,DE,465.5,2,db_fernverkehr_1415370,Hamburg-Altona(S),Nürnberg Hbf,463.5,379.0,day,5,69.52,potentiel_moyen,107.893,country_city_distance
+HAM-OLB,HAM,OLB,Hamburg,Olbia (SS),DE,IT,1416.1,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,83.141,country_distance
+HAM-CDG,HAM,CDG,Hamburg,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,728.0,3,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,83.068,country_city_distance
+HAM-RJK,HAM,RJK,Hamburg,Rijeka(Omišalj),DE,HR,992.0,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,85.632,country_distance
+HAM-FCO,HAM,FCO,Hamburg,Rome,DE,IT,1325.7,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,88.426,country_distance
+HAM-SCN,HAM,SCN,Hamburg,Saarbrücken,DE,DE,529.9,2,db_fernverkehr_1121187,Hamburg Dammtor,Stuttgart Hbf,534.0,317.0,day,7,80.1,fort_potentiel,107.807,country_city_distance
+HAM-SZG,HAM,SZG,Hamburg,Salzburg,DE,AT,682.8,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,85.571,country_city_distance
+HAM-SPU,HAM,SPU,Hamburg,Split,DE,HR,1213.2,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,78.505,country_distance
+HAM-ARN,HAM,ARN,Hamburg,Stockholm,DE,SE,825.6,2,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,81.955,country_city_distance
+HAM-STR,HAM,STR,Hamburg,Stuttgart,DE,DE,551.9,2,db_fernverkehr_1121187,Hamburg Dammtor,Stuttgart Hbf,534.0,317.0,day,7,80.1,fort_potentiel,117.189,country_city_distance
+HAM-TLS,HAM,TLS,Hamburg,Toulouse/Blagnac,DE,FR,1277.9,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,81.97,country_distance
+HAM-VCE,HAM,VCE,Hamburg,Venezia (VE),DE,IT,919.3,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,98.17,country_city_distance
+HAM-VIE,HAM,VIE,Hamburg,Vienna,DE,AT,767.5,4,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,90.515,country_city_distance
+HAM-WAW,HAM,WAW,Hamburg,Warsaw,DE,PL,753.4,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,80.038,country_distance
+HAM-ZRH,HAM,ZRH,Hamburg,Zurich,DE,CH,693.8,3,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,100.57,country_city_distance
+HAJ-DBV,HAJ,DBV,Hannover,Dubrovnik,DE,HR,1273.5,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,77.271,country_distance
+HAJ-MXP,HAJ,MXP,Hannover,Ferno (VA),DE,IT,762.7,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,83.001,country_distance
+HAJ-NAP,HAJ,NAP,Hannover,Napoli,DE,IT,1333.5,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,83.964,country_distance
+HAJ-CDG,HAJ,CDG,Hannover,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,631.3,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,76.98,country_city_distance
+HAJ-FCO,HAJ,FCO,Hannover,Rome,DE,IT,1200.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,90.397,country_distance
+HAJ-SPU,HAJ,SPU,Hannover,Split,DE,HR,1106.3,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,78.54,country_distance
+HAJ-STR,HAJ,STR,Hannover,Stuttgart,DE,DE,420.6,2,db_fernverkehr_1154720,Hannover Hbf,Stuttgart Hbf,401.3,285.0,day,4,60.2,potentiel_moyen,110.853,country_city_distance
+HAJ-VCE,HAJ,VCE,Hannover,Venezia (VE),DE,IT,797.4,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,96.717,country_city_distance
+HAJ-VIE,HAJ,VIE,Hannover,Vienna,DE,AT,687.4,3,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,75.386,country_distance
+HAJ-ZRH,HAJ,ZRH,Hannover,Zurich,DE,CH,562.2,2,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,81.134,country_city_distance
+CGN-BRI,CGN,BRI,Köln (Cologne),Bari,DE,IT,1309.7,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.469,country_distance
+CGN-BIA,CGN,BIA,Köln (Cologne),Bastia,DE,FR,941.3,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,81.29,country_distance
+CGN-BLQ,CGN,BLQ,Köln (Cologne),Bologna,DE,IT,769.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,81.609,country_distance
+CGN-BUD,CGN,BUD,Köln (Cologne),Budapest,DE,HU,959.3,1,back_on_track_MÁV EN 40457,Berlin Hbf,Budapest Nyugati,995.0,788.0,night,7,149.25,faible_potentiel,100.355,country_city_distance
+CGN-CAG,CGN,CAG,Köln (Cologne),Cagliari,DE,IT,1300.0,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,84.5,country_distance
+CGN-CLY,CGN,CLY,Köln (Cologne),Calvi,DE,FR,935.3,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,79.957,country_distance
+CGN-VRN,CGN,VRN,Köln (Cologne),Caselle (VR),DE,IT,668.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,77.45,country_distance
+CGN-DBV,CGN,DBV,Köln (Cologne),Dubrovnik,DE,HR,1251.0,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,76.127,country_distance
+CGN-MXP,CGN,MXP,Köln (Cologne),Ferno (VA),DE,IT,593.8,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,73.629,country_distance
+CGN-GDN,CGN,GDN,Köln (Cologne),Gdańsk,DE,PL,857.0,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,78.274,country_distance
+CGN-KTW,CGN,KTW,Köln (Cologne),Katowice,DE,PL,841.5,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,78.623,country_distance
+CGN-KLU,CGN,KLU,Köln (Cologne),Klagenfurt am Wörthersee,DE,AT,705.6,2,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,72.556,country_distance
+CGN-MUC,CGN,MUC,Köln (Cologne),Munich,DE,DE,435.7,3,db_fernverkehr_739279,Köln Hbf,München Hbf,455.1,284.0,day,7,68.26,potentiel_moyen,107.71,country_city_distance
+CGN-NAP,CGN,NAP,Köln (Cologne),Napoli,DE,IT,1238.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,84.374,country_distance
+CGN-NCE,CGN,NCE,Köln (Cologne),"Nice, Alpes-Maritimes",DE,FR,801.5,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,76.299,country_distance
+CGN-OLB,CGN,OLB,Köln (Cologne),Olbia (SS),DE,IT,1123.3,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.833,country_distance
+CGN-PMO,CGN,PMO,Köln (Cologne),Palermo,DE,IT,1486.5,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,83.681,country_distance
+CGN-PSA,CGN,PSA,Köln (Cologne),Pisa (PI),DE,IT,835.2,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,85.41,country_distance
+CGN-PUY,CGN,PUY,Köln (Cologne),Pula,DE,HR,833.9,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,83.194,country_distance
+CGN-RJK,CGN,RJK,Köln (Cologne),Rijeka(Omišalj),DE,HR,835.6,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,86.438,country_distance
+CGN-FCO,CGN,FCO,Köln (Cologne),Rome,DE,IT,1080.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,91.236,country_distance
+CGN-SPU,CGN,SPU,Köln (Cologne),Split,DE,HR,1067.1,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,77.781,country_distance
+CGN-ARN,CGN,ARN,Köln (Cologne),Stockholm,DE,SE,1188.8,1,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,96.024,country_city_distance
+CGN-ZAG,CGN,ZAG,Köln (Cologne),Velika Gorica,DE,HR,870.9,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,83.916,country_distance
+CGN-VCE,CGN,VCE,Köln (Cologne),Venezia (VE),DE,IT,709.8,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,91.992,country_city_distance
+CGN-VIE,CGN,VIE,Köln (Cologne),Vienna,DE,AT,746.0,3,back_on_track_ÖBB NJ 40491,Hamburg Altona,Innsbruck Hbf,1112.0,798.0,night,7,166.8,faible_potentiel,77.805,country_distance
+CGN-WAW,CGN,WAW,Köln (Cologne),Warsaw,DE,PL,965.9,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,87.02,country_distance
+CGN-ZAD,CGN,ZAD,Köln (Cologne),Zadar,DE,HR,972.0,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,83.381,country_distance
+LBC-BGY,LBC,BGY,Lübeck,Orio al Serio (BG),DE,IT,907.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,88.314,country_distance
+LBC-PSA,LBC,PSA,Lübeck,Pisa (PI),DE,IT,1125.7,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.656,country_distance
+FMM-AHO,FMM,AHO,Memmingen,Alghero,DE,IT,832.4,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,85.083,country_distance
+FMM-CLY,FMM,CLY,Memmingen,Calvi,DE,FR,617.3,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,64.987,country_distance
+FMM-NAP,FMM,NAP,Memmingen,Napoli,DE,IT,852.4,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,88.152,country_distance
+FMM-CIA,FMM,CIA,Memmingen,Rome,DE,IT,712.7,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,82.195,country_distance
+FMM-TPS,FMM,TPS,Memmingen,Trapani (TP),DE,IT,1135.2,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,93.364,country_distance
+MUC-KRK,MUC,KRK,Munich,Balice,DE,PL,611.4,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,71.75,country_city_distance
+MUC-BRI,MUC,BRI,Munich,Bari,DE,IT,892.8,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,90.871,country_city_distance
+MUC-BLQ,MUC,BLQ,Munich,Bologna,DE,IT,426.3,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,62.501,country_distance
+MUC-BOD,MUC,BOD,Munich,Bordeaux,DE,FR,1031.0,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,83.053,country_distance
+MUC-BDS,MUC,BDS,Munich,Brindisi,DE,IT,984.7,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,94.099,country_city_distance
+MUC-BUD,MUC,BUD,Munich,Budapest,DE,HU,566.6,1,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,82.535,country_city_distance
+MUC-CAG,MUC,CAG,Munich,Cagliari,DE,IT,1035.4,3,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,93.957,country_city_distance
+MUC-EBA,MUC,EBA,Munich,Campo nell'Elba (LI),DE,IT,633.4,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,80.059,country_distance
+MUC-TRN,MUC,TRN,Munich,Caselle Torinese (TO),DE,IT,471.2,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,68.383,country_distance
+MUC-CTA,MUC,CTA,Munich,Catania,DE,IT,1239.4,5,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,94.166,country_city_distance
+MUC-LYS,MUC,LYS,Munich,"Colombier-Saugnieu, Rhône",DE,FR,585.2,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,63.189,country_distance
+MUC-DTM,MUC,DTM,Munich,Dortmund,DE,DE,461.4,2,db_fernverkehr_303575,München Hbf,Dortmund Hbf,476.8,327.0,day,7,71.52,potentiel_moyen,107.989,country_city_distance
+MUC-DBV,MUC,DBV,Munich,Dubrovnik,DE,HR,818.0,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,87.822,country_distance
+MUC-DUS,MUC,DUS,Munich,Düsseldorf,DE,DE,485.8,3,db_fernverkehr_985422,München Hbf,Essen Hbf,491.7,316.0,day,7,73.76,potentiel_moyen,99.836,country_city_distance
+MUC-AOI,MUC,AOI,Munich,Falconara Marittima (AN),DE,IT,540.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,75.494,country_distance
+MUC-FLR,MUC,FLR,Munich,Firenze (FI),DE,IT,507.4,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,71.641,country_distance
+MUC-FRA,MUC,FRA,Munich,Frankfurt am Main,DE,DE,299.3,3,db_fernverkehr_1561571,München Hbf,Frankfurt(Main)Hbf,303.6,241.0,day,6,45.54,potentiel_moyen,102.464,country_city_distance
+MUC-GDN,MUC,GDN,Munich,Gdańsk,DE,PL,813.9,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,83.338,country_city_distance
+MUC-GOA,MUC,GOA,Munich,Genova (GE),DE,IT,493.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,70.553,country_distance
+MUC-GOT,MUC,GOT,Munich,Göteborg,DE,SE,1035.6,2,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,79.17,country_distance
+MUC-HAM,MUC,HAM,Munich,Hamburg,DE,DE,600.0,2,db_fernverkehr_1508602,München Hbf,Hamburg Hbf,611.6,345.0,day,7,91.74,fort_potentiel,111.34,country_city_distance
+MUC-CGN,MUC,CGN,Munich,Köln (Cologne),DE,DE,435.7,2,db_fernverkehr_789445,München Hbf,Köln Hbf,455.1,251.0,day,6,68.26,potentiel_moyen,106.71,country_city_distance
+MUC-SUF,MUC,SUF,Munich,Lamezia Terme (CZ),DE,IT,1109.7,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,98.825,country_city_distance
+MUC-MRS,MUC,MRS,Munich,"Marignane, Bouches-du-Rhône",DE,FR,746.2,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,76.727,country_distance
+MUC-NTE,MUC,NTE,Munich,Nantes,DE,FR,1009.1,1,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,82.672,country_distance
+MUC-NAP,MUC,NAP,Munich,Napoli,DE,IT,853.6,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,89.911,country_distance
+MUC-NCE,MUC,NCE,Munich,"Nice, Alpes-Maritimes",DE,FR,630.0,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,66.253,country_distance
+MUC-OLB,MUC,OLB,Munich,Olbia (SS),DE,IT,848.0,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,87.54,country_distance
+MUC-PMO,MUC,PMO,Munich,Palermo,DE,IT,1136.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,96.158,country_city_distance
+MUC-CDG,MUC,CDG,Munich,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,681.2,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,80.646,country_city_distance
+MUC-PSA,MUC,PSA,Munich,Pisa (PI),DE,IT,530.3,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,73.905,country_distance
+MUC-POZ,MUC,POZ,Munich,Poznań,DE,PL,576.0,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,70.138,country_city_distance
+MUC-FCO,MUC,FCO,Munich,Rome,DE,IT,729.2,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.885,country_city_distance
+MUC-SPU,MUC,SPU,Munich,Split,DE,HR,638.8,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,80.45,country_distance
+MUC-ARN,MUC,ARN,Munich,Stockholm,DE,SE,1317.2,3,back_on_track_SJ/RDC EN 346,Berlin Hbf,Stockholm C,1439.0,986.0,night,7,215.85,faible_potentiel,98.438,country_city_distance
+MUC-GWT,MUC,GWT,Munich,Sylt,DE,DE,766.9,2,db_fernverkehr_602368,München Hbf,Hamburg-Altona(S),612.5,362.0,day,7,91.88,fort_potentiel,95.124,country_city_distance
+MUC-TLS,MUC,TLS,Munich,Toulouse/Blagnac,DE,FR,960.1,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,81.116,country_distance
+MUC-ZAG,MUC,ZAG,Munich,Velika Gorica,DE,HR,435.3,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,67.561,country_distance
+MUC-WAW,MUC,WAW,Munich,Warsaw,DE,PL,777.3,2,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,86.69,country_city_distance
+MUC-ZAD,MUC,ZAD,Munich,Zadar,DE,HR,547.0,2,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,78.9,country_distance
+NUE-DUS,NUE,DUS,Nuremberg,Düsseldorf,DE,DE,364.7,2,db_fernverkehr_1169834,Gera Hbf,Düsseldorf Hbf,371.2,393.0,day,7,55.68,potentiel_moyen,103.084,country_city_distance
+NUE-HAM,NUE,HAM,Nuremberg,Hamburg,DE,DE,465.5,2,db_fernverkehr_203281,Nürnberg Hbf,Hamburg-Altona(S),463.5,407.0,day,6,69.52,potentiel_moyen,108.893,country_city_distance
+NUE-OLB,NUE,OLB,Nuremberg,Olbia (SS),DE,IT,964.0,2,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,86.71,country_distance
+NUE-CDG,NUE,CDG,Nuremberg,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,620.7,2,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,77.626,country_city_distance
+NUE-SPU,NUE,SPU,Nuremberg,Split,DE,HR,773.3,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,86.876,country_distance
+FKB-BRI,FKB,BRI,Rheinmünster,Bari,DE,IT,1088.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,92.764,country_distance
+FKB-CAG,FKB,CAG,Rheinmünster,Cagliari,DE,IT,1062.3,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,91.018,country_distance
+FKB-CIA,FKB,CIA,Rheinmünster,Rome,DE,IT,852.4,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,87.69,country_distance
+FKB-TPS,FKB,TPS,Rheinmünster,Trapani (TP),DE,IT,1259.4,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,90.21,country_distance
+FKB-ZAD,FKB,ZAD,Rheinmünster,Zadar,DE,HR,762.1,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,89.752,country_distance
+SCN-HAM,SCN,HAM,Saarbrücken,Hamburg,DE,DE,529.9,2,db_fernverkehr_664066,Karlsruhe Hbf,Hamburg Hbf,519.1,352.0,day,7,77.86,potentiel_moyen,105.74,country_city_distance
+LEJ-CDG,LEJ,CDG,Schkeuditz,"Paris (Roissy-en-France, Val-d'Oise)",DE,FR,738.3,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,81.575,country_city_distance
+LEJ-ZRH,LEJ,ZRH,Schkeuditz,Zurich,DE,CH,514.7,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,76.644,country_city_distance
+STR-KRK,STR,KRK,Stuttgart,Balice,DE,PL,779.3,1,back_on_track_PKP/ČD EN 40406,München Hbf,Warszawa Wschodnia,1139.0,820.0,night,7,170.85,faible_potentiel,74.461,country_distance
+STR-BRI,STR,BRI,Stuttgart,Bari,DE,IT,1027.2,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,95.345,country_city_distance
+STR-BIA,STR,BIA,Stuttgart,Bastia,DE,FR,682.7,1,back_on_track_ÖBB NJ 40424,Berlin Ostbahnhof,Paris Est,1168.0,883.0,night,3,175.2,faible_potentiel,69.69,country_distance
+STR-BDS,STR,BDS,Stuttgart,Brindisi,DE,IT,1127.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,94.233,country_city_distance
+STR-BUD,STR,BUD,Stuttgart,Budapest,DE,HU,758.6,1,back_on_track_MÁV/ÖBB EN 50462,Stuttgart Hbf,Budapest Keleti,966.0,770.0,night,7,144.9,faible_potentiel,105.165,country_city_distance
+STR-CAG,STR,CAG,Stuttgart,Cagliari,DE,IT,1049.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,95.627,country_city_distance
+STR-CTA,STR,CTA,Stuttgart,Catania,DE,IT,1334.2,5,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,93.734,country_city_distance
+STR-DBV,STR,DBV,Stuttgart,Dubrovnik,DE,HR,977.9,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,95.631,country_city_distance
+STR-FLR,STR,FLR,Stuttgart,Firenze (FI),DE,IT,563.7,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,87.675,country_city_distance
+STR-HAM,STR,HAM,Stuttgart,Hamburg,DE,DE,551.9,2,db_fernverkehr_186029,Stuttgart Hbf,Hamburg Hbf,533.3,306.0,day,7,79.99,potentiel_moyen,114.157,country_city_distance
+STR-HAJ,STR,HAJ,Stuttgart,Hannover,DE,DE,420.6,2,db_fernverkehr_909928,Stuttgart Hbf,Hannover Hbf,401.3,281.0,night,6,60.2,potentiel_moyen,112.853,country_city_distance
+STR-SUF,STR,SUF,Stuttgart,Lamezia Terme (CZ),DE,IT,1224.0,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,95.027,country_city_distance
+STR-NAP,STR,NAP,Stuttgart,Napoli,DE,IT,955.0,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,99.104,country_city_distance
+STR-OLB,STR,OLB,Stuttgart,Olbia (SS),DE,IT,866.6,3,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,99.079,country_city_distance
+STR-RJK,STR,RJK,Stuttgart,Rijeka(Omišalj),DE,HR,560.1,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,91.274,country_city_distance
+STR-FCO,STR,FCO,Stuttgart,Rome,DE,IT,801.3,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,96.723,country_city_distance
+STR-SPU,STR,SPU,Stuttgart,Split,DE,HR,790.3,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,98.347,country_city_distance
+STR-ZAG,STR,ZAG,Stuttgart,Velika Gorica,DE,HR,611.8,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,92.774,country_city_distance
+STR-VCE,STR,VCE,Stuttgart,Venezia (VE),DE,IT,426.0,2,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,87.0,country_city_distance
+STR-ZAD,STR,ZAD,Stuttgart,Zadar,DE,HR,693.8,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,98.546,country_city_distance
+GWT-MUC,GWT,MUC,Sylt,Munich,DE,DE,766.9,2,db_fernverkehr_129826,Basel SBB,Hamburg Hbf,689.2,403.0,day,7,103.38,fort_potentiel,95.377,country_distance
+GWT-ZRH,GWT,ZRH,Sylt,Zurich,DE,CH,829.1,1,back_on_track_ÖBB NJ 471,Hamburg Altona,Zürich HB,1011.0,733.0,night,7,151.65,faible_potentiel,94.848,country_city_distance
+NRN-AHO,NRN,AHO,Weeze,Alghero,DE,IT,1230.8,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.793,country_distance
+NRN-BRI,NRN,BRI,Weeze,Bari,DE,IT,1417.2,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,83.763,country_distance
+NRN-BLQ,NRN,BLQ,Weeze,Bologna,DE,IT,873.3,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,83.698,country_distance
+NRN-BZR,NRN,BZR,Weeze,Béziers,DE,FR,943.8,1,back_on_track_ES 474,Berlin Hbf,Paris Gare du Nord,1120.0,929.0,night,3,168.0,faible_potentiel,77.733,country_distance
+NRN-CAG,NRN,CAG,Weeze,Cagliari,DE,IT,1391.6,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,82.993,country_distance
+NRN-AOI,NRN,AOI,Weeze,Falconara Marittima (AN),DE,IT,1038.8,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,88.401,country_distance
+NRN-BGY,NRN,BGY,Weeze,Orio al Serio (BG),DE,IT,709.6,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,81.671,country_distance
+NRN-PSR,NRN,PSR,Weeze,Pescara,DE,IT,1186.4,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,85.044,country_distance
+NRN-PSA,NRN,PSA,Weeze,Pisa (PI),DE,IT,935.8,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,83.674,country_distance
+NRN-CIA,NRN,CIA,Weeze,Rome,DE,IT,1194.8,1,back_on_track_ÖBB NJ 295,München Hbf,Roma Termini,1092.0,780.0,night,7,163.8,faible_potentiel,89.224,country_distance
+NRN-TSF,NRN,TSF,Weeze,Treviso (TV),DE,IT,796.9,1,back_on_track_ÖBB NJ 237,Stuttgart Hbf,Venezia Santa Lucia,852.0,753.0,night,7,127.8,faible_potentiel,82.579,country_distance
+NRN-ZAD,NRN,ZAD,Weeze,Zadar,DE,HR,1079.4,1,back_on_track_HŽPP/ÖBB EN 40237,Stuttgart Hbf,Zagreb Gl. K.,807.0,850.0,night,7,121.05,faible_potentiel,81.316,country_distance
+ALC-BCN,ALC,BCN,Alicante,Barcelona,ES,ES,403.9,2,renfe_0109212026-06-01,Alicante/Alacant,Barcelona-Sants,405.6,317.0,day,7,60.84,potentiel_moyen,114.895,country_city_distance
+ALC-BIO,ALC,BIO,Alicante,Bilbao,ES,ES,592.1,2,renfe_0518312026-04-06,Alicante/Alacant,Leon,639.0,290.0,day,7,95.85,fort_potentiel,107.02,country_city_distance
+ALC-PMI,ALC,PMI,Alicante,Palma de Mallorca,ES,ES,318.2,3,renfe_0586322026-04-06,Alicante/Alacant,Madrid Pta.Atocha - Almudena Grandes,357.7,150.0,day,7,53.65,potentiel_moyen,101.602,country_city_distance
+LEI-BCN,LEI,BCN,Almería,Barcelona,ES,ES,626.4,2,renfe_0393112026-04-26,Granada,Barcelona-Sants,679.9,388.0,day,7,101.98,fort_potentiel,105.15,country_city_distance
+LEI-MAD,LEI,MAD,Almería,Madrid,ES,ES,419.0,2,renfe_0027912026-04-07,Almeria,Madrid-Chamartín-Clara Campoamor,418.1,440.0,day,7,62.72,potentiel_moyen,114.946,country_city_distance
+BCN-ALC,BCN,ALC,Barcelona,Alicante,ES,ES,403.9,2,renfe_0116112026-04-06,Barcelona-Sants,Alicante/Alacant,405.6,318.0,day,7,60.84,potentiel_moyen,114.895,country_city_distance
+BCN-LEI,BCN,LEI,Barcelona,Almería,ES,ES,626.4,2,renfe_0062242026-04-07,Barcelona-Sants,Leon,652.3,468.0,day,7,97.84,fort_potentiel,107.421,country_city_distance
+BCN-BIO,BCN,BIO,Barcelona,Bilbao,ES,ES,466.8,2,renfe_0043812026-04-07,Barcelona-Sants,Bilbao-Abando Indalecio Prieto,466.2,423.0,day,7,69.93,potentiel_moyen,114.968,country_city_distance
+BCN-LCG,BCN,LCG,Barcelona,Culleredo,ES,ES,887.7,2,renfe_0062222026-04-07,Barcelona-Sants,Ourense,835.7,714.0,day,7,125.36,potentiel_moyen,104.161,country_city_distance
+BCN-GRX,BCN,GRX,Barcelona,Granada,ES,ES,680.1,2,renfe_0393012026-04-26,Barcelona-Sants,Granada,679.9,386.0,day,7,101.98,fort_potentiel,117.993,country_city_distance
+BCN-EAS,BCN,EAS,Barcelona,Hondarribia,ES,ES,391.9,2,renfe_0056212026-04-07,Barcelona-Sants,Pamplona/Iruña,352.4,239.0,day,7,52.86,potentiel_moyen,103.48,country_city_distance
+BCN-IBZ,BCN,IBZ,Barcelona,Ibiza (Eivissa),ES,ES,276.2,3,renfe_1750112026-04-06,Barcelona-Estació De França,Zaragoza-Delicias,259.6,399.0,day,7,38.94,potentiel_moyen,101.225,country_city_distance
+BCN-XRY,BCN,XRY,Barcelona,Jerez de la Frontera,ES,ES,865.7,3,renfe_0394212026-04-06,Barcelona-Sants,Sevilla-Santa Justa,825.9,370.0,day,7,123.88,fort_potentiel,107.235,country_city_distance
+BCN-MAD,BCN,MAD,Barcelona,Madrid,ES,ES,483.2,3,renfe_0314012026-04-06,Barcelona-Sants,Madrid Pta.Atocha - Almudena Grandes,501.9,181.0,day,7,75.28,potentiel_moyen,114.032,country_city_distance
+BCN-AGP,BCN,AGP,Barcelona,Málaga,ES,ES,766.0,3,renfe_0399012026-05-01,Barcelona-Sants,Malaga Maria Zambrano,768.7,384.0,day,7,115.3,fort_potentiel,117.912,country_city_distance
+BCN-OVD,BCN,OVD,Barcelona,Ranón,ES,ES,711.6,2,renfe_0393012026-04-26,Barcelona-Sants,Granada,679.9,386.0,day,7,101.98,fort_potentiel,109.386,country_city_distance
+BCN-SDR,BCN,SDR,Barcelona,Santander,ES,ES,539.2,3,renfe_0973712026-04-06,Barcelona-Sants,Lyon Part Dieu,534.0,306.0,day,7,80.1,fort_potentiel,107.976,country_city_distance
+BCN-SCQ,BCN,SCQ,Barcelona,Santiago de Compostela,ES,ES,883.3,3,renfe_0394212026-04-06,Barcelona-Sants,Sevilla-Santa Justa,825.9,370.0,day,7,123.88,fort_potentiel,107.961,country_city_distance
+BCN-SVQ,BCN,SVQ,Barcelona,Seville,ES,ES,809.3,3,renfe_0394212026-04-06,Barcelona-Sants,Sevilla-Santa Justa,825.9,370.0,day,7,123.88,fort_potentiel,109.41,country_city_distance
+BCN-VLL,BCN,VLL,Barcelona,Valladolid,ES,ES,578.8,3,renfe_0973712026-04-06,Barcelona-Sants,Lyon Part Dieu,534.0,306.0,day,7,80.1,fort_potentiel,104.815,country_city_distance
+BCN-VGO,BCN,VGO,Barcelona,Vigo,ES,ES,893.3,2,renfe_0062212026-04-07,Barcelona-Sants,Vigo Urzaiz,904.1,832.0,day,7,135.62,faible_potentiel,111.698,country_city_distance
+BIO-ALC,BIO,ALC,Bilbao,Alicante,ES,ES,592.1,2,renfe_0531212026-04-06,Leon,Alicante/Alacant,639.0,280.0,day,7,95.85,fort_potentiel,107.02,country_city_distance
+BIO-BCN,BIO,BCN,Bilbao,Barcelona,ES,ES,466.8,2,renfe_0043712026-04-07,Bilbao-Abando Indalecio Prieto,Barcelona-Sants,466.2,431.0,day,7,69.93,potentiel_moyen,114.968,country_city_distance
+BIO-LCG,BIO,LCG,Bilbao,Culleredo,ES,ES,442.3,2,renfe_0043712026-04-07,Bilbao-Abando Indalecio Prieto,Barcelona-Sants,466.2,431.0,day,7,69.93,potentiel_moyen,102.399,country_city_distance
+BIO-IBZ,BIO,IBZ,Bilbao,Ibiza (Eivissa),ES,ES,609.2,3,renfe_0043712026-04-07,Bilbao-Abando Indalecio Prieto,Barcelona-Sants,466.2,431.0,day,7,69.93,potentiel_moyen,97.132,country_city_distance
+BIO-MAD,BIO,MAD,Bilbao,Madrid,ES,ES,317.0,2,renfe_0418612026-04-07,Bilbao-Abando Indalecio Prieto,Madrid-Chamartín-Clara Campoamor,316.3,275.0,day,7,47.44,potentiel_moyen,114.945,country_city_distance
+BIO-AGP,BIO,AGP,Bilbao,Málaga,ES,ES,749.1,2,renfe_0399012026-05-01,Barcelona-Sants,Malaga Maria Zambrano,768.7,384.0,day,7,115.3,fort_potentiel,106.632,country_city_distance
+BIO-PMI,BIO,PMI,Bilbao,Palma de Mallorca,ES,ES,628.8,4,renfe_0531212026-04-06,Leon,Alicante/Alacant,639.0,280.0,day,7,95.85,fort_potentiel,101.776,country_distance
+BIO-SCQ,BIO,SCQ,Bilbao,Santiago de Compostela,ES,ES,449.1,2,renfe_0043712026-04-07,Bilbao-Abando Indalecio Prieto,Barcelona-Sants,466.2,431.0,day,7,69.93,potentiel_moyen,103.102,country_city_distance
+BIO-SVQ,BIO,SVQ,Bilbao,Seville,ES,ES,701.2,2,renfe_0575012026-04-06,Gijón/Xixón,Castelló,610.7,447.0,day,7,91.6,fort_potentiel,96.303,country_distance
+LCG-BCN,LCG,BCN,Culleredo,Barcelona,ES,ES,887.7,2,renfe_0394312026-04-06,Sevilla-Santa Justa,Barcelona-Sants,825.9,348.0,day,7,123.88,fort_potentiel,103.402,country_city_distance
+LCG-BIO,LCG,BIO,Culleredo,Bilbao,ES,ES,442.3,2,renfe_0043812026-04-07,Barcelona-Sants,Bilbao-Abando Indalecio Prieto,466.2,423.0,day,7,69.93,potentiel_moyen,102.399,country_city_distance
+LCG-MAD,LCG,MAD,Culleredo,Madrid,ES,ES,505.5,3,renfe_0314012026-04-06,Barcelona-Sants,Madrid Pta.Atocha - Almudena Grandes,501.9,181.0,day,7,75.28,potentiel_moyen,103.572,country_city_distance
+LCG-SVQ,LCG,SVQ,Culleredo,Seville,ES,ES,687.2,2,renfe_0062242026-04-07,Barcelona-Sants,Leon,652.3,468.0,day,7,97.84,fort_potentiel,95.935,country_distance
+GRX-BCN,GRX,BCN,Granada,Barcelona,ES,ES,680.1,2,renfe_0393112026-04-26,Granada,Barcelona-Sants,679.9,388.0,day,7,101.98,fort_potentiel,117.993,country_city_distance
+GRX-PMI,GRX,PMI,Granada,Palma de Mallorca,ES,ES,625.7,3,renfe_0393112026-04-26,Granada,Barcelona-Sants,679.9,388.0,day,7,101.98,fort_potentiel,105.522,country_city_distance
+EAS-BCN,EAS,BCN,Hondarribia,Barcelona,ES,ES,391.9,2,renfe_0056312026-04-12,Pamplona/Iruña,Barcelona-Sants,352.4,242.0,day,7,52.86,potentiel_moyen,103.48,country_city_distance
+IBZ-BCN,IBZ,BCN,Ibiza (Eivissa),Barcelona,ES,ES,276.2,3,renfe_1705012026-04-06,Zaragoza-Delicias,Barcelona-Estació De França,259.6,396.0,day,7,38.94,potentiel_moyen,101.225,country_city_distance
+IBZ-BIO,IBZ,BIO,Ibiza (Eivissa),Bilbao,ES,ES,609.2,2,renfe_0043812026-04-07,Barcelona-Sants,Bilbao-Abando Indalecio Prieto,466.2,423.0,day,7,69.93,potentiel_moyen,97.132,country_city_distance
+IBZ-MAD,IBZ,MAD,Ibiza (Eivissa),Madrid,ES,ES,459.9,5,renfe_0446412026-04-06,Vigo Urzaiz,Madrid-Chamartín-Clara Campoamor,463.3,230.0,day,7,69.5,potentiel_moyen,105.44,country_city_distance
+XRY-BCN,XRY,BCN,Jerez de la Frontera,Barcelona,ES,ES,865.7,3,renfe_0394312026-04-06,Sevilla-Santa Justa,Barcelona-Sants,825.9,348.0,day,7,123.88,fort_potentiel,107.235,country_city_distance
+MAD-LEI,MAD,LEI,Madrid,Almería,ES,ES,419.0,2,renfe_0027612026-04-07,Madrid-Chamartín-Clara Campoamor,Almeria,418.1,446.0,day,7,62.72,potentiel_moyen,114.946,country_city_distance
+MAD-BCN,MAD,BCN,Madrid,Barcelona,ES,ES,483.2,4,renfe_0307112026-04-07,Madrid Pta.Atocha - Almudena Grandes,Barcelona-Sants,501.9,182.0,day,7,75.28,potentiel_moyen,114.032,country_city_distance
+MAD-BIO,MAD,BIO,Madrid,Bilbao,ES,ES,317.0,2,renfe_0418712026-04-07,Madrid-Chamartín-Clara Campoamor,Bilbao-Abando Indalecio Prieto,316.3,287.0,day,7,47.44,potentiel_moyen,114.945,country_city_distance
+MAD-LCG,MAD,LCG,Madrid,Culleredo,ES,ES,505.5,3,renfe_0307112026-04-07,Madrid Pta.Atocha - Almudena Grandes,Barcelona-Sants,501.9,182.0,day,7,75.28,potentiel_moyen,103.572,country_city_distance
+MAD-IBZ,MAD,IBZ,Madrid,Ibiza (Eivissa),ES,ES,459.9,5,renfe_0456512026-04-06,Madrid-Chamartín-Clara Campoamor,Vigo Urzaiz,463.3,233.0,day,7,69.5,potentiel_moyen,105.44,country_city_distance
+MAD-AGP,MAD,AGP,Madrid,Málaga,ES,ES,432.2,2,renfe_0217212026-04-27,Madrid Pta.Atocha - Almudena Grandes,Malaga Maria Zambrano,415.9,159.0,day,7,62.38,potentiel_moyen,114.057,country_city_distance
+MAD-PMI,MAD,PMI,Madrid,Palma de Mallorca,ES,ES,547.4,4,renfe_0440512026-04-06,Madrid-Chamartín-Clara Campoamor,A Coruña,505.6,216.0,day,7,75.84,potentiel_moyen,104.091,country_city_distance
+MAD-OVD,MAD,OVD,Madrid,Ranón,ES,ES,397.3,2,renfe_0213612026-04-16,Madrid Pta.Atocha - Almudena Grandes,Granada,358.4,194.0,day,7,53.76,potentiel_moyen,105.052,country_city_distance
+MAD-SCQ,MAD,SCQ,Madrid,Santiago de Compostela,ES,ES,482.7,2,renfe_0440512026-04-06,Madrid-Chamartín-Clara Campoamor,A Coruña,505.6,216.0,day,7,75.84,potentiel_moyen,103.814,country_city_distance
+MAD-VLC,MAD,VLC,Madrid,Valencia,ES,ES,286.0,3,renfe_0508032026-04-06,Madrid-Chamartín-Clara Campoamor,Valencia Joaquin Sorolla,302.9,114.0,day,7,45.43,potentiel_moyen,113.523,country_city_distance
+MAD-VGO,MAD,VGO,Madrid,Vigo,ES,ES,463.9,4,renfe_0456512026-04-06,Madrid-Chamartín-Clara Campoamor,Vigo Urzaiz,463.3,233.0,day,7,69.5,potentiel_moyen,114.968,country_city_distance
+MAH-VLC,MAH,VLC,Mahón (Maó),Valencia,ES,ES,404.3,2,renfe_0508012026-04-06,Burgos Rosa Manzano,Valencia Joaquin Sorolla,425.3,224.0,day,7,63.8,potentiel_moyen,102.451,country_city_distance
+AGP-BCN,AGP,BCN,Málaga,Barcelona,ES,ES,766.0,3,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,117.912,country_city_distance
+AGP-BIO,AGP,BIO,Málaga,Bilbao,ES,ES,749.1,2,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,106.632,country_city_distance
+AGP-IBZ,AGP,IBZ,Málaga,Ibiza (Eivissa),ES,ES,570.9,2,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,97.338,country_city_distance
+AGP-MAD,AGP,MAD,Málaga,Madrid,ES,ES,432.2,2,renfe_0207312026-04-27,Malaga Maria Zambrano,Madrid Pta.Atocha - Almudena Grandes,415.9,159.0,day,7,62.38,potentiel_moyen,114.057,country_city_distance
+AGP-PMI,AGP,PMI,Málaga,Palma de Mallorca,ES,ES,709.1,5,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,105.586,country_city_distance
+AGP-OVD,AGP,OVD,Málaga,Ranón,ES,ES,777.0,2,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,107.233,country_city_distance
+AGP-SCQ,AGP,SCQ,Málaga,Santiago de Compostela,ES,ES,768.2,3,renfe_0399312026-04-06,Malaga Maria Zambrano,Barcelona-Sants,768.7,363.0,day,7,115.3,fort_potentiel,107.038,country_city_distance
+PMI-ALC,PMI,ALC,Palma de Mallorca,Alicante,ES,ES,318.2,3,renfe_0591222026-04-06,Madrid Pta.Atocha - Almudena Grandes,Alicante/Alacant,357.7,146.0,day,7,53.65,potentiel_moyen,101.602,country_city_distance
+PMI-BIO,PMI,BIO,Palma de Mallorca,Bilbao,ES,ES,628.8,4,renfe_0518312026-04-06,Alicante/Alacant,Leon,639.0,290.0,day,7,95.85,fort_potentiel,101.776,country_distance
+PMI-GRX,PMI,GRX,Palma de Mallorca,Granada,ES,ES,625.7,3,renfe_0393012026-04-26,Barcelona-Sants,Granada,679.9,386.0,day,7,101.98,fort_potentiel,105.522,country_city_distance
+PMI-MAD,PMI,MAD,Palma de Mallorca,Madrid,ES,ES,547.4,4,renfe_0440412026-04-06,A Coruña,Madrid-Chamartín-Clara Campoamor,505.6,214.0,day,7,75.84,potentiel_moyen,104.091,country_city_distance
+PMI-AGP,PMI,AGP,Palma de Mallorca,Málaga,ES,ES,709.1,4,renfe_0399012026-05-01,Barcelona-Sants,Malaga Maria Zambrano,768.7,384.0,day,7,115.3,fort_potentiel,105.586,country_city_distance
+PMI-OVD,PMI,OVD,Palma de Mallorca,Ranón,ES,ES,854.8,2,renfe_0527312026-04-06,Alicante/Alacant,Ourense,767.1,294.0,day,7,115.06,fort_potentiel,98.617,country_distance
+PMI-SCQ,PMI,SCQ,Palma de Mallorca,Santiago de Compostela,ES,ES,1003.2,2,renfe_0394212026-04-06,Barcelona-Sants,Sevilla-Santa Justa,825.9,370.0,day,7,123.88,fort_potentiel,94.855,country_distance
+PMI-SVQ,PMI,SVQ,Palma de Mallorca,Seville,ES,ES,787.5,4,renfe_0527312026-04-06,Alicante/Alacant,Ourense,767.1,294.0,day,7,115.06,fort_potentiel,99.82,country_distance
+PMI-VLC,PMI,VLC,Palma de Mallorca,Valencia,ES,ES,276.3,5,renfe_1801812026-05-11,Alcazar de San Juan,Valencia-Estaciò Del Nord,243.0,215.0,day,7,36.45,potentiel_moyen,104.487,country_city_distance
+PNA-MAD,PNA,MAD,Pamplona,Madrid,ES,ES,299.5,2,renfe_0060812026-04-07,Pamplona/Iruña,Madrid Pta.Atocha - Almudena Grandes,317.4,217.0,day,7,47.61,potentiel_moyen,113.506,country_city_distance
+OVD-BCN,OVD,BCN,Ranón,Barcelona,ES,ES,711.6,2,renfe_0393112026-04-26,Granada,Barcelona-Sants,679.9,388.0,day,7,101.98,fort_potentiel,109.386,country_city_distance
+OVD-MAD,OVD,MAD,Ranón,Madrid,ES,ES,397.3,2,renfe_0206712026-04-06,Granada,Madrid Pta.Atocha - Almudena Grandes,358.4,202.0,day,7,53.76,potentiel_moyen,105.052,country_city_distance
+OVD-AGP,OVD,AGP,Ranón,Málaga,ES,ES,777.0,2,renfe_0399012026-05-01,Barcelona-Sants,Malaga Maria Zambrano,768.7,384.0,day,7,115.3,fort_potentiel,107.233,country_city_distance
+OVD-PMI,OVD,PMI,Ranón,Palma de Mallorca,ES,ES,854.8,2,renfe_0538212026-04-06,Ourense,Alicante/Alacant,767.1,303.0,day,7,115.06,fort_potentiel,98.617,country_distance
+OVD-SVQ,OVD,SVQ,Ranón,Seville,ES,ES,683.5,2,renfe_0575012026-04-06,Gijón/Xixón,Castelló,610.7,447.0,day,7,91.6,fort_potentiel,97.087,country_distance
+OVD-VLC,OVD,VLC,Ranón,Valencia,ES,ES,647.0,2,renfe_0517012026-04-06,Leon,Valencia Joaquin Sorolla,558.3,251.0,day,7,83.74,fort_potentiel,106.239,country_city_distance
+SDR-BCN,SDR,BCN,Santander,Barcelona,ES,ES,539.2,3,renfe_0974212026-04-06,Lyon Part Dieu,Barcelona-Sants,534.0,288.0,day,7,80.1,fort_potentiel,107.976,country_city_distance
+SCQ-BCN,SCQ,BCN,Santiago de Compostela,Barcelona,ES,ES,883.3,3,renfe_0394312026-04-06,Sevilla-Santa Justa,Barcelona-Sants,825.9,348.0,day,7,123.88,fort_potentiel,107.961,country_city_distance
+SCQ-BIO,SCQ,BIO,Santiago de Compostela,Bilbao,ES,ES,449.1,2,renfe_0043812026-04-07,Barcelona-Sants,Bilbao-Abando Indalecio Prieto,466.2,423.0,day,7,69.93,potentiel_moyen,103.102,country_city_distance
+SCQ-MAD,SCQ,MAD,Santiago de Compostela,Madrid,ES,ES,482.7,2,renfe_0440412026-04-06,A Coruña,Madrid-Chamartín-Clara Campoamor,505.6,214.0,day,7,75.84,potentiel_moyen,103.814,country_city_distance
+SCQ-AGP,SCQ,AGP,Santiago de Compostela,Málaga,ES,ES,768.2,3,renfe_0399012026-05-01,Barcelona-Sants,Malaga Maria Zambrano,768.7,384.0,day,7,115.3,fort_potentiel,107.038,country_city_distance
+SCQ-PMI,SCQ,PMI,Santiago de Compostela,Palma de Mallorca,ES,ES,1003.2,3,renfe_0394312026-04-06,Sevilla-Santa Justa,Barcelona-Sants,825.9,348.0,day,7,123.88,fort_potentiel,94.855,country_distance
+SVQ-LEI,SVQ,LEI,Seville,Almería,ES,ES,318.8,2,renfe_1877912026-04-07,Sevilla-Santa Justa,Plasencia,292.6,298.0,day,7,43.89,potentiel_moyen,97.368,country_distance
+SVQ-BCN,SVQ,BCN,Seville,Barcelona,ES,ES,809.3,3,renfe_0394312026-04-06,Sevilla-Santa Justa,Barcelona-Sants,825.9,348.0,day,7,123.88,fort_potentiel,109.41,country_city_distance
+SVQ-BIO,SVQ,BIO,Seville,Bilbao,ES,ES,701.2,2,renfe_0572112026-04-06,Castelló,Gijón/Xixón,610.7,446.0,day,7,91.6,fort_potentiel,96.303,country_distance
+SVQ-LCG,SVQ,LCG,Seville,Culleredo,ES,ES,687.2,2,renfe_0518312026-04-06,Alicante/Alacant,Leon,639.0,290.0,day,7,95.85,fort_potentiel,95.778,country_distance
+SVQ-PMI,SVQ,PMI,Seville,Palma de Mallorca,ES,ES,787.5,5,renfe_0538212026-04-06,Ourense,Alicante/Alacant,767.1,303.0,day,7,115.06,fort_potentiel,99.82,country_distance
+SVQ-OVD,SVQ,OVD,Seville,Ranón,ES,ES,683.5,2,renfe_0572112026-04-06,Castelló,Gijón/Xixón,610.7,446.0,day,7,91.6,fort_potentiel,97.087,country_distance
+VLC-MAD,VLC,MAD,Valencia,Madrid,ES,ES,286.0,3,renfe_0507112026-07-01,Valencia Joaquin Sorolla,Madrid-Chamartín-Clara Campoamor,302.9,116.0,day,7,45.43,potentiel_moyen,113.523,country_city_distance
+VLC-MAH,VLC,MAH,Valencia,Mahón (Maó),ES,ES,404.3,2,renfe_0517112026-04-06,Valencia Joaquin Sorolla,Burgos Rosa Manzano,425.3,227.0,day,7,63.8,potentiel_moyen,102.451,country_city_distance
+VLC-PMI,VLC,PMI,Valencia,Palma de Mallorca,ES,ES,276.3,5,renfe_1802712026-04-06,Valencia-Estaciò Del Nord,Alcazar de San Juan,243.0,241.0,day,7,36.45,potentiel_moyen,104.487,country_city_distance
+VLC-OVD,VLC,OVD,Valencia,Ranón,ES,ES,647.0,2,renfe_0507112026-04-06,Valencia Joaquin Sorolla,Leon,558.3,259.0,day,7,83.74,fort_potentiel,106.239,country_city_distance
+VLL-BCN,VLL,BCN,Valladolid,Barcelona,ES,ES,578.8,3,renfe_0974212026-04-06,Lyon Part Dieu,Barcelona-Sants,534.0,288.0,day,7,80.1,fort_potentiel,104.815,country_city_distance
+VGO-BCN,VGO,BCN,Vigo,Barcelona,ES,ES,893.3,2,renfe_0062112026-04-08,Vigo Urzaiz,Barcelona-Sants,904.1,848.0,day,7,135.62,faible_potentiel,111.698,country_city_distance
+VGO-MAD,VGO,MAD,Vigo,Madrid,ES,ES,463.9,4,renfe_0446412026-04-06,Vigo Urzaiz,Madrid-Chamartín-Clara Campoamor,463.3,230.0,day,7,69.5,potentiel_moyen,114.968,country_city_distance
+HEL-KAJ,HEL,KAJ,Helsinki (Vantaa),Kajaani,FI,FI,463.0,2,back_on_track_VR IC 273,Helsinki / Helsingfors,Rovaniemi,899.0,710.0,night,7,134.85,potentiel_moyen,82.083,country_city_distance
+HEL-KEM,HEL,KEM,Helsinki (Vantaa),Kemi / Tornio,FI,FI,607.5,2,back_on_track_VR IC 273,Helsinki / Helsingfors,Rovaniemi,899.0,710.0,night,7,134.85,potentiel_moyen,92.504,country_city_distance
+HEL-OUL,HEL,OUL,Helsinki (Vantaa),Oulu / Oulunsalo,FI,FI,513.2,2,back_on_track_VR IC 273,Helsinki / Helsingfors,Rovaniemi,899.0,710.0,night,7,134.85,potentiel_moyen,83.815,country_city_distance
+HEL-RVN,HEL,RVN,Helsinki (Vantaa),Rovaniemi,FI,FI,695.7,2,back_on_track_VR IC 273,Helsinki / Helsingfors,Rovaniemi,899.0,710.0,night,7,134.85,potentiel_moyen,107.694,country_city_distance
+KAJ-HEL,KAJ,HEL,Kajaani,Helsinki (Vantaa),FI,FI,463.0,2,back_on_track_VR IC 266 (H),Rovaniemi,Helsinki / Helsingfors,899.0,755.0,night,7,134.85,faible_potentiel,79.083,country_city_distance
+KEM-HEL,KEM,HEL,Kemi / Tornio,Helsinki (Vantaa),FI,FI,607.5,2,back_on_track_VR IC 274,Kemijärvi,Helsinki / Helsingfors,983.0,855.0,night,7,147.45,faible_potentiel,90.547,country_city_distance
+KTT-HEL,KTT,HEL,Kittilä,Helsinki (Vantaa),FI,FI,820.9,2,back_on_track_VR IC 266 (H),Rovaniemi,Helsinki / Helsingfors,899.0,755.0,night,7,134.85,faible_potentiel,98.372,country_city_distance
+OUL-HEL,OUL,HEL,Oulu / Oulunsalo,Helsinki (Vantaa),FI,FI,513.2,2,back_on_track_VR IC 266 (H),Rovaniemi,Helsinki / Helsingfors,899.0,755.0,night,7,134.85,faible_potentiel,80.815,country_city_distance
+RVN-HEL,RVN,HEL,Rovaniemi,Helsinki (Vantaa),FI,FI,695.7,2,back_on_track_VR IC 266 (H),Rovaniemi,Helsinki / Helsingfors,899.0,755.0,night,7,134.85,faible_potentiel,104.694,country_city_distance
+AJA-LYS,AJA,LYS,Ajaccio,"Colombier-Saugnieu, Rhône",FR,FR,517.1,4,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,94.44,country_distance
+AJA-LIL,AJA,LIL,Ajaccio,Lesquin,FR,FR,1055.5,2,back_on_track_SNCF IC Nuit 5781,Paris Austerlitz,Nice Ville,989.0,754.0,night,7,148.35,faible_potentiel,87.867,country_distance
+AJA-MRS,AJA,MRS,Ajaccio,"Marignane, Bouches-du-Rhône",FR,FR,338.3,3,sncf_intercites_OCESN4200F3799136:2025-01-21T00:39:14Z,Nancy,Lyon Perrache,342.5,270.0,day,7,51.38,potentiel_moyen,92.767,country_distance
+AJA-NTE,AJA,NTE,Ajaccio,Nantes,FR,FR,1008.3,3,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,90.744,country_city_distance
+AJA-ORY,AJA,ORY,Ajaccio,"Paris (Orly, Val-de-Marne)",FR,FR,908.4,2,back_on_track_SNCF IC Nuit 5792,Briançon,Paris Austerlitz,796.0,730.0,night,7,119.4,faible_potentiel,99.907,country_city_distance
+AJA-TLS,AJA,TLS,Ajaccio,Toulouse/Blagnac,FR,FR,635.8,3,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,99.951,country_city_distance
+BIA-LYS,BIA,LYS,Bastia,"Colombier-Saugnieu, Rhône",FR,FR,497.3,3,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,94.854,country_distance
+BIA-DUS,BIA,DUS,Bastia,Düsseldorf,FR,DE,993.0,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,84.094,country_distance
+BIA-FRA,BIA,FRA,Bastia,Frankfurt am Main,FR,DE,834.1,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,77.326,country_distance
+BIA-HAM,BIA,HAM,Bastia,Hamburg,FR,DE,1232.3,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,86.225,country_distance
+BIA-CGN,BIA,CGN,Bastia,Köln (Cologne),FR,DE,941.3,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,82.265,country_distance
+BIA-LIL,BIA,LIL,Bastia,Lesquin,FR,FR,1015.0,2,back_on_track_SNCF IC Nuit 5781,Paris Austerlitz,Nice Ville,989.0,754.0,night,7,148.35,faible_potentiel,90.344,country_distance
+BIA-MRS,BIA,MRS,Bastia,"Marignane, Bouches-du-Rhône",FR,FR,361.0,3,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,93.691,country_distance
+BIA-NTE,BIA,NTE,Bastia,Nantes,FR,FR,1011.8,3,back_on_track_SNCF IC Nuit 3740,Paris Austerlitz,Tarbes,841.0,716.0,night,5,126.15,potentiel_moyen,91.734,country_distance
+BIA-ORY,BIA,ORY,Bastia,"Paris (Orly, Val-de-Marne)",FR,FR,881.5,2,back_on_track_SNCF IC Nuit 5792,Briançon,Paris Austerlitz,796.0,730.0,night,7,119.4,faible_potentiel,101.004,country_city_distance
+BIA-STR,BIA,STR,Bastia,Stuttgart,FR,DE,682.7,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,67.808,country_distance
+BIA-TLS,BIA,TLS,Bastia,Toulouse/Blagnac,FR,FR,669.8,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,100.323,country_city_distance
+BOD-LYS,BOD,LYS,Bordeaux,"Colombier-Saugnieu, Rhône",FR,FR,465.0,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,101.393,country_city_distance
+BOD-LIL,BOD,LIL,Bordeaux,Lesquin,FR,FR,698.8,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,95.017,country_city_distance
+BOD-MRS,BOD,MRS,Bordeaux,"Marignane, Bouches-du-Rhône",FR,FR,497.6,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,104.821,country_city_distance
+BOD-MUC,BOD,MUC,Bordeaux,Munich,FR,DE,1031.0,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,83.053,country_distance
+BOD-NTE,BOD,NTE,Bordeaux,Nantes,FR,FR,267.6,2,sncf_intercites_OCESN3858F3522237:2025-01-21T00:39:14Z,Bordeaux Saint-Jean,Nantes,276.6,250.0,day,7,41.49,potentiel_moyen,114.159,country_city_distance
+BOD-NCE,BOD,NCE,Bordeaux,"Nice, Alpes-Maritimes",FR,FR,644.8,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,98.409,country_city_distance
+BOD-CDG,BOD,CDG,Bordeaux,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,526.9,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,102.18,country_city_distance
+BOD-SXB,BOD,SXB,Bordeaux,Strasbourg,FR,FR,757.8,2,sncf_intercites_OCESN4655F3523772:2024-12-16T00:27:29Z,Bordeaux Saint-Jean,Marseille Saint-Charles,503.6,387.0,day,6,75.54,potentiel_moyen,94.25,country_city_distance
+BES-LYS,BES,LYS,Brest,"Colombier-Saugnieu, Rhône",FR,FR,780.3,2,back_on_track_SNCF IC Nuit 3751,Paris Austerlitz,Toulouse Matabiau,714.0,571.0,night,7,107.1,potentiel_moyen,93.015,country_distance
+BES-MRS,BES,MRS,Brest,"Marignane, Bouches-du-Rhône",FR,FR,928.8,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,91.888,country_distance
+BES-CDG,BES,CDG,Brest,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,515.0,2,sncf_intercites_OCESN3654F3521987:2025-01-17T00:20:49Z,Cahors,Paris Austerlitz,493.6,348.0,day,5,74.04,potentiel_moyen,102.416,country_city_distance
+BSL-DRS,BSL,DRS,Bâle / Mulhouse,Dresden,FR,DE,598.8,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,64.608,country_distance
+BSL-HAM,BSL,HAM,Bâle / Mulhouse,Hamburg,FR,DE,692.6,3,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,70.941,country_distance
+BSL-CDG,BSL,CDG,Bâle / Mulhouse,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,399.3,3,sncf_intercites_OCESN3674F3530179:2025-01-18T00:24:06Z,Brive-la-Gaillarde,Paris Austerlitz,415.1,274.0,day,7,62.26,potentiel_moyen,103.849,country_city_distance
+BZR-BRE,BZR,BRE,Béziers,Bremen,FR,DE,1153.0,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,87.05,country_distance
+BZR-NRN,BZR,NRN,Béziers,Weeze,FR,DE,943.8,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,77.811,country_distance
+CLY-DUS,CLY,DUS,Calvi,Düsseldorf,FR,DE,985.9,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,82.168,country_distance
+CLY-CGN,CLY,CGN,Calvi,Köln (Cologne),FR,DE,935.3,2,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,80.351,country_distance
+CLY-MRS,CLY,MRS,Calvi,"Marignane, Bouches-du-Rhône",FR,FR,308.2,3,sncf_intercites_OCESN4093F3514373:2025-01-22T00:42:25Z,Paris Austerlitz,Rennes,308.7,244.0,day,6,46.3,potentiel_moyen,92.933,country_distance
+CLY-FMM,CLY,FMM,Calvi,Memmingen,FR,DE,617.3,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,64.987,country_distance
+CLY-NTE,CLY,NTE,Calvi,Nantes,FR,FR,966.8,2,back_on_track_SNCF IC Nuit 3740,Paris Austerlitz,Tarbes,841.0,716.0,night,5,126.15,potentiel_moyen,91.533,country_distance
+CLY-ORY,CLY,ORY,Calvi,"Paris (Orly, Val-de-Marne)",FR,FR,851.1,2,back_on_track_SNCF IC Nuit 3754 (Sun),Albi Ville,Paris Austerlitz,792.0,702.0,night,1,118.8,potentiel_moyen,100.264,country_city_distance
+CFE-CDG,CFE,CDG,Clermont-Ferrand,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,361.3,2,sncf_intercites_OCESN5990F3516598:2024-11-29T10:03:28Z,Clermont-Ferrand,Paris Bercy Bourg. Pays d'Auv.,344.6,242.0,night,6,51.69,potentiel_moyen,112.844,country_city_distance
+LYS-AJA,LYS,AJA,"Colombier-Saugnieu, Rhône",Ajaccio,FR,FR,517.1,4,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,92.44,country_distance
+LYS-BIA,LYS,BIA,"Colombier-Saugnieu, Rhône",Bastia,FR,FR,497.3,3,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,94.151,country_distance
+LYS-BOD,LYS,BOD,"Colombier-Saugnieu, Rhône",Bordeaux,FR,FR,465.0,2,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,101.393,country_city_distance
+LYS-BES,LYS,BES,"Colombier-Saugnieu, Rhône",Brest,FR,FR,780.3,2,back_on_track_SNCF IC Nuit 3750,Toulouse Matabiau,Paris Austerlitz,714.0,679.0,night,7,107.1,potentiel_moyen,93.015,country_distance
+LYS-DUS,LYS,DUS,"Colombier-Saugnieu, Rhône",Düsseldorf,FR,DE,630.8,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,67.398,country_distance
+LYS-MUC,LYS,MUC,"Colombier-Saugnieu, Rhône",Munich,FR,DE,585.2,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,63.189,country_distance
+LYS-NTE,LYS,NTE,"Colombier-Saugnieu, Rhône",Nantes,FR,FR,537.2,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,102.974,country_city_distance
+LYS-NCE,LYS,NCE,"Colombier-Saugnieu, Rhône","Nice, Alpes-Maritimes",FR,FR,284.7,2,sncf_intercites_OCESN3858F3522237:2025-01-21T00:39:14Z,Bordeaux Saint-Jean,Nantes,276.6,250.0,day,7,41.49,potentiel_moyen,94.486,country_distance
+LYS-CDG,LYS,CDG,"Colombier-Saugnieu, Rhône","Paris (Roissy-en-France, Val-d'Oise)",FR,FR,411.9,2,sncf_intercites_OCESN3674F3530179:2025-01-18T00:24:06Z,Brive-la-Gaillarde,Paris Austerlitz,415.1,274.0,day,7,62.26,potentiel_moyen,101.949,country_city_distance
+LYS-PIS,LYS,PIS,"Colombier-Saugnieu, Rhône",Poitiers/Biard,FR,FR,380.6,2,sncf_intercites_OCESN5990F3516598:2024-11-29T10:03:28Z,Clermont-Ferrand,Paris Bercy Bourg. Pays d'Auv.,344.6,242.0,night,6,51.69,potentiel_moyen,91.885,country_distance
+LYS-TLS,LYS,TLS,"Colombier-Saugnieu, Rhône",Toulouse/Blagnac,FR,FR,375.7,3,sncf_intercites_OCESN4770F3588894:2025-01-21T00:39:14Z,Marseille Saint-Charles,Toulouse Matabiau,318.8,233.0,day,3,47.82,potentiel_moyen,91.682,country_city_distance
+FSC-MRS,FSC,MRS,Figari,"Marignane, Bouches-du-Rhône",FR,FR,384.5,3,sncf_intercites_OCESN3674F3530179:2025-01-18T00:24:06Z,Brive-la-Gaillarde,Paris Austerlitz,415.1,274.0,day,7,62.26,potentiel_moyen,93.01,country_distance
+FSC-NTE,FSC,NTE,Figari,Nantes,FR,FR,1056.9,2,back_on_track_SNCF IC Nuit 3740,Paris Austerlitz,Tarbes,841.0,716.0,night,5,126.15,potentiel_moyen,89.484,country_distance
+FSC-NCE,FSC,NCE,Figari,"Nice, Alpes-Maritimes",FR,FR,285.0,3,sncf_intercites_OCESN69F3743461:2025-01-22T00:42:25Z,Paris Gare du Nord,Bruxelles Midi,259.7,186.0,day,6,38.96,potentiel_moyen,93.84,country_distance
+LIL-AJA,LIL,AJA,Lesquin,Ajaccio,FR,FR,1055.5,2,back_on_track_SNCF IC Nuit 5772,Nice Ville,Paris Austerlitz,989.0,853.0,night,7,148.35,faible_potentiel,87.867,country_distance
+LIL-BIA,LIL,BIA,Lesquin,Bastia,FR,FR,1015.0,2,back_on_track_SNCF IC Nuit 5772,Nice Ville,Paris Austerlitz,989.0,853.0,night,7,148.35,faible_potentiel,90.344,country_distance
+LIL-BOD,LIL,BOD,Lesquin,Bordeaux,FR,FR,698.8,2,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,95.017,country_city_distance
+LIL-MRS,LIL,MRS,Lesquin,"Marignane, Bouches-du-Rhône",FR,FR,808.5,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,93.399,country_distance
+LIL-NCE,LIL,NCE,Lesquin,"Nice, Alpes-Maritimes",FR,FR,828.5,2,back_on_track_SNCF IC Nuit 3750,Toulouse Matabiau,Paris Austerlitz,714.0,679.0,night,7,107.1,potentiel_moyen,90.295,country_distance
+LIL-TLS,LIL,TLS,Lesquin,Toulouse/Blagnac,FR,FR,782.5,2,back_on_track_SNCF IC Nuit 3751,Paris Austerlitz,Toulouse Matabiau,714.0,571.0,night,7,107.1,potentiel_moyen,95.42,country_city_distance
+MRS-AJA,MRS,AJA,"Marignane, Bouches-du-Rhône",Ajaccio,FR,FR,338.3,3,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,93.32,country_distance
+MRS-BIA,MRS,BIA,"Marignane, Bouches-du-Rhône",Bastia,FR,FR,361.0,3,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,93.833,country_distance
+MRS-BOD,MRS,BOD,"Marignane, Bouches-du-Rhône",Bordeaux,FR,FR,497.6,2,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,104.821,country_city_distance
+MRS-BES,MRS,BES,"Marignane, Bouches-du-Rhône",Brest,FR,FR,928.8,2,back_on_track_SNCF IC Nuit 3740,Paris Austerlitz,Tarbes,841.0,716.0,night,5,126.15,potentiel_moyen,93.819,country_distance
+MRS-CLY,MRS,CLY,"Marignane, Bouches-du-Rhône",Calvi,FR,FR,308.2,3,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,91.223,country_distance
+MRS-FSC,MRS,FSC,"Marignane, Bouches-du-Rhône",Figari,FR,FR,384.5,3,sncf_intercites_OCESN3685F3518395:2024-12-28T00:21:35Z,Paris Austerlitz,Brive-la-Gaillarde,415.1,274.0,night,7,62.26,potentiel_moyen,93.01,country_distance
+MRS-FRA,MRS,FRA,"Marignane, Bouches-du-Rhône",Frankfurt am Main,FR,DE,775.5,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,77.728,country_distance
+MRS-LIL,MRS,LIL,"Marignane, Bouches-du-Rhône",Lesquin,FR,FR,808.5,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,93.613,country_distance
+MRS-MUC,MRS,MUC,"Marignane, Bouches-du-Rhône",Munich,FR,DE,746.2,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,76.727,country_distance
+MRS-NTE,MRS,NTE,"Marignane, Bouches-du-Rhône",Nantes,FR,FR,674.5,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,97.128,country_city_distance
+MRS-ORY,MRS,ORY,"Marignane, Bouches-du-Rhône","Paris (Orly, Val-de-Marne)",FR,FR,628.1,2,back_on_track_SNCF IC Nuit 3790,Aurillac,Paris Austerlitz,602.0,651.0,night,7,90.3,potentiel_moyen,103.373,country_city_distance
+MRS-CDG,MRS,CDG,"Marignane, Bouches-du-Rhône","Paris (Roissy-en-France, Val-d'Oise)",FR,FR,652.2,8,back_on_track_SNCF IC Nuit 3790,Aurillac,Paris Austerlitz,602.0,651.0,night,7,90.3,potentiel_moyen,102.488,country_city_distance
+MPL-DUS,MPL,DUS,Montpellier/Méditerranée,Düsseldorf,FR,DE,883.1,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,77.936,country_distance
+MPL-FRA,MPL,FRA,Montpellier/Méditerranée,Frankfurt am Main,FR,DE,797.6,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,73.371,country_distance
+MPL-HHN,MPL,HHN,Montpellier/Méditerranée,Frankfurt am Main (Lautzenhausen),FR,DE,751.4,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,71.212,country_distance
+MPL-NTE,MPL,NTE,Montpellier/Méditerranée,Nantes,FR,FR,589.5,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,103.285,country_city_distance
+MPL-CDG,MPL,CDG,Montpellier/Méditerranée,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,613.7,2,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,104.258,country_city_distance
+MPL-SXB,MPL,SXB,Montpellier/Méditerranée,Strasbourg,FR,FR,619.8,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,94.466,country_distance
+NTE-AJA,NTE,AJA,Nantes,Ajaccio,FR,FR,1008.3,3,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,90.744,country_city_distance
+NTE-BIA,NTE,BIA,Nantes,Bastia,FR,FR,1011.8,3,back_on_track_SNCF IC Nuit 5772,Nice Ville,Paris Austerlitz,989.0,853.0,night,7,148.35,faible_potentiel,90.641,country_distance
+NTE-BOD,NTE,BOD,Nantes,Bordeaux,FR,FR,267.6,2,sncf_intercites_OCESN3837F3517637:2025-01-21T00:39:14Z,Nantes,Bordeaux Saint-Jean,276.6,251.0,day,7,41.49,potentiel_moyen,114.159,country_city_distance
+NTE-CLY,NTE,CLY,Nantes,Calvi,FR,FR,966.8,2,back_on_track_SNCF IC Nuit 5781,Paris Austerlitz,Nice Ville,989.0,754.0,night,7,148.35,faible_potentiel,91.517,country_distance
+NTE-LYS,NTE,LYS,Nantes,"Colombier-Saugnieu, Rhône",FR,FR,537.2,3,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,102.974,country_city_distance
+NTE-DUS,NTE,DUS,Nantes,Düsseldorf,FR,DE,761.9,2,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,75.175,country_distance
+NTE-FSC,NTE,FSC,Nantes,Figari,FR,FR,1056.9,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,88.737,country_city_distance
+NTE-MRS,NTE,MRS,Nantes,"Marignane, Bouches-du-Rhône",FR,FR,674.5,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,97.128,country_city_distance
+NTE-MPL,NTE,MPL,Nantes,Montpellier/Méditerranée,FR,FR,589.5,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,103.285,country_city_distance
+NTE-MUC,NTE,MUC,Nantes,Munich,FR,DE,1009.1,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,83.813,country_distance
+NTE-NCE,NTE,NCE,Nantes,"Nice, Alpes-Maritimes",FR,FR,790.4,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,96.712,country_city_distance
+NTE-CDG,NTE,CDG,Nantes,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,371.8,3,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,113.003,country_city_distance
+NTE-SXB,NTE,SXB,Nantes,Strasbourg,FR,FR,706.0,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,95.81,country_city_distance
+NTE-TLS,NTE,TLS,Nantes,Toulouse/Blagnac,FR,FR,455.4,2,sncf_intercites_OCESN4406F3782122:2025-01-21T00:39:14Z,Nantes,Lyon Perrache,514.0,413.0,day,7,77.1,potentiel_moyen,100.921,country_city_distance
+NCE-BOD,NCE,BOD,"Nice, Alpes-Maritimes",Bordeaux,FR,FR,644.8,2,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,98.409,country_city_distance
+NCE-LYS,NCE,LYS,"Nice, Alpes-Maritimes","Colombier-Saugnieu, Rhône",FR,FR,284.7,2,sncf_intercites_OCESN3837F3517637:2025-01-21T00:39:14Z,Nantes,Bordeaux Saint-Jean,276.6,251.0,day,7,41.49,potentiel_moyen,94.486,country_distance
+NCE-DUS,NCE,DUS,"Nice, Alpes-Maritimes",Düsseldorf,FR,DE,849.2,2,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,79.322,country_distance
+NCE-FSC,NCE,FSC,"Nice, Alpes-Maritimes",Figari,FR,FR,285.0,3,sncf_intercites_OCESN56F3740687:2025-01-22T00:42:25Z,Bruxelles Midi,Paris Gare du Nord,259.7,177.0,day,6,38.96,potentiel_moyen,93.84,country_distance
+NCE-FRA,NCE,FRA,"Nice, Alpes-Maritimes",Frankfurt am Main,FR,DE,715.4,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,71.724,country_distance
+NCE-HAM,NCE,HAM,"Nice, Alpes-Maritimes",Hamburg,FR,DE,1127.2,2,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,86.831,country_distance
+NCE-CGN,NCE,CGN,"Nice, Alpes-Maritimes",Köln (Cologne),FR,DE,801.5,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,77.061,country_distance
+NCE-LIL,NCE,LIL,"Nice, Alpes-Maritimes",Lesquin,FR,FR,828.5,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,93.019,country_distance
+NCE-MUC,NCE,MUC,"Nice, Alpes-Maritimes",Munich,FR,DE,630.0,1,back_on_track_ÖBB NJ 40469,Paris Est,Berlin Hbf,1168.0,794.0,night,3,175.2,faible_potentiel,66.608,country_distance
+NCE-NTE,NCE,NTE,"Nice, Alpes-Maritimes",Nantes,FR,FR,790.4,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,96.712,country_city_distance
+NCE-ORY,NCE,ORY,"Nice, Alpes-Maritimes","Paris (Orly, Val-de-Marne)",FR,FR,676.2,2,sncf_intercites_OCESN5772F3553086:2025-01-10T00:20:33Z,Nice-Ville,Paris Austerlitz,683.8,716.0,night,5,102.57,potentiel_moyen,104.719,country_city_distance
+NCE-CDG,NCE,CDG,"Nice, Alpes-Maritimes","Paris (Roissy-en-France, Val-d'Oise)",FR,FR,694.0,2,sncf_intercites_OCESN5772F3553086:2025-01-10T00:20:33Z,Nice-Ville,Paris Austerlitz,683.8,716.0,night,5,102.57,potentiel_moyen,104.633,country_city_distance
+NCE-TLS,NCE,TLS,"Nice, Alpes-Maritimes",Toulouse/Blagnac,FR,FR,470.8,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,96.888,country_city_distance
+ORY-AJA,ORY,AJA,"Paris (Orly, Val-de-Marne)",Ajaccio,FR,FR,908.4,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,102.907,country_city_distance
+ORY-BIA,ORY,BIA,"Paris (Orly, Val-de-Marne)",Bastia,FR,FR,881.5,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,104.004,country_city_distance
+ORY-CLY,ORY,CLY,"Paris (Orly, Val-de-Marne)",Calvi,FR,FR,851.1,2,back_on_track_SNCF IC Nuit 5787,Paris Austerlitz,Briançon,796.0,690.0,night,7,119.4,potentiel_moyen,100.689,country_city_distance
+ORY-NCE,ORY,NCE,"Paris (Orly, Val-de-Marne)","Nice, Alpes-Maritimes",FR,FR,676.2,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,103.716,country_city_distance
+ORY-TLS,ORY,TLS,"Paris (Orly, Val-de-Marne)",Toulouse/Blagnac,FR,FR,572.3,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,112.406,country_city_distance
+CDG-BOD,CDG,BOD,"Paris (Roissy-en-France, Val-d'Oise)",Bordeaux,FR,FR,526.9,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,103.801,country_city_distance
+CDG-BRE,CDG,BRE,"Paris (Roissy-en-France, Val-d'Oise)",Bremen,FR,DE,625.4,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,78.854,country_city_distance
+CDG-BES,CDG,BES,"Paris (Roissy-en-France, Val-d'Oise)",Brest,FR,FR,515.0,2,sncf_intercites_OCESN3635F3521937:2025-01-18T00:24:06Z,Paris Austerlitz,Cahors,493.6,347.0,day,7,74.04,potentiel_moyen,104.416,country_city_distance
+CDG-BSL,CDG,BSL,"Paris (Roissy-en-France, Val-d'Oise)",Bâle / Mulhouse,FR,FR,399.3,3,sncf_intercites_OCESN3685F3518395:2024-12-28T00:21:35Z,Paris Austerlitz,Brive-la-Gaillarde,415.1,274.0,night,7,62.26,potentiel_moyen,103.849,country_city_distance
+CDG-CFE,CDG,CFE,"Paris (Roissy-en-France, Val-d'Oise)",Clermont-Ferrand,FR,FR,361.3,2,sncf_intercites_OCESN5977F3656405:2025-01-17T00:20:49Z,Paris Bercy Bourg. Pays d'Auv.,Clermont-Ferrand,344.6,196.0,day,6,51.69,potentiel_moyen,112.844,country_city_distance
+CDG-LYS,CDG,LYS,"Paris (Roissy-en-France, Val-d'Oise)","Colombier-Saugnieu, Rhône",FR,FR,411.9,5,sncf_intercites_OCESN3685F3518395:2024-12-28T00:21:35Z,Paris Austerlitz,Brive-la-Gaillarde,415.1,274.0,night,7,62.26,potentiel_moyen,101.949,country_city_distance
+CDG-HAM,CDG,HAM,"Paris (Roissy-en-France, Val-d'Oise)",Hamburg,FR,DE,728.0,3,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,83.068,country_city_distance
+CDG-HAJ,CDG,HAJ,"Paris (Roissy-en-France, Val-d'Oise)",Hannover,FR,DE,631.3,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,76.98,country_city_distance
+CDG-MRS,CDG,MRS,"Paris (Roissy-en-France, Val-d'Oise)","Marignane, Bouches-du-Rhône",FR,FR,652.2,3,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,103.947,country_city_distance
+CDG-MPL,CDG,MPL,"Paris (Roissy-en-France, Val-d'Oise)",Montpellier/Méditerranée,FR,FR,613.7,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,106.258,country_city_distance
+CDG-MUC,CDG,MUC,"Paris (Roissy-en-France, Val-d'Oise)",Munich,FR,DE,681.2,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,80.646,country_city_distance
+CDG-NTE,CDG,NTE,"Paris (Roissy-en-France, Val-d'Oise)",Nantes,FR,FR,371.8,2,sncf_intercites_OCESN4071F3825261:2025-01-21T00:39:14Z,Paris Austerlitz,Nantes,342.1,238.0,day,5,51.32,potentiel_moyen,111.003,country_city_distance
+CDG-NCE,CDG,NCE,"Paris (Roissy-en-France, Val-d'Oise)","Nice, Alpes-Maritimes",FR,FR,694.0,2,back_on_track_SNCF IC Nuit 3751,Paris Austerlitz,Toulouse Matabiau,714.0,571.0,night,7,107.1,potentiel_moyen,103.334,country_city_distance
+CDG-NUE,CDG,NUE,"Paris (Roissy-en-France, Val-d'Oise)",Nuremberg,FR,DE,620.7,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,77.626,country_city_distance
+CDG-PUF,CDG,PUF,"Paris (Roissy-en-France, Val-d'Oise)",Pau/Pyrénées (Uzein),FR,FR,666.3,2,sncf_intercites_OCESN3731F3634977:2024-11-29T10:03:28Z,Paris Austerlitz,Tarbes,647.6,618.0,night,5,97.14,potentiel_moyen,103.965,country_city_distance
+CDG-RNS,CDG,RNS,"Paris (Roissy-en-France, Val-d'Oise)","Saint-Jacques-de-la-Lande, Ille-et-Vilaine",FR,FR,332.5,2,sncf_intercites_OCESN5977F3656405:2025-01-17T00:20:49Z,Paris Bercy Bourg. Pays d'Auv.,Clermont-Ferrand,344.6,196.0,day,6,51.69,potentiel_moyen,101.774,country_city_distance
+CDG-LEJ,CDG,LEJ,"Paris (Roissy-en-France, Val-d'Oise)",Schkeuditz,FR,DE,738.3,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,81.575,country_city_distance
+CDG-TLS,CDG,TLS,"Paris (Roissy-en-France, Val-d'Oise)",Toulouse/Blagnac,FR,FR,605.1,8,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,112.207,country_city_distance
+PUF-CDG,PUF,CDG,Pau/Pyrénées (Uzein),"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,666.3,2,back_on_track_SNCF IC Nuit 3790,Aurillac,Paris Austerlitz,602.0,651.0,night,7,90.3,potentiel_moyen,102.087,country_city_distance
+PIS-LYS,PIS,LYS,Poitiers/Biard,"Colombier-Saugnieu, Rhône",FR,FR,380.6,2,sncf_intercites_OCESN4752F3542315:2025-01-07T00:21:42Z,Nîmes Centre,Bordeaux Saint-Jean,406.8,320.0,day,5,61.02,potentiel_moyen,92.63,country_distance
+RNS-CDG,RNS,CDG,"Saint-Jacques-de-la-Lande, Ille-et-Vilaine","Paris (Roissy-en-France, Val-d'Oise)",FR,FR,332.5,2,sncf_intercites_OCESN4080F3831467:2025-01-21T00:39:14Z,Nantes,Paris Austerlitz,342.1,248.0,day,7,51.32,potentiel_moyen,102.47,country_city_distance
+SXB-BOD,SXB,BOD,Strasbourg,Bordeaux,FR,FR,757.8,2,sncf_intercites_OCESN4764F3543489:2025-01-21T00:39:14Z,Marseille Saint-Charles,Bordeaux Saint-Jean,503.6,385.0,day,6,75.54,potentiel_moyen,94.25,country_city_distance
+SXB-MPL,SXB,MPL,Strasbourg,Montpellier/Méditerranée,FR,FR,619.8,2,sncf_intercites_OCESN3645F3520783:2025-01-18T00:24:06Z,Paris Austerlitz,Toulouse Matabiau,585.9,426.0,day,7,87.88,fort_potentiel,94.484,country_distance
+SXB-NTE,SXB,NTE,Strasbourg,Nantes,FR,FR,706.0,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,95.81,country_city_distance
+TLS-AJA,TLS,AJA,Toulouse/Blagnac,Ajaccio,FR,FR,635.8,3,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,97.951,country_city_distance
+TLS-BIA,TLS,BIA,Toulouse/Blagnac,Bastia,FR,FR,669.8,2,back_on_track_SNCF IC Nuit 3750,Toulouse Matabiau,Paris Austerlitz,714.0,679.0,night,7,107.1,potentiel_moyen,98.805,country_city_distance
+TLS-BRE,TLS,BRE,Toulouse/Blagnac,Bremen,FR,DE,1180.8,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,85.867,country_distance
+TLS-LYS,TLS,LYS,Toulouse/Blagnac,"Colombier-Saugnieu, Rhône",FR,FR,375.7,3,sncf_intercites_OCESN4651F3521916:2025-01-21T00:39:14Z,Toulouse Matabiau,Marseille Saint-Charles,318.8,231.0,day,3,47.82,potentiel_moyen,91.682,country_city_distance
+TLS-FRA,TLS,FRA,Toulouse/Blagnac,Frankfurt am Main,FR,DE,896.7,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,78.637,country_distance
+TLS-HAM,TLS,HAM,Toulouse/Blagnac,Hamburg,FR,DE,1277.9,2,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,81.97,country_distance
+TLS-LIL,TLS,LIL,Toulouse/Blagnac,Lesquin,FR,FR,782.5,2,back_on_track_SNCF IC Nuit 3750,Toulouse Matabiau,Paris Austerlitz,714.0,679.0,night,7,107.1,potentiel_moyen,95.42,country_city_distance
+TLS-MUC,TLS,MUC,Toulouse/Blagnac,Munich,FR,DE,960.1,1,back_on_track_ES 475,Paris Gare du Nord,Berlin Hbf,1120.0,974.0,night,3,168.0,faible_potentiel,81.116,country_distance
+TLS-NTE,TLS,NTE,Toulouse/Blagnac,Nantes,FR,FR,455.4,2,sncf_intercites_OCESN4502F3796298:2025-01-21T00:39:14Z,Lyon Perrache,Nantes,514.0,412.0,day,7,77.1,potentiel_moyen,100.921,country_city_distance
+TLS-NCE,TLS,NCE,Toulouse/Blagnac,"Nice, Alpes-Maritimes",FR,FR,470.8,2,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,94.888,country_city_distance
+TLS-ORY,TLS,ORY,Toulouse/Blagnac,"Paris (Orly, Val-de-Marne)",FR,FR,572.3,2,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,110.406,country_city_distance
+TLS-CDG,TLS,CDG,Toulouse/Blagnac,"Paris (Roissy-en-France, Val-d'Oise)",FR,FR,605.1,4,sncf_intercites_OCESN3644F3744473:2025-01-21T00:39:14Z,Toulouse Matabiau,Paris Austerlitz,585.9,425.0,day,5,87.88,fort_potentiel,110.207,country_city_distance
+DBV-DUS,DBV,DUS,Dubrovnik,Düsseldorf,HR,DE,1302.4,3,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,79.404,country_distance
+DBV-FRA,DBV,FRA,Dubrovnik,Frankfurt am Main,HR,DE,1114.0,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,82.11,country_distance
+DBV-GVA,DBV,GVA,Dubrovnik,Geneva,HR,CH,1047.3,1,back_on_track_HŽPP/ÖBB EN 40414,Zagreb Gl. K.,Zürich HB,903.0,822.0,night,7,135.45,faible_potentiel,81.555,country_distance
+DBV-HAM,DBV,HAM,Dubrovnik,Hamburg,HR,DE,1373.5,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,77.689,country_distance
+DBV-HAJ,DBV,HAJ,Dubrovnik,Hannover,HR,DE,1273.5,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,77.271,country_distance
+DBV-CGN,DBV,CGN,Dubrovnik,Köln (Cologne),HR,DE,1251.0,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,76.127,country_distance
+DBV-MUC,DBV,MUC,Dubrovnik,Munich,HR,DE,818.0,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,87.822,country_distance
+DBV-STR,DBV,STR,Dubrovnik,Stuttgart,HR,DE,977.9,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,95.631,country_city_distance
+DBV-ZRH,DBV,ZRH,Dubrovnik,Zurich,HR,CH,936.9,2,back_on_track_HŽPP/ÖBB EN 40414,Zagreb Gl. K.,Zürich HB,903.0,822.0,night,7,135.45,faible_potentiel,99.095,country_city_distance
+PUY-FRA,PUY,FRA,Pula,Frankfurt am Main,HR,DE,698.5,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,84.117,country_distance
+PUY-HHN,PUY,HHN,Pula,Frankfurt am Main (Lautzenhausen),HR,DE,752.3,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,86.182,country_distance
+PUY-CGN,PUY,CGN,Pula,Köln (Cologne),HR,DE,833.9,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,83.194,country_distance
+RJK-HAM,RJK,HAM,Rijeka(Omišalj),Hamburg,HR,DE,992.0,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,85.632,country_distance
+RJK-CGN,RJK,CGN,Rijeka(Omišalj),Köln (Cologne),HR,DE,835.6,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,86.438,country_distance
+RJK-STR,RJK,STR,Rijeka(Omišalj),Stuttgart,HR,DE,560.1,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,91.274,country_city_distance
+SPU-DTM,SPU,DTM,Split,Dortmund,HR,DE,1099.5,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,80.081,country_distance
+SPU-DUS,SPU,DUS,Split,Düsseldorf,HR,DE,1119.3,3,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,80.813,country_distance
+SPU-FRA,SPU,FRA,Split,Frankfurt am Main,HR,DE,930.5,3,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,84.557,country_distance
+SPU-GVA,SPU,GVA,Split,Geneva,HR,CH,856.2,1,back_on_track_HŽPP/ÖBB EN 40414,Zagreb Gl. K.,Zürich HB,903.0,822.0,night,7,135.45,faible_potentiel,82.508,country_distance
+SPU-HAM,SPU,HAM,Split,Hamburg,HR,DE,1213.2,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,78.505,country_distance
+SPU-HAJ,SPU,HAJ,Split,Hannover,HR,DE,1106.3,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,78.54,country_distance
+SPU-CGN,SPU,CGN,Split,Köln (Cologne),HR,DE,1067.1,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,77.781,country_distance
+SPU-MUC,SPU,MUC,Split,Munich,HR,DE,638.8,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,80.45,country_distance
+SPU-NUE,SPU,NUE,Split,Nuremberg,HR,DE,773.3,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,86.876,country_distance
+SPU-STR,SPU,STR,Split,Stuttgart,HR,DE,790.3,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,98.347,country_city_distance
+SPU-ZRH,SPU,ZRH,Split,Zurich,HR,CH,744.2,2,back_on_track_HŽPP/ÖBB EN 40414,Zagreb Gl. K.,Zürich HB,903.0,822.0,night,7,135.45,faible_potentiel,93.54,country_city_distance
+ZAG-FRA,ZAG,FRA,Velika Gorica,Frankfurt am Main,HR,DE,734.6,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,87.286,country_distance
+ZAG-CGN,ZAG,CGN,Velika Gorica,Köln (Cologne),HR,DE,870.9,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,83.916,country_distance
+ZAG-MUC,ZAG,MUC,Velika Gorica,Munich,HR,DE,435.3,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,67.561,country_distance
+ZAG-STR,ZAG,STR,Velika Gorica,Stuttgart,HR,DE,611.8,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,92.774,country_city_distance
+ZAG-ZRH,ZAG,ZRH,Velika Gorica,Zurich,HR,CH,605.1,2,back_on_track_HŽPP/ÖBB EN 40414,Zagreb Gl. K.,Zürich HB,903.0,822.0,night,7,135.45,faible_potentiel,88.442,country_city_distance
+ZAD-DUS,ZAD,DUS,Zadar,Düsseldorf,HR,DE,1024.6,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,86.229,country_distance
+ZAD-FRA,ZAD,FRA,Zadar,Frankfurt am Main,HR,DE,835.7,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,90.766,country_distance
+ZAD-HHN,ZAD,HHN,Zadar,Frankfurt am Main (Lautzenhausen),HR,DE,893.0,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,89.217,country_distance
+ZAD-FDH,ZAD,FDH,Zadar,Friedrichshafen,HR,DE,601.7,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,80.166,country_distance
+ZAD-CGN,ZAD,CGN,Zadar,Köln (Cologne),HR,DE,972.0,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,83.381,country_distance
+ZAD-MUC,ZAD,MUC,Zadar,Munich,HR,DE,547.0,2,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,78.9,country_distance
+ZAD-FKB,ZAD,FKB,Zadar,Rheinmünster,HR,DE,762.1,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,89.752,country_distance
+ZAD-STR,ZAD,STR,Zadar,Stuttgart,HR,DE,693.8,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,98.546,country_city_distance
+ZAD-NRN,ZAD,NRN,Zadar,Weeze,HR,DE,1079.4,1,back_on_track_HŽPP/ÖBB EN 414,Zagreb Gl. K.,Stuttgart Hbf,807.0,780.0,night,7,121.05,faible_potentiel,81.316,country_distance
+BUD-DTM,BUD,DTM,Budapest,Dortmund,HU,DE,955.1,1,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,102.572,country_city_distance
+BUD-DUS,BUD,DUS,Budapest,Düsseldorf,HU,DE,999.8,1,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,103.068,country_city_distance
+BUD-FRA,BUD,FRA,Budapest,Frankfurt am Main,HU,DE,835.6,3,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,100.099,country_city_distance
+BUD-HHN,BUD,HHN,Budapest,Frankfurt am Main (Lautzenhausen),HU,DE,923.1,1,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,102.838,country_city_distance
+BUD-GVA,BUD,GVA,Budapest,Geneva,HU,CH,1008.1,1,back_on_track_MÁV/ÖBB EN 40462,Budapest Keleti,Zürich HB,1083.0,700.0,night,7,162.45,potentiel_moyen,98.143,country_city_distance
+BUD-HAM,BUD,HAM,Budapest,Hamburg,HU,DE,949.8,1,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,102.574,country_city_distance
+BUD-CGN,BUD,CGN,Budapest,Köln (Cologne),HU,DE,959.3,1,back_on_track_MÁV EN 40476,Budapest Nyugati,Berlin Hbf,995.0,765.0,night,7,149.25,faible_potentiel,100.355,country_city_distance
+BUD-MUC,BUD,MUC,Budapest,Munich,HU,DE,566.6,1,back_on_track_ČD EN 40476,Budapest-Nyugati,Berlin Hbf,608.0,764.0,night,7,91.2,faible_potentiel,98.923,country_city_distance
+BUD-OTP,BUD,OTP,Budapest,Otopeni,HU,RO,616.3,1,back_on_track_CFR/MÁV IC 407,Budapest Keleti,Brașov,803.0,963.0,night,7,120.45,faible_potentiel,91.734,country_city_distance
+BUD-PRG,BUD,PRG,Budapest,Prague,HU,CZ,471.6,2,back_on_track_ČD EN 40457,Praha hl.n.,Budapest Nyugati,608.0,626.0,night,7,91.2,potentiel_moyen,82.163,country_reverse_distance
+BUD-STR,BUD,STR,Budapest,Stuttgart,HU,DE,758.6,1,back_on_track_MÁV/ÖBB EN 50237,Budapest Keleti,Stuttgart Hbf,966.0,718.0,night,7,144.9,potentiel_moyen,108.165,country_city_distance
+BUD-WAW,BUD,WAW,Budapest,Warsaw,HU,PL,540.6,2,back_on_track_MÁV/PKP EN 476 / IC 406,Budapest Nyugati,Warszawa Wschodnia,902.0,765.0,night,7,135.3,faible_potentiel,87.787,country_city_distance
+BUD-ZRH,BUD,ZRH,Budapest,Zurich,HU,CH,805.1,1,back_on_track_MÁV/ÖBB EN 40462,Budapest Keleti,Zürich HB,1083.0,700.0,night,7,162.45,potentiel_moyen,106.371,country_city_distance
+AHO-CRL,AHO,CRL,Alghero,Charleroi,IT,BE,1132.6,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,83.671,country_distance
+AHO-DTM,AHO,DTM,Alghero,Dortmund,IT,DE,1211.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,87.126,country_distance
+AHO-HHN,AHO,HHN,Alghero,Frankfurt am Main (Lautzenhausen),IT,DE,1038.8,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.648,country_distance
+AHO-FMM,AHO,FMM,Alghero,Memmingen,IT,DE,832.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,85.083,country_distance
+AHO-NRN,AHO,NRN,Alghero,Weeze,IT,DE,1230.8,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,83.913,country_distance
+BRI-TRN,BRI,TRN,Bari,Caselle Torinese (TO),IT,IT,865.2,2,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,94.135,country_distance
+BRI-CTA,BRI,CTA,Bari,Catania,IT,IT,433.5,2,trenitalia_1-4825-1FB-0083,SASSARI,CAGLIARI,174.8,185.0,day,6,26.22,faible_potentiel,82.263,country_distance
+BRI-CRL,BRI,CRL,Bari,Charleroi,IT,BE,1404.9,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,80.327,country_distance
+BRI-DUS,BRI,DUS,Bari,Düsseldorf,IT,DE,1363.0,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.648,country_distance
+BRI-FLR,BRI,FLR,Bari,Firenze (FI),IT,IT,543.8,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,88.156,country_distance
+BRI-HHN,BRI,HHN,Bari,Frankfurt am Main (Lautzenhausen),IT,DE,1225.3,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,83.685,country_distance
+BRI-CGN,BRI,CGN,Bari,Köln (Cologne),IT,DE,1309.7,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,83.178,country_distance
+BRI-MUC,BRI,MUC,Bari,Munich,IT,DE,892.8,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,88.579,country_city_distance
+BRI-PMO,BRI,PMO,Bari,Palermo,IT,IT,455.1,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,80.481,country_distance
+BRI-FKB,BRI,FKB,Bari,Rheinmünster,IT,DE,1088.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,90.473,country_distance
+BRI-LIN,BRI,LIN,Bari,Segrate (MI),IT,IT,771.5,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,95.186,country_distance
+BRI-STR,BRI,STR,Bari,Stuttgart,IT,DE,1027.2,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,95.345,country_city_distance
+BRI-NRN,BRI,NRN,Bari,Weeze,IT,DE,1417.2,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,81.472,country_distance
+BLQ-CTA,BLQ,CTA,Bologna,Catania,IT,IT,847.3,4,back_on_track_FS IC Notte 1954,Palermo Centrale,Roma Termini,867.0,750.0,night,7,130.05,faible_potentiel,90.343,country_distance
+BLQ-CRL,BLQ,CRL,Bologna,Charleroi,IT,BE,834.4,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,76.068,country_distance
+BLQ-FRA,BLQ,FRA,Bologna,Frankfurt am Main,IT,DE,644.3,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,80.249,country_distance
+BLQ-CGN,BLQ,CGN,Bologna,Köln (Cologne),IT,DE,769.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,81.609,country_distance
+BLQ-MUC,BLQ,MUC,Bologna,Munich,IT,DE,426.3,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,62.501,country_distance
+BLQ-VIE,BLQ,VIE,Bologna,Vienna,IT,AT,567.6,1,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,91.472,country_distance
+BLQ-NRN,BLQ,NRN,Bologna,Weeze,IT,DE,873.3,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,83.698,country_distance
+BLQ-BRU,BLQ,BRU,Bologna,Zaventem,IT,BE,871.1,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,74.156,country_distance
+BZO-FCO,BZO,FCO,Bolzano (BZ),Rome,IT,IT,522.8,2,back_on_track_FS IC Notte 763,Bolzano / Bozen,Roma Termini,631.0,516.0,night,2,94.65,potentiel_moyen,97.326,country_city_distance
+BDS-MUC,BDS,MUC,Brindisi,Munich,IT,DE,984.7,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,93.554,country_city_distance
+BDS-STR,BDS,STR,Brindisi,Stuttgart,IT,DE,1127.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,94.233,country_city_distance
+CAG-CRL,CAG,CRL,Cagliari,Charleroi,IT,BE,1297.4,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,83.498,country_distance
+CAG-DUS,CAG,DUS,Cagliari,Düsseldorf,IT,DE,1350.3,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.594,country_distance
+CAG-FLR,CAG,FLR,Cagliari,Firenze (FI),IT,IT,537.3,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,86.635,country_distance
+CAG-HHN,CAG,HHN,Cagliari,Frankfurt am Main (Lautzenhausen),IT,DE,1197.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.958,country_distance
+CAG-CGN,CAG,CGN,Cagliari,Köln (Cologne),IT,DE,1300.0,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.091,country_distance
+CAG-MUC,CAG,MUC,Cagliari,Munich,IT,DE,1035.4,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,93.548,country_city_distance
+CAG-FKB,CAG,FKB,Cagliari,Rheinmünster,IT,DE,1062.3,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,90.609,country_distance
+CAG-STR,CAG,STR,Cagliari,Stuttgart,IT,DE,1049.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,95.627,country_city_distance
+CAG-NRN,CAG,NRN,Cagliari,Weeze,IT,DE,1391.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,82.584,country_distance
+EBA-FDH,EBA,FDH,Campo nell'Elba (LI),Friedrichshafen,IT,DE,549.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,72.803,country_distance
+EBA-MUC,EBA,MUC,Campo nell'Elba (LI),Munich,IT,DE,633.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,80.059,country_distance
+VRN-CTA,VRN,CTA,Caselle (VR),Catania,IT,IT,947.6,3,back_on_track_FS IC Notte 796,Salerno,Torino Lingotto,962.0,820.0,night,7,144.3,faible_potentiel,92.14,country_distance
+VRN-FRA,VRN,FRA,Caselle (VR),Frankfurt am Main,IT,DE,543.6,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,74.124,country_distance
+VRN-HAM,VRN,HAM,Caselle (VR),Hamburg,IT,DE,918.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,85.51,country_distance
+VRN-CGN,VRN,CGN,Caselle (VR),Köln (Cologne),IT,DE,668.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,77.45,country_distance
+VRN-PMO,VRN,PMO,Caselle (VR),Palermo,IT,IT,823.2,3,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,98.828,country_city_distance
+TRN-BRI,TRN,BRI,Caselle Torinese (TO),Bari,IT,IT,865.2,2,back_on_track_FS IC Notte 765,Milano Centrale,Bari Centrale,1092.0,585.0,night,7,163.8,potentiel_moyen,97.318,country_city_distance
+TRN-CTA,TRN,CTA,Caselle Torinese (TO),Catania,IT,IT,1058.7,4,back_on_track_FS IC Notte 752,Lecce,Milano Centrale,1032.0,682.0,night,7,154.8,potentiel_moyen,92.746,country_distance
+TRN-CRL,TRN,CRL,Caselle Torinese (TO),Charleroi,IT,BE,631.5,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,67.29,country_distance
+TRN-DUS,TRN,DUS,Caselle Torinese (TO),Düsseldorf,IT,DE,680.2,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,83.027,country_distance
+TRN-FRA,TRN,FRA,Caselle Torinese (TO),Frankfurt am Main,IT,DE,540.9,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,75.05,country_distance
+TRN-SUF,TRN,SUF,Caselle Torinese (TO),Lamezia Terme (CZ),IT,IT,995.7,2,back_on_track_FS IC Notte 752,Lecce,Milano Centrale,1032.0,682.0,night,7,154.8,potentiel_moyen,93.731,country_distance
+TRN-MUC,TRN,MUC,Caselle Torinese (TO),Munich,IT,DE,471.2,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,68.383,country_distance
+TRN-NAP,TRN,NAP,Caselle Torinese (TO),Napoli,IT,IT,721.7,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,95.149,country_distance
+TRN-PMO,TRN,PMO,Caselle Torinese (TO),Palermo,IT,IT,901.9,3,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,102.461,country_city_distance
+TRN-FCO,TRN,FCO,Caselle Torinese (TO),Rome,IT,IT,529.4,3,back_on_track_FS IC Notte 788,Lecce,Roma Termini,647.0,475.0,night,1,97.05,fort_potentiel,88.232,country_distance
+TRN-BRU,TRN,BRU,Caselle Torinese (TO),Zaventem,IT,BE,676.0,2,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,66.865,country_distance
+CTA-BRI,CTA,BRI,Catania,Bari,IT,IT,433.5,2,trenitalia_1-4826-1FA-0083,CAGLIARI,SASSARI,174.8,181.0,day,6,26.22,faible_potentiel,82.263,country_distance
+CTA-BLQ,CTA,BLQ,Catania,Bologna,IT,IT,847.3,4,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,90.343,country_distance
+CTA-VRN,CTA,VRN,Catania,Caselle (VR),IT,IT,947.6,3,back_on_track_FS IC Notte 1515,Torino Lingotto,Salerno,962.0,768.0,night,7,144.3,faible_potentiel,92.14,country_distance
+CTA-TRN,CTA,TRN,Catania,Caselle Torinese (TO),IT,IT,1058.7,4,back_on_track_FS IC Notte 755,Milano Centrale,Lecce,1032.0,700.0,night,7,154.8,potentiel_moyen,92.746,country_distance
+CTA-MXP,CTA,MXP,Catania,Ferno (VA),IT,IT,1049.1,3,back_on_track_FS IC Notte 797,Torino Porta Susa,Salerno,1009.0,786.0,night,7,151.35,faible_potentiel,94.794,country_city_distance
+CTA-FLR,CTA,FLR,Catania,Firenze (FI),IT,IT,776.6,3,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,94.421,country_distance
+CTA-FRA,CTA,FRA,Catania,Frankfurt am Main,IT,DE,1489.8,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,81.066,country_distance
+CTA-MUC,CTA,MUC,Catania,Munich,IT,DE,1239.4,5,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,92.136,country_city_distance
+CTA-NAP,CTA,NAP,Catania,Napoli,IT,IT,386.0,3,trenitalia_1-4758-203-0083,CAGLIARI,OLBIA,192.9,213.0,day,6,28.94,faible_potentiel,84.675,country_distance
+CTA-PSA,CTA,PSA,Catania,Pisa (PI),IT,IT,795.7,2,back_on_track_FS IC Notte 1959 (S),Roma Termini,Siracusa,820.0,749.0,night,7,123.0,faible_potentiel,95.052,country_distance
+CTA-FCO,CTA,FCO,Catania,Rome,IT,IT,539.1,6,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,87.137,country_distance
+CTA-LIN,CTA,LIN,Catania,Segrate (MI),IT,IT,1009.2,3,back_on_track_FS IC Notte 755,Milano Centrale,Lecce,1032.0,700.0,night,7,154.8,potentiel_moyen,93.526,country_distance
+CTA-STR,CTA,STR,Catania,Stuttgart,IT,DE,1334.2,5,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,93.734,country_city_distance
+CTA-VCE,CTA,VCE,Catania,Venezia (VE),IT,IT,921.8,3,back_on_track_FS IC Notte 755,Milano Centrale,Lecce,1032.0,700.0,night,7,154.8,potentiel_moyen,91.102,country_distance
+CTA-VIE,CTA,VIE,Catania,Vienna,IT,AT,1189.8,3,back_on_track_ÖBB NJ 40294,Roma Tiburtina,Wien Hbf,1112.0,882.0,night,7,166.8,faible_potentiel,91.08,country_distance
+AOI-CRL,AOI,CRL,Falconara Marittima (AN),Charleroi,IT,BE,1015.7,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,86.505,country_distance
+AOI-DUS,AOI,DUS,Falconara Marittima (AN),Düsseldorf,IT,DE,985.9,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,87.255,country_distance
+AOI-MUC,AOI,MUC,Falconara Marittima (AN),Munich,IT,DE,540.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,75.494,country_distance
+AOI-NRN,AOI,NRN,Falconara Marittima (AN),Weeze,IT,DE,1038.8,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.322,country_distance
+MXP-CTA,MXP,CTA,Ferno (VA),Catania,IT,IT,1049.1,3,back_on_track_FS IC Notte 798,Salerno,Torino Porta Susa,1009.0,747.0,night,7,151.35,faible_potentiel,94.794,country_city_distance
+MXP-DUS,MXP,DUS,Ferno (VA),Düsseldorf,IT,DE,645.6,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,80.42,country_distance
+MXP-FRA,MXP,FRA,Ferno (VA),Frankfurt am Main,IT,DE,489.0,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,69.942,country_distance
+MXP-HAM,MXP,HAM,Ferno (VA),Hamburg,IT,DE,894.1,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,86.323,country_distance
+MXP-HAJ,MXP,HAJ,Ferno (VA),Hannover,IT,DE,762.7,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,83.001,country_distance
+MXP-CGN,MXP,CGN,Ferno (VA),Köln (Cologne),IT,DE,593.8,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,73.629,country_distance
+MXP-FCO,MXP,FCO,Ferno (VA),Rome,IT,IT,511.0,6,back_on_track_FS IC Notte 788,Lecce,Roma Termini,647.0,475.0,night,1,97.05,fort_potentiel,85.846,country_distance
+MXP-VIE,MXP,VIE,Ferno (VA),Vienna,IT,AT,656.4,5,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,92.504,country_distance
+MXP-BRU,MXP,BRU,Ferno (VA),Zaventem,IT,BE,664.7,4,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,64.444,country_distance
+FLR-BRI,FLR,BRI,Firenze (FI),Bari,IT,IT,543.8,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,88.156,country_distance
+FLR-CAG,FLR,CAG,Firenze (FI),Cagliari,IT,IT,537.3,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,86.635,country_distance
+FLR-CTA,FLR,CTA,Firenze (FI),Catania,IT,IT,776.6,3,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,94.421,country_distance
+FLR-DUS,FLR,DUS,Firenze (FI),Düsseldorf,IT,DE,895.6,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,88.158,country_distance
+FLR-FRA,FLR,FRA,Firenze (FI),Frankfurt am Main,IT,DE,719.9,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,84.874,country_distance
+FLR-MUC,FLR,MUC,Firenze (FI),Munich,IT,DE,507.4,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,71.641,country_distance
+FLR-PMO,FLR,PMO,Firenze (FI),Palermo,IT,IT,646.0,3,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,94.018,country_distance
+FLR-STR,FLR,STR,Firenze (FI),Stuttgart,IT,DE,563.7,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,87.675,country_city_distance
+FLR-VIE,FLR,VIE,Firenze (FI),Vienna,IT,AT,632.9,5,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,94.341,country_distance
+FLR-BRU,FLR,BRU,Firenze (FI),Zaventem,IT,BE,936.2,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,76.365,country_distance
+GOA-CRL,GOA,CRL,Genova (GE),Charleroi,IT,BE,748.8,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,73.422,country_distance
+GOA-MUC,GOA,MUC,Genova (GE),Munich,IT,DE,493.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,70.553,country_distance
+SUF-TRN,SUF,TRN,Lamezia Terme (CZ),Caselle Torinese (TO),IT,IT,995.7,2,back_on_track_FS IC Notte 755,Milano Centrale,Lecce,1032.0,700.0,night,7,154.8,potentiel_moyen,93.731,country_distance
+SUF-HHN,SUF,HHN,Lamezia Terme (CZ),Frankfurt am Main (Lautzenhausen),IT,DE,1417.5,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,82.886,country_distance
+SUF-MUC,SUF,MUC,Lamezia Terme (CZ),Munich,IT,DE,1109.7,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,95.98,country_city_distance
+SUF-FCO,SUF,FCO,Lamezia Terme (CZ),Rome,IT,IT,467.2,2,back_on_track_FS IC Notte 788,Lecce,Roma Termini,647.0,475.0,night,1,97.05,fort_potentiel,84.879,country_distance
+SUF-STR,SUF,STR,Lamezia Terme (CZ),Stuttgart,IT,DE,1224.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,95.027,country_city_distance
+SUF-VCE,SUF,VCE,Lamezia Terme (CZ),Venezia (VE),IT,IT,800.6,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,94.515,country_city_distance
+SUF-VIE,SUF,VIE,Lamezia Terme (CZ),Vienna,IT,AT,1023.8,1,back_on_track_ÖBB NJ 40294,Roma Tiburtina,Wien Hbf,1112.0,882.0,night,7,166.8,faible_potentiel,91.83,country_distance
+NAP-TRN,NAP,TRN,Napoli,Caselle Torinese (TO),IT,IT,721.7,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,95.149,country_distance
+NAP-CTA,NAP,CTA,Napoli,Catania,IT,IT,386.0,3,trenitalia_1-4753-20E-0083,OLBIA,CAGLIARI,192.9,208.0,day,6,28.94,faible_potentiel,84.675,country_distance
+NAP-DUS,NAP,DUS,Napoli,Düsseldorf,IT,DE,1292.6,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.406,country_distance
+NAP-FRA,NAP,FRA,Napoli,Frankfurt am Main,IT,DE,1109.6,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.675,country_distance
+NAP-HAM,NAP,HAM,Napoli,Hamburg,IT,DE,1453.2,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,82.119,country_distance
+NAP-HAJ,NAP,HAJ,Napoli,Hannover,IT,DE,1333.5,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,83.63,country_distance
+NAP-CGN,NAP,CGN,Napoli,Köln (Cologne),IT,DE,1238.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.041,country_distance
+NAP-FMM,NAP,FMM,Napoli,Memmingen,IT,DE,852.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,88.152,country_distance
+NAP-MUC,NAP,MUC,Napoli,Munich,IT,DE,853.6,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,89.911,country_distance
+NAP-PMO,NAP,PMO,Napoli,Palermo,IT,IT,318.4,2,trenitalia_1-4753-20E-0083,OLBIA,CAGLIARI,192.9,208.0,day,6,28.94,faible_potentiel,85.328,country_distance
+NAP-LIN,NAP,LIN,Napoli,Segrate (MI),IT,IT,649.6,4,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,93.044,country_distance
+NAP-STR,NAP,STR,Napoli,Stuttgart,IT,DE,955.0,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,99.104,country_city_distance
+NAP-VCE,NAP,VCE,Napoli,Venezia (VE),IT,IT,537.1,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,85.733,country_distance
+NAP-VIE,NAP,VIE,Napoli,Vienna,IT,AT,823.3,1,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,90.025,country_distance
+NAP-BRU,NAP,BRU,Napoli,Zaventem,IT,BE,1345.1,2,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,79.789,country_distance
+OLB-DUS,OLB,DUS,Olbia (SS),Düsseldorf,IT,DE,1174.5,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,90.845,country_distance
+OLB-FRA,OLB,FRA,Olbia (SS),Frankfurt am Main,IT,DE,1017.7,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,87.562,country_distance
+OLB-FDH,OLB,FDH,Olbia (SS),Friedrichshafen,IT,DE,753.1,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,82.288,country_distance
+OLB-HAM,OLB,HAM,Olbia (SS),Hamburg,IT,DE,1416.1,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.927,country_distance
+OLB-CGN,OLB,CGN,Olbia (SS),Köln (Cologne),IT,DE,1123.3,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,89.619,country_distance
+OLB-MUC,OLB,MUC,Olbia (SS),Munich,IT,DE,848.0,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,89.946,country_city_distance
+OLB-NUE,OLB,NUE,Olbia (SS),Nuremberg,IT,DE,964.0,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,89.496,country_distance
+OLB-STR,OLB,STR,Olbia (SS),Stuttgart,IT,DE,866.6,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,99.079,country_city_distance
+OLB-VIE,OLB,VIE,Olbia (SS),Vienna,IT,AT,976.7,4,back_on_track_ÖBB NJ 40294,Roma Tiburtina,Wien Hbf,1112.0,882.0,night,7,166.8,faible_potentiel,91.281,country_distance
+BGY-BRE,BGY,BRE,Orio al Serio (BG),Bremen,IT,DE,823.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,87.386,country_distance
+BGY-CRL,BGY,CRL,Orio al Serio (BG),Charleroi,IT,BE,660.1,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,70.384,country_distance
+BGY-HHN,BGY,HHN,Orio al Serio (BG),Frankfurt am Main (Lautzenhausen),IT,DE,509.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,73.874,country_distance
+BGY-LBC,BGY,LBC,Orio al Serio (BG),Lübeck,IT,DE,907.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,88.314,country_distance
+BGY-NRN,BGY,NRN,Orio al Serio (BG),Weeze,IT,DE,709.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,81.671,country_distance
+PMO-BRI,PMO,BRI,Palermo,Bari,IT,IT,455.1,2,back_on_track_FS IC Notte 788,Lecce,Roma Termini,647.0,475.0,night,1,97.05,fort_potentiel,82.083,country_distance
+PMO-VRN,PMO,VRN,Palermo,Caselle (VR),IT,IT,823.2,3,back_on_track_FS IC Notte 1954,Palermo Centrale,Roma Termini,867.0,750.0,night,7,130.05,faible_potentiel,98.828,country_city_distance
+PMO-TRN,PMO,TRN,Palermo,Caselle Torinese (TO),IT,IT,901.9,3,back_on_track_FS IC Notte 1954,Palermo Centrale,Roma Termini,867.0,750.0,night,7,130.05,faible_potentiel,102.461,country_city_distance
+PMO-FLR,PMO,FLR,Palermo,Firenze (FI),IT,IT,646.0,3,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,94.018,country_distance
+PMO-FRA,PMO,FRA,Palermo,Frankfurt am Main,IT,DE,1365.9,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,80.915,country_distance
+PMO-CGN,PMO,CGN,Palermo,Köln (Cologne),IT,DE,1486.5,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,80.222,country_distance
+PMO-MUC,PMO,MUC,Palermo,Munich,IT,DE,1136.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,92.7,country_city_distance
+PMO-NAP,PMO,NAP,Palermo,Napoli,IT,IT,318.4,2,trenitalia_1-4758-203-0083,CAGLIARI,OLBIA,192.9,213.0,day,6,28.94,faible_potentiel,85.328,country_distance
+PMO-FCO,PMO,FCO,Palermo,Rome,IT,IT,409.8,4,back_on_track_FS IC Notte 788,Lecce,Roma Termini,647.0,475.0,night,1,97.05,fort_potentiel,80.03,country_distance
+PMO-LIN,PMO,LIN,Palermo,Segrate (MI),IT,IT,867.6,2,back_on_track_FS IC Notte 1954,Palermo Centrale,Roma Termini,867.0,750.0,night,7,130.05,faible_potentiel,103.299,country_city_distance
+PMO-VCE,PMO,VCE,Palermo,Venezia (VE),IT,IT,817.3,3,back_on_track_FS IC Notte 1954,Palermo Centrale,Roma Termini,867.0,750.0,night,7,130.05,faible_potentiel,100.217,country_city_distance
+PMO-VIE,PMO,VIE,Palermo,Vienna,IT,AT,1139.8,1,back_on_track_ÖBB NJ 40294,Roma Tiburtina,Wien Hbf,1112.0,882.0,night,7,166.8,faible_potentiel,90.676,country_distance
+PEG-CRL,PEG,CRL,Perugia (PG),Charleroi,IT,BE,1021.9,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,85.257,country_distance
+PSR-CRL,PSR,CRL,Pescara,Charleroi,IT,BE,1160.9,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,85.144,country_distance
+PSR-HHN,PSR,HHN,Pescara,Frankfurt am Main (Lautzenhausen),IT,DE,990.1,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,87.128,country_distance
+PSR-NRN,PSR,NRN,Pescara,Weeze,IT,DE,1186.4,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,86.172,country_distance
+PSA-CTA,PSA,CTA,Pisa (PI),Catania,IT,IT,795.7,2,back_on_track_FS IC Notte 1960,Siracusa,Roma Termini,820.0,726.0,night,7,123.0,faible_potentiel,95.052,country_distance
+PSA-CRL,PSA,CRL,Pisa (PI),Charleroi,IT,BE,876.8,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,79.065,country_distance
+PSA-HHN,PSA,HHN,Pisa (PI),Frankfurt am Main (Lautzenhausen),IT,DE,735.8,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,85.965,country_distance
+PSA-CGN,PSA,CGN,Pisa (PI),Köln (Cologne),IT,DE,835.2,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,85.41,country_distance
+PSA-LBC,PSA,LBC,Pisa (PI),Lübeck,IT,DE,1125.7,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,88.114,country_distance
+PSA-MUC,PSA,MUC,Pisa (PI),Munich,IT,DE,530.3,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,73.905,country_distance
+PSA-NRN,PSA,NRN,Pisa (PI),Weeze,IT,DE,935.8,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,83.674,country_distance
+REG-FCO,REG,FCO,Reggio Calabria,Rome,IT,IT,506.2,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,88.192,country_distance
+REG-LIN,REG,LIN,Reggio Calabria,Segrate (MI),IT,IT,974.9,2,back_on_track_FS IC Notte 755,Milano Centrale,Lecce,1032.0,700.0,night,7,154.8,potentiel_moyen,94.536,country_distance
+FCO-BZO,FCO,BZO,Rome,Bolzano (BZ),IT,IT,522.8,2,back_on_track_FS IC Notte 764,Roma Termini,Bolzano / Bozen,631.0,503.0,night,2,94.65,potentiel_moyen,97.326,country_city_distance
+FCO-TRN,FCO,TRN,Rome,Caselle Torinese (TO),IT,IT,529.4,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,87.674,country_distance
+FCO-CTA,FCO,CTA,Rome,Catania,IT,IT,539.1,6,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,87.137,country_distance
+CIA-CRL,CIA,CRL,Rome,Charleroi,IT,BE,1147.8,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,82.432,country_distance
+FCO-DUS,FCO,DUS,Rome,Düsseldorf,IT,DE,1134.2,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,90.356,country_distance
+FCO-MXP,FCO,MXP,Rome,Ferno (VA),IT,IT,511.0,5,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,85.572,country_distance
+FCO-FRA,FCO,FRA,Rome,Frankfurt am Main,IT,DE,957.6,3,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,84.563,country_distance
+CIA-HHN,CIA,HHN,Rome,Frankfurt am Main (Lautzenhausen),IT,DE,995.0,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.634,country_distance
+FCO-HAM,FCO,HAM,Rome,Hamburg,IT,DE,1325.7,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,85.926,country_distance
+FCO-HAJ,FCO,HAJ,Rome,Hannover,IT,DE,1200.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,87.897,country_distance
+FCO-CGN,FCO,CGN,Rome,Köln (Cologne),IT,DE,1080.6,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,88.736,country_distance
+FCO-SUF,FCO,SUF,Rome,Lamezia Terme (CZ),IT,IT,467.2,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,84.627,country_distance
+CIA-FMM,CIA,FMM,Rome,Memmingen,IT,DE,712.7,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,79.782,country_distance
+FCO-MUC,FCO,MUC,Rome,Munich,IT,DE,729.2,2,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,83.385,country_city_distance
+FCO-PMO,FCO,PMO,Rome,Palermo,IT,IT,409.8,4,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,78.038,country_distance
+FCO-REG,FCO,REG,Rome,Reggio Calabria,IT,IT,506.2,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,88.192,country_distance
+CIA-FKB,CIA,FKB,Rome,Rheinmünster,IT,DE,852.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,86.893,country_distance
+FCO-LIN,FCO,LIN,Rome,Segrate (MI),IT,IT,470.3,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,86.227,country_distance
+FCO-STR,FCO,STR,Rome,Stuttgart,IT,DE,801.3,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,96.723,country_city_distance
+FCO-VCE,FCO,VCE,Rome,Venezia (VE),IT,IT,411.6,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,78.228,country_distance
+FCO-VIE,FCO,VIE,Rome,Vienna,IT,AT,778.8,5,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,87.603,country_distance
+CIA-NRN,CIA,NRN,Rome,Weeze,IT,DE,1194.8,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,86.724,country_distance
+FCO-BRU,FCO,BRU,Rome,Zaventem,IT,BE,1172.6,6,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,78.612,country_distance
+TRS-CRL,TRS,CRL,Ronchi dei Legionari/Trieste,Charleroi,IT,BE,842.9,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,78.534,country_distance
+LIN-BRI,LIN,BRI,Segrate (MI),Bari,IT,IT,771.5,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,95.186,country_distance
+LIN-CTA,LIN,CTA,Segrate (MI),Catania,IT,IT,1009.2,3,back_on_track_FS IC Notte 752,Lecce,Milano Centrale,1032.0,682.0,night,7,154.8,potentiel_moyen,93.526,country_distance
+LIN-FRA,LIN,FRA,Segrate (MI),Frankfurt am Main,IT,DE,512.3,4,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,72.884,country_distance
+LIN-NAP,LIN,NAP,Segrate (MI),Napoli,IT,IT,649.6,4,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,93.044,country_distance
+LIN-PMO,LIN,PMO,Segrate (MI),Palermo,IT,IT,867.6,2,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,103.299,country_city_distance
+LIN-REG,LIN,REG,Segrate (MI),Reggio Calabria,IT,IT,974.9,2,back_on_track_FS IC Notte 752,Lecce,Milano Centrale,1032.0,682.0,night,7,154.8,potentiel_moyen,94.536,country_distance
+LIN-FCO,LIN,FCO,Segrate (MI),Rome,IT,IT,470.3,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,86.227,country_distance
+LIN-VIE,LIN,VIE,Segrate (MI),Vienna,IT,AT,629.1,1,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,94.489,country_distance
+LIN-BRU,LIN,BRU,Segrate (MI),Zaventem,IT,BE,702.8,4,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,67.582,country_distance
+TPS-HHN,TPS,HHN,Trapani (TP),Frankfurt am Main (Lautzenhausen),IT,DE,1401.3,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,81.839,country_distance
+TPS-FMM,TPS,FMM,Trapani (TP),Memmingen,IT,DE,1135.2,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,91.334,country_distance
+TPS-FKB,TPS,FKB,Trapani (TP),Rheinmünster,IT,DE,1259.4,1,back_on_track_ÖBB NJ 294,Roma Tiburtina,München Hbf,1092.0,912.0,night,7,163.8,faible_potentiel,88.18,country_distance
+TSF-BRE,TSF,BRE,Treviso (TV),Bremen,IT,DE,858.6,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,85.694,country_distance
+TSF-CRL,TSF,CRL,Treviso (TV),Charleroi,IT,BE,784.7,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,75.002,country_distance
+TSF-HHN,TSF,HHN,Treviso (TV),Frankfurt am Main (Lautzenhausen),IT,DE,603.2,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,77.996,country_distance
+TSF-NRN,TSF,NRN,Treviso (TV),Weeze,IT,DE,796.9,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,82.579,country_distance
+TSF-BRU,TSF,BRU,Treviso (TV),Zaventem,IT,BE,815.7,1,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,73.033,country_distance
+VCE-CTA,VCE,CTA,Venezia (VE),Catania,IT,IT,921.8,3,back_on_track_FS IC Notte 752,Lecce,Milano Centrale,1032.0,682.0,night,7,154.8,potentiel_moyen,91.102,country_distance
+VCE-DUS,VCE,DUS,Venezia (VE),Düsseldorf,IT,DE,763.5,3,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,98.015,country_city_distance
+VCE-FRA,VCE,FRA,Venezia (VE),Frankfurt am Main,IT,DE,577.0,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,89.085,country_city_distance
+VCE-HAM,VCE,HAM,Venezia (VE),Hamburg,IT,DE,919.3,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,98.17,country_city_distance
+VCE-HAJ,VCE,HAJ,Venezia (VE),Hannover,IT,DE,797.4,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,96.717,country_city_distance
+VCE-CGN,VCE,CGN,Venezia (VE),Köln (Cologne),IT,DE,709.8,1,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,91.992,country_city_distance
+VCE-SUF,VCE,SUF,Venezia (VE),Lamezia Terme (CZ),IT,IT,800.6,2,back_on_track_FS IC Notte 770,Trieste Centrale,Roma Termini,711.0,684.0,night,7,106.65,potentiel_moyen,94.515,country_city_distance
+VCE-NAP,VCE,NAP,Venezia (VE),Napoli,IT,IT,537.1,2,back_on_track_FS IC Notte 774,Roma Termini,Trieste Centrale,711.0,680.0,night,7,106.65,potentiel_moyen,85.733,country_distance
+VCE-PMO,VCE,PMO,Venezia (VE),Palermo,IT,IT,817.3,3,back_on_track_FS IC Notte 1955 (P),Roma Termini,Palermo Centrale,867.0,773.0,night,7,130.05,faible_potentiel,100.217,country_city_distance
+VCE-STR,VCE,STR,Venezia (VE),Stuttgart,IT,DE,426.0,2,back_on_track_ÖBB NJ 236,Venezia Santa Lucia,Stuttgart Hbf,852.0,741.0,night,7,127.8,faible_potentiel,87.0,country_city_distance
+VCE-VIE,VCE,VIE,Venezia (VE),Vienna,IT,AT,432.3,1,back_on_track_ÖBB NJ 40236,Venezia Santa Lucia,Wien Hbf,619.0,672.0,night,7,92.85,potentiel_moyen,95.632,country_city_distance
+VCE-BRU,VCE,BRU,Venezia (VE),Zaventem,IT,BE,835.8,3,back_on_track_ES 457,Milano Porta Garibaldi,Bruxelles Midi / Brussel Zuid,1107.0,1060.0,night,3,166.05,faible_potentiel,73.849,country_distance
+TGD-BEG,TGD,BEG,Podgorica,Belgrade,ME,RS,286.4,2,back_on_track_ŽS/ŽPCG 1130 / 432,Bar,Zemun,469.0,675.0,night,7,70.35,potentiel_moyen,73.868,country_distance
+TIV-BEG,TIV,BEG,Tivat,Belgrade,ME,RS,297.2,2,back_on_track_ŽS/ŽPCG 1130 / 432,Bar,Zemun,469.0,675.0,night,7,70.35,potentiel_moyen,76.606,country_distance
+AMS-BRN,AMS,BRN,Amsterdam,Bern,NL,CH,631.4,1,back_on_track_ÖBB NJ 403,Amsterdam Centraal,Zürich HB,845.0,710.0,night,7,126.75,potentiel_moyen,93.85,country_city_distance
+AMS-GVA,AMS,GVA,Amsterdam,Geneva,NL,CH,682.0,2,back_on_track_ÖBB NJ 403,Amsterdam Centraal,Zürich HB,845.0,710.0,night,7,126.75,potentiel_moyen,94.025,country_city_distance
+AMS-ZRH,AMS,ZRH,Amsterdam,Zurich,NL,CH,603.5,3,back_on_track_ÖBB NJ 403,Amsterdam Centraal,Zürich HB,845.0,710.0,night,7,126.75,potentiel_moyen,104.996,country_city_distance
+ALF-OSL,ALF,OSL,Alta,Oslo (Gardermoen),NO,NO,1225.0,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,90.655,country_city_distance
+BGO-OSL,BGO,OSL,Bergen,Oslo (Gardermoen),NO,NO,324.7,3,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,101.889,country_city_distance
+BGO-TRF,BGO,TRF,Bergen,Sandefjord(Torp),NO,NO,308.0,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,88.627,country_city_distance
+BGO-TRD,BGO,TRD,Bergen,Trondheim,NO,NO,461.5,3,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,99.889,country_city_distance
+BGO-AES,BGO,AES,Bergen,Ålesund,NO,NO,256.5,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,81.637,country_city_distance
+BOO-OSL,BOO,OSL,Bodø,Oslo (Gardermoen),NO,NO,802.7,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,99.317,country_city_distance
+BOO-TOS,BOO,TOS,Bodø,Tromsø,NO,NO,326.3,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,81.306,country_city_distance
+BOO-TRD,BOO,TRD,Bodø,Trondheim,NO,NO,452.7,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,99.629,country_city_distance
+EVE-OSL,EVE,OSL,Evenes,Oslo (Gardermoen),NO,NO,960.0,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,94.052,country_city_distance
+EVE-TRD,EVE,TRD,Evenes,Trondheim,NO,NO,616.7,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,102.039,country_city_distance
+HAU-OSL,HAU,OSL,Karmøy,Oslo (Gardermoen),NO,NO,343.0,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,91.369,country_city_distance
+KKN-OSL,KKN,OSL,Kirkenes,Oslo (Gardermoen),NO,NO,1368.7,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,89.233,country_city_distance
+KRS-OSL,KRS,OSL,Kristiansand(Kjevik),Oslo (Gardermoen),NO,NO,280.0,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,84.298,country_city_distance
+KSU-SVG,KSU,SVG,Kvernberget,Stavanger,NO,NO,485.4,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,94.648,country_city_distance
+OSL-ALF,OSL,ALF,Oslo (Gardermoen),Alta,NO,NO,1225.0,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,90.655,country_city_distance
+OSL-BGO,OSL,BGO,Oslo (Gardermoen),Bergen,NO,NO,324.7,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,101.889,country_city_distance
+OSL-BOO,OSL,BOO,Oslo (Gardermoen),Bodø,NO,NO,802.7,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,99.317,country_city_distance
+OSL-EVE,OSL,EVE,Oslo (Gardermoen),Evenes,NO,NO,960.0,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,94.052,country_city_distance
+OSL-HAU,OSL,HAU,Oslo (Gardermoen),Karmøy,NO,NO,343.0,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,91.369,country_city_distance
+OSL-KKN,OSL,KKN,Oslo (Gardermoen),Kirkenes,NO,NO,1368.7,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,89.233,country_city_distance
+OSL-KRS,OSL,KRS,Oslo (Gardermoen),Kristiansand(Kjevik),NO,NO,280.0,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,84.298,country_city_distance
+OSL-SVG,OSL,SVG,Oslo (Gardermoen),Stavanger,NO,NO,340.9,2,back_on_track_GA F5 725,Oslo S,Stavanger,588.0,536.0,night,6,88.2,potentiel_moyen,95.879,country_city_distance
+OSL-TOS,OSL,TOS,Oslo (Gardermoen),Tromsø,NO,NO,1115.5,3,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,98.032,country_city_distance
+OSL-TRD,OSL,TRD,Oslo (Gardermoen),Trondheim,NO,NO,363.0,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,103.708,country_city_distance
+OSL-AES,OSL,AES,Oslo (Gardermoen),Ålesund,NO,NO,373.8,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,96.379,country_city_distance
+OSL-MOL,OSL,MOL,Oslo (Gardermoen),Årø,NO,NO,349.2,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,93.243,country_city_distance
+TRF-BGO,TRF,BGO,Sandefjord(Torp),Bergen,NO,NO,308.0,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,88.627,country_city_distance
+TRF-SVG,TRF,SVG,Sandefjord(Torp),Stavanger,NO,NO,266.6,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,71.551,country_distance
+TRF-TRD,TRF,TRD,Sandefjord(Torp),Trondheim,NO,NO,476.2,2,back_on_track_SJN 405,Oslo S,Trondheim,556.0,471.0,night,6,83.4,fort_potentiel,101.561,country_city_distance
+SVG-KSU,SVG,KSU,Stavanger,Kvernberget,NO,NO,485.4,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,94.648,country_city_distance
+SVG-OSL,SVG,OSL,Stavanger,Oslo (Gardermoen),NO,NO,340.9,3,back_on_track_GA F5 726,Stavanger,Oslo S,588.0,550.0,night,6,88.2,potentiel_moyen,95.879,country_city_distance
+TOS-BOO,TOS,BOO,Tromsø,Bodø,NO,NO,326.3,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,81.306,country_city_distance
+TOS-OSL,TOS,OSL,Tromsø,Oslo (Gardermoen),NO,NO,1115.5,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,98.032,country_city_distance
+TOS-ARN,TOS,ARN,Tromsø,Stockholm,NO,SE,1116.8,1,back_on_track_SJ 93,Narvik,Stockholm C,1456.0,1153.0,night,7,218.4,faible_potentiel,92.134,country_city_distance
+TOS-TRD,TOS,TRD,Tromsø,Trondheim,NO,NO,775.8,2,back_on_track_SJN 476,Bodø,Trondheim,725.0,606.0,night,6,108.75,potentiel_moyen,101.113,country_city_distance
+TRD-BGO,TRD,BGO,Trondheim,Bergen,NO,NO,461.5,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,99.889,country_city_distance
+TRD-BOO,TRD,BOO,Trondheim,Bodø,NO,NO,452.7,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,99.629,country_city_distance
+TRD-EVE,TRD,EVE,Trondheim,Evenes,NO,NO,616.7,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,102.039,country_city_distance
+TRD-OSL,TRD,OSL,Trondheim,Oslo (Gardermoen),NO,NO,363.0,2,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,103.708,country_city_distance
+TRD-TRF,TRD,TRF,Trondheim,Sandefjord(Torp),NO,NO,476.2,3,back_on_track_SJN 406,Trondheim,Oslo S,556.0,461.0,night,6,83.4,fort_potentiel,101.561,country_city_distance
+TRD-TOS,TRD,TOS,Trondheim,Tromsø,NO,NO,775.8,2,back_on_track_SJN 475,Trondheim,Bodø,725.0,600.0,night,6,108.75,potentiel_moyen,101.113,country_city_distance
+AES-BGO,AES,BGO,Ålesund,Bergen,NO,NO,256.5,2,back_on_track_VY 605,Oslo S,Bergen,482.0,440.0,night,6,72.3,potentiel_moyen,81.637,country_city_distance
+AES-OSL,AES,OSL,Ålesund,Oslo (Gardermoen),NO,NO,373.8,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,96.379,country_city_distance
+MOL-OSL,MOL,OSL,Årø,Oslo (Gardermoen),NO,NO,349.2,2,back_on_track_VY 606,Bergen,Oslo S,482.0,446.0,night,6,72.3,potentiel_moyen,93.243,country_city_distance
+KRK-DTM,KRK,DTM,Balice,Dortmund,PL,DE,869.3,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,81.481,country_distance
+KRK-FRA,KRK,FRA,Balice,Frankfurt am Main,PL,DE,800.8,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,75.013,country_distance
+KRK-MUC,KRK,MUC,Balice,Munich,PL,DE,611.4,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,71.75,country_city_distance
+KRK-STR,KRK,STR,Balice,Stuttgart,PL,DE,779.3,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,74.461,country_distance
+GDN-DTM,GDN,DTM,Gdańsk,Dortmund,PL,DE,792.6,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,78.311,country_distance
+GDN-FRA,GDN,FRA,Gdańsk,Frankfurt am Main,PL,DE,829.4,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,76.239,country_distance
+GDN-CGN,GDN,CGN,Gdańsk,Köln (Cologne),PL,DE,857.0,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,78.274,country_distance
+GDN-MUC,GDN,MUC,Gdańsk,Munich,PL,DE,813.9,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,83.338,country_city_distance
+RZE-FRA,RZE,FRA,Jasionka,Frankfurt am Main,PL,DE,959.8,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,83.019,country_distance
+KTW-DTM,KTW,DTM,Katowice,Dortmund,PL,DE,810.0,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,80.044,country_distance
+KTW-DUS,KTW,DUS,Katowice,Düsseldorf,PL,DE,867.6,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,81.927,country_distance
+KTW-FRA,KTW,FRA,Katowice,Frankfurt am Main,PL,DE,749.2,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,73.526,country_distance
+KTW-HHN,KTW,HHN,Katowice,Frankfurt am Main (Lautzenhausen),PL,DE,842.2,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,77.723,country_distance
+KTW-CGN,KTW,CGN,Katowice,Köln (Cologne),PL,DE,841.5,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,78.623,country_distance
+POZ-DUS,POZ,DUS,Poznań,Düsseldorf,PL,DE,701.5,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,74.444,country_distance
+POZ-FRA,POZ,FRA,Poznań,Frankfurt am Main,PL,DE,633.7,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,66.887,country_distance
+POZ-MUC,POZ,MUC,Poznań,Munich,PL,DE,576.0,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,70.138,country_city_distance
+WAW-BUD,WAW,BUD,Warsaw,Budapest,PL,HU,540.6,2,back_on_track_MÁV/PKP IC 407 / EN 477,Warszawa Wschodnia,Budapest Nyugati,902.0,768.0,night,7,135.3,faible_potentiel,87.787,country_city_distance
+WAW-DUS,WAW,DUS,Warsaw,Düsseldorf,PL,DE,981.3,3,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,89.768,country_distance
+WAW-FRA,WAW,FRA,Warsaw,Frankfurt am Main,PL,DE,897.3,3,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,83.837,country_distance
+WAW-HAM,WAW,HAM,Warsaw,Hamburg,PL,DE,753.4,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,80.038,country_distance
+WAW-CGN,WAW,CGN,Warsaw,Köln (Cologne),PL,DE,965.9,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,87.02,country_distance
+WAW-LWO,WAW,LWO,Warsaw,Lviv,PL,UA,335.0,1,back_on_track_UZ 024,Chelm,Kyiv Pasazhyrskyi,540.0,722.0,night,7,81.0,faible_potentiel,69.559,country_distance
+WAW-MUC,WAW,MUC,Warsaw,Munich,PL,DE,777.3,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,86.69,country_city_distance
+WAW-PRG,WAW,PRG,Warsaw,Prague,PL,CZ,521.0,3,back_on_track_RJ 1038,Przemyśl Gł.,Praha hl.n.,740.0,644.0,night,7,111.0,potentiel_moyen,83.866,country_distance
+WRO-DUS,WRO,DUS,Wrocław,Düsseldorf,PL,DE,704.6,1,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,75.673,country_distance
+WRO-FRA,WRO,FRA,Wrocław,Frankfurt am Main,PL,DE,599.6,2,back_on_track_PKP/ČD EN 40407,Warszawa Wschodnia,München Hbf,1139.0,883.0,night,7,170.85,faible_potentiel,65.381,country_distance
+CLJ-OTP,CLJ,OTP,Cluj-Napoca,Otopeni,RO,RO,309.6,2,back_on_track_CFR 1838,Cluj-Napoca,Iași,459.0,520.0,night,7,68.85,potentiel_moyen,90.663,country_city_distance
+IAS-OTP,IAS,OTP,Iaşi,Otopeni,RO,RO,312.9,2,back_on_track_CFR 1668,Iași,București Nord,405.0,403.0,night,7,60.75,potentiel_moyen,94.07,country_city_distance
+IAS-VIE,IAS,VIE,Iaşi,Vienna,RO,AT,833.6,2,back_on_track_CFR/MÁV/ÖBB D 346,București Nord,Wien Hbf,1157.0,1094.0,night,7,173.55,faible_potentiel,80.396,country_distance
+OMR-OTP,OMR,OTP,Oradea,Otopeni,RO,RO,424.7,2,back_on_track_CFR 1667,București Nord,Iași,405.0,396.0,night,7,60.75,potentiel_moyen,91.068,country_distance
+OTP-BUD,OTP,BUD,Otopeni,Budapest,RO,HU,616.3,1,back_on_track_CFR/MÁV IC 406,Brașov,Budapest Keleti,803.0,904.0,night,7,120.45,faible_potentiel,91.734,country_city_distance
+OTP-CLJ,OTP,CLJ,Otopeni,Cluj-Napoca,RO,RO,309.6,2,back_on_track_CFR 1837,Iași,Cluj-Napoca,459.0,520.0,night,7,68.85,potentiel_moyen,90.663,country_city_distance
+OTP-IAS,OTP,IAS,Otopeni,Iaşi,RO,RO,312.9,2,back_on_track_CFR 1667,București Nord,Iași,405.0,396.0,night,7,60.75,potentiel_moyen,94.07,country_city_distance
+OTP-IST,OTP,IST,Otopeni,Istanbul,RO,TR,424.5,2,back_on_track_TCDD/BDŽ/CFR 461/12504,București Nord,İstanbul Halkalı,799.0,1184.0,night,7,119.85,faible_potentiel,76.373,country_city_distance
+OTP-OMR,OTP,OMR,Otopeni,Oradea,RO,RO,424.7,2,back_on_track_CFR 1668,Iași,București Nord,405.0,403.0,night,7,60.75,potentiel_moyen,91.068,country_distance
+OTP-SUJ,OTP,SUJ,Otopeni,Satu Mare,RO,RO,427.4,2,back_on_track_CFR 1954,Constanța,Suceava Nord,526.0,466.0,night,7,78.9,potentiel_moyen,90.572,country_distance
+OTP-TSR,OTP,TSR,Otopeni,Timişoara,RO,RO,397.9,2,back_on_track_CFR 1668,Iași,București Nord,405.0,403.0,night,7,60.75,potentiel_moyen,92.499,country_distance
+OTP-BAY,OTP,BAY,Otopeni,Tăuții-Măgherăuș,RO,RO,398.9,2,back_on_track_CFR 1668,Iași,București Nord,405.0,403.0,night,7,60.75,potentiel_moyen,92.345,country_distance
+OTP-VIE,OTP,VIE,Otopeni,Vienna,RO,AT,830.1,2,back_on_track_CFR/MÁV/ÖBB D 346,București Nord,Wien Hbf,1157.0,1094.0,night,7,173.55,faible_potentiel,80.012,country_distance
+SUJ-OTP,SUJ,OTP,Satu Mare,Otopeni,RO,RO,427.4,2,back_on_track_CFR 1952,Suceava Nord,Constanța,526.0,454.0,night,7,78.9,potentiel_moyen,90.572,country_distance
+SBZ-VIE,SBZ,VIE,Sibiu,Vienna,RO,AT,626.1,2,back_on_track_CFR/MÁV/ÖBB D 346,București Nord,Wien Hbf,1157.0,1094.0,night,7,173.55,faible_potentiel,70.388,country_distance
+TSR-OTP,TSR,OTP,Timişoara,Otopeni,RO,RO,397.9,2,back_on_track_CFR 1667,București Nord,Iași,405.0,396.0,night,7,60.75,potentiel_moyen,92.499,country_distance
+BAY-OTP,BAY,OTP,Tăuții-Măgherăuș,Otopeni,RO,RO,398.9,2,back_on_track_CFR 1667,București Nord,Iași,405.0,396.0,night,7,60.75,potentiel_moyen,92.345,country_distance
+BEG-TGD,BEG,TGD,Belgrade,Podgorica,RS,ME,286.4,2,back_on_track_ŽS/ŽPCG 433,Zemun,Bar,469.0,679.0,night,7,70.35,potentiel_moyen,73.868,country_distance
+BEG-TIV,BEG,TIV,Belgrade,Tivat,RS,ME,297.2,2,back_on_track_ŽS/ŽPCG 433,Zemun,Bar,469.0,679.0,night,7,70.35,potentiel_moyen,76.606,country_distance
+GEV-KRF,GEV,KRF,Gällivare,Nyland,SE,SE,475.8,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,86.253,country_distance
+GEV-ARN,GEV,ARN,Gällivare,Stockholm,SE,SE,844.3,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,99.931,country_city_distance
+GOT-DUS,GOT,DUS,Göteborg,Düsseldorf,SE,DE,792.5,1,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,69.264,country_distance
+GOT-FRA,GOT,FRA,Göteborg,Frankfurt am Main,SE,DE,883.2,3,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,72.759,country_distance
+GOT-MUC,GOT,MUC,Göteborg,Munich,SE,DE,1035.6,2,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,79.17,country_distance
+GOT-ARN,GOT,ARN,Göteborg,Stockholm,SE,SE,394.2,4,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,91.06,country_city_distance
+GOT-BMA,GOT,BMA,Göteborg,Stockholm,SE,SE,378.7,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,89.467,country_city_distance
+HAD-BMA,HAD,BMA,Halmstad,Stockholm,SE,SE,422.5,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,97.669,country_city_distance
+KLR-BMA,KLR,BMA,Kalmar,Stockholm,SE,SE,312.3,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,85.772,country_city_distance
+KRN-ARN,KRN,ARN,Kiruna,Stockholm,SE,SE,916.4,2,back_on_track_SJ 91,Luleå C,Stockholm C,1052.0,779.0,night,7,157.8,faible_potentiel,97.916,country_city_distance
+LLA-ARN,LLA,ARN,Luleå,Stockholm,SE,SE,689.4,2,back_on_track_SJ 71,Duved,Stockholm C,652.0,575.0,night,7,97.8,potentiel_moyen,104.644,country_city_distance
+LYC-ARN,LYC,ARN,Lycksele,Stockholm,SE,SE,546.4,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,103.907,country_city_distance
+MMX-ARN,MMX,ARN,Malmö,Stockholm,SE,SE,531.5,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,114.119,country_city_distance
+MMX-BMA,MMX,BMA,Malmö,Stockholm,SE,SE,504.7,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,112.586,country_city_distance
+MMX-VBY,MMX,VBY,Malmö,Visby,SE,SE,385.2,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,90.026,country_city_distance
+NYO-BRE,NYO,BRE,Nyköping,Bremen,SE,DE,813.6,1,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,71.566,country_distance
+KRF-GEV,KRF,GEV,Nyland,Gällivare,SE,SE,475.8,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,86.253,country_distance
+KRF-ARN,KRF,ARN,Nyland,Stockholm,SE,SE,378.2,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,89.721,country_city_distance
+RNB-BMA,RNB,BMA,Ronneby,Stockholm,SE,SE,378.1,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,89.545,country_city_distance
+ARN-DUS,ARN,DUS,Stockholm,Düsseldorf,SE,DE,1162.5,3,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,95.554,country_city_distance
+ARN-FRA,ARN,FRA,Stockholm,Frankfurt am Main,SE,DE,1224.0,3,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,95.942,country_city_distance
+ARN-GOT,ARN,GOT,Stockholm,Göteborg,SE,SE,394.2,4,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,91.06,country_city_distance
+BMA-GOT,BMA,GOT,Stockholm,Göteborg,SE,SE,378.7,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,89.467,country_city_distance
+BMA-HAD,BMA,HAD,Stockholm,Halmstad,SE,SE,422.5,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,97.669,country_city_distance
+ARN-HAM,ARN,HAM,Stockholm,Hamburg,SE,DE,825.6,2,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,81.955,country_city_distance
+BMA-KLR,BMA,KLR,Stockholm,Kalmar,SE,SE,312.3,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,85.772,country_city_distance
+ARN-KRN,ARN,KRN,Stockholm,Kiruna,SE,SE,916.4,2,back_on_track_SJ 92,Stockholm C,Luleå C,1052.0,838.0,night,7,157.8,faible_potentiel,97.916,country_city_distance
+ARN-CGN,ARN,CGN,Stockholm,Köln (Cologne),SE,DE,1188.8,1,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,96.024,country_city_distance
+ARN-LLA,ARN,LLA,Stockholm,Luleå,SE,SE,689.4,2,back_on_track_SJ 70,Stockholm C,Duved,652.0,577.0,night,7,97.8,potentiel_moyen,104.644,country_city_distance
+ARN-LYC,ARN,LYC,Stockholm,Lycksele,SE,SE,546.4,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,103.907,country_city_distance
+ARN-MMX,ARN,MMX,Stockholm,Malmö,SE,SE,531.5,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,114.119,country_city_distance
+BMA-MMX,BMA,MMX,Stockholm,Malmö,SE,SE,504.7,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,112.586,country_city_distance
+ARN-MUC,ARN,MUC,Stockholm,Munich,SE,DE,1317.2,3,back_on_track_SJ/RDC EN 345,Stockholm C,Berlin Hbf,1439.0,1020.0,night,7,215.85,faible_potentiel,98.438,country_city_distance
+ARN-KRF,ARN,KRF,Stockholm,Nyland,SE,SE,378.2,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,89.721,country_city_distance
+BMA-RNB,BMA,RNB,Stockholm,Ronneby,SE,SE,378.1,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,89.545,country_city_distance
+BMA-SDL,BMA,SDL,Stockholm,Sundsvall/ Härnösand,SE,SE,353.9,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,88.088,country_city_distance
+ARN-TOS,ARN,TOS,Stockholm,Tromsø,SE,NO,1116.8,1,back_on_track_SJ 94,Stockholm C,Narvik,1456.0,1105.0,night,7,218.4,faible_potentiel,92.134,country_city_distance
+ARN-UME,ARN,UME,Stockholm,Umeå,SE,SE,477.0,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,101.274,country_city_distance
+BMA-UME,BMA,UME,Stockholm,Umeå,SE,SE,508.7,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,103.28,country_city_distance
+ARN-VIE,ARN,VIE,Stockholm,Vienna,SE,AT,1286.0,4,back_on_track_ST 305,Malmö C,Innsbruck Hbf,1847.0,1272.0,night,1,277.05,faible_potentiel,73.581,country_distance
+ARN-VHM,ARN,VHM,Stockholm,Vilhelmina,SE,SE,551.2,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,103.681,country_city_distance
+BMA-VXO,BMA,VXO,Stockholm,Växjö,SE,SE,329.0,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,86.343,country_city_distance
+BMA-AGH,BMA,AGH,Stockholm,Ängelholm,SE,SE,454.3,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,99.837,country_city_distance
+SDL-BMA,SDL,BMA,Sundsvall/ Härnösand,Stockholm,SE,SE,353.9,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,88.088,country_city_distance
+UME-ARN,UME,ARN,Umeå,Stockholm,SE,SE,477.0,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,101.274,country_city_distance
+UME-BMA,UME,BMA,Umeå,Stockholm,SE,SE,508.7,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,103.28,country_city_distance
+VHM-ARN,VHM,ARN,Vilhelmina,Stockholm,SE,SE,551.2,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,103.681,country_city_distance
+VBY-MMX,VBY,MMX,Visby,Malmö,SE,SE,385.2,2,back_on_track_SJ 1,Stockholm C,Malmö C,614.0,462.0,night,7,92.1,fort_potentiel,90.026,country_city_distance
+VXO-ARN,VXO,ARN,Växjö,Stockholm,SE,SE,355.5,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,89.821,country_city_distance
+VXO-BMA,VXO,BMA,Växjö,Stockholm,SE,SE,329.0,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,86.343,country_city_distance
+AGH-BMA,AGH,BMA,Ängelholm,Stockholm,SE,SE,454.3,2,back_on_track_SJ 2,Malmö C,Stockholm C,614.0,463.0,night,7,92.1,fort_potentiel,99.837,country_city_distance
+KSC-BTS,KSC,BTS,Košice,Bratislava,SK,SK,302.3,2,back_on_track_ZSSK R 680,Humenné,Bratislava hl.st.,529.0,462.0,night,7,79.35,potentiel_moyen,83.56,country_city_distance
+KSC-PRG,KSC,PRG,Košice,Prague,SK,CZ,529.8,2,back_on_track_ZSSK EN 442,Humenné,Praha hl.n.,745.0,735.0,night,7,111.75,faible_potentiel,79.778,country_distance
+IST-OTP,IST,OTP,Istanbul,Otopeni,TR,RO,424.5,2,back_on_track_TCDD/BDŽ/CFR 12503/460,İstanbul Halkalı,București Nord,799.0,1268.0,night,7,119.85,faible_potentiel,76.373,country_city_distance
+IST-SOF,IST,SOF,Istanbul,Sofia,TR,BG,466.7,1,back_on_track_TCDD/BDŽ 12503/492,İstanbul Halkalı,Sofia,591.0,948.0,night,7,88.65,faible_potentiel,105.342,country_city_distance
+DNK-VIE,DNK,VIE,Dnipro,Vienna,UA,AT,1369.4,2,back_on_track_UZ/ÖBB 40749,Kyiv Pasazhyrskyi,Wien Hbf,1477.0,1220.0,night,7,221.55,faible_potentiel,90.377,country_distance
+LWO-WAW,LWO,WAW,Lviv,Warsaw,UA,PL,335.0,1,back_on_track_UZ 019,Kyiv Pasazhyrskyi,Chelm,540.0,594.0,night,7,81.0,potentiel_moyen,72.559,country_distance
