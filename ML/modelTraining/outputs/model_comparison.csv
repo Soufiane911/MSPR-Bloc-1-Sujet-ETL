@@ -1,0 +1,5 @@
+model_name,validation_accuracy,validation_balanced_accuracy,validation_precision_macro,validation_recall_macro,validation_f1_macro,validation_fort_potentiel_f1,test_accuracy,test_balanced_accuracy,test_precision_macro,test_recall_macro,test_f1_macro,test_fort_potentiel_f1,primary_metric,secondary_metric
+gradient_boosting,0.999886,0.999954,0.999769,0.999954,0.999861,1.0,1.0,1.0,1.0,1.0,1.0,1.0,f1_macro,balanced_accuracy
+random_forest,0.999886,0.999954,0.999769,0.999954,0.999861,1.0,0.999886,0.997375,0.999769,0.997375,0.998567,0.9960474308300395,f1_macro,balanced_accuracy
+mlp,0.997614,0.979318,0.973978,0.979318,0.976628,0.9375,0.997388,0.988063,0.968962,0.988063,0.978139,0.9429657794676806,f1_macro,balanced_accuracy
+logistic_regression,0.965807,0.959172,0.803834,0.959172,0.860249,0.6890756302521008,0.965243,0.963004,0.807527,0.963004,0.86445,0.7062146892655368,f1_macro,balanced_accuracy

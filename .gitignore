@@ -32,3 +32,11 @@ tmp/
 # Local-only project documents and planning scratchpad
 SUJET/
 obrail-ml/
+rendu/
+
+# Raw external datasets and generated extraction intermediates
+data/raw/
+data/.cache/
+data-avion/raw/
+ML/datasetML/outputs/raw_obrail_extract.csv
+ML/datasetML/outputs/prepared_obrail_dataset.csv

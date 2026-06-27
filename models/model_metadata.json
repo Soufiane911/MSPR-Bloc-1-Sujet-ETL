@@ -1,0 +1,56 @@
+{
+  "selected_model": "gradient_boosting",
+  "selection_rule": "highest validation f1_macro, then balanced_accuracy",
+  "primary_metric": "f1_macro",
+  "secondary_metric": "balanced_accuracy",
+  "target_column": "substitution_potential",
+  "feature_columns": [
+    "distance_km",
+    "duration_min",
+    "avg_speed_kmh",
+    "weekly_frequency",
+    "estimated_co2_saving_kg",
+    "is_international",
+    "train_type",
+    "origin_country",
+    "destination_country"
+  ],
+  "dataset_path": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/data/ml/obrail_ml_dataset.csv",
+  "random_state": 42,
+  "trained_at_utc": "2026-06-27T16:31:41.311962+00:00",
+  "training_rows_70_percent": 41082,
+  "validation_rows_15_percent": 8803,
+  "test_rows_15_percent": 8804,
+  "final_training_rows_85_percent": 49885,
+  "test_metrics": {
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0,
+    "f1_macro": 1.0
+  },
+  "model_path": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/models/obrail_substitution_model.joblib",
+  "classification_report_path": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/ML/modelTraining/outputs/classification_report.json",
+  "figures": {
+    "model_comparison": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/model_comparison.png",
+    "confusion_matrix": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/confusion_matrix.png",
+    "feature_importance": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/feature_importance.png"
+  },
+  "selection_metrics": {
+    "model_name": "gradient_boosting",
+    "validation_accuracy": 0.999886,
+    "validation_balanced_accuracy": 0.999954,
+    "validation_precision_macro": 0.999769,
+    "validation_recall_macro": 0.999954,
+    "validation_f1_macro": 0.999861,
+    "validation_fort_potentiel_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_balanced_accuracy": 1.0,
+    "test_precision_macro": 1.0,
+    "test_recall_macro": 1.0,
+    "test_f1_macro": 1.0,
+    "test_fort_potentiel_f1": 1.0,
+    "primary_metric": "f1_macro",
+    "secondary_metric": "balanced_accuracy"
+  }
+}
