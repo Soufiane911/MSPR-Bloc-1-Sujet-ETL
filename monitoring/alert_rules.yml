@@ -36,6 +36,17 @@ groups:
           summary: "Latence API elevee (p95 > 2s)"
           description: "Le 95e percentile du temps de reponse de l'API est de {{ $value }}s au cours des 5 dernieres minutes."
 
+      # Alert 4b: Model inference errors
+      - alert: ModelPredictionErrorsHigh
+        expr: rate(model_prediction_errors_total{job="obrail-api"}[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+          service: ml
+        annotations:
+          summary: "Erreurs de prediction ML detectees"
+          description: "Le service de prediction a declenche au moins une erreur d'inference au cours des 5 dernieres minutes."
+
       # Alert 4: PostgreSQL exporter down
       - alert: PostgreSQLExporterDown
         expr: up{job="postgresql"} == 0

@@ -98,7 +98,7 @@ class TestInputValidation:
         response = client.get("/trains/?limit=1 UNION SELECT * FROM operators--")
         assert response.status_code == 422
 
-    @patch('app.services.train_service.TrainService.get_trains')
+    @patch('app.routers.trains.train_service.get_trains')
     def test_xss_in_query_param_blocked(self, mock_get_trains):
         """Une tentative XSS dans un parametre doit etre traitee comme texte brut (JSON)."""
         mock_get_trains.return_value = []

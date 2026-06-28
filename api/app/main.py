@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
-from app.routers import trains, schedules, stations, operators, stats, trajets
+from app.routers import trains, schedules, stations, operators, stats, trajets, predict
 from app.middleware import PrometheusMiddleware
 
 # Création de l'application FastAPI
@@ -68,7 +68,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "HEAD"],
+    allow_methods=["GET", "HEAD", "POST", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type"],
 )
 
@@ -79,6 +79,7 @@ app.include_router(stations.router, prefix="/stations", tags=["Stations"])
 app.include_router(operators.router, prefix="/operators", tags=["Operators"])
 app.include_router(stats.router, prefix="/stats", tags=["Statistics"])
 app.include_router(trajets.router, prefix="/trajets", tags=["Trajets"])
+app.include_router(predict.router, prefix="/predict", tags=["Prediction"])
 
 
 @app.get("/")
@@ -100,7 +101,8 @@ def read_root():
             "stations": "/stations",
             "operators": "/operators",
             "statistics": "/stats",
-            "trajets": "/trajets"
+            "trajets": "/trajets",
+            "predict": "/predict"
         }
     }
 

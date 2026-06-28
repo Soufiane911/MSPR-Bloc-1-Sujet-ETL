@@ -14,33 +14,6 @@ body {
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top right, #fff8dc, var(--bg));
-  background-color: var(--bg);
-}
-
-/* Lien d'evitement (skip link) — visible au focus clavier uniquement */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--brand);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  z-index: 10000;
-  text-decoration: none;
-  border-radius: 0 0 8px 0;
-  font-weight: 600;
-}
-.skip-link:focus-visible {
-  top: 0;
-}
-
-/* Focus visible accessible */
-button:focus-visible, button:focus,
-a:focus-visible, a:focus,
-select:focus-visible, select:focus,
-input:focus-visible, input:focus {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
 }
 
 .app-shell {
@@ -132,4 +105,66 @@ header p { margin-top: 0.3rem; color: var(--muted); }
   .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
   .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-2 { grid-template-columns: 1fr; }
+}
+
+.demo-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 500px at 90% -20%, #d8eef2 0%, transparent 60%),
+    radial-gradient(1200px 500px at 10% -20%, #ffe7c9 0%, transparent 60%),
+    var(--bg);
+}
+
+.demo-controls {
+  display: flex;
+  gap: 0.8rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.demo-controls label {
+  flex: 1;
+  font-size: 0.92rem;
+}
+
+.demo-controls select {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.demo-controls button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, #145f6b, #2f8998);
+}
+
+.demo-result {
+  margin-top: 1rem;
+}
+
+.demo-kpi-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .demo-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .demo-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .demo-kpi-grid {
+    grid-template-columns: 1fr;
+  }
 }

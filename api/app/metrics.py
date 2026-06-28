@@ -94,3 +94,23 @@ cache_size_bytes = Gauge(
     'Cache size in bytes',
     ['cache_name']
 )
+
+# Model prediction metrics
+model_predictions_total = Counter(
+    'model_predictions_total',
+    'Total model predictions by class',
+    ['model_name', 'predicted_class']
+)
+
+model_prediction_latency_seconds = Histogram(
+    'model_prediction_latency_seconds',
+    'Model prediction latency in seconds',
+    ['model_name'],
+    buckets=(0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5)
+)
+
+model_prediction_errors_total = Counter(
+    'model_prediction_errors_total',
+    'Total model prediction errors',
+    ['model_name', 'error_type']
+)

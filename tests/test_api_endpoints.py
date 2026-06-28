@@ -13,7 +13,7 @@ client = TestClient(app)
 class TestTrainsEndpoints:
     """Tests for train-related API endpoints."""
     
-    @patch('app.services.train_service.TrainService.get_trains')
+    @patch('app.routers.trains.train_service.get_trains')
     def test_get_trains_success(self, mock_get_trains):
         """Test successful retrieval of trains."""
         mock_get_trains.return_value = [
@@ -40,7 +40,7 @@ class TestTrainsEndpoints:
         assert len(response.json()) == 2
         assert response.json()[0]['train_number'] == 'TGV001'
     
-    @patch('app.services.train_service.TrainService.get_trains')
+    @patch('app.routers.trains.train_service.get_trains')
     def test_get_trains_with_filters(self, mock_get_trains):
         """Test train retrieval with query filters."""
         mock_get_trains.return_value = [
@@ -60,7 +60,7 @@ class TestTrainsEndpoints:
         assert response.status_code == 200
         mock_get_trains.assert_called_once()
     
-    @patch('app.services.train_service.TrainService.get_trains')
+    @patch('app.routers.trains.train_service.get_trains')
     def test_get_trains_pagination(self, mock_get_trains):
         """Test train pagination with limit and offset."""
         mock_get_trains.return_value = []

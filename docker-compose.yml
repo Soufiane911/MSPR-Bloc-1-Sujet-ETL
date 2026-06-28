@@ -35,6 +35,8 @@ services:
         condition: service_healthy
     volumes:
       - ./api:/app
+      - ./models:/app/models:ro
+      - ./ML:/app/ML:ro
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     networks:
       - obrail-network

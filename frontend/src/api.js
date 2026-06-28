@@ -11,35 +11,90 @@ export async function loadDashboardData(country, trainType) {
   const typeApi = trainType === "Jour" ? "day" : trainType === "Nuit" ? "night" : "";
   const typeQuery = typeApi ? `&train_type=${typeApi}` : "";
 
-  const endpoints = [
-    { key: "summary",  path: "/stats/summary" },
-    { key: "byCountry", path: "/stats/by-country" },
-    { key: "dayNight", path: `/stats/day-night?country=${country && country !== "Tous" ? country : ""}` },
-    { key: "routes",   path: "/stats/top-routes?limit=20" },
-    { key: "quality",  path: "/stats/data-quality" },
-    { key: "trains",   path: `/trains/?limit=1000${countryQuery}${typeQuery}` },
-    { key: "stations", path: `/stations/?limit=1000${countryQuery}` },
-    { key: "operators",path: `/operators/?limit=1000${countryQuery}` },
-    { key: "schedules",path: `/schedules/?limit=1000${countryQuery}${typeQuery}` },
-    { key: "trajets",  path: `/trajets/?limit=1000${countryQuery}${typeQuery}` },
-  ];
+  const [summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules] =
+    await Promise.all([
+      getJson("/stats/summary"),
+      getJson("/stats/byCountry"),
+      getJson(`/stats/dayNight?country=${country && country !== "Tous" ? country : ""}`),
+      getJson("/stats/topRoutes?limit=20"),
+      getJson("/stats/dataQuality"),
+      getJson(`/trains/?limit=1000${countryQuery}${typeQuery}`),
+      getJson(`/stations/?limit=1000${countryQuery}`),
+      getJson(`/operators/?limit=1000${countryQuery}`),
+      getJson(`/schedules/?limit=1000${countryQuery}${typeQuery}`),
+    ]);
 
-  const results = await Promise.allSettled(
-    endpoints.map((ep) => getJson(ep.path))
-  );
+  return { summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules };
+}
 
-  const data = {};
-  const errors = [];
+export async function loadAviationData(limit = 50) {
+  const [summary, byCountry, topRoutes, topAirports, airlineSummary, dataQuality] = await Promise.all([
+    getJson('/aviationStats/summary'),
+    getJson('/aviationStats/byCountry'),
+    getJson(`/aviationStats/topRoutes?limit=${Math.max(1, Math.min(50, limit))}`),
+    getJson(`/aviationStats/topAirports?limit=${Math.max(1, Math.min(50, limit))}`),
+    getJson('/aviationStats/airlineSummary'),
+    getJson('/aviationStats/dataQuality'),
+  ]);
 
-  results.forEach((result, i) => {
-    const key = endpoints[i].key;
-    if (result.status === "fulfilled") {
-      data[key] = result.value;
-    } else {
-      data[key] = null;
-      errors.push(`${endpoints[i].path} — ${result.reason.message}`);
-    }
+  return { summary, byCountry, topRoutes, topAirports, airlineSummary, dataQuality };
+}
+
+export async function loadTrajets({ country, trainType, limit = 200, offset = 0 } = {}) {
+  const params = new URLSearchParams();
+  if (country) params.set("country", country);
+  if (trainType) params.set("train_type", trainType);
+  params.set("limit", String(limit));
+  params.set("offset", String(offset));
+  return getJson(`/trajets?${params.toString()}`);
+}
+
+export async function predictRoute(payload) {
+  const res = await fetch(`${API_BASE}/predict/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
+  if (!res.ok) throw new Error(`API ${res.status}: /predict/`);
+  return res.json();
+}
 
-  return { data, errors };
+export async function loadFlightChoices(limit = 20) {
+  try {
+    return await getJson(`/aviationStats/topRoutes?limit=${Math.max(1, Math.min(50, limit))}`);
+  } catch {
+    // Fallback static routes if aviation endpoints are not available on this branch.
+    return [
+      {
+        id: "CDG-MXP",
+        origin_iata: "CDG",
+        destination_iata: "MXP",
+        origin_name: "Paris",
+        destination_name: "Milan",
+        origin_country: "FR",
+        destination_country: "IT",
+        avg_distance_km: 640,
+      },
+      {
+        id: "PAR-BER",
+        origin_iata: "ORY",
+        destination_iata: "BER",
+        origin_name: "Paris",
+        destination_name: "Berlin",
+        origin_country: "FR",
+        destination_country: "DE",
+        avg_distance_km: 880,
+      },
+      {
+        id: "MAD-BCN",
+        origin_iata: "MAD",
+        destination_iata: "BCN",
+        origin_name: "Madrid",
+        destination_name: "Barcelona",
+        origin_country: "ES",
+        destination_country: "ES",
+        avg_distance_km: 505,
+      },
+    ];
+  }
 }

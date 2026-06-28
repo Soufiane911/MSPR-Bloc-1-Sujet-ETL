@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { loadDashboardData } from "./api";
+import { loadDashboardData, loadAviationData } from "./api";
 import Sidebar from "./components/Sidebar";
 import Tabs from "./components/Tabs";
 import KpiBar from "./components/KpiBar";
@@ -8,27 +8,23 @@ import DayNightTab from "./tabs/DayNightTab";
 import NetworkTab from "./tabs/NetworkTab";
 import MapTab from "./tabs/MapTab";
 import QualityTab from "./tabs/QualityTab";
-import TrajetsTab from "./tabs/TrajetsTab";
+import AviationPage from "./pages/AviationPage";
+import DemoPredictPage from "./pages/DemoPredictPage";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
   const [filters, setFilters] = useState({ country: "Tous", trainType: "Tous", distanceMin: 0, distanceMax: 2000 });
-  const [state, setState] = useState({ loading: true, error: "", warnings: [], data: null });
+  const [state, setState] = useState({ loading: true, error: "", data: null });
 
   useEffect(() => {
     let mounted = true;
-    setState((s) => ({ ...s, loading: true, error: "", warnings: [] }));
-    loadDashboardData(filters.country, filters.trainType)
-      .then(({ data, errors }) => {
-        if (!mounted) return;
-        if (errors.length > 0) {
-          // Certains endpoints ont echoue mais d'autres sont disponibles
-          setState({ loading: false, error: "", warnings: errors, data });
-        } else {
-          setState({ loading: false, error: "", warnings: [], data });
-        }
+    setState((s) => ({ ...s, loading: true, error: "" }));
+    Promise.all([loadDashboardData(filters.country, filters.trainType), loadAviationData(20)])
+      .then(([dashboardData, aviationData]) => {
+        const combined = { ...dashboardData, aviation: aviationData };
+        mounted && setState({ loading: false, error: "", data: combined });
       })
-      .catch((err) => mounted && setState({ loading: false, error: err.message, warnings: [], data: null }));
+      .catch((err) => mounted && setState({ loading: false, error: err.message, data: null }));
     return () => {
       mounted = false;
     };
@@ -62,48 +58,44 @@ export default function App() {
     return Math.ceil(max || 2000);
   }, [d]);
 
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/aviation")) {
+    return <AviationPage />;
+  }
+
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/demo-predict")) {
+    return <DemoPredictPage />;
+  }
+
   return (
-    <>
-      <a href="#contenu-principal" className="skip-link">
-        Aller au contenu
-      </a>
+    <main className="app-shell">
       <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
-      <main className="app-shell" id="contenu-principal" role="main" tabIndex={-1}>
-        <section className="content">
-          <header>
-            <h1>ObRail Europe</h1>
-            <p>Dashboard React remplacant Streamlit avec fonctionnalites equivalentes.</p>
-          </header>
+      <section className="content">
+        <header>
+          <h1>ObRail Europe</h1>
+          <p>Analyse de données ferroviaires et aériennes</p>
+          <p style={{ marginTop: 8 }}>
+            <a href="/aviation">Voir les statistiques Aviation →</a>
+            {" | "}
+            <a href="/demo-predict">Démo IA /predict →</a>
+          </p>
+        </header>
 
-          {state.loading && <div className="card">Chargement des donnees...</div>}
-          {state.error && <div className="card error">Erreur: {state.error}</div>}
+        {state.loading && <div className="card">Chargement des donnees...</div>}
+        {state.error && <div className="card error">Erreur: {state.error}</div>}
 
-          {state.warnings.length > 0 && (
-            <div className="card" style={{ borderColor: "#f39b2f", background: "#fff8dc" }}>
-              <strong style={{ color: "#b37400" }}>Avertissement : certains endpoints sont indisponibles</strong>
-              <ul style={{ margin: "0.5rem 0 0 1rem", fontSize: "0.85rem", color: "#607086" }}>
-                {state.warnings.map((w, i) => (
-                  <li key={i}>{w}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+        {!state.loading && !state.error && d && (
+          <>
+            <KpiBar kpis={kpis} />
+            <Tabs active={activeTab} setActive={setActiveTab} />
 
-          {!state.loading && !state.error && d && (
-            <>
-              <KpiBar kpis={kpis} />
-              <Tabs active={activeTab} setActive={setActiveTab} />
-
-              {activeTab === "overview" && <OverviewTab trains={d.trains || []} byCountry={d.byCountry || []} />}
-              {activeTab === "trajets" && <TrajetsTab trajets={d.trajets || []} />}
-              {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight || []} />}
-              {activeTab === "network" && <NetworkTab routes={d.routes || []} />}
-              {activeTab === "map" && <MapTab stations={d.stations || []} />}
-              {activeTab === "quality" && <QualityTab quality={d.quality || []} schedules={schedules} />}
-            </>
-          )}
-        </section>
-      </main>
-    </>
+            {activeTab === "overview" && <OverviewTab trains={d.trains} byCountry={d.byCountry} />}
+            {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight} />}
+            {activeTab === "network" && <NetworkTab routes={d.routes} />}
+            {activeTab === "map" && <MapTab stations={d.stations} />}
+            {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
+          </>
+        )}
+      </section>
+    </main>
   );
 }
