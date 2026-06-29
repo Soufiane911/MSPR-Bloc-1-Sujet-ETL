@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):(?:5173|8501)\/api\/.*/;
+const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):\d+\/api\/.*/;
 
 async function fulfillJson(route, status, body) {
   await route.fulfill({
@@ -93,4 +93,55 @@ test("la demo ignore une alternative train incoherente et utilise le fallback co
   await expect(trainCard.getByText("Route: Rome -> Prague")).toBeVisible();
   await expect(trainCard.getByText("Alternative estimée faute de trajet ferroviaire cohérent dans la base.")).toBeVisible();
   await expect(page.getByText("Одеса Головна")).toHaveCount(0);
+});
+
+test("la demo garde une prediction modele si la recherche train est indisponible", async ({ page }) => {
+  await page.route(API_URL, async (route) => {
+    const url = new URL(route.request().url());
+    const pathname = url.pathname.replace(/^\/api/, "");
+
+    if (pathname === "/aviationStats/topRoutes") {
+      await fulfillJson(route, 200, [
+        {
+          id: "CDG-MXP",
+          origin_iata: "CDG",
+          destination_iata: "MXP",
+          origin_name: "Paris",
+          destination_name: "Milan",
+          origin_country: "FR",
+          destination_country: "IT",
+          avg_distance_km: 640,
+          estimated_duration_min: 88,
+          airline_count: 5,
+        },
+      ]);
+      return;
+    }
+
+    if (pathname === "/trajets") {
+      await fulfillJson(route, 503, { detail: "Train search unavailable" });
+      return;
+    }
+
+    if (pathname === "/predict/") {
+      await fulfillJson(route, 200, {
+        prediction: "fort_potentiel",
+        confidence: 0.87,
+        probabilities: { fort_potentiel: 0.87, potentiel_moyen: 0.11, faible_potentiel: 0.02 },
+        explanation: "Prediction fort_potentiel basee sur une alternative estimee.",
+        model_version: "test",
+      });
+      return;
+    }
+
+    await fulfillJson(route, 404, { detail: `Unexpected route: ${pathname}` });
+  });
+
+  await page.goto("/demo-predict");
+  await page.getByRole("button", { name: "Lancer la prédiction" }).click();
+
+  await expect(page.getByRole("heading", { name: "Résultat du modèle" })).toBeVisible();
+  await expect(page.getByText("Classe prédite")).toBeVisible();
+  await expect(page.getByText("Train: DEMO-ALT (ObRail Synthétique)")).toBeVisible();
+  await expect(page.getByText(/^Erreur:/)).toHaveCount(0);
 });

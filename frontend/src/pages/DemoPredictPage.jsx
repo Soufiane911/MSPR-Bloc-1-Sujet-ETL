@@ -122,6 +122,14 @@ function toPredictPayload(train, flight) {
   };
 }
 
+async function loadTrajetsOrEmpty(params) {
+  try {
+    return await loadTrajets(params);
+  } catch {
+    return [];
+  }
+}
+
 export default function DemoPredictPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -163,11 +171,11 @@ export default function DemoPredictPage() {
 
     try {
       const [originTrajets, destinationTrajets, broadTrajets] = await Promise.all([
-        loadTrajets({ country: selectedFlight.originCountry, limit: 300 }),
+        loadTrajetsOrEmpty({ country: selectedFlight.originCountry, limit: 300 }),
         selectedFlight.destinationCountry !== selectedFlight.originCountry
-          ? loadTrajets({ country: selectedFlight.destinationCountry, limit: 300 })
+          ? loadTrajetsOrEmpty({ country: selectedFlight.destinationCountry, limit: 300 })
           : Promise.resolve([]),
-        loadTrajets({ limit: 300 }),
+        loadTrajetsOrEmpty({ limit: 300 }),
       ]);
 
       const candidates = [...originTrajets, ...destinationTrajets, ...broadTrajets];

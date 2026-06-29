@@ -1,9 +1,37 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
+const EMPTY_DASHBOARD_DATA = {
+  summary: {
+    operators: 0,
+    stations: 0,
+    trains: 0,
+    schedules: 0,
+    day_trains: 0,
+    night_trains: 0,
+  },
+  byCountry: [],
+  dayNight: [],
+  routes: [],
+  quality: [],
+  trains: [],
+  stations: [],
+  operators: [],
+  schedules: [],
+  trajets: [],
+};
+
 async function getJson(path) {
   const res = await fetch(`${API_BASE}${path}`);
   if (!res.ok) throw new Error(`API ${res.status}: ${path}`);
   return res.json();
+}
+
+async function getJsonOrDefault(path, fallback) {
+  try {
+    return await getJson(path);
+  } catch {
+    return fallback;
+  }
 }
 
 export async function loadDashboardData(country, trainType) {
@@ -15,16 +43,16 @@ export async function loadDashboardData(country, trainType) {
 
   const [summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules, trajets] =
     await Promise.all([
-      getJson("/stats/summary"),
-      getJson("/stats/by-country"),
-      getJson(dayNightPath),
-      getJson("/stats/top-routes?limit=20"),
-      getJson("/stats/data-quality"),
-      getJson(`/trains/?limit=1000${countryQuery}${typeQuery}`),
-      getJson(`/stations/?limit=1000${countryQuery}`),
-      getJson(`/operators/?limit=1000${countryQuery}`),
-      getJson(`/schedules/?limit=1000${countryQuery}${typeQuery}`),
-      getJson(`/trajets?limit=1000${countryQuery}${typeQuery}`),
+      getJsonOrDefault("/stats/summary", EMPTY_DASHBOARD_DATA.summary),
+      getJsonOrDefault("/stats/by-country", EMPTY_DASHBOARD_DATA.byCountry),
+      getJsonOrDefault(dayNightPath, EMPTY_DASHBOARD_DATA.dayNight),
+      getJsonOrDefault("/stats/top-routes?limit=20", EMPTY_DASHBOARD_DATA.routes),
+      getJsonOrDefault("/stats/data-quality", EMPTY_DASHBOARD_DATA.quality),
+      getJsonOrDefault(`/trains/?limit=1000${countryQuery}${typeQuery}`, EMPTY_DASHBOARD_DATA.trains),
+      getJsonOrDefault(`/stations/?limit=1000${countryQuery}`, EMPTY_DASHBOARD_DATA.stations),
+      getJsonOrDefault(`/operators/?limit=1000${countryQuery}`, EMPTY_DASHBOARD_DATA.operators),
+      getJsonOrDefault(`/schedules/?limit=1000${countryQuery}${typeQuery}`, EMPTY_DASHBOARD_DATA.schedules),
+      getJsonOrDefault(`/trajets?limit=1000${countryQuery}${typeQuery}`, EMPTY_DASHBOARD_DATA.trajets),
     ]);
 
   return { summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules, trajets };

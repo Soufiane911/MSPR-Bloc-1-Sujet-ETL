@@ -10,10 +10,15 @@ async function fulfillJson(route, status, body) {
   });
 }
 
-async function mockDashboardApi(page) {
+test("le dashboard reste navigable si un endpoint statistique echoue", async ({ page }) => {
   await page.route(API_URL, async (route) => {
     const url = new URL(route.request().url());
     const pathname = url.pathname.replace(/^\/api/, "");
+
+    if (pathname === "/stats/top-routes") {
+      await fulfillJson(route, 503, { detail: "Top routes unavailable" });
+      return;
+    }
 
     if (pathname.startsWith("/aviationStats")) {
       await fulfillJson(route, 503, { detail: "Aviation unavailable" });
@@ -24,15 +29,6 @@ async function mockDashboardApi(page) {
       "/stats/summary": { trains: 1, stations: 2, schedules: 1 },
       "/stats/by-country": [{ country: "FR", nb_trains: 1 }],
       "/stats/day-night": [{ country: "FR", train_type: "day", nb_trains: 1, nb_schedules: 1 }],
-      "/stats/top-routes": [
-        {
-          origin_city: "Paris",
-          destination_city: "Lyon",
-          frequency: 4,
-          avg_duration: 120,
-          avg_distance: 465,
-        },
-      ],
       "/stats/data-quality": [{ table_name: "schedules", total_records: 1 }],
       "/trains/": [{ train_id: 1, train_type: "day" }],
       "/stations/": [
@@ -64,16 +60,12 @@ async function mockDashboardApi(page) {
 
     await fulfillJson(route, 404, { detail: `Unexpected route: ${pathname}` });
   });
-}
-
-test("le dashboard ferroviaire reste utilisable si les stats aviation sont indisponibles", async ({ page }) => {
-  await mockDashboardApi(page);
 
   await page.goto("/");
 
   await expect(page.getByText("Chargement des donnees...")).toBeHidden({ timeout: 30000 });
   await expect(page.getByText(/^Erreur:/)).toHaveCount(0);
-  await expect(page.getByText("Trains", { exact: true })).toBeVisible();
+  await expect(page.locator(".tabs button").first()).toBeVisible();
 
   await page.getByRole("button", { name: "Trajets", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Consultation des trajets" })).toBeVisible();

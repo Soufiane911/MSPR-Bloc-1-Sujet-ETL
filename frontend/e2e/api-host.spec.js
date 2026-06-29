@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const SAME_ORIGIN_API = /http:\/\/(?:localhost|127\.0\.0\.1):(?:5173|8501)\/api\/.*/;
+const SAME_ORIGIN_API = /http:\/\/(?:localhost|127\.0\.0\.1):\d+\/api\/.*/;
 const DIRECT_API = /http:\/\/(?:localhost|127\.0\.0\.1):8000\/.*/;
 
 async function fulfillJson(route, status, body) {
