@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):8000\/.*/;
+const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):(?:5173|8501)\/api\/.*/;
 
 async function fulfillJson(route, status, body) {
   await route.fulfill({
@@ -29,8 +29,9 @@ test("la demo predict affiche une prediction complete", async ({ page }) => {
 test("la demo ignore une alternative train incoherente et utilise le fallback coherent", async ({ page }) => {
   await page.route(API_URL, async (route) => {
     const url = new URL(route.request().url());
+    const pathname = url.pathname.replace(/^\/api/, "");
 
-    if (url.pathname === "/aviationStats/topRoutes") {
+    if (pathname === "/aviationStats/topRoutes") {
       await fulfillJson(route, 200, [
         {
           id: "FCO-PRG",
@@ -49,7 +50,7 @@ test("la demo ignore une alternative train incoherente et utilise le fallback co
       return;
     }
 
-    if (url.pathname === "/trajets") {
+    if (pathname === "/trajets") {
       await fulfillJson(route, 200, [
         {
           trajet_id: 10,
@@ -67,7 +68,7 @@ test("la demo ignore une alternative train incoherente et utilise le fallback co
       return;
     }
 
-    if (url.pathname === "/predict/") {
+    if (pathname === "/predict/") {
       await fulfillJson(route, 200, {
         prediction: "fort_potentiel",
         confidence: 0.91,
@@ -78,7 +79,7 @@ test("la demo ignore une alternative train incoherente et utilise le fallback co
       return;
     }
 
-    await fulfillJson(route, 404, { detail: `Unexpected route: ${url.pathname}` });
+    await fulfillJson(route, 404, { detail: `Unexpected route: ${pathname}` });
   });
 
   await page.goto("/demo-predict");

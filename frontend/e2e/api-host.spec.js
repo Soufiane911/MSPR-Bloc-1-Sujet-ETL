@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-const SAME_HOST_API = /http:\/\/127\.0\.0\.1:8000\/.*/;
-const LOCALHOST_API = /http:\/\/localhost:8000\/.*/;
+const SAME_ORIGIN_API = /http:\/\/(?:localhost|127\.0\.0\.1):(?:5173|8501)\/api\/.*/;
+const DIRECT_API = /http:\/\/(?:localhost|127\.0\.0\.1):8000\/.*/;
 
 async function fulfillJson(route, status, body) {
   await route.fulfill({
@@ -13,6 +13,7 @@ async function fulfillJson(route, status, body) {
 
 async function mockDashboardApi(route) {
   const url = new URL(route.request().url());
+  const pathname = url.pathname.replace(/^\/api/, "");
 
   const responses = {
     "/stats/summary": { trains: 1, stations: 2, schedules: 1 },
@@ -43,32 +44,32 @@ async function mockDashboardApi(route) {
     ],
   };
 
-  if (url.pathname.startsWith("/aviationStats")) {
+  if (pathname.startsWith("/aviationStats")) {
     await fulfillJson(route, 503, { detail: "Aviation unavailable" });
     return;
   }
 
-  if (Object.prototype.hasOwnProperty.call(responses, url.pathname)) {
-    await fulfillJson(route, 200, responses[url.pathname]);
+  if (Object.prototype.hasOwnProperty.call(responses, pathname)) {
+    await fulfillJson(route, 200, responses[pathname]);
     return;
   }
 
-  await fulfillJson(route, 404, { detail: `Unexpected route: ${url.pathname}` });
+  await fulfillJson(route, 404, { detail: `Unexpected route: ${pathname}` });
 }
 
-test("les appels API utilisent le meme hostname que la page", async ({ page }) => {
-  const localhostCalls = [];
+test("les appels API passent par le proxy meme origine de la page", async ({ page }) => {
+  const directApiCalls = [];
 
-  await page.route(LOCALHOST_API, async (route) => {
-    localhostCalls.push(route.request().url());
+  await page.route(DIRECT_API, async (route) => {
+    directApiCalls.push(route.request().url());
     await route.abort("failed");
   });
-  await page.route(SAME_HOST_API, mockDashboardApi);
+  await page.route(SAME_ORIGIN_API, mockDashboardApi);
 
   await page.goto("/");
 
   await expect(page.getByText("Chargement des donnees...")).toBeHidden({ timeout: 30000 });
   await expect(page.getByText(/^Erreur:/)).toHaveCount(0);
   await expect(page.getByText("Trains", { exact: true })).toBeVisible();
-  expect(localhostCalls).toEqual([]);
+  expect(directApiCalls).toEqual([]);
 });

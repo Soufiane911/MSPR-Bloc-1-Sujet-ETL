@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):8000\/.*/;
+const API_URL = /http:\/\/(?:localhost|127\.0\.0\.1):(?:5173|8501)\/api\/.*/;
 
 async function fulfillJson(route, status, body) {
   await route.fulfill({
@@ -13,8 +13,9 @@ async function fulfillJson(route, status, body) {
 async function mockDashboardApi(page) {
   await page.route(API_URL, async (route) => {
     const url = new URL(route.request().url());
+    const pathname = url.pathname.replace(/^\/api/, "");
 
-    if (url.pathname.startsWith("/aviationStats")) {
+    if (pathname.startsWith("/aviationStats")) {
       await fulfillJson(route, 503, { detail: "Aviation unavailable" });
       return;
     }
@@ -56,12 +57,12 @@ async function mockDashboardApi(page) {
       ],
     };
 
-    if (Object.prototype.hasOwnProperty.call(responses, url.pathname)) {
-      await fulfillJson(route, 200, responses[url.pathname]);
+    if (Object.prototype.hasOwnProperty.call(responses, pathname)) {
+      await fulfillJson(route, 200, responses[pathname]);
       return;
     }
 
-    await fulfillJson(route, 404, { detail: `Unexpected route: ${url.pathname}` });
+    await fulfillJson(route, 404, { detail: `Unexpected route: ${pathname}` });
   });
 }
 
