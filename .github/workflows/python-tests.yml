@@ -103,6 +103,8 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Start services with docker compose
+      env:
+        DATABASE_URL: postgresql://obrail:obrail_secure_password@database:5432/obrail_db
       run: |
         docker compose up -d
         sleep 60
