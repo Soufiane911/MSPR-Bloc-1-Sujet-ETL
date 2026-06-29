@@ -132,25 +132,34 @@ jobs:
 
     - name: Application Health Checks
       run: |
-        max_attempts=30
-        attempt=1
-        while [ $attempt -le $max_attempts ]; do
-          if curl -f http://localhost:8000/health; then
-            echo "API is healthy"
-            break
-          fi
-          echo "Attempt $attempt of $max_attempts failed. Retrying..."
-          sleep 2
-          attempt=$((attempt + 1))
-        done
-        [ $attempt -le $max_attempts ]
+        check_url() {
+          local url="$1"
+          local label="$2"
+          local max_attempts=30
+          local attempt=1
 
-        curl -f http://localhost:9090/-/healthy
-        curl -f http://localhost:3000/api/health
-        curl -f http://localhost:9187
-        curl -f http://localhost:8501
-        curl -f http://localhost:8501/api/health
-        curl -f http://localhost:8501/api/stats/summary
+          while [ $attempt -le $max_attempts ]; do
+            if curl -f "$url"; then
+              echo "$label is healthy"
+              return 0
+            fi
+            echo "$label attempt $attempt of $max_attempts failed. Retrying..."
+            sleep 2
+            attempt=$((attempt + 1))
+          done
+
+          echo "ERROR: $label did not become healthy in time"
+          return 1
+        }
+
+        check_url http://localhost:8000/health "API"
+        check_url http://localhost:8501 "Dashboard"
+        check_url http://localhost:8501/api/health "Dashboard API proxy"
+        check_url http://localhost:8501/api/stats/summary "Dashboard stats proxy"
+        check_url http://localhost:9090/-/healthy "Prometheus"
+        check_url http://localhost:3000/api/health "Grafana"
+        check_url http://localhost:9187 "Postgres exporter"
+
         curl -s http://localhost:8000/metrics | head -20
         curl -s 'http://localhost:9090/api/v1/query?query=up' | jq '.'
         curl -s http://localhost:9187/metrics | grep pg_stat_activity_count
