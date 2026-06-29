@@ -9,9 +9,9 @@ on:
     - cron: '*/10 8-18 * * 1-5'
     - cron: '0 3 * * *'
   push:
-    branches: [ main, 6-3-main, Try#2test, develop, monitoring ]
+    branches: [ main, 6-3-main, main-6.2-6.4, Try#2test, develop, monitoring ]
   pull_request:
-    branches: [ main, 6-3-main, Try#2test, develop ]
+    branches: [ main, 6-3-main, main-6.2-6.4, Try#2test, develop ]
   workflow_dispatch:
 
 jobs:

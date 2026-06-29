@@ -17,7 +17,7 @@
   ],
   "dataset_path": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/data/ml/obrail_ml_dataset.csv",
   "random_state": 42,
-  "trained_at_utc": "2026-06-27T16:31:41.311962+00:00",
+  "trained_at_utc": "2026-06-28T14:08:27.397064+00:00",
   "training_rows_70_percent": 41082,
   "validation_rows_15_percent": 8803,
   "test_rows_15_percent": 8804,
@@ -35,6 +35,23 @@
     "model_comparison": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/model_comparison.png",
     "confusion_matrix": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/confusion_matrix.png",
     "feature_importance": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/rendu/figures/feature_importance.png"
+  },
+  "hyperparameter_search": {
+    "method": "GridSearchCV",
+    "scoring": "f1_macro",
+    "cv": {
+      "strategy": "StratifiedKFold",
+      "n_splits": 3,
+      "shuffle": true,
+      "random_state": 42
+    },
+    "best_params": {
+      "model__learning_rate": 0.05,
+      "model__max_depth": 2,
+      "model__n_estimators": 80
+    },
+    "best_score": 0.999694,
+    "artifact_path": "/Users/soufianehamzaoui/Desktop/EPSI/MSPR/6.2-6.4/ML/modelTraining/outputs/hyperparameter_search.json"
   },
   "selection_metrics": {
     "model_name": "gradient_boosting",

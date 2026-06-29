@@ -17,6 +17,7 @@ import pandas as pd
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
 
 from ML.modelTraining.common import (
     DATASET_PATH,
@@ -50,6 +51,13 @@ DEFAULT_MODEL_PATH = MODELS_DIR / "obrail_substitution_model.joblib"
 DEFAULT_METADATA_PATH = MODELS_DIR / "model_metadata.json"
 DEFAULT_REPORT_PATH = OUTPUT_DIR / "classification_report.json"
 DEFAULT_COMPARISON_PATH = OUTPUT_DIR / "model_comparison.csv"
+DEFAULT_HYPERPARAMETER_SEARCH_PATH = OUTPUT_DIR / "hyperparameter_search.json"
+
+DEFAULT_GRADIENT_BOOSTING_PARAM_GRID = {
+    "model__n_estimators": [80, 120],
+    "model__learning_rate": [0.05, 0.08],
+    "model__max_depth": [2, 3],
+}
 
 
 @dataclass
@@ -76,9 +84,73 @@ def run_model_experiments(dataset: pd.DataFrame | None = None) -> list[dict[str,
     return payloads
 
 
+def run_hyperparameter_search(
+    model_name: str = "gradient_boosting",
+    dataset: pd.DataFrame | None = None,
+    output_path: Path = DEFAULT_HYPERPARAMETER_SEARCH_PATH,
+    param_grid: dict[str, list[Any]] | None = None,
+    cv_splits: int = 3,
+) -> dict[str, Any]:
+    """Run GridSearchCV with StratifiedKFold for the retained model."""
+
+    if model_name != "gradient_boosting":
+        raise ValueError(
+            "Hyperparameter search is currently configured for gradient_boosting"
+        )
+
+    training_dataset = load_training_dataset() if dataset is None else dataset
+    splits = split_training_data(training_dataset)
+    module = _load_model_module(model_name)
+    estimator = module.build_estimator()
+    model = build_model_pipeline(estimator)
+
+    cv = StratifiedKFold(
+        n_splits=cv_splits,
+        shuffle=True,
+        random_state=RANDOM_STATE,
+    )
+    search = GridSearchCV(
+        estimator=model,
+        param_grid=param_grid or DEFAULT_GRADIENT_BOOSTING_PARAM_GRID,
+        scoring="f1_macro",
+        cv=cv,
+        refit=True,
+        n_jobs=1,
+        return_train_score=False,
+    )
+    search.fit(splits.X_train, splits.y_train)
+
+    best_params = _normalize_search_params(search.best_params_)
+    payload = {
+        "model_name": model_name,
+        "method": "GridSearchCV",
+        "scoring": "f1_macro",
+        "cv": {
+            "strategy": "StratifiedKFold",
+            "n_splits": cv_splits,
+            "shuffle": True,
+            "random_state": RANDOM_STATE,
+        },
+        "param_grid": _normalize_search_params(search.param_grid),
+        "best_params": best_params,
+        "estimator_params": _strip_pipeline_param_prefix(best_params),
+        "best_score": round(float(search.best_score_), 6),
+        "candidates": _build_search_candidates(search),
+        "searched_on": "train split only",
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False, default=str),
+        encoding="utf-8",
+    )
+    return payload
+
+
 def train_final_model(
     model_name: str,
     dataset: pd.DataFrame | None = None,
+    estimator_params: dict[str, Any] | None = None,
 ) -> FinalModelResult:
     """Train the selected model on train+validation and evaluate on test."""
 
@@ -86,6 +158,8 @@ def train_final_model(
     splits = split_training_data(training_dataset)
     module = _load_model_module(model_name)
     estimator = module.build_estimator()
+    if estimator_params:
+        estimator.set_params(**estimator_params)
     model = build_model_pipeline(estimator)
 
     X_final_train = pd.concat(
@@ -117,6 +191,8 @@ def write_final_outputs(
     report_path: Path = DEFAULT_REPORT_PATH,
     metadata_path: Path = DEFAULT_METADATA_PATH,
     figures_dir: Path = FIGURES_DIR,
+    hyperparameter_search: dict[str, Any] | None = None,
+    hyperparameter_search_path: Path = DEFAULT_HYPERPARAMETER_SEARCH_PATH,
 ) -> dict[str, Any]:
     """Write the final model, metadata, report, and figures."""
 
@@ -138,7 +214,14 @@ def write_final_outputs(
         encoding="utf-8",
     )
 
-    metadata = _build_metadata(result, model_path, report_path, figures_dir)
+    metadata = _build_metadata(
+        result,
+        model_path,
+        report_path,
+        figures_dir,
+        hyperparameter_search=hyperparameter_search,
+        hyperparameter_search_path=hyperparameter_search_path,
+    )
     metadata_path.write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False, default=str),
         encoding="utf-8",
@@ -163,8 +246,26 @@ def run_training_pipeline(dataset: pd.DataFrame | None = None) -> dict[str, Any]
     comparison = build_model_comparison(OUTPUT_DIR)
     write_model_comparison(comparison, DEFAULT_COMPARISON_PATH)
     best_model = select_best_model(comparison)
-    final_result = train_final_model(best_model["model_name"], training_dataset)
-    metadata = write_final_outputs(final_result, comparison)
+    hyperparameter_search = None
+    estimator_params = None
+    if best_model["model_name"] == "gradient_boosting":
+        hyperparameter_search = run_hyperparameter_search(
+            best_model["model_name"],
+            training_dataset,
+            output_path=DEFAULT_HYPERPARAMETER_SEARCH_PATH,
+        )
+        estimator_params = hyperparameter_search["estimator_params"]
+    final_result = train_final_model(
+        best_model["model_name"],
+        training_dataset,
+        estimator_params=estimator_params,
+    )
+    metadata = write_final_outputs(
+        final_result,
+        comparison,
+        hyperparameter_search=hyperparameter_search,
+        hyperparameter_search_path=DEFAULT_HYPERPARAMETER_SEARCH_PATH,
+    )
     metadata["selection_metrics"] = best_model
     DEFAULT_METADATA_PATH.write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False, default=str),
@@ -254,8 +355,10 @@ def _build_metadata(
     model_path: Path,
     report_path: Path,
     figures_dir: Path,
+    hyperparameter_search: dict[str, Any] | None = None,
+    hyperparameter_search_path: Path = DEFAULT_HYPERPARAMETER_SEARCH_PATH,
 ) -> dict[str, Any]:
-    return {
+    metadata = {
         "selected_model": result.model_name,
         "selection_rule": "highest validation f1_macro, then balanced_accuracy",
         "primary_metric": "f1_macro",
@@ -282,6 +385,52 @@ def _build_metadata(
             "feature_importance": str(figures_dir / "feature_importance.png"),
         },
     }
+    if hyperparameter_search:
+        metadata["hyperparameter_search"] = {
+            "method": hyperparameter_search["method"],
+            "scoring": hyperparameter_search["scoring"],
+            "cv": hyperparameter_search["cv"],
+            "best_params": hyperparameter_search["best_params"],
+            "best_score": hyperparameter_search["best_score"],
+            "artifact_path": str(hyperparameter_search_path),
+        }
+    return metadata
+
+
+def _normalize_search_params(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _normalize_search_params(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_normalize_search_params(item) for item in value]
+    if hasattr(value, "item"):
+        return value.item()
+    return value
+
+
+def _strip_pipeline_param_prefix(params: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key.removeprefix("model__"): value
+        for key, value in params.items()
+        if key.startswith("model__")
+    }
+
+
+def _build_search_candidates(search: GridSearchCV) -> list[dict[str, Any]]:
+    candidates = []
+    for index, params in enumerate(search.cv_results_["params"]):
+        candidates.append(
+            {
+                "rank": int(search.cv_results_["rank_test_score"][index]),
+                "mean_test_score": round(
+                    float(search.cv_results_["mean_test_score"][index]), 6
+                ),
+                "std_test_score": round(
+                    float(search.cv_results_["std_test_score"][index]), 6
+                ),
+                "params": _normalize_search_params(params),
+            }
+        )
+    return sorted(candidates, key=lambda item: item["rank"])
 
 
 def _get_feature_names(model: Any) -> list[str]:

@@ -2,11 +2,95 @@ import pytest
 import pandas as pd
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import OperationalError
+from unittest.mock import MagicMock
 
 from loaders import database_loader as loader_module
 from loaders.database_loader import DatabaseLoader
 
 TEST_SCHEMA = "test_etl"
+
+
+def test_load_stations_preparation_keeps_distinct_source_ids(monkeypatch):
+    """Deux stop_id differents ne doivent pas etre dedupliques par nom."""
+    loader = DatabaseLoader.__new__(DatabaseLoader)
+    loader.logger = MagicMock()
+    loader.stats = {"stations_loaded": 0}
+    captured = {}
+
+    def fake_insert(df, table_name, conflict_columns, update_columns):
+        captured["df"] = df.copy()
+        captured["conflict_columns"] = conflict_columns
+        return len(df)
+
+    loader._insert_with_tosql = fake_insert
+
+    stations = pd.DataFrame(
+        [
+            {
+                "stop_name": "Zurich HB",
+                "country": "CH",
+                "stop_id": "ZRH_PLATFORM_1",
+                "source_name": "cff_sbb",
+            },
+            {
+                "stop_name": "Zurich HB",
+                "country": "CH",
+                "stop_id": "ZRH_PLATFORM_2",
+                "source_name": "cff_sbb",
+            },
+        ]
+    )
+
+    count = loader.load_stations(stations)
+
+    assert count == 2
+    assert captured["conflict_columns"] == ["uic_code", "source_name"]
+    assert set(captured["df"]["uic_code"]) == {"ZRH_PLATFORM_1", "ZRH_PLATFORM_2"}
+
+
+def test_load_schedules_rejects_impossible_train_speed():
+    loader = DatabaseLoader.__new__(DatabaseLoader)
+    loader.logger = MagicMock()
+    loader.stats = {"schedules_loaded": 0}
+    captured = {}
+
+    def fake_bulk_insert(df, table_name, columns, conflict_columns, update_columns):
+        captured["df"] = df.copy()
+        return len(df)
+
+    loader._bulk_insert = fake_bulk_insert
+
+    schedules = pd.DataFrame(
+        [
+            {
+                "train_id": 1,
+                "origin_id": 10,
+                "destination_id": 20,
+                "departure_time": "2026-01-01T00:00:00+00:00",
+                "arrival_time": "2026-01-01T00:13:00+00:00",
+                "duration_min": 13,
+                "distance_km": 1036,
+                "frequency": "daily",
+                "source_name": "back_on_track",
+            },
+            {
+                "train_id": 2,
+                "origin_id": 30,
+                "destination_id": 40,
+                "departure_time": "2026-01-01T00:00:00+00:00",
+                "arrival_time": "2026-01-01T11:16:00+00:00",
+                "duration_min": 676,
+                "distance_km": 1036,
+                "frequency": "daily",
+                "source_name": "back_on_track",
+            },
+        ]
+    )
+
+    count = loader.load_schedules(schedules)
+
+    assert count == 1
+    assert captured["df"]["train_id"].tolist() == [2]
 
 
 def _setup_test_schema(engine):
@@ -40,7 +124,7 @@ def _setup_test_schema(engine):
                 source_name VARCHAR(100),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE(name, country, source_name)
+                UNIQUE(uic_code, source_name)
             )
         """))
         conn.execute(text("""
@@ -210,3 +294,51 @@ def test_database_loader_is_idempotent(monkeypatch):
         "trains": 1,
         "schedules": 1,
     }
+
+
+@pytest.mark.integration
+def test_load_stations_keeps_same_name_with_distinct_source_ids(monkeypatch):
+    """Les schedules referencent les stop_id source, pas seulement le nom de gare."""
+    pytest.importorskip("psycopg2")
+
+    try:
+        engine = create_engine(
+            "postgresql://obrail:changeme@localhost:5433/obrail_db",
+            connect_args={"options": f"-c search_path={TEST_SCHEMA}"},
+        )
+        _setup_test_schema(engine)
+    except OperationalError:
+        pytest.skip("PostgreSQL not available - this is an integration test")
+
+    monkeypatch.setattr(loader_module, "get_engine", lambda: engine)
+
+    loader = DatabaseLoader()
+    stations = pd.DataFrame(
+        [
+            {
+                "stop_name": "Zurich HB",
+                "country": "CH",
+                "stop_lat": 47.378,
+                "stop_lon": 8.54,
+                "stop_id": "ZRH_PLATFORM_1",
+                "source_name": "cff_sbb",
+            },
+            {
+                "stop_name": "Zurich HB",
+                "country": "CH",
+                "stop_lat": 47.379,
+                "stop_lon": 8.541,
+                "stop_id": "ZRH_PLATFORM_2",
+                "source_name": "cff_sbb",
+            },
+        ]
+    )
+
+    loader.load_stations(stations)
+
+    with engine.connect() as conn:
+        count = conn.execute(text("SELECT COUNT(*) FROM stations")).scalar_one()
+
+    _teardown_test_schema(engine)
+
+    assert count == 2

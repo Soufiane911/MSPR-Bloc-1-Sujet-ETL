@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Tabs from "./components/Tabs";
 import KpiBar from "./components/KpiBar";
 import OverviewTab from "./tabs/OverviewTab";
+import TrajetsTab from "./tabs/TrajetsTab";
 import DayNightTab from "./tabs/DayNightTab";
 import NetworkTab from "./tabs/NetworkTab";
 import MapTab from "./tabs/MapTab";
@@ -19,9 +20,16 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
     setState((s) => ({ ...s, loading: true, error: "" }));
-    Promise.all([loadDashboardData(filters.country, filters.trainType), loadAviationData(20)])
-      .then(([dashboardData, aviationData]) => {
-        const combined = { ...dashboardData, aviation: aviationData };
+    Promise.allSettled([loadDashboardData(filters.country, filters.trainType), loadAviationData(20)])
+      .then(([dashboardResult, aviationResult]) => {
+        if (dashboardResult.status === "rejected") {
+          throw dashboardResult.reason;
+        }
+
+        const combined = {
+          ...dashboardResult.value,
+          aviation: aviationResult.status === "fulfilled" ? aviationResult.value : null,
+        };
         mounted && setState({ loading: false, error: "", data: combined });
       })
       .catch((err) => mounted && setState({ loading: false, error: err.message, data: null }));
@@ -67,35 +75,39 @@ export default function App() {
   }
 
   return (
-    <main className="app-shell">
-      <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
-      <section className="content">
-        <header>
-          <h1>ObRail Europe</h1>
-          <p>Analyse de données ferroviaires et aériennes</p>
-          <p style={{ marginTop: 8 }}>
-            <a href="/aviation">Voir les statistiques Aviation →</a>
-            {" | "}
-            <a href="/demo-predict">Démo IA /predict →</a>
-          </p>
-        </header>
+    <>
+      <a className="skip-link" href="#contenu-principal">Aller au contenu</a>
+      <main id="contenu-principal" role="main" className="app-shell">
+        <Sidebar countries={countries} filters={filters} setFilters={setFilters} maxDistance={maxDistance} />
+        <section className="content">
+          <header>
+            <h1>ObRail Europe</h1>
+            <p>Analyse de données ferroviaires et aériennes</p>
+            <p style={{ marginTop: 8 }}>
+              <a href="/aviation">Voir les statistiques Aviation →</a>
+              {" | "}
+              <a href="/demo-predict">Démo IA /predict →</a>
+            </p>
+          </header>
 
-        {state.loading && <div className="card">Chargement des donnees...</div>}
-        {state.error && <div className="card error">Erreur: {state.error}</div>}
+          {state.loading && <div className="card">Chargement des donnees...</div>}
+          {state.error && <div className="card error">Erreur: {state.error}</div>}
 
-        {!state.loading && !state.error && d && (
-          <>
-            <KpiBar kpis={kpis} />
-            <Tabs active={activeTab} setActive={setActiveTab} />
+          {!state.loading && !state.error && d && (
+            <>
+              <KpiBar kpis={kpis} />
+              <Tabs active={activeTab} setActive={setActiveTab} />
 
-            {activeTab === "overview" && <OverviewTab trains={d.trains} byCountry={d.byCountry} />}
-            {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight} />}
-            {activeTab === "network" && <NetworkTab routes={d.routes} />}
-            {activeTab === "map" && <MapTab stations={d.stations} />}
-            {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
-          </>
-        )}
-      </section>
-    </main>
+              {activeTab === "overview" && <OverviewTab trains={d.trains} byCountry={d.byCountry} />}
+              {activeTab === "trajets" && <TrajetsTab trajets={d.trajets} />}
+              {activeTab === "daynight" && <DayNightTab dayNight={d.dayNight} />}
+              {activeTab === "network" && <NetworkTab routes={d.routes} />}
+              {activeTab === "map" && <MapTab stations={d.stations} />}
+              {activeTab === "quality" && <QualityTab quality={d.quality} schedules={schedules} />}
+            </>
+          )}
+        </section>
+      </main>
+    </>
   );
 }

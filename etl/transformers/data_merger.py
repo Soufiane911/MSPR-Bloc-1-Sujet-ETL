@@ -4,8 +4,11 @@ Module de fusion des données pour l'ETL ObRail Europe.
 Fusionne les données de différentes sources en un jeu de données unifié.
 """
 
-import pandas as pd
+import re
 from typing import Dict, List
+
+import pandas as pd
+
 from config.logging_config import setup_logging
 
 
@@ -75,6 +78,80 @@ class DataMerger:
             pd.to_timedelta(series.astype(str), errors="coerce").dt.total_seconds() / 60
         )
         return parsed_from_dt.fillna(parsed_from_td)
+
+    @staticmethod
+    def _parse_time_minutes(value) -> float:
+        """Retourne les minutes depuis le début du jour de service."""
+        if pd.isna(value):
+            return float("nan")
+
+        if isinstance(value, pd.Timedelta):
+            return value.total_seconds() / 60
+
+        text = str(value).strip()
+        if text == "":
+            return float("nan")
+
+        match = re.match(r"^(-?\d+):([0-5]\d)(?::([0-5]\d(?:\.\d+)?))?$", text)
+        if match:
+            hours = int(match.group(1))
+            minutes = int(match.group(2))
+            seconds = float(match.group(3) or 0)
+            return hours * 60 + minutes + seconds / 60
+
+        timedelta_value = pd.to_timedelta(text, errors="coerce")
+        if pd.notna(timedelta_value):
+            return timedelta_value.total_seconds() / 60
+
+        timestamp = pd.to_datetime(text, errors="coerce", utc=True)
+        if pd.notna(timestamp):
+            return timestamp.hour * 60 + timestamp.minute + timestamp.second / 60
+
+        return float("nan")
+
+    @classmethod
+    def _parse_time_minutes_series(cls, series: pd.Series) -> pd.Series:
+        return series.map(cls._parse_time_minutes)
+
+    @classmethod
+    def _normalize_schedule_datetimes(cls, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Convertit les horaires agrégés en timestamps monotones.
+
+        Les sources GTFS et Back-on-Track encodent souvent les horaires sans
+        vraie date de service. Sans cette normalisation, un trajet de nuit
+        23:13 -> 10:29 est rejeté au chargement car l'arrivée semble précéder
+        le départ.
+        """
+        if not {"departure_time", "arrival_time", "duration_min"}.issubset(df.columns):
+            return df
+
+        result = df.copy()
+        base = pd.Timestamp("2026-01-01T00:00:00Z")
+        dep_minutes = cls._parse_time_minutes_series(result["departure_time"])
+        arr_minutes = cls._parse_time_minutes_series(result["arrival_time"])
+        duration = pd.to_numeric(result["duration_min"], errors="coerce")
+
+        adjusted_arr = arr_minutes.copy()
+        rolls_over_midnight = adjusted_arr <= dep_minutes
+        adjusted_arr = adjusted_arr.mask(
+            rolls_over_midnight & duration.notna() & (duration > 0),
+            dep_minutes + duration,
+        )
+        adjusted_arr = adjusted_arr.mask(
+            rolls_over_midnight & (duration.isna() | (duration <= 0)),
+            adjusted_arr + 24 * 60,
+        )
+
+        valid = dep_minutes.notna() & adjusted_arr.notna()
+        result.loc[valid, "departure_time"] = base + pd.to_timedelta(
+            dep_minutes[valid], unit="m"
+        )
+        result.loc[valid, "arrival_time"] = base + pd.to_timedelta(
+            adjusted_arr[valid], unit="m"
+        )
+
+        return result
 
     def merge_operators(self) -> pd.DataFrame:
         """
@@ -488,22 +565,9 @@ class DataMerger:
         # Calcul de la durée
         if "duration_min" not in merged.columns:
             try:
-                dep_dt = pd.to_datetime(
-                    merged["departure_time"], errors="coerce", utc=True
-                )
-                arr_dt = pd.to_datetime(
-                    merged["arrival_time"], errors="coerce", utc=True
-                )
-                diff = (arr_dt - dep_dt).dt.total_seconds() / 60
-
-                fallback_dep = pd.to_timedelta(
-                    merged["departure_time"].astype(str), errors="coerce"
-                )
-                fallback_arr = pd.to_timedelta(
-                    merged["arrival_time"].astype(str), errors="coerce"
-                )
-                fallback_diff = (fallback_arr - fallback_dep).dt.total_seconds() / 60
-                diff = diff.fillna(fallback_diff)
+                dep_minutes = self._parse_time_minutes_series(merged["departure_time"])
+                arr_minutes = self._parse_time_minutes_series(merged["arrival_time"])
+                diff = arr_minutes - dep_minutes
 
                 if "duration" in merged.columns:
                     diff = diff.fillna(self._parse_duration_minutes(merged["duration"]))
@@ -514,6 +578,8 @@ class DataMerger:
             except Exception as e:
                 self.logger.warning(f"Calcul durée échoué: {e}")
                 merged["duration_min"] = None
+
+        merged = self._normalize_schedule_datetimes(merged)
 
         if "distance_km" not in merged.columns:
             if "distance" in merged.columns:

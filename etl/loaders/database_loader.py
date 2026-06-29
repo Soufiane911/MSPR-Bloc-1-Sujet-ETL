@@ -28,6 +28,7 @@ class DatabaseLoader:
     # Taille des batchs pour le traitement
     BATCH_SIZE = 10000
     COPY_THRESHOLD = 5000  # Utiliser COPY si plus de 5000 lignes
+    MAX_REASONABLE_TRAIN_SPEED_KMH = 320
 
     def __init__(self):
         """Initialise le loader de base de données."""
@@ -77,6 +78,9 @@ class DatabaseLoader:
             "ALTER TABLE trains ADD COLUMN IF NOT EXISTS ml_night_probability DECIMAL(4, 2)",
             "ALTER TABLE trains ADD COLUMN IF NOT EXISTS night_percentage DECIMAL(5, 2)",
             "ALTER TABLE trains ADD COLUMN IF NOT EXISTS needs_manual_review BOOLEAN DEFAULT FALSE",
+            "ALTER TABLE stations DROP CONSTRAINT IF EXISTS uq_station_unique",
+            "ALTER TABLE stations DROP CONSTRAINT IF EXISTS uq_station_source",
+            "DROP INDEX IF EXISTS idx_stations_conflict",
         ]
 
         statements = [
@@ -86,7 +90,7 @@ class DatabaseLoader:
             """,
             """
             CREATE UNIQUE INDEX IF NOT EXISTS idx_stations_conflict
-            ON stations (name, country, source_name)
+            ON stations (uic_code, source_name)
             """,
             """
             CREATE UNIQUE INDEX IF NOT EXISTS idx_trains_conflict
@@ -421,13 +425,14 @@ class DatabaseLoader:
             df_load["name"] = df_load["name"].astype(str).str.strip()
             df_load = df_load[df_load["name"] != ""]
 
-        # CORRECTION: Deduplicate before insert to avoid ON CONFLICT error
-        # Keep first occurrence of each unique (name, country, source_name) combination
+        # Deduplicate on source station id, not name: schedules reference stop_id/uic_code.
         before_dedup = len(df_load)
-        df_load = df_load.drop_duplicates(subset=["name", "country", "source_name"], keep="first")
+        df_load = df_load.drop_duplicates(subset=["uic_code", "source_name"], keep="first")
         after_dedup = len(df_load)
         if before_dedup != after_dedup:
-            self.logger.info(f"[DEDUP] Stations: removed {before_dedup - after_dedup} duplicates before insert")
+            self.logger.info(
+                f"[DEDUP] Stations: removed {before_dedup - after_dedup} duplicates before insert"
+            )
 
         # Ensure optional columns exist (NULL when missing, no placeholder values)
         for col in ["city", "latitude", "longitude", "uic_code", "timezone", "source_name"]:
@@ -451,7 +456,7 @@ class DatabaseLoader:
         count = self._insert_with_tosql(
             df_final,
             table_name="stations",
-            conflict_columns=["name", "country", "source_name"],
+            conflict_columns=["uic_code", "source_name"],
             update_columns=["latitude", "longitude", "uic_code", "city"],
         )
 
@@ -606,6 +611,22 @@ class DatabaseLoader:
                     f"[WARN] Schedules: {dropped} lignes invalides ignorées avant chargement"
                 )
 
+        if all(c in df_load.columns for c in ["distance_km", "duration_min"]):
+            before_speed_filter = len(df_load)
+            speed_kmh = df_load["distance_km"] / (df_load["duration_min"] / 60)
+            implausible_speed = (
+                df_load["distance_km"].notna()
+                & df_load["duration_min"].notna()
+                & (speed_kmh > self.MAX_REASONABLE_TRAIN_SPEED_KMH)
+            )
+            df_load = df_load[~implausible_speed]
+            dropped_speed = before_speed_filter - len(df_load)
+            if dropped_speed > 0:
+                self.logger.warning(
+                    f"[WARN] Schedules: {dropped_speed} lignes ignorées "
+                    f"(vitesse > {self.MAX_REASONABLE_TRAIN_SPEED_KMH} km/h)"
+                )
+
         count = self._bulk_insert(
             df=df_load,
             table_name="schedules",
@@ -730,5 +751,21 @@ class DatabaseLoader:
             result_count = conn.execute(text(count_sql))
             count = result_count.scalar()
 
+            delete_implausible_sql = """
+                DELETE FROM schedules
+                WHERE distance_km IS NOT NULL
+                  AND duration_min > 0
+                  AND distance_km / (duration_min / 60.0) > :max_speed
+            """
+            deleted = conn.execute(
+                text(delete_implausible_sql),
+                {"max_speed": self.MAX_REASONABLE_TRAIN_SPEED_KMH},
+            ).rowcount
+
         self.logger.info(f"[OK] {count} distances calculees")
+        if deleted:
+            self.logger.warning(
+                f"[WARN] {deleted} schedules supprimés après calcul distance "
+                f"(vitesse > {self.MAX_REASONABLE_TRAIN_SPEED_KMH} km/h)"
+            )
         return count

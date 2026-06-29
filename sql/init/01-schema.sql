@@ -57,7 +57,7 @@ CREATE TABLE stations (
     CONSTRAINT chk_longitude CHECK (
         longitude BETWEEN -180 AND 180
     ),
-    CONSTRAINT uq_station_unique UNIQUE (name, country, source_name)
+    CONSTRAINT uq_station_source_uic UNIQUE (uic_code, source_name)
 );
 COMMENT ON TABLE stations IS 'Gares et arrêts ferroviaires européens';
 COMMENT ON COLUMN stations.station_id IS 'Identifiant unique auto-incrémenté';

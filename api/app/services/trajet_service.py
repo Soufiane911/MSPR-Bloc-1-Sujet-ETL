@@ -9,6 +9,30 @@ from sqlalchemy import text
 from app.database import engine
 
 
+MAX_REASONABLE_TRAIN_SPEED_KMH = 320
+
+
+def is_plausible_trajet(row: Dict[str, Any]) -> bool:
+    """Ecarte les durees impossibles quand distance et duree sont connues."""
+    distance_km = row.get("distance_km")
+    duration_min = row.get("duration_min")
+
+    if distance_km is None or duration_min is None:
+        return True
+
+    distance = float(distance_km)
+    duration = float(duration_min)
+    if distance <= 0 or duration <= 0:
+        return False
+
+    speed_kmh = distance / (duration / 60)
+    return speed_kmh <= MAX_REASONABLE_TRAIN_SPEED_KMH
+
+
+def filter_plausible_trajets(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [row for row in rows if is_plausible_trajet(row)]
+
+
 class TrajetService:
     """Service de consultation des trajets issus des dessertes."""
 
@@ -77,7 +101,8 @@ class TrajetService:
 
         with engine.connect() as conn:
             result = conn.execute(text(query), params)
-            return [dict(row._mapping) for row in result]
+            rows = [dict(row._mapping) for row in result]
+            return filter_plausible_trajets(rows)
 
     def get_trajet_by_id(self, trajet_id: int) -> Optional[Dict[str, Any]]:
         """Recupere un trajet par son identifiant."""
@@ -110,4 +135,8 @@ class TrajetService:
         with engine.connect() as conn:
             result = conn.execute(text(query), {"trajet_id": trajet_id})
             row = result.fetchone()
-            return dict(row._mapping) if row else None
+            if row is None:
+                return None
+
+            trajet = dict(row._mapping)
+            return trajet if is_plausible_trajet(trajet) else None

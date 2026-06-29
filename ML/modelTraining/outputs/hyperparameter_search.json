@@ -1,0 +1,119 @@
+{
+  "model_name": "gradient_boosting",
+  "method": "GridSearchCV",
+  "scoring": "f1_macro",
+  "cv": {
+    "strategy": "StratifiedKFold",
+    "n_splits": 3,
+    "shuffle": true,
+    "random_state": 42
+  },
+  "param_grid": {
+    "model__n_estimators": [
+      80,
+      120
+    ],
+    "model__learning_rate": [
+      0.05,
+      0.08
+    ],
+    "model__max_depth": [
+      2,
+      3
+    ]
+  },
+  "best_params": {
+    "model__learning_rate": 0.05,
+    "model__max_depth": 2,
+    "model__n_estimators": 80
+  },
+  "estimator_params": {
+    "learning_rate": 0.05,
+    "max_depth": 2,
+    "n_estimators": 80
+  },
+  "best_score": 0.999694,
+  "candidates": [
+    {
+      "rank": 1,
+      "mean_test_score": 0.999694,
+      "std_test_score": 0.000433,
+      "params": {
+        "model__learning_rate": 0.05,
+        "model__max_depth": 2,
+        "model__n_estimators": 80
+      }
+    },
+    {
+      "rank": 1,
+      "mean_test_score": 0.999694,
+      "std_test_score": 0.000433,
+      "params": {
+        "model__learning_rate": 0.05,
+        "model__max_depth": 3,
+        "model__n_estimators": 80
+      }
+    },
+    {
+      "rank": 1,
+      "mean_test_score": 0.999694,
+      "std_test_score": 0.000433,
+      "params": {
+        "model__learning_rate": 0.05,
+        "model__max_depth": 3,
+        "model__n_estimators": 120
+      }
+    },
+    {
+      "rank": 1,
+      "mean_test_score": 0.999694,
+      "std_test_score": 0.000433,
+      "params": {
+        "model__learning_rate": 0.08,
+        "model__max_depth": 3,
+        "model__n_estimators": 80
+      }
+    },
+    {
+      "rank": 1,
+      "mean_test_score": 0.999694,
+      "std_test_score": 0.000433,
+      "params": {
+        "model__learning_rate": 0.08,
+        "model__max_depth": 3,
+        "model__n_estimators": 120
+      }
+    },
+    {
+      "rank": 6,
+      "mean_test_score": 0.999386,
+      "std_test_score": 0.000434,
+      "params": {
+        "model__learning_rate": 0.05,
+        "model__max_depth": 2,
+        "model__n_estimators": 120
+      }
+    },
+    {
+      "rank": 6,
+      "mean_test_score": 0.999386,
+      "std_test_score": 0.000434,
+      "params": {
+        "model__learning_rate": 0.08,
+        "model__max_depth": 2,
+        "model__n_estimators": 80
+      }
+    },
+    {
+      "rank": 6,
+      "mean_test_score": 0.999386,
+      "std_test_score": 0.000434,
+      "params": {
+        "model__learning_rate": 0.08,
+        "model__max_depth": 2,
+        "model__n_estimators": 120
+      }
+    }
+  ],
+  "searched_on": "train split only"
+}

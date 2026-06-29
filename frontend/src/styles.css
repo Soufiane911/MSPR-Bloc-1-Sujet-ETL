@@ -13,7 +13,24 @@ body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top right, #fff8dc, var(--bg));
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at top right, #fff8dc, var(--bg));
+}
+
+.skip-link {
+  position: fixed;
+  top: -40px;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0 0 8px 8px;
+  background: var(--text);
+  color: #fff;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--accent);
 }
 
 .app-shell {
@@ -109,10 +126,10 @@ header p { margin-top: 0.3rem; color: var(--muted); }
 
 .demo-shell {
   min-height: 100vh;
-  background:
+  background-color: var(--bg);
+  background-image:
     radial-gradient(1200px 500px at 90% -20%, #d8eef2 0%, transparent 60%),
-    radial-gradient(1200px 500px at 10% -20%, #ffe7c9 0%, transparent 60%),
-    var(--bg);
+    radial-gradient(1200px 500px at 10% -20%, #ffe7c9 0%, transparent 60%);
 }
 
 .demo-controls {

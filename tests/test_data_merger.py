@@ -323,6 +323,59 @@ class TestDataIntegrity:
         assert merged['name'].dtype == df1['name'].dtype
         assert merged['value'].dtype == df1['value'].dtype
 
+    def test_merge_schedules_keeps_overnight_rows_loadable(self):
+        """Les horaires de nuit doivent produire arrival_time > departure_time."""
+        from etl.transformers.data_merger import DataMerger
+
+        merger = DataMerger()
+        merger.add_source(
+            "back_on_track",
+            {
+                "stop_times": pd.DataFrame(
+                    [
+                        {
+                            "trip_id": "UZ 099",
+                            "stop_sequence": 0,
+                            "stop_id": "ODESSA",
+                            "departure_time": "1899-12-30T23:13:00.000Z",
+                            "arrival_time": "",
+                        },
+                        {
+                            "trip_id": "UZ 099",
+                            "stop_sequence": 99,
+                            "stop_id": "BUHUSI",
+                            "departure_time": "",
+                            "arrival_time": "1899-12-30T10:29:00.000Z",
+                        },
+                    ]
+                )
+            },
+        )
+
+        trains = pd.DataFrame(
+            [
+                {
+                    "trip_id": "back_on_track_UZ 099",
+                    "train_id": 1,
+                    "duration": "1899-12-30T11:16:00.000Z",
+                    "distance": 1036,
+                }
+            ]
+        )
+        stations = pd.DataFrame(
+            [
+                {"stop_id": "back_on_track_ODESSA", "station_id": 10},
+                {"stop_id": "back_on_track_BUHUSI", "station_id": 20},
+            ]
+        )
+
+        result = merger.merge_schedules(trains=trains, stations=stations)
+
+        assert len(result) == 1
+        row = result.iloc[0]
+        assert row["duration_min"] == 676
+        assert pd.Timestamp(row["arrival_time"]) > pd.Timestamp(row["departure_time"])
+
 
 class TestMergePerformance:
     """Tests for merge operation performance and scalability."""

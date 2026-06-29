@@ -3,31 +3,103 @@ import { loadFlightChoices, loadTrajets, predictRoute } from "../api";
 
 const CO2_FLIGHT_PER_KM = 0.255;
 const CO2_TRAIN_PER_KM = 0.041;
+const DEFAULT_FLIGHT_SPEED_KMH = 800;
+const FLIGHT_BLOCK_TIME_BUFFER_MIN = 40;
+const MAX_REASONABLE_TRAIN_SPEED_KMH = 320;
+const MIN_REASONABLE_TRAIN_SPEED_KMH = 35;
+const SYNTHETIC_TRAIN_SPEED_KMH = 120;
+
+function estimateFlightDuration(distanceKm) {
+  if (!distanceKm) return 0;
+  return Math.round((distanceKm / DEFAULT_FLIGHT_SPEED_KMH) * 60 + FLIGHT_BLOCK_TIME_BUFFER_MIN);
+}
+
+function compactText(value, maxLength = 80) {
+  if (!value) return "";
+  const text = String(value);
+  return text.length > maxLength ? `${text.slice(0, maxLength - 1)}...` : text;
+}
 
 function normalizeFlightRow(row, idx) {
   const originCountry = row.origin_country || row.originCountry || "EU";
   const destinationCountry = row.destination_country || row.destinationCountry || originCountry;
   const distanceKm = Number(row.avg_distance_km || row.distance_km || 0);
+  const durationMin = Number(row.estimated_duration_min || row.duration_min || estimateFlightDuration(distanceKm));
+  const originCode = row.origin_iata || row.origin_name || "?";
+  const destinationCode = row.destination_iata || row.destination_name || "?";
   return {
-    id: row.id || `${row.origin_iata || row.origin_name}-${row.destination_iata || row.destination_name}-${idx}`,
-    label: `${row.origin_iata || row.origin_name || "?"} -> ${row.destination_iata || row.destination_name || "?"}`,
+    id: row.id || `${originCode}-${destinationCode}-${idx}`,
+    label: `${originCode} -> ${destinationCode}`,
+    originName: row.origin_name || row.origin_city || originCode,
+    destinationName: row.destination_name || row.destination_city || destinationCode,
     originCountry,
     destinationCountry,
     distanceKm,
+    durationMin,
+    airlineCount: Number(row.airline_count || 0),
+    airlines: row.airlines || "",
+    equipment: row.equipment || "",
   };
+}
+
+function isSpecificCountry(country) {
+  return Boolean(country && country !== "EU");
+}
+
+function hasCompatibleCountries(train, flight) {
+  const originCountry = train.origin_country;
+  const destinationCountry = train.destination_country;
+
+  if (!isSpecificCountry(originCountry) || !isSpecificCountry(destinationCountry)) {
+    return false;
+  }
+
+  const sameDirection = originCountry === flight.originCountry && destinationCountry === flight.destinationCountry;
+  const reverseDirection = originCountry === flight.destinationCountry && destinationCountry === flight.originCountry;
+  return sameDirection || reverseDirection;
+}
+
+function hasPlausibleTrainTiming(train) {
+  const distanceKm = Number(train.distance_km || 0);
+  const durationMin = Number(train.duration_min || 0);
+  if (!distanceKm || !durationMin) return false;
+
+  const speedKmh = distanceKm / (durationMin / 60);
+  return speedKmh >= MIN_REASONABLE_TRAIN_SPEED_KMH && speedKmh <= MAX_REASONABLE_TRAIN_SPEED_KMH;
 }
 
 function pickTrainAlternative(trajets, flight) {
   if (!trajets?.length) return null;
 
   const targetDistance = flight.distanceKm || 0;
-  const ranked = [...trajets].sort((a, b) => {
+  const eligible = trajets.filter(
+    (train) => hasCompatibleCountries(train, flight) && hasPlausibleTrainTiming(train)
+  );
+  const ranked = eligible.sort((a, b) => {
     const da = Math.abs(Number(a.distance_km || 0) - targetDistance);
     const db = Math.abs(Number(b.distance_km || 0) - targetDistance);
     return da - db;
   });
 
   return ranked[0] || null;
+}
+
+function buildSyntheticTrainAlternative(flight) {
+  const estDistance = flight.distanceKm * 1.08;
+  const estDuration = Math.round((estDistance / SYNTHETIC_TRAIN_SPEED_KMH) * 60);
+  return {
+    trajet_id: -1,
+    train_number: "DEMO-ALT",
+    operator_name: "ObRail Synthétique",
+    train_type: estDuration > 420 ? "night" : "day",
+    origin: flight.originName,
+    destination: flight.destinationName,
+    origin_country: flight.originCountry,
+    destination_country: flight.destinationCountry,
+    distance_km: estDistance,
+    duration_min: estDuration,
+    is_synthetic: true,
+  };
 }
 
 function toPredictPayload(train, flight) {
@@ -103,20 +175,7 @@ export default function DemoPredictPage() {
 
       // Fallback synthétique pour garantir une démo fonctionnelle même sans matching DB.
       if (!train) {
-        const estDistance = selectedFlight.distanceKm * 1.08;
-        const estDuration = Math.round((estDistance / 120) * 60);
-        train = {
-          trajet_id: -1,
-          train_number: "DEMO-ALT",
-          operator_name: "ObRail Synthétique",
-          train_type: estDuration > 420 ? "night" : "day",
-          origin: selectedFlight.label.split(" -> ")[0],
-          destination: selectedFlight.label.split(" -> ")[1],
-          origin_country: selectedFlight.originCountry,
-          destination_country: selectedFlight.destinationCountry,
-          distance_km: estDistance,
-          duration_min: estDuration,
-        };
+        train = buildSyntheticTrainAlternative(selectedFlight);
       }
 
       setMatchingTrain(train);
@@ -131,8 +190,10 @@ export default function DemoPredictPage() {
   const co2Saving = prediction?.payload?.estimated_co2_saving_kg ?? 0;
 
   return (
-    <main className="demo-shell">
-      <section className="content">
+    <>
+      <a className="skip-link" href="#contenu-principal">Aller au contenu</a>
+      <main id="contenu-principal" role="main" className="demo-shell">
+        <section className="content">
         <header>
           <h1>Démo IA — Substitution Avion vers Train</h1>
           <p>Sélectionnez un trajet avion, visualisez une alternative train, puis exécutez la prédiction ML.</p>
@@ -169,8 +230,18 @@ export default function DemoPredictPage() {
                 <article className="card">
                   <h3>Trajet avion choisi</h3>
                   <p><strong>Liaison:</strong> {selectedFlight.label}</p>
+                  <p><strong>Type:</strong> vol direct estimé</p>
+                  <p><strong>Route:</strong> {selectedFlight.originName}{" -> "}{selectedFlight.destinationName}</p>
                   <p><strong>Distance estimée:</strong> {Math.round(selectedFlight.distanceKm)} km</p>
+                  <p><strong>Durée estimée:</strong> {selectedFlight.durationMin || "n/a"} min</p>
                   <p><strong>Pays:</strong> {selectedFlight.originCountry}{" -> "}{selectedFlight.destinationCountry}</p>
+                  <p><strong>Compagnies observées:</strong> {selectedFlight.airlineCount || "n/a"}</p>
+                  {selectedFlight.airlines && (
+                    <p><strong>Codes compagnies:</strong> {compactText(selectedFlight.airlines)}</p>
+                  )}
+                  {selectedFlight.equipment && (
+                    <p><strong>Équipements:</strong> {compactText(selectedFlight.equipment)}</p>
+                  )}
                 </article>
 
                 <article className="card">
@@ -183,6 +254,9 @@ export default function DemoPredictPage() {
                       <p><strong>Route:</strong> {matchingTrain.origin}{" -> "}{matchingTrain.destination}</p>
                       <p><strong>Distance:</strong> {Math.round(Number(matchingTrain.distance_km || 0))} km</p>
                       <p><strong>Durée:</strong> {matchingTrain.duration_min || "n/a"} min</p>
+                      {matchingTrain.is_synthetic && (
+                        <p className="muted">Alternative estimée faute de trajet ferroviaire cohérent dans la base.</p>
+                      )}
                     </>
                   )}
                 </article>
@@ -234,7 +308,8 @@ export default function DemoPredictPage() {
             )}
           </>
         )}
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }

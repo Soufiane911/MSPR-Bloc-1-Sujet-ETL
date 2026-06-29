@@ -7,24 +7,27 @@ async function getJson(path) {
 }
 
 export async function loadDashboardData(country, trainType) {
-  const countryQuery = country && country !== "Tous" ? `&country=${country}` : "";
+  const countryValue = country && country !== "Tous" ? encodeURIComponent(country) : "";
+  const countryQuery = countryValue ? `&country=${countryValue}` : "";
   const typeApi = trainType === "Jour" ? "day" : trainType === "Nuit" ? "night" : "";
-  const typeQuery = typeApi ? `&train_type=${typeApi}` : "";
+  const typeQuery = typeApi ? `&train_type=${encodeURIComponent(typeApi)}` : "";
+  const dayNightPath = countryValue ? `/stats/day-night?country=${countryValue}` : "/stats/day-night";
 
-  const [summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules] =
+  const [summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules, trajets] =
     await Promise.all([
       getJson("/stats/summary"),
-      getJson("/stats/byCountry"),
-      getJson(`/stats/dayNight?country=${country && country !== "Tous" ? country : ""}`),
-      getJson("/stats/topRoutes?limit=20"),
-      getJson("/stats/dataQuality"),
+      getJson("/stats/by-country"),
+      getJson(dayNightPath),
+      getJson("/stats/top-routes?limit=20"),
+      getJson("/stats/data-quality"),
       getJson(`/trains/?limit=1000${countryQuery}${typeQuery}`),
       getJson(`/stations/?limit=1000${countryQuery}`),
       getJson(`/operators/?limit=1000${countryQuery}`),
       getJson(`/schedules/?limit=1000${countryQuery}${typeQuery}`),
+      getJson(`/trajets?limit=1000${countryQuery}${typeQuery}`),
     ]);
 
-  return { summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules };
+  return { summary, byCountry, dayNight, routes, quality, trains, stations, operators, schedules, trajets };
 }
 
 export async function loadAviationData(limit = 50) {
